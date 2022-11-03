@@ -1,0 +1,37 @@
+@use 'sass:string';
+
+// don't import IBM fonts and disable all default styles
+@use '@carbon/styles/scss/config' with (
+  $css--body: false,
+  $css--default-type: false,
+  $css--font-face: false,
+  $css--reset: false
+);
+
+// use the default font from the theme
+$fontFamily: "Inter,Twemoji,'Apple Color Emoji','Segoe UI Emoji',Arial,Helvetica,sans-serif,'Noto Color Emoji'";
+
+@use '@carbon/styles/scss/type' as * with (
+  // disable all custom fonts
+  $font-families:
+    (
+      'mono': string.unquote($fontFamily),
+      'sans': string.unquote($fontFamily),
+      'sans-condensed': string.unquote($fontFamily),
+      'sans-hebrew': string.unquote($fontFamily),
+      'serif': string.unquote($fontFamily)
+    ),
+  // configure the weights that we loaded of the font
+  $font-weights: ('light': 400, 'regular': 400, 'semibold': 600)
+);
+
+@use '@carbon/styles';
+
+@import '@carbon/charts/styles/styles';
+
+// use the `theme` property to select the different styles for the light and dark mode.
+
+// hide the backdrop of a chart as the color doesn't match the theme
+.chart-holder.chart-holder {
+  --cds-grid-bg: none;
+}

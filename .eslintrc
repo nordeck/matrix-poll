@@ -1,0 +1,29 @@
+{
+  "plugins": ["promise", "notice"],
+  "extends": [
+    "react-app",
+    "react-app/jest",
+    "plugin:promise/recommended",
+    "prettier",
+    "eslint:recommended"
+  ],
+  "rules": {
+    "notice/notice": [
+      "error",
+      {
+        "templateFile": "scripts/license-header.txt",
+        "onNonMatchingHeader": "replace"
+      }
+    ],
+    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-explicit-any": "error",
+    "no-var": "error",
+    "prefer-const": "error",
+    "object-shorthand": "error",
+    "react/jsx-no-bind": "error",
+    "react/jsx-sort-props": "error"
+  },
+  "globals": {
+    "__webpack_nonce__": true
+  }
+}

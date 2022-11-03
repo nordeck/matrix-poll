@@ -1,0 +1,266 @@
+{
+  "adminPanel": {
+    "createGroup": "Create new group",
+    "createGroupModal": {
+      "cancel": "Cancel",
+      "save": "Save",
+      "title": "Create new group"
+    },
+    "noGroupsAdminMessage": "You have to create a group first.",
+    "noGroupsUserMessage": "An admin has to create a group first.",
+    "title": "Groups"
+  },
+  "assignParticipantsView": {
+    "addDelegateUser": "Assign delegate",
+    "addRepresentativeUser": "Assign representative",
+    "selectNoParticipants": "There are no unassigned participants in this room."
+  },
+  "cancel": "Cancel",
+  "close": "Close",
+  "createPollPdfContentHeader": {
+    "castVotes_one": "Cast votes: {{count}}",
+    "castVotes_other": "Cast votes: {{count}}",
+    "description": "Description",
+    "eligibleMembers_one": "Voting persons: {{count}}",
+    "eligibleMembers_other": "Voting persons: {{count}}",
+    "general": "General information",
+    "invitedMembers_one": "Invited persons: {{count}}",
+    "invitedMembers_other": "Invited persons: {{count}}",
+    "joinedMembers_one": "Joined persons: {{count}}",
+    "joinedMembers_other": "Joined persons: {{count}}",
+    "question": "Voting question",
+    "totalVotingResult": "Total voting result",
+    "votingInformation": "Voting information"
+  },
+  "createPollPdfContentTable": {
+    "noVotesWereCast": "No votes were cast."
+  },
+  "createPollSpecifics": {
+    "messageAbsent": "Absent: {{delegate}} ({{group}})",
+    "messageRepresented": "Represented by: {{delegate}} ({{group}})",
+    "specifics": "Specifics"
+  },
+  "draggableList": {
+    "dragStart": "You have lifted a poll. It is in position {{startPosition}} of {{totalCount}} in the list. Use the arrow keys to move, space bar to drop, and escape to cancel.",
+    "dropped": "You have dropped the poll. It has moved from position {{startPosition}} to {{destinationPosition}}.",
+    "droppedOnNoDropTarget": "The poll has been dropped while not over a location. The poll has returned to its starting position of {{startPosition}}.",
+    "movedPosition": "You have moved the poll to position {{position}} of {{totalCount}}.",
+    "movementCanceled": "Movement cancelled. The poll has returned to its starting position of {{startPosition}}.",
+    "notOverDropTarget": "You are currently not dragging over any droppable area."
+  },
+  "dropdownItemDeletePoll": {
+    "confirmButton": "Delete",
+    "deletePoll": "Delete poll",
+    "message": "Are you sure you want to delete the poll “{{title}}”?"
+  },
+  "getAnswerLabel": {
+    "invalidAnswer": "Invalid"
+  },
+  "getPollTypeLabel": {
+    "title_byName": "Poll by name",
+    "title_open": "Open poll",
+    "title_secret": "Secret poll",
+    "titleWithGroups_byName": "Poll by name (grouped)",
+    "titleWithGroups_open": "Open poll (grouped)",
+    "titleWithGroups_secret": "Secret poll (grouped)"
+  },
+  "groupCard": {
+    "confirmButton": "Delete",
+    "deleteGroup": "Delete group",
+    "editGroup": "Edit group",
+    "editGroupModal": {
+      "cancel": "Cancel",
+      "save": "Save",
+      "title": "Edit group"
+    },
+    "hideParticipants": "Hide participants list",
+    "message": "Are you sure you want to delete the group “{{title}}”?",
+    "modalHeader": "Delete group",
+    "moreSettings": "More settings",
+    "participants": "Participants",
+    "showParticipants": "Show participants list"
+  },
+  "groups": {
+    "groupColor": "Group color (required)",
+    "groupColorHelper": "A color is required",
+    "groupTitle": "Group title (required)",
+    "groupTitleHelper": "A title is required",
+    "groupTitlePlaceholder": "Group title"
+  },
+  "infosIcons": {
+    "castVotes_zero": "No cast votes",
+    "castVotes_one": "One cast vote",
+    "castVotes_other": "{{count}} cast votes",
+    "castVotes_loading": "Votes loading",
+    "title": "Poll Details",
+    "users_zero": "No voting persons",
+    "users_one": "One voting person",
+    "users_other": "{{count}} voting persons"
+  },
+  "participantItem": {
+    "changeToDelegate": "Change to delegate",
+    "changeToRepresentative": "Change to representative",
+    "deleteButton": "Remove"
+  },
+  "participantsList": {
+    "delegate_one": "Delegates: {{count}}",
+    "delegate_other": "Delegates: {{count}}",
+    "noDelegate": "No delegates have been assigned yet.",
+    "noRepresentative": "No representatives have been assigned yet.",
+    "representative_one": "Representatives: {{count}}",
+    "representative_other": "Representatives: {{count}}"
+  },
+  "pollDuration": "{{startDate, datetime}} - {{endDate, datetime}}",
+  "pollForm": {
+    "absent": "Absent",
+    "answer": {
+      "abstain": "Abstain",
+      "no": "No",
+      "yes": "Yes"
+    },
+    "answerType": {
+      "yesNo": "Yes | No",
+      "yesNoAbstain": "Yes | No | Abstain"
+    },
+    "answerTypes": "Answer type",
+    "attendance": "Attendance",
+    "delegatedTo": "Represented by {{name}}",
+    "delegatedToComponent": "Represented by <2>{{name}}</2>",
+    "delegatePresent": "Present",
+    "description": "Description",
+    "descriptionHelperText": "A description is required",
+    "descriptionRequired": "Description (required)",
+    "duration": "Duration in minutes (required)",
+    "durationHelperText": "A duration is required",
+    "noDelegate": "No delegates have been assigned yet",
+    "poll": "Poll",
+    "pollTypes": "Poll type",
+    "question": "Question (required)",
+    "questionHelperText": "A question is required",
+    "realTimeResults": "Display live results",
+    "title": "Title (required)",
+    "titleHelperText": "A title is required",
+    "type_byName": "By Name",
+    "type_open": "Open"
+  },
+  "pollPanel": {
+    "createPoll": "Create new poll",
+    "createPollModal": {
+      "cancel": "Cancel",
+      "save": "Save",
+      "title": "Create new poll"
+    },
+    "finishedPolls": "Finished polls",
+    "noPolls": "There are no active polls.",
+    "ongoingPolls": "Active polls"
+  },
+  "pollResultModalContent": {
+    "groupResult": "Result by group",
+    "result": "Result",
+    "resultByName": "Voting persons",
+    "resultDisplayMode": "Result Display Mode",
+    "resultTable": "Results"
+  },
+  "pollResultTable": {
+    "answer": "Answer",
+    "count": "Count",
+    "group": "Group",
+    "total": "Total"
+  },
+  "pollsListFinishedItem": {
+    "error": "Data could not be loaded."
+  },
+  "pollsListOngoing": {
+    "error": "Data could not be loaded."
+  },
+  "pollsListUpcoming": {
+    "notStartedPolls": "Not started polls"
+  },
+  "pollsListUpcomingItem": {
+    "drag": "Reorder polls",
+    "dragInstructions": ". Press space bar to start a drag. When dragging you can use the arrow keys to move the item around and escape to cancel. Ensure your screen reader is in focus mode or forms mode.",
+    "editPoll": "Edit poll",
+    "editPollModal": {
+      "cancel": "Cancel",
+      "save": "Save",
+      "title": "Edit poll"
+    },
+    "moreSettings": "More settings"
+  },
+  "pollsPdfDocumentation": {
+    "closingConfirmButton": "Deactivate",
+    "closingDialogHeader": "Deactivate PDF",
+    "closingMessage": "You are about to deactivate the PDF download. Are you sure?",
+    "deactivate": "Set deactivation time",
+    "deactivatePdfNow": "Deactivate PDF now",
+    "documentation": "Documentation",
+    "duration": "Deactivate after weeks (required)",
+    "durationHelperText": "A duration is required",
+    "moreSetting": "More settings",
+    "pdfDeactivatedMessage": "The download of the PDF document will be deactivated on {{date, datetime}}.",
+    "pdfDeactivatedTitle": "PDF will be deactivated",
+    "title": "Deactivate PDF"
+  },
+  "pollsPdfDownloadButton": {
+    "footer": "{{currentPage}} of {{pageCount}}",
+    "pdfDownload": "Download PDF documentation",
+    "tooltip": "The provided PDF is currently not accessible and can not be read using a screen reader."
+  },
+  "pollStatusNotifications": {
+    "endsSoon": "The poll “{{title}}” ends in {{remainingTime}}.",
+    "finished": "The poll “{{title}}” ended.",
+    "started": "The poll “{{title}}” was started and ends in {{remainingTime}}."
+  },
+  "resultViewDetails": {
+    "seeResult": "See result",
+    "seeResultLive": "See live result"
+  },
+  "resultVoteView": {
+    "myAnswer": "Your Answer: ",
+    "resultIsInvisible": "You will see the result when the voting ends."
+  },
+  "showResultsByGroupedNameList": {
+    "noVotesWereCast": "No votes were cast."
+  },
+  "startPollButton": {
+    "addVoters": {
+      "description": "Please add voters to the poll.",
+      "title": "This poll has no voters."
+    },
+    "cancelButton": "Cancel",
+    "changePermissionMessage": {
+      "description": "Adjust the power level or remove the users from the poll.",
+      "title": "This poll contains users with an insufficient power level."
+    },
+    "confirmButton": "Start",
+    "conflictMessage": {
+      "description": "Please edit the poll to resolve conflict.",
+      "title": "Changes in the groups detected."
+    },
+    "message": "Are you sure you want to start the poll?",
+    "start": "Start",
+    "startPoll": "Start poll"
+  },
+  "timeDistance": {
+    "remainingExact": "Ends in {{time}}"
+  },
+  "userHasNoPermissionMessage": {
+    "delegateHasNoPermission": "<0>{{delegate}}</0> has an insufficient power level and will not be able to vote.",
+    "representativeHasNoPermission": "<0>{{representative}}</0> cannot represent <4>{{delegate}}</4> because the user has an insufficient power level.",
+    "title": "Insufficient power level"
+  },
+  "voteView": {
+    "answer": "Answer",
+    "readLess": "Read less",
+    "readMore": "Read more",
+    "resultIsInvisible": "You will see the result when the voting ends.",
+    "resultVisibleAfterFirstVote": "You will see the result as soon as a first vote has been cast.",
+    "vote": "Vote"
+  },
+  "votingRightsConfiguration": {
+    "voters": "Voting persons"
+  },
+  "votingRightsDropdown": {
+    "selectOpen": "Open"
+  }
+}

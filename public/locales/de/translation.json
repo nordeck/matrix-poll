@@ -1,0 +1,266 @@
+{
+  "adminPanel": {
+    "createGroup": "Neue Gruppe erstellen",
+    "createGroupModal": {
+      "cancel": "Abbrechen",
+      "save": "Speichern",
+      "title": "Neue Gruppe erstellen"
+    },
+    "noGroupsAdminMessage": "Du hast noch keine Gruppe erstellt.",
+    "noGroupsUserMessage": "Administratoren haben noch keine Gruppe erstellt.",
+    "title": "Gruppen"
+  },
+  "assignParticipantsView": {
+    "addDelegateUser": "Stimmberechtigte zuweisen",
+    "addRepresentativeUser": "Vertreter:innen zuweisen",
+    "selectNoParticipants": "Es gibt keine nicht zugewiesenen Teilnehmer:innen in diesem Raum."
+  },
+  "cancel": "Abbrechen",
+  "close": "Schließen",
+  "createPollPdfContentHeader": {
+    "castVotes_one": "Abgestimmt: {{count}}",
+    "castVotes_other": "Abgestimmt: {{count}}",
+    "description": "Beschreibung",
+    "eligibleMembers_one": "Stimmberechtigte Personen: {{count}}",
+    "eligibleMembers_other": "Stimmberechtigte Personen: {{count}}",
+    "general": "Allgemeines",
+    "invitedMembers_one": "Eingeladene Personen: {{count}}",
+    "invitedMembers_other": "Eingeladene Personen: {{count}}",
+    "joinedMembers_one": "Anwesende Personen: {{count}}",
+    "joinedMembers_other": "Anwesende Personen: {{count}}",
+    "question": "Abstimmungsfrage",
+    "totalVotingResult": "Abstimmungsergebnis gesamt",
+    "votingInformation": "Abstimmungsinformation"
+  },
+  "createPollPdfContentTable": {
+    "noVotesWereCast": "Es wurden keine Stimmen abgegeben."
+  },
+  "createPollSpecifics": {
+    "messageAbsent": "Abwesend: {{delegate}} ({{group}})",
+    "messageRepresented": "Vertreten durch: {{delegate}} ({{group}})",
+    "specifics": "Besonderheiten"
+  },
+  "draggableList": {
+    "dragStart": "Du hast eine Abstimmung aufgehoben. Sie befindet sich an Position {{startPosition}} von {{totalCount}} in der Liste. Nutze die Pfeiltasten zum verschieben, Leertaste zum Ablegen und Escape zum Abbrechen.",
+    "dropped": "Du hast die Abstimmung abgelegt. Sie wurde von Position {{startPosition}} nach {{destinationPosition}} verschoben.",
+    "droppedOnNoDropTarget": "Du hast die Abstimmung abgelegt während du nicht über einer gültigen Ablagestelle gewesen bist. Die Abstimmung ist zu ihrer ursprünglichen Position {{startPosition}} zurückgekehrt.",
+    "movedPosition": "Du hast die Abstimmung zu Position {{position}} von {{totalCount}} verschoben.",
+    "movementCanceled": "Verschieben abgebrochen. Die Abstimmung ist zu ihrer ursprünglichen Position {{startPosition}} zurückgekehrt.",
+    "notOverDropTarget": "Du befindest dich aktuell nicht über einer gültigen Ablagestelle."
+  },
+  "dropdownItemDeletePoll": {
+    "confirmButton": "Löschen",
+    "deletePoll": "Abstimmung löschen",
+    "message": "Möchtest du die Abstimmung {{title}} wirklich löschen?"
+  },
+  "getAnswerLabel": {
+    "invalidAnswer": "Ungültig"
+  },
+  "getPollTypeLabel": {
+    "title_byName": "Namentliche Abstimmung",
+    "title_open": "Offene Abstimmung",
+    "title_secret": "Geheime Abstimmung",
+    "titleWithGroups_byName": "Namentliche Abstimmung (gruppiert)",
+    "titleWithGroups_open": "Offene Abstimmung (gruppiert)",
+    "titleWithGroups_secret": "Geheime Abstimmung (gruppiert)"
+  },
+  "groupCard": {
+    "confirmButton": "Löschen",
+    "deleteGroup": "Gruppe löschen",
+    "editGroup": "Gruppe bearbeiten",
+    "editGroupModal": {
+      "cancel": "Abbrechen",
+      "save": "Speichern",
+      "title": "Gruppe bearbeiten"
+    },
+    "hideParticipants": "Teilnehmerliste ausblenden",
+    "message": "Möchtest du die Gruppe {{title}} wirklich löschen?",
+    "modalHeader": "Gruppe löschen",
+    "moreSettings": "Mehr Einstellungen",
+    "participants": "Teilnehmer:innen",
+    "showParticipants": "Teilnehmerliste einblenden"
+  },
+  "groups": {
+    "groupColor": "Gruppenfarbe (erforderlich)",
+    "groupColorHelper": "Eine Farbe ist erforderlich",
+    "groupTitle": "Gruppenname (erforderlich)",
+    "groupTitleHelper": "Ein Name ist erforderlich",
+    "groupTitlePlaceholder": "Gruppenname"
+  },
+  "infosIcons": {
+    "castVotes_zero": "Keine abgegebenen Stimmen",
+    "castVotes_one": "Eine abgegebene Stimme",
+    "castVotes_other": "{{count}} abgegebene Stimmen",
+    "castVotes_loading": "Abgegebene Stimmen werden geladen",
+    "title": "Abstimmungsdetails",
+    "users_zero": "Kein:e Stimmberechtigte:r",
+    "users_one": "Ein:e Stimmberechtigte:r",
+    "users_other": "{{count}} Stimmberechtigte"
+  },
+  "participantItem": {
+    "changeToDelegate": "Zuweisen als Stimmberechtigte:r",
+    "changeToRepresentative": "Zuweisen als Vertreter:in",
+    "deleteButton": "Entfernen"
+  },
+  "participantsList": {
+    "delegate_one": "Stimmberechtigte: {{count}}",
+    "delegate_other": "Stimmberechtigte: {{count}}",
+    "noDelegate": "Es gibt keine Stimmberechtigten.",
+    "noRepresentative": "Es gibt keine:n Vertreter:in.",
+    "representative_one": "Vertreter:innen: {{count}}",
+    "representative_other": "Vertreter:innen: {{count}}"
+  },
+  "pollDuration": "{{startDate, datetime}} - {{endDate, datetime}}",
+  "pollForm": {
+    "absent": "Abwesend",
+    "answer": {
+      "abstain": "Enthaltung",
+      "no": "Nein",
+      "yes": "Ja"
+    },
+    "answerType": {
+      "yesNo": "Ja | Nein",
+      "yesNoAbstain": "Ja | Nein | Enthaltung"
+    },
+    "answerTypes": "Antworttyp",
+    "attendance": "Teilnahme",
+    "delegatedTo": "Vertreten durch {{name}}",
+    "delegatedToComponent": "Vertreten durch <2>{{name}}</2>",
+    "delegatePresent": "Anwesend",
+    "description": "Beschreibung",
+    "descriptionHelperText": "Eine Beschreibung ist erforderlich",
+    "descriptionRequired": "Beschreibung (erforderlich)",
+    "duration": "Dauer in Minuten (erforderlich)",
+    "durationHelperText": "Eine Dauer ist erforderlich",
+    "noDelegate": "Es gibt keine Stimmberechtigten",
+    "poll": "Abstimmung",
+    "pollTypes": "Abstimmungstyp",
+    "question": "Frage (erforderlich)",
+    "questionHelperText": "Eine Frage ist erforderlich",
+    "realTimeResults": "Live-Ergebnisse anzeigen",
+    "title": "Titel (erforderlich)",
+    "titleHelperText": "Ein Titel ist erforderlich",
+    "type_byName": "Namentlich",
+    "type_open": "Offen"
+  },
+  "pollPanel": {
+    "createPoll": "Neue Abstimmung erstellen",
+    "createPollModal": {
+      "cancel": "Abbrechen",
+      "save": "Speichern",
+      "title": "Neue Abstimmung erstellen"
+    },
+    "finishedPolls": "Abgeschlossene Abstimmungen",
+    "noPolls": "Es gibt keine laufenden Abstimmungen",
+    "ongoingPolls": "Laufende Abstimmungen"
+  },
+  "pollResultModalContent": {
+    "groupResult": "Gruppiertes Ergebnis",
+    "result": "Ergebnis",
+    "resultByName": "Abstimmende",
+    "resultDisplayMode": "Anzeige der Ergebnisse",
+    "resultTable": "Ergebnisse"
+  },
+  "pollResultTable": {
+    "answer": "Antwort",
+    "count": "Anzahl",
+    "group": "Gruppe",
+    "total": "Gesamt"
+  },
+  "pollsListFinishedItem": {
+    "error": "Die Daten konnten nicht geladen werden."
+  },
+  "pollsListOngoing": {
+    "error": "Die Daten konnten nicht geladen werden."
+  },
+  "pollsListUpcoming": {
+    "notStartedPolls": "Nicht gestartete Abstimmungen"
+  },
+  "pollsListUpcomingItem": {
+    "drag": "Reihenfolge der Abstimmungen ändern",
+    "dragInstructions": ". Drücke Leerttaste um diese Abstimmung zu verschieben. Während des Verschiebens, nutze die Pfeiltasten um den Eintrag zu verschieben und Escape um es abzubrechen. Stelle sicher das dein Screen Reader im Fokus oder Formular Modus ist.",
+    "editPoll": "Abstimmung bearbeiten",
+    "editPollModal": {
+      "cancel": "Abbrechen",
+      "save": "Speichern",
+      "title": "Abstimmung bearbeiten"
+    },
+    "moreSettings": "Mehr Einstellungen"
+  },
+  "pollsPdfDocumentation": {
+    "closingConfirmButton": "Deaktivieren",
+    "closingDialogHeader": "PDF deaktivieren",
+    "closingMessage": "Du bist dabei, den PDF-Download zu deaktivieren. Bist du sicher?",
+    "deactivate": "Deaktivierungszeitpunkt setzen",
+    "deactivatePdfNow": "PDF jetzt deaktivieren",
+    "documentation": "Dokumentation",
+    "duration": "Nach Wochen deaktivieren (erforderlich)",
+    "durationHelperText": "Eine Anzahl ist erforderlich",
+    "moreSetting": "Mehr Einstellungen",
+    "pdfDeactivatedMessage": "Das herunterladen des PDF Dokuments wird am {{date, datetime}} deaktiviert.",
+    "pdfDeactivatedTitle": "PDF wird deaktiviert",
+    "title": "PDF deaktivieren"
+  },
+  "pollsPdfDownloadButton": {
+    "footer": "{{currentPage}} von {{pageCount}}",
+    "pdfDownload": "PDF-Dokument herunterladen",
+    "tooltip": "Das bereitgestellte PDF ist aktuell nicht barrierefrei und kann nicht mit einem Screen Reader gelesen werden."
+  },
+  "pollStatusNotifications": {
+    "endsSoon": "Die Abstimmung „{{title}}“ endet in {{remainingTime}}.",
+    "finished": "Die Abstimmung „{{title}}“ wurde beendet.",
+    "started": "Die Abstimmung „{{title}}“ wurde gestartet und endet in {{remainingTime}}."
+  },
+  "resultViewDetails": {
+    "seeResult": "Ergebnis ansehen",
+    "seeResultLive": "Live-Ergebnis ansehen"
+  },
+  "resultVoteView": {
+    "myAnswer": "Deine Antwort: ",
+    "resultIsInvisible": "Du siehst das Ergebnis, wenn die Abstimmung beendet ist."
+  },
+  "showResultsByGroupedNameList": {
+    "noVotesWereCast": "Es wurden keine Stimmen abgegeben."
+  },
+  "startPollButton": {
+    "addVoters": {
+      "description": "Bitte füge Abstimmende hinzu.",
+      "title": "Diese Abstimmung beinhaltet keine Abstimmende."
+    },
+    "cancelButton": "Abbrechen",
+    "changePermissionMessage": {
+      "description": "Bitte bearbeite das Berechtigungslevel oder entferne die Personen aus der Abstimmung.",
+      "title": "Diese Abstimmung beinhaltet Personen mit unzureichendem Berechtigungslevel."
+    },
+    "confirmButton": "Starten",
+    "conflictMessage": {
+      "description": "Bitte bearbeite die Abstimmung, um den Konflikt zu beheben.",
+      "title": "Es wurden Änderungen in den Gruppen erkannt."
+    },
+    "message": "Bist du sicher, dass du die Abstimmung starten möchtest?",
+    "start": "Starten",
+    "startPoll": "Abstimmung starten"
+  },
+  "timeDistance": {
+    "remainingExact": "Endet in {{time}}"
+  },
+  "userHasNoPermissionMessage": {
+    "delegateHasNoPermission": "<0>{{delegate}}</0> hat keinen ausreichenden Berechtigungslevel um an der Abstimmung teilzunehmen.",
+    "representativeHasNoPermission": "<0>{{representative}}</0> kann <4>{{delegate}}</4> nicht vertreten da der Berechtigungslevel nicht ausreicht.",
+    "title": "Berechtigungslevel nicht ausreichend"
+  },
+  "voteView": {
+    "answer": "Antwort",
+    "readLess": "weniger lesen",
+    "readMore": "mehr lesen",
+    "resultIsInvisible": "Du siehst das Ergebnis, wenn die Abstimmung beendet ist.",
+    "resultVisibleAfterFirstVote": "Du siehst das Ergebnis, wenn die erste Stimme abgegeben wurde.",
+    "vote": "Abstimmen"
+  },
+  "votingRightsConfiguration": {
+    "voters": "Abstimmende"
+  },
+  "votingRightsDropdown": {
+    "selectOpen": "Öffnen"
+  }
+}

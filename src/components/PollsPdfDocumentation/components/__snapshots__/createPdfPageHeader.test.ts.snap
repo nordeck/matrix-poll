@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createPdfPageHeader should generate a pdf header and table 1`] = `
+Array [
+  Object {
+    "stack": Array [
+      Object {
+        "alignment": "center",
+        "bold": true,
+        "fontSize": 20,
+        "margin": Array [
+          0,
+          30,
+          0,
+          10,
+        ],
+        "text": "PDF Test",
+      },
+      Object {
+        "columnGap": 30,
+        "columns": Array [
+          Object {
+            "alignment": "right",
+            "text": "Joined persons: 3",
+            "width": "*",
+          },
+          Object {
+            "text": "Invited persons: 2",
+            "width": "*",
+          },
+        ],
+      },
+    ],
+  },
+]
+`;

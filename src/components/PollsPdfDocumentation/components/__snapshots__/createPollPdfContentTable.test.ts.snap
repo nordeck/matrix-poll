@@ -1,0 +1,579 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createPollPdfContentTable should generate table for "byName" with groups 1`] = `
+Array [
+  Array [
+    Object {
+      "table": Object {
+        "body": Array [
+          Array [
+            Object {
+              "columns": Array [
+                Object {
+                  "canvas": Array [
+                    Object {
+                      "color": "#ff0000",
+                      "r1": 15,
+                      "r2": 15,
+                      "type": "ellipse",
+                      "x": 15,
+                      "y": 15,
+                    },
+                  ],
+                  "width": 33,
+                },
+                Object {
+                  "relativePosition": Object {
+                    "y": 7.777777777777778,
+                  },
+                  "style": Object {
+                    "alignment": "left",
+                    "bold": true,
+                    "fontSize": 13,
+                  },
+                  "text": "Group 1",
+                },
+              ],
+            },
+            Object {
+              "style": "tableHeader",
+              "text": "Yes
+1",
+              "type": "none",
+            },
+            Object {
+              "style": "tableHeader",
+              "text": "No
+0",
+              "type": "none",
+            },
+            Object {
+              "style": "tableHeader",
+              "text": "Invalid
+1",
+              "type": "none",
+            },
+          ],
+          Array [
+            Object {
+              "style": Object {
+                "alignment": "left",
+              },
+              "text": "Name of @user-1",
+            },
+            Object {
+              "style": "tableBody",
+              "text": "X",
+            },
+            Object {
+              "style": "tableBody",
+              "text": "",
+            },
+            Object {
+              "style": "tableBody",
+              "text": "",
+            },
+          ],
+          Array [
+            Object {
+              "style": Object {
+                "alignment": "left",
+              },
+              "text": "Name of @user-2",
+            },
+            Object {
+              "style": "tableBody",
+              "text": "",
+            },
+            Object {
+              "style": "tableBody",
+              "text": "",
+            },
+            Object {
+              "style": "tableBody",
+              "text": "X",
+            },
+          ],
+        ],
+        "headerRows": 1,
+        "heights": 18,
+        "widths": Array [
+          "66%",
+          "10%",
+          "10%",
+          "14%",
+        ],
+      },
+    },
+    Object {
+      "table": Object {
+        "body": Array [
+          Array [
+            Object {
+              "columns": Array [
+                Object {
+                  "canvas": Array [
+                    Object {
+                      "color": "#0000ff",
+                      "r1": 15,
+                      "r2": 15,
+                      "type": "ellipse",
+                      "x": 15,
+                      "y": 15,
+                    },
+                  ],
+                  "width": 33,
+                },
+                Object {
+                  "relativePosition": Object {
+                    "y": 7.777777777777778,
+                  },
+                  "style": Object {
+                    "alignment": "left",
+                    "bold": true,
+                    "fontSize": 13,
+                  },
+                  "text": "Group 2",
+                },
+              ],
+            },
+            Object {
+              "style": "tableHeader",
+              "text": "Yes
+0",
+              "type": "none",
+            },
+            Object {
+              "style": "tableHeader",
+              "text": "No
+1",
+              "type": "none",
+            },
+            Object {
+              "style": "tableHeader",
+              "text": "Invalid
+0",
+              "type": "none",
+            },
+          ],
+          Array [
+            Object {
+              "style": Object {
+                "alignment": "left",
+              },
+              "text": "Name of @user-3",
+            },
+            Object {
+              "style": "tableBody",
+              "text": "",
+            },
+            Object {
+              "style": "tableBody",
+              "text": "X",
+            },
+            Object {
+              "style": "tableBody",
+              "text": "",
+            },
+          ],
+        ],
+        "headerRows": 1,
+        "heights": 18,
+        "widths": Array [
+          "66%",
+          "10%",
+          "10%",
+          "14%",
+        ],
+      },
+    },
+    Object {
+      "table": Object {
+        "body": Array [
+          Array [
+            Object {
+              "columns": Array [
+                Object {
+                  "canvas": Array [
+                    Object {
+                      "color": "#ffaaff",
+                      "r1": 15,
+                      "r2": 15,
+                      "type": "ellipse",
+                      "x": 15,
+                      "y": 15,
+                    },
+                  ],
+                  "width": 33,
+                },
+                Object {
+                  "relativePosition": Object {
+                    "y": 7.777777777777778,
+                  },
+                  "style": Object {
+                    "alignment": "left",
+                    "bold": true,
+                    "fontSize": 13,
+                  },
+                  "text": "Group 3",
+                },
+              ],
+            },
+            Object {
+              "style": "tableHeader",
+              "text": "Yes
+0",
+              "type": "none",
+            },
+            Object {
+              "style": "tableHeader",
+              "text": "No
+0",
+              "type": "none",
+            },
+            Object {
+              "style": "tableHeader",
+              "text": "Invalid
+0",
+              "type": "none",
+            },
+          ],
+          Array [
+            Object {
+              "colSpan": 4,
+              "style": Object {
+                "alignment": "center",
+              },
+              "text": "No votes were cast.",
+            },
+          ],
+        ],
+        "headerRows": 1,
+        "heights": 18,
+        "widths": Array [
+          "66%",
+          "10%",
+          "10%",
+          "14%",
+        ],
+      },
+    },
+  ],
+]
+`;
+
+exports[`createPollPdfContentTable should generate table for "byName" without groups 1`] = `
+Array [
+  Object {
+    "table": Object {
+      "body": Array [
+        Array [
+          Object {
+            "color": "black",
+            "fillColor": "white",
+            "style": Object {
+              "alignment": "left",
+              "bold": true,
+              "fontSize": 13,
+              "margin": Array [
+                0,
+                5,
+                0,
+                0,
+              ],
+            },
+            "text": "",
+          },
+          Object {
+            "color": "black",
+            "fillColor": "white",
+            "style": "tableHeader",
+            "text": "Yes
+1",
+            "type": "none",
+          },
+          Object {
+            "color": "black",
+            "fillColor": "white",
+            "style": "tableHeader",
+            "text": "No
+1",
+            "type": "none",
+          },
+          Object {
+            "color": "black",
+            "fillColor": "white",
+            "style": "tableHeader",
+            "text": "Invalid
+1",
+            "type": "none",
+          },
+        ],
+        Array [
+          Object {
+            "style": Object {
+              "alignment": "left",
+            },
+            "text": "Name of @user-1",
+          },
+          Object {
+            "style": "tableBody",
+            "text": "X",
+          },
+          Object {
+            "style": "tableBody",
+            "text": "",
+          },
+          Object {
+            "style": "tableBody",
+            "text": "",
+          },
+        ],
+        Array [
+          Object {
+            "style": Object {
+              "alignment": "left",
+            },
+            "text": "Name of @user-2",
+          },
+          Object {
+            "style": "tableBody",
+            "text": "",
+          },
+          Object {
+            "style": "tableBody",
+            "text": "",
+          },
+          Object {
+            "style": "tableBody",
+            "text": "X",
+          },
+        ],
+        Array [
+          Object {
+            "style": Object {
+              "alignment": "left",
+            },
+            "text": "Name of @user-3",
+          },
+          Object {
+            "style": "tableBody",
+            "text": "",
+          },
+          Object {
+            "style": "tableBody",
+            "text": "X",
+          },
+          Object {
+            "style": "tableBody",
+            "text": "",
+          },
+        ],
+      ],
+      "headerRows": 1,
+      "heights": 18,
+      "widths": Array [
+        "66%",
+        "10%",
+        "10%",
+        "14%",
+      ],
+    },
+  },
+]
+`;
+
+exports[`createPollPdfContentTable should generate table for "open" with groups 1`] = `
+Array [
+  Array [
+    Array [
+      Object {
+        "table": Object {
+          "body": Array [
+            Array [
+              Object {
+                "columns": Array [
+                  Object {
+                    "canvas": Array [
+                      Object {
+                        "color": "#ff0000",
+                        "r1": 15,
+                        "r2": 15,
+                        "type": "ellipse",
+                        "x": 15,
+                        "y": 15,
+                      },
+                    ],
+                    "width": 33,
+                  },
+                  Object {
+                    "relativePosition": Object {
+                      "y": 7.777777777777778,
+                    },
+                    "style": Object {
+                      "alignment": "left",
+                      "bold": true,
+                      "fontSize": 13,
+                    },
+                    "text": "Group 1",
+                  },
+                ],
+              },
+              Object {
+                "style": "tableHeader",
+                "text": "Yes
+1",
+                "type": "none",
+              },
+              Object {
+                "style": "tableHeader",
+                "text": "No
+0",
+                "type": "none",
+              },
+              Object {
+                "style": "tableHeader",
+                "text": "Invalid
+1",
+                "type": "none",
+              },
+            ],
+          ],
+          "headerRows": 1,
+          "heights": 18,
+          "widths": Array [
+            "66%",
+            "10%",
+            "10%",
+            "14%",
+          ],
+        },
+      },
+      Object {
+        "table": Object {
+          "body": Array [
+            Array [
+              Object {
+                "columns": Array [
+                  Object {
+                    "canvas": Array [
+                      Object {
+                        "color": "#0000ff",
+                        "r1": 15,
+                        "r2": 15,
+                        "type": "ellipse",
+                        "x": 15,
+                        "y": 15,
+                      },
+                    ],
+                    "width": 33,
+                  },
+                  Object {
+                    "relativePosition": Object {
+                      "y": 7.777777777777778,
+                    },
+                    "style": Object {
+                      "alignment": "left",
+                      "bold": true,
+                      "fontSize": 13,
+                    },
+                    "text": "Group 2",
+                  },
+                ],
+              },
+              Object {
+                "style": "tableHeader",
+                "text": "Yes
+0",
+                "type": "none",
+              },
+              Object {
+                "style": "tableHeader",
+                "text": "No
+1",
+                "type": "none",
+              },
+              Object {
+                "style": "tableHeader",
+                "text": "Invalid
+0",
+                "type": "none",
+              },
+            ],
+          ],
+          "headerRows": 1,
+          "heights": 18,
+          "widths": Array [
+            "66%",
+            "10%",
+            "10%",
+            "14%",
+          ],
+        },
+      },
+      Object {
+        "table": Object {
+          "body": Array [
+            Array [
+              Object {
+                "columns": Array [
+                  Object {
+                    "canvas": Array [
+                      Object {
+                        "color": "#ffaaff",
+                        "r1": 15,
+                        "r2": 15,
+                        "type": "ellipse",
+                        "x": 15,
+                        "y": 15,
+                      },
+                    ],
+                    "width": 33,
+                  },
+                  Object {
+                    "relativePosition": Object {
+                      "y": 7.777777777777778,
+                    },
+                    "style": Object {
+                      "alignment": "left",
+                      "bold": true,
+                      "fontSize": 13,
+                    },
+                    "text": "Group 3",
+                  },
+                ],
+              },
+              Object {
+                "style": "tableHeader",
+                "text": "Yes
+0",
+                "type": "none",
+              },
+              Object {
+                "style": "tableHeader",
+                "text": "No
+0",
+                "type": "none",
+              },
+              Object {
+                "style": "tableHeader",
+                "text": "Invalid
+0",
+                "type": "none",
+              },
+            ],
+          ],
+          "headerRows": 1,
+          "heights": 18,
+          "widths": Array [
+            "66%",
+            "10%",
+            "10%",
+            "14%",
+          ],
+        },
+      },
+    ],
+  ],
+]
+`;

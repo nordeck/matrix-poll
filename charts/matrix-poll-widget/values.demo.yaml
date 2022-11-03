@@ -1,0 +1,18 @@
+image:
+  tag: 0.1.0-390f20a
+
+imagePullSecrets:
+  - name: dockerconfigjson-ghcr
+
+ingress:
+  enabled: true
+  className: nginx
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-dns"
+
+settings:
+  hostname: demo.nordeck.systems
+
+env:
+  - name: REACT_APP_IGNORE_USER_IDS
+    value: "@meeting-bot:synapse.demo.nordeck.systems,@meetings-bot:synapse.demo.nordeck.systems"

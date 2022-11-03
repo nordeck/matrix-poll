@@ -1,0 +1,158 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createPollSpecifics should generate a poll specifics content if there is a group and someone is represented 1`] = `
+Array [
+  Object {
+    "color": "#444",
+    "style": "tableExample",
+    "table": Object {
+      "body": Array [
+        Array [
+          Array [
+            Object {
+              "decoration": "underline",
+              "margin": Array [
+                0,
+                2,
+              ],
+              "text": "Specifics",
+            },
+            Object {
+              "style": "list",
+              "ul": Array [
+                Object {
+                  "alignment": "left",
+                  "text": Array [
+                    "Absent: Name of user-bob (Red Party)",
+                    Object {
+                      "font": "ZapfDingbats",
+                      "text": " ➔ ",
+                    },
+                    "Represented by: Name of user-backup-1 (Red Party)",
+                  ],
+                },
+                Object {
+                  "alignment": "left",
+                  "text": Array [
+                    "Absent: Name of user-dameon (Blue Party)",
+                    Object {
+                      "font": "ZapfDingbats",
+                      "text": " ➔ ",
+                    },
+                    "Represented by: Name of user-backup-2 (Blue Party)",
+                  ],
+                },
+              ],
+            },
+          ],
+        ],
+      ],
+      "widths": Array [
+        "100%",
+      ],
+    },
+  },
+]
+`;
+
+exports[`createPollSpecifics should generate a poll specifics content if there is a group with absent delegate without representing 1`] = `
+Array [
+  Object {
+    "color": "#444",
+    "style": "tableExample",
+    "table": Object {
+      "body": Array [
+        Array [
+          Array [
+            Object {
+              "decoration": "underline",
+              "margin": Array [
+                0,
+                2,
+              ],
+              "text": "Specifics",
+            },
+            Object {
+              "style": "list",
+              "ul": Array [
+                Object {
+                  "alignment": "left",
+                  "text": Array [
+                    "Absent: Name of user-bob (Red Party)",
+                  ],
+                },
+              ],
+            },
+          ],
+        ],
+      ],
+      "widths": Array [
+        "100%",
+      ],
+    },
+  },
+]
+`;
+
+exports[`createPollSpecifics should generate a poll specifics content if there is a group, someone is representing someone else and someone is not represented 1`] = `
+Array [
+  Object {
+    "color": "#444",
+    "style": "tableExample",
+    "table": Object {
+      "body": Array [
+        Array [
+          Array [
+            Object {
+              "decoration": "underline",
+              "margin": Array [
+                0,
+                2,
+              ],
+              "text": "Specifics",
+            },
+            Object {
+              "style": "list",
+              "ul": Array [
+                Object {
+                  "alignment": "left",
+                  "text": Array [
+                    "Absent: Name of user-bob (Red Party)",
+                    Object {
+                      "font": "ZapfDingbats",
+                      "text": " ➔ ",
+                    },
+                    "Represented by: Name of user-backup-1 (Red Party)",
+                  ],
+                },
+                Object {
+                  "alignment": "left",
+                  "text": Array [
+                    "Absent: Name of user-charlie (Red Party)",
+                  ],
+                },
+                Object {
+                  "alignment": "left",
+                  "text": Array [
+                    "Absent: Name of user-dameon (Blue Party)",
+                    Object {
+                      "font": "ZapfDingbats",
+                      "text": " ➔ ",
+                    },
+                    "Represented by: Name of user-backup-2 (Blue Party)",
+                  ],
+                },
+              ],
+            },
+          ],
+        ],
+      ],
+      "widths": Array [
+        "100%",
+      ],
+    },
+  },
+]
+`;
+
+exports[`createPollSpecifics should not generate a poll specifics content if there is no group 1`] = `Array []`;

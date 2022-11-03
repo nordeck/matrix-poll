@@ -1,0 +1,18 @@
+image:
+  tag: 3d391b9
+
+imagePullSecrets:
+  - name: dockerconfigjson-ghcr
+
+ingress:
+  enabled: true
+  className: nginx
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-qa"
+
+settings:
+  hostname: qa.nordeck.systems
+
+env:
+  - name: REACT_APP_IGNORE_USER_IDS
+    value: "@meetings-bot:synapse.qa.nordeck.systems"

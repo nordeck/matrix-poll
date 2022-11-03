@@ -1,0 +1,139 @@
+{
+  "name": "@nordeck/matrix-poll-widget",
+  "description": "A poll widget for Matrix",
+  "author": "Nordeck IT + Consulting GmbH",
+  "license": "Apache-2.0",
+  "version": "1.1.0",
+  "private": true,
+  "dependencies": {
+    "@carbon/charts": "^1.5.6",
+    "@carbon/charts-react": "^1.5.6",
+    "@carbon/import-once": "^10.7.0",
+    "@carbon/styles": "^1.12.0",
+    "@matrix-widget-toolkit/api": "^1.0.1",
+    "@matrix-widget-toolkit/mui": "^1.0.1",
+    "@matrix-widget-toolkit/react": "^1.0.1",
+    "@mui/icons-material": "^5.10.6",
+    "@mui/material": "^5.10.8",
+    "@mui/utils": "^5.10.6",
+    "@reduxjs/toolkit": "^1.8.6",
+    "d3": "^7.6.1",
+    "i18next": "^21.10.0",
+    "i18next-chained-backend": "^3.1.0",
+    "i18next-http-backend": "^1.4.4",
+    "joi": "^17.6.4",
+    "lodash": "^4.17.20",
+    "luxon": "^3.0.4",
+    "matrix-widget-api": "^1.1.1",
+    "pdfmake": "^0.2.5",
+    "react": "^17.0.2",
+    "react-beautiful-dnd": "^13.1.1",
+    "react-dom": "^17.0.2",
+    "react-i18next": "^11.18.6",
+    "react-lines-ellipsis": "^0.15.3",
+    "react-redux": "^8.0.4",
+    "react-router-dom": "^6.4.2",
+    "react-use": "^17.4.0",
+    "redux": "^4.2.0",
+    "rxjs": "^7.5.7",
+    "uuid": "^9.0.0"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.25.0",
+    "@craco/craco": "^6.4.5",
+    "@matrix-widget-toolkit/testing": "^1.0.1",
+    "@testing-library/dom": "^8.19.0",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^12.1.5",
+    "@testing-library/react-hooks": "^8.0.1",
+    "@testing-library/user-event": "^14.4.3",
+    "@types/jest": "^27.0.0",
+    "@types/jest-axe": "^3.5.5",
+    "@types/lodash": "^4.14.186",
+    "@types/luxon": "^3.0.2",
+    "@types/node": "^16.11.66",
+    "@types/pdfmake": "^0.2.1",
+    "@types/react": "^17.0.0",
+    "@types/react-beautiful-dnd": "^13.1.2",
+    "@types/react-dom": "^17.0.0",
+    "@types/uuid": "^8.3.4",
+    "cross-env": "^7.0.3",
+    "depcheck": "^1.4.3",
+    "dotenv-cli": "^6.0.0",
+    "eslint": "^8.25.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-react-app": "^7.0.1",
+    "eslint-plugin-notice": "^0.9.10",
+    "eslint-plugin-promise": "^6.1.1",
+    "husky": "^8.0.1",
+    "i18next-parser": "^6.6.0",
+    "jest": "^27.4.3",
+    "jest-axe": "^6.0.0",
+    "lint-staged": "^13.0.3",
+    "prettier": "^2.7.1",
+    "prettier-plugin-organize-imports": "^3.1.1",
+    "react-scripts": "5.0.1",
+    "sass": "^1.55.0",
+    "typescript": "^4.5.2",
+    "yarn-deduplicate": "^6.0.0"
+  },
+  "engines": {
+    "node": ">=16",
+    "yarn": ">=1.22.1 <2.0.0"
+  },
+  "scripts": {
+    "docker": "yarn run docker:build && yarn run docker:run && yarn run docker:remove",
+    "docker:build": "docker build -t nordeck/matrix-poll-widget .",
+    "docker:run": "dotenv -- docker run -e REACT_APP_HOME_SERVER_URL -p 3000:8080 --name matrix-poll-widget nordeck/matrix-poll-widget",
+    "docker:stop": "docker stop matrix-poll-widget",
+    "docker:remove": "yarn run docker:stop && docker rm -v matrix-poll-widget",
+    "start": "cross-env HTTPS=true BROWSER=none craco start",
+    "dev": "cross-env BROWSER=none ESLINT_NO_DEV_ERRORS=true TSC_COMPILE_ON_ERROR=true WDS_SOCKET_PORT=0 craco start",
+    "build": "cross-env GENERATE_SOURCEMAP=false INLINE_RUNTIME_CHUNK=false craco build",
+    "test": "craco test",
+    "test:all": "craco test --coverage --watchAll=false",
+    "deduplicate": "yarn-deduplicate",
+    "depcheck": "depcheck --ignores=@types/jest,@types/node,prettier-plugin-organize-imports,typescript,i18next-parser,jest,@testing-library/dom,@changesets/cli,sass,@carbon/import-once",
+    "lint": "eslint .",
+    "prepare": "husky install",
+    "translate": "i18next 'src/**/*.{ts,tsx}'",
+    "prettier:check": "prettier --check .",
+    "prettier:write": "prettier --write .",
+    "generate-disclaimer": "cp LICENSE ./build/LICENSE.txt && cp NOTICE ./build/NOTICE.txt && yarn licenses generate-disclaimer --prod >> ./build/NOTICE.txt && yarn licenses list --prod --json --no-progress > ./build/licenses.json"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "yarn eslint --max-warnings=0",
+      "bash -c \"yarn tsc --pretty\"",
+      "prettier --write"
+    ],
+    "*.{package.json,js,jsx,ts,tsx}": [
+      "bash -c \"yarn depcheck\""
+    ],
+    "*.{yaml,yml,json,md,html}": [
+      "prettier --write"
+    ],
+    "*.{json,js,jsx,ts,tsx}": [
+      "bash -c \"yarn translate --fail-on-update\""
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nordeck/matrix-poll.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nordeck/matrix-poll/issues"
+  }
+}
