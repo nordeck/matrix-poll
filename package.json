@@ -51,7 +51,7 @@
     "@types/jest-axe": "^3.5.5",
     "@types/lodash": "^4.14.186",
     "@types/luxon": "^3.0.2",
-    "@types/node": "^16.11.66",
+    "@types/node": "^18.11.9",
     "@types/pdfmake": "^0.2.1",
     "@types/react": "^17.0.0",
     "@types/react-beautiful-dnd": "^13.1.2",
