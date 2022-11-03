@@ -4,6 +4,7 @@
 
 This widget allows to conduct polls in Matrix rooms.
 But unlike [MSC3381](https://github.com/matrix-org/matrix-spec-proposals/blob/travis/msc/polls/proposals/3381-polls.md), it is designed for more complex scenarios, like polls with multiple parties in a council.
+You have full control over your data, as it's stored in your Matrix room.
 
 It supports creating parties, assigning members to them, and handling representatives.
 You can prepare multiple polls in advance and then run through them in a session.
