@@ -3,7 +3,7 @@
 ![CI](https://github.com/nordeck/matrix-poll/workflows/CI/badge.svg)
 
 This widget allows to conduct polls in Matrix rooms.
-But unlike [MS3381](https://github.com/matrix-org/matrix-spec-proposals/blob/travis/msc/polls/proposals/3381-polls.md), it is designed for more complex scenarios, like polls with multiple parties in a council.
+But unlike [MSC3381](https://github.com/matrix-org/matrix-spec-proposals/blob/travis/msc/polls/proposals/3381-polls.md), it is designed for more complex scenarios, like polls with multiple parties in a council.
 
 It supports creating parties, assigning members to them, and handling representatives.
 You can prepare multiple polls in advance and then run through them in a session.
