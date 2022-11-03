@@ -10,17 +10,17 @@ registries:
     url: https://npm.pkg.github.com
     token: ${{secrets.PACKAGE_TOKEN}}
 updates:
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    open-pull-requests-limit: 15
+    rebase-strategy: 'disabled'
+    schedule:
+      interval: 'weekly'
   - package-ecosystem: 'npm'
     directory: '/'
     open-pull-requests-limit: 15
     rebase-strategy: 'disabled'
     registries:
       - npm-github
-    schedule:
-      interval: 'weekly'
-  - package-ecosystem: 'github-actions'
-    directory: '/'
-    open-pull-requests-limit: 15
-    rebase-strategy: 'disabled'
     schedule:
       interval: 'weekly'
