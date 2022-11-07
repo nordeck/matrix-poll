@@ -57,6 +57,16 @@ spec:
           envFrom:
           - configMapRef:
               name: {{ include "app.fullname" . }}-cm
+          volumeMounts:
+          - name: cache-volume
+            mountPath: /var/cache/nginx
+          - name: tmp-volume
+            mountPath: /tmp
+      volumes:
+      - name: cache-volume
+        emptyDir: {}
+      - name: tmp-volume
+        emptyDir: {}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
