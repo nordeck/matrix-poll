@@ -242,7 +242,7 @@ export const PollsPdfDownloadButton = () => {
             defaultValue: '{{currentPage}} of {{pageCount}}',
             currentPage,
             pageCount,
-          }),
+          }) as string,
           alignment: 'center',
           margin: [10, 10],
         };

@@ -33,7 +33,7 @@ describe('StoreProvider', () => {
   it('should work', () => {
     const store = configureStore({
       reducer: {
-        example: createReducer({ title: 'Example' }, {}),
+        example: createReducer({ title: 'Example' }, () => {}),
       },
     });
     const useAppSelector: TypedUseSelectorHook<
