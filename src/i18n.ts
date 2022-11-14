@@ -22,6 +22,7 @@ import i18n from 'i18next';
 import ChainedBackend from 'i18next-chained-backend';
 import HttpBackend from 'i18next-http-backend';
 import { initReactI18next } from 'react-i18next';
+import { setLocale } from './lib/locale';
 
 i18n
   .use(ChainedBackend)
@@ -40,5 +41,11 @@ i18n
     supportedLngs: ['en', 'de'],
     nonExplicitSupportedLngs: true,
   });
+
+setLocale(i18n.language);
+
+i18n.on('languageChanged', () => {
+  setLocale(i18n.language);
+});
 
 export default i18n;

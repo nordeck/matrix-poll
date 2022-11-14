@@ -23,6 +23,7 @@ import { toHaveNoViolations } from 'jest-axe';
 import { Settings } from 'luxon';
 // Make sure to initialize i18n (see mock below)
 import './i18n';
+import { setLocale } from './lib/locale';
 
 // Use a different configuration for i18next during tests
 jest.mock('./i18n', () => {
@@ -70,7 +71,8 @@ window.URL.revokeObjectURL = jest.fn();
 // We want our tests to be in a reproducible time zone, always resulting in
 // the same results, independent from where they are run.
 Settings.defaultZone = 'UTC';
-Settings.defaultLocale = 'en';
+
+setLocale('en');
 
 // Add support for jest-axe
 expect.extend(toHaveNoViolations);
