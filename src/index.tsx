@@ -16,8 +16,6 @@
 
 import { WidgetApiImpl } from '@matrix-widget-toolkit/api';
 import { getEnvironment, getNonce } from '@matrix-widget-toolkit/mui';
-import i18next from 'i18next';
-import { Settings } from 'luxon';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
@@ -39,12 +37,6 @@ if (version) {
     `You are running version "${version}" of the matrix-poll-widget!`
   );
 }
-
-Settings.defaultLocale = i18next.language;
-
-i18next.on('languageChanged', () => {
-  Settings.defaultLocale = i18next.language;
-});
 
 const widgetApiPromise = WidgetApiImpl.create({
   capabilities: widgetCapabilities,
