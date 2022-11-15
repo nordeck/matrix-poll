@@ -1962,10 +1962,10 @@
     qs "^6.11.0"
     rxjs "^7.5.7"
 
-"@matrix-widget-toolkit/mui@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@matrix-widget-toolkit/mui/-/mui-1.0.2.tgz#61459c0a294f520ae729b90c34eefbee4026e622"
-  integrity sha512-bWTJ0fZ1RgTaHaz74/0zxWmlVHP9asb9wZDonhY9MyOd2oqB7JFd2cxYnqLIVJQ6JhVcD0kvxfbQdOdbJTnwLQ==
+"@matrix-widget-toolkit/mui@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@matrix-widget-toolkit/mui/-/mui-1.0.3.tgz#216500dc1d709623831dd0c69950935171a7763a"
+  integrity sha512-eIcQfNdrtd5sIcRSP0vrr+GgZibx2QJYcLhAq7et+kecVecY/HTFNGjTaCW9p0i4xEVtA3+Lj7qZwcl7617hMQ==
   dependencies:
     "@emotion/cache" "^11.10.5"
     "@emotion/react" "^11.10.5"
