@@ -9259,10 +9259,10 @@ path-type@^4.0.0:
   resolved "https://registry.yarnpkg.com/path-type/-/path-type-4.0.0.tgz#84ed01c0a7ba380afe09d90a8c180dcd9d03043b"
   integrity sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==
 
-pdfmake@^0.2.5:
-  version "0.2.5"
-  resolved "https://registry.yarnpkg.com/pdfmake/-/pdfmake-0.2.5.tgz#48b17670d69dae3860a5d8721ff12f7988140613"
-  integrity sha512-NlayjehMtuZEdw2Lyipf/MxOCR2vATZQ7jn8cH0/dHwsNb+mqof9/6SW4jZT5p+So4qz+0mD21KG81+dDQSEhA==
+pdfmake@^0.2.6:
+  version "0.2.6"
+  resolved "https://registry.yarnpkg.com/pdfmake/-/pdfmake-0.2.6.tgz#322d6ef94e2503d29353529286e452c801921966"
+  integrity sha512-gZARnKLJjTuHWKIkqF4G6dafIaPfH7NFqBz9U9wb26PV5koHQ5eeQ/0rgZmIdfJzMKqHzXB9aK25ykG2AnnzEQ==
   dependencies:
     "@foliojs-fork/linebreak" "^1.1.1"
     "@foliojs-fork/pdfkit" "^0.13.0"

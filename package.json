@@ -25,7 +25,7 @@
     "lodash": "^4.17.20",
     "luxon": "^3.1.0",
     "matrix-widget-api": "^1.1.1",
-    "pdfmake": "^0.2.5",
+    "pdfmake": "^0.2.6",
     "react": "^17.0.2",
     "react-beautiful-dnd": "^13.1.1",
     "react-dom": "^17.0.2",
