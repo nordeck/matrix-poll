@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import { getEnvironment } from '@matrix-widget-toolkit/mui';
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
 import { renderHook } from '@testing-library/react-hooks';
 import { DateTime } from 'luxon';
@@ -28,6 +29,11 @@ import {
 import { createStore } from '../store';
 import { PollInvalidAnswer, usePollResults } from './usePollResults';
 
+jest.mock('@matrix-widget-toolkit/mui', () => ({
+  ...jest.requireActual('@matrix-widget-toolkit/mui'),
+  getEnvironment: jest.fn(),
+}));
+
 let widgetApi: MockedWidgetApi;
 
 afterEach(() => widgetApi.stop());
@@ -39,6 +45,10 @@ describe('selectPollResults', () => {
 
   beforeEach(() => {
     widgetApi.mockSendStateEvent(mockPowerLevelsEvent());
+
+    jest
+      .mocked(getEnvironment)
+      .mockImplementation((_, defaultValue) => defaultValue);
 
     Wrapper = ({ children }) => {
       const [store] = useState(() => createStore({ widgetApi }));
@@ -1250,6 +1260,72 @@ describe('selectPollResults', () => {
             invalidVoters: {
               '@user-delegate-1': { state: 'invalid' },
             },
+          },
+        },
+      },
+    });
+  });
+
+  it('should ignore ignored users', async () => {
+    jest
+      .mocked(getEnvironment)
+      .mockImplementation((name, defaultValue) =>
+        name === 'REACT_APP_IGNORE_USER_IDS'
+          ? '@user-with-power-2'
+          : defaultValue
+      );
+
+    widgetApi.mockSendStateEvent(
+      mockPowerLevelsEvent({
+        content: {
+          users: {
+            '@user-with-power-1': 50,
+            '@user-with-power-2': 50,
+          },
+          events: {
+            'net.nordeck.poll.vote': 50,
+          },
+          events_default: 0,
+          users_default: 0,
+        },
+      })
+    );
+    widgetApi.mockSendStateEvent(
+      mockRoomMember({ state_key: '@user-with-power-1' })
+    );
+    widgetApi.mockSendStateEvent(
+      mockRoomMember({ state_key: '@user-with-power-2' })
+    );
+    const poll = widgetApi.mockSendStateEvent(
+      mockPoll({
+        state_key: 'my-poll',
+        content: {
+          startTime: new Date().toISOString(),
+          endTime: DateTime.now().plus({ minute: 1 }).toISO(),
+          answers: [
+            { id: '1', label: 'Yes' },
+            { id: '2', label: 'No' },
+          ],
+          groups: undefined,
+        },
+      })
+    );
+
+    const { result, waitForValueToChange } = renderHook(
+      () => usePollResults('my-poll', { includeInvalidVotes: true }),
+      { wrapper: Wrapper }
+    );
+
+    await waitForValueToChange(() => result.current.isLoading);
+
+    expect(result.current).toEqual({
+      isLoading: false,
+      data: {
+        poll,
+        votingRights: ['@user-with-power-1'],
+        results: {
+          votes: {
+            '@user-with-power-1': PollInvalidAnswer,
           },
         },
       },
