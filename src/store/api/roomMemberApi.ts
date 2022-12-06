@@ -20,12 +20,12 @@ import {
   StateEvent,
   STATE_EVENT_ROOM_MEMBER,
 } from '@matrix-widget-toolkit/api';
-import { getEnvironment } from '@matrix-widget-toolkit/mui';
 import { createEntityAdapter, EntityState } from '@reduxjs/toolkit';
 import { isError } from 'lodash';
 import { bufferTime, filter } from 'rxjs';
 import { ThunkExtraArgument } from '../store';
 import { baseApi } from './baseApi';
+import { getIgnoredUsers } from './config';
 
 const roomMemberEventEntityAdapter = createEntityAdapter<
   StateEvent<RoomMemberStateEventContent>
@@ -110,12 +110,6 @@ export const roomMemberApi = baseApi.injectEndpoints({
 
 export const { selectAll: selectRoomMembers, selectById: selectRoomMember } =
   roomMemberEventEntityAdapter.getSelectors();
-
-function getIgnoredUsers(): string[] {
-  return getEnvironment('REACT_APP_IGNORE_USER_IDS', '')
-    .split(',')
-    .filter((a) => a.length > 0);
-}
 
 export function selectActiveRoomMembers(
   state: EntityState<StateEvent<RoomMemberStateEventContent>>
