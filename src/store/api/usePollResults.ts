@@ -32,6 +32,7 @@ import {
   ROOM_EVENT_VOTE,
   VotingRight,
 } from '../../model';
+import { getIgnoredUsers } from './config';
 import { selectPollById, useGetPollsQuery } from './pollApi';
 import { useGetPowerLevelsQuery } from './powerLevelsApi';
 import { selectRoomMembers, useGetRoomMembersQuery } from './roomMemberApi';
@@ -197,8 +198,11 @@ export function selectPollResults(
 ): SelectPollResults | undefined {
   const { includeInvalidVotes = false } = opts;
 
+  const ignoredUsers = getIgnoredUsers();
   const roomMembers = roomMembersState
-    ? selectRoomMembers(roomMembersState)
+    ? selectRoomMembers(roomMembersState).filter(
+        (m) => !ignoredUsers.includes(m.state_key)
+      )
     : [];
 
   // no groups -> use votes, room members, and power levels

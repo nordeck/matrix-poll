@@ -108,7 +108,7 @@ export interface IPoll {
 const pollSchema = Joi.object<IPoll, true>({
   title: Joi.string().min(1).required(),
   question: Joi.string().min(1).required(),
-  description: Joi.string().min(1).required(),
+  description: Joi.string().min(0).required(),
   pollType: Joi.string()
     .valid(...Object.values(PollType))
     .required(),

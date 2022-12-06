@@ -53,7 +53,7 @@ describe('isValidPollEvent', () => {
       isValidPollEvent({
         content: {
           title: 'My title',
-          description: 'My Description',
+          description: '',
           question: 'My Question?',
           pollType: 'open',
           answers: [
@@ -172,7 +172,6 @@ describe('isValidPollEvent', () => {
     { description: undefined },
     { description: null },
     { description: 111 },
-    { description: '' },
     { question: undefined },
     { question: null },
     { question: 111 },
