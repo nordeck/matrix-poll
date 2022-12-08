@@ -1086,16 +1086,16 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@carbon/charts-react@^1.5.6":
-  version "1.5.6"
-  resolved "https://registry.yarnpkg.com/@carbon/charts-react/-/charts-react-1.5.6.tgz#bc4d0f2d2a653eec51a5c8bb18d01e45cc73e7e3"
-  integrity sha512-y9BS1zfuNLGU6DK5kIkl39NvFEbgIglif/fC0sqEKgU8j9oCPzfWMeQDR7PTfLUD3MHJrilqOSYQOPZ666nxjA==
+"@carbon/charts-react@^1.6.2":
+  version "1.6.2"
+  resolved "https://registry.yarnpkg.com/@carbon/charts-react/-/charts-react-1.6.2.tgz#1d189a2524653a22ec503a2d9f8f683e8acd2c2d"
+  integrity sha512-eoYl3bMB0+2JSv/FlTJD2DLY17Vvb02BV2pBmxUIbfgIQcjMNFmbIVzJ0b/VhUD3N/15tZVDYSNwBxEt+DPRmQ==
   dependencies:
-    "@carbon/charts" "^1.5.6"
+    "@carbon/charts" "^1.6.2"
     "@carbon/icons-react" "^10.49.0"
     "@carbon/telemetry" "0.1.0"
 
-"@carbon/charts@^1.5.6", "@carbon/charts@^1.6.2":
+"@carbon/charts@^1.6.2":
   version "1.6.2"
   resolved "https://registry.yarnpkg.com/@carbon/charts/-/charts-1.6.2.tgz#5565c03e42f93b75e032728ada994d2b2374a1fa"
   integrity sha512-JsmryCGQiaY5eq4r1NU+WQKDOAmZm6oTCtKKkeQPgnDxDfJVVn7lheSsovcDongDTx6nQ1rgYQaak927RK7chw==
@@ -10432,15 +10432,10 @@ regenerate@^1.4.2:
   resolved "https://registry.yarnpkg.com/regenerate/-/regenerate-1.4.2.tgz#b9346d8827e8f5a32f7ba29637d398b69014848a"
   integrity sha512-zrceR/XhGYU/d/opr2EKO7aRHUeiBI8qjtfHqADTwZd6Szfy16la6kqD0MIUs5z5hx6AaKa+PixpPrR289+I0A==
 
-regenerator-runtime@^0.13.11:
+regenerator-runtime@^0.13.11, regenerator-runtime@^0.13.4, regenerator-runtime@^0.13.9:
   version "0.13.11"
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.11.tgz#f6dca3e7ceec20590d07ada785636a90cdca17f9"
   integrity sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg==
-
-regenerator-runtime@^0.13.4, regenerator-runtime@^0.13.9:
-  version "0.13.10"
-  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.10.tgz#ed07b19616bcbec5da6274ebc75ae95634bfc2ee"
-  integrity sha512-KepLsg4dU12hryUO7bp/axHAKvwGOCV0sGloQtpagJ12ai+ojVDqkeGSiRX1zlq+kjIMZ1t7gpze+26QqtdGqw==
 
 regenerator-transform@^0.14.2:
   version "0.14.5"
