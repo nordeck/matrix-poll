@@ -9,7 +9,7 @@
     "@carbon/charts": "^1.6.2",
     "@carbon/charts-react": "^1.6.2",
     "@carbon/import-once": "^10.7.0",
-    "@carbon/styles": "^1.18.0",
+    "@carbon/styles": "^1.19.0",
     "@matrix-widget-toolkit/api": "^1.0.2",
     "@matrix-widget-toolkit/mui": "^1.0.4",
     "@matrix-widget-toolkit/react": "^1.0.2",
