@@ -100,7 +100,7 @@ As soon as the project maintainers merged it, the package will be released and t
 
 ### Architecture Decision Records
 
-We use [Architecture Decision Records (ADR)s](./docs/adr/adr001-use-adrs-to-document-decisions.md) to document decisions for our software.
+We use [Architecture Decision Records (ADR)s](https://github.com/nordeck/matrix-widget-toolkit/blob/main/docs/adrs/adr001-use-adrs-to-document-decisions.md) to document decisions for our software.
 You can find them at [`/docs/adrs`](./docs/adrs/).
 
 ## Deployment
