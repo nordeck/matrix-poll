@@ -39,7 +39,7 @@
     "uuid": "^9.0.0"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.25.2",
+    "@changesets/cli": "^2.26.0",
     "@craco/craco": "^7.0.0",
     "@matrix-widget-toolkit/testing": "^1.0.1",
     "@testing-library/dom": "^8.19.0",
@@ -66,7 +66,7 @@
     "eslint-plugin-notice": "^0.9.10",
     "eslint-plugin-promise": "^6.1.1",
     "husky": "^8.0.2",
-    "i18next-parser": "^7.0.2",
+    "i18next-parser": "^7.1.0",
     "jest": "^27.4.3",
     "jest-axe": "^7.0.0",
     "lint-staged": "^13.1.0",
