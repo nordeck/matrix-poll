@@ -5846,10 +5846,10 @@ escodegen@~1.2.0:
   optionalDependencies:
     source-map "~0.1.30"
 
-eslint-config-prettier@^8.5.0:
-  version "8.5.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-8.5.0.tgz#5a81680ec934beca02c7b1a61cf8ca34b66feab1"
-  integrity sha512-obmWKLUNCnhtQRKc+tmnYuQl0pFU1ibYJQ5BGhTVB08bHe9wC8qUeG7c08dj9XX+AuPj1YSGSQIHl1pnDHZR0Q==
+eslint-config-prettier@^8.6.0:
+  version "8.6.0"
+  resolved "https://registry.yarnpkg.com/eslint-config-prettier/-/eslint-config-prettier-8.6.0.tgz#dec1d29ab728f4fa63061774e1672ac4e363d207"
+  integrity sha512-bAF0eLpLVqP5oEVUFKpMA+NnRFICwn9X8B5jrR9FcqnYBuPbqWEjTEspPWMj5ye6czoSLDweCzSo3Ko7gGrZaA==
 
 eslint-config-react-app@^7.0.1:
   version "7.0.1"
@@ -6522,6 +6522,15 @@ fs-extra@^10.0.0:
     jsonfile "^6.0.1"
     universalify "^2.0.0"
 
+fs-extra@^11.1.0:
+  version "11.1.0"
+  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-11.1.0.tgz#5784b102104433bb0e090f48bfc4a30742c357ed"
+  integrity sha512-0rcTq621PD5jM/e0a3EJoGC/1TC5ZBCERW82LQuwfGnCa1V8w7dpYH1yNu+SLb6E5dkeCBzKEyLGlFrnr+dUyw==
+  dependencies:
+    graceful-fs "^4.2.0"
+    jsonfile "^6.0.1"
+    universalify "^2.0.0"
+
 fs-extra@^7.0.1:
   version "7.0.1"
   resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-7.0.1.tgz#4f189c44aa123b895f722804f55ea23eadc348e9"
@@ -7070,10 +7079,10 @@ i18next-http-backend@^2.1.1:
   dependencies:
     cross-fetch "3.1.5"
 
-i18next-parser@^7.1.0:
-  version "7.1.0"
-  resolved "https://registry.yarnpkg.com/i18next-parser/-/i18next-parser-7.1.0.tgz#299e0b99ae210037035939a89b747dc15a5965e5"
-  integrity sha512-+4SPpTZChHZw8Mx/XUMyLAhngpxMX7ZegDdTrO0AUc7/mctzUfyS+17XEMJ3xP35TDELZNFLnvLAOt3gBj5VuQ==
+i18next-parser@^7.2.0:
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/i18next-parser/-/i18next-parser-7.2.0.tgz#cd72388ca3fc74456c1454b61a8a7f2808889614"
+  integrity sha512-gKRJozYvRG2D+eZs1c35lFkmHtiOorZji0vVSbOEmBIUkzPpwbYnviumm8tozQjBp9c6Fa6IT0uEIQ7HstpmdQ==
   dependencies:
     "@babel/runtime" "^7.15.4"
     broccoli-plugin "^4.0.7"
@@ -7083,7 +7092,7 @@ i18next-parser@^7.1.0:
     concat-stream "~2.0.0"
     eol "^0.9.1"
     esbuild "^0.16.4"
-    fs-extra "^10.0.0"
+    fs-extra "^11.1.0"
     gulp-sort "^2.0.0"
     i18next "^22.0.4"
     js-yaml "4.1.0"
