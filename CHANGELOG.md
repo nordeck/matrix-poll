@@ -1,5 +1,16 @@
 # @nordeck/matrix-poll-widget
 
+## 1.2.0
+
+### Minor Changes
+
+- e357d9e: Show error and loading states for votes on the poll cards.
+
+### Patch Changes
+
+- 2937b97: Set document language to improve accessibility.
+- ab13e23: Fix creating meeting without description if `REACT_APP_POLL_DESCRIPTION_REQUIRED` is not set.
+
 ## 1.1.0
 
 ### Minor Changes
