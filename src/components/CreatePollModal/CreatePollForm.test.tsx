@@ -962,6 +962,6 @@ describe('<CreatePollForm>', () => {
       initialSelectionEnd: 2,
     });
 
-    expect(durationSpinbutton).toHaveValue(5);
+    expect(durationSpinbutton).toHaveValue(55);
   });
 });

@@ -186,7 +186,7 @@ export const CreatePollForm = ({
   const handleChangeDuration = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       setIsDirty(true);
-      setDuration(e.target.value.replace(/\..*/, ''));
+      setDuration(e.target.value.replace(/[^0-9]*/g, ''));
     },
     []
   );
