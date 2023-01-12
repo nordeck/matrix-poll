@@ -940,4 +940,28 @@ describe('<CreatePollForm>', () => {
       }).content
     );
   });
+
+  it('should convert decimal numbers duration to Whole numbers', async () => {
+    const onPollChange = jest.fn();
+
+    widgetApi.clearStateEvents();
+
+    render(<CreatePollForm onPollChange={onPollChange} />, {
+      wrapper: Wrapper,
+    });
+
+    const durationSpinbutton = screen.getByRole('spinbutton', {
+      name: 'Duration in minutes (required)',
+      description: '',
+    });
+
+    expect(durationSpinbutton).toHaveValue(1);
+
+    await userEvent.type(durationSpinbutton, '5.5', {
+      initialSelectionStart: 0,
+      initialSelectionEnd: 2,
+    });
+
+    expect(durationSpinbutton).toHaveValue(5);
+  });
 });
