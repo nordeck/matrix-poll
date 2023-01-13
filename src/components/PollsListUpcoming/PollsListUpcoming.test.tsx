@@ -231,7 +231,7 @@ describe('<PollsListUpcoming>', () => {
       within(dialog).getByText('My Other Description')
     ).toBeInTheDocument();
     expect(within(dialog).getByText('My Other Question')).toBeInTheDocument();
-    expect(within(dialog).getAllByText('Ends in 01:00')).toHaveLength(2);
+    expect(within(dialog).getByText('Ends in 01:00')).toBeInTheDocument();
 
     const radioGroup = within(dialog).getByRole('radiogroup', {
       name: 'Answer',

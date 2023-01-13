@@ -53,6 +53,11 @@
     "deletePoll": "Delete poll",
     "message": "Are you sure you want to delete the poll “{{title}}”?"
   },
+  "dropdownItemStopPoll": {
+    "confirmButton": "Stop",
+    "message": "Are you sure you want to stop the timer for poll “{{title}}”?",
+    "stopTimer": "Stop timer"
+  },
   "getAnswerLabel": {
     "invalidAnswer": "Invalid"
   },
@@ -172,6 +177,10 @@
   },
   "pollsListOngoing": {
     "error": "Data could not be loaded."
+  },
+  "pollsListOnGoingItem": {
+    "moreSettings": "More settings",
+    "stopPoll": "Stop poll"
   },
   "pollsListUpcoming": {
     "notStartedPolls": "Not started polls"

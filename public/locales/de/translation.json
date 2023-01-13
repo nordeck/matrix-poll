@@ -53,6 +53,11 @@
     "deletePoll": "Abstimmung löschen",
     "message": "Möchtest du die Abstimmung {{title}} wirklich löschen?"
   },
+  "dropdownItemStopPoll": {
+    "confirmButton": "Beenden",
+    "message": "Möchtest du die Abstimmung {{title}} wirklich beenden?",
+    "stopTimer": "Abstimmung beenden"
+  },
   "getAnswerLabel": {
     "invalidAnswer": "Ungültig"
   },
@@ -172,6 +177,10 @@
   },
   "pollsListOngoing": {
     "error": "Die Daten konnten nicht geladen werden."
+  },
+  "pollsListOnGoingItem": {
+    "moreSettings": "Mehr Einstellungen",
+    "stopPoll": "Abstimmung beenden"
   },
   "pollsListUpcoming": {
     "notStartedPolls": "Nicht gestartete Abstimmungen"

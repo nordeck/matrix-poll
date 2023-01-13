@@ -152,16 +152,6 @@ export const TimeDistance = ({
   return timeDistance.renderLabel ? (
     <>
       <TimeDistanceComponent
-        // this component reserves the space to move others away
-        animated={timeDistance.animated}
-        aria-hidden="true"
-        labelColor={timeDistance.labelColor}
-        labelText={timeDistance.labelText}
-        paused={paused}
-        startHours={timeDistance.startHours}
-        sx={{ ...sx, position: 'relative', visibility: 'hidden' }}
-      />
-      <TimeDistanceComponent
         // this component renders the actual label
         animated={timeDistance.animated}
         labelColor={timeDistance.labelColor}

@@ -268,7 +268,7 @@ describe('<PollsListOngoing>', () => {
     expect(within(pollItem).getByText(/My Description/i)).toBeInTheDocument();
 
     // poll timer
-    expect(within(pollItem).getAllByText(/ends in [\d]+/i)).toHaveLength(2);
+    expect(within(pollItem).getByText(/ends in [\d]+/i)).toBeInTheDocument();
   });
 
   it('should show vote form and live result button if the poll is open, the user can vote and someone has voted', async () => {
@@ -753,6 +753,32 @@ describe('<PollsListOngoing>', () => {
       within(activePollListItem).queryByRole('button', {
         name: 'See live result',
         description: 'Test poll open and visible',
+      })
+    ).not.toBeInTheDocument();
+  });
+
+  it('should remove poll from ongoing list if poll stopped manually', async () => {
+    render(<PollsListOngoing />, { wrapper: Wrapper });
+
+    const activePollList = await screen.findByRole('list', {
+      name: /active polls/i,
+    });
+    const activePollListItem = within(activePollList).getByRole('listitem', {
+      name: 'Test poll open and visible',
+    });
+    const moreSettings = within(activePollListItem).getByRole('button', {
+      name: 'More settings',
+    });
+    await userEvent.click(moreSettings);
+    await userEvent.click(
+      screen.getByRole('menuitem', {
+        name: 'Stop poll',
+      })
+    );
+
+    expect(
+      within(activePollList).queryByRole('listitem', {
+        name: 'Test poll open and visible',
       })
     ).not.toBeInTheDocument();
   });
