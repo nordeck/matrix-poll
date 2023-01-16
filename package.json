@@ -32,7 +32,7 @@
     "react-i18next": "^12.0.0",
     "react-lines-ellipsis": "^0.15.3",
     "react-redux": "^8.0.5",
-    "react-router-dom": "^6.4.5",
+    "react-router-dom": "^6.6.2",
     "react-use": "^17.4.0",
     "redux": "^4.2.0",
     "rxjs": "^7.8.0",
