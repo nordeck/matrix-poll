@@ -2064,17 +2064,26 @@
     qs "^6.11.0"
     rxjs "^7.5.7"
 
-"@matrix-widget-toolkit/mui@^1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@matrix-widget-toolkit/mui/-/mui-1.0.5.tgz#3fc1c0469c818937e96b948cb7ee5e4c08fee077"
-  integrity sha512-Z5dy3cJoAxRp04JD6Q6fq3Ue6S2T2rA0Ij/Y6EOp/Zj6Zd4Kb7gkk6VX8dCJhs9d6NCr6f7fLViWb0YQvEG+kQ==
+"@matrix-widget-toolkit/api@^2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@matrix-widget-toolkit/api/-/api-2.0.0.tgz#27c32f5ed3cd4e05cfc6afd0a38e012b9dbdb78f"
+  integrity sha512-e00nvcL4d1zcNbNLe+p6Weh3EPwQShHyYciMrq2BrBWuPd98+ri2EnS35U+Hs/FQ9eVdu5apmUKg1Y3jW/YZgA==
+  dependencies:
+    matrix-widget-api "^1.1.1"
+    qs "^6.11.0"
+    rxjs "^7.8.0"
+
+"@matrix-widget-toolkit/mui@^1.0.6":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@matrix-widget-toolkit/mui/-/mui-1.0.6.tgz#f20b0d6a9d21b4dfb5f8e97b319bba67601d2f48"
+  integrity sha512-XooKhzmqHbK5h3HYW/y6y6tlzx5eAurhFxEvV0UtlIIcbhrUGvb4qz7Cq8eO+ZpcaNq0MUbqug5e2OLs5AeRNg==
   dependencies:
     "@emotion/cache" "^11.10.5"
     "@emotion/react" "^11.10.5"
     "@emotion/styled" "^11.10.5"
     "@fontsource/inter" "^4.5.14"
-    "@matrix-widget-toolkit/api" "^1.0.1"
-    "@matrix-widget-toolkit/react" "^1.0.2"
+    "@matrix-widget-toolkit/api" "^2.0.0"
+    "@matrix-widget-toolkit/react" "^1.0.3"
     "@mui/icons-material" "^5.11.0"
     "@mui/material" "^5.11.3"
     "@mui/utils" "^5.11.2"
@@ -2086,12 +2095,12 @@
     react-i18next "^12.0.0"
     react-use "^17.4.0"
 
-"@matrix-widget-toolkit/react@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@matrix-widget-toolkit/react/-/react-1.0.2.tgz#f0152ebab601221a6f043f44339022867648639b"
-  integrity sha512-8QSLXImHFfzS6FNkl2yrBHvpCJiYu9zW0eyYJVbaKBXWx2tGpzcoF9eQdHuXp3Vd1UJbCenzdS9+JmdfwShANw==
+"@matrix-widget-toolkit/react@^1.0.2", "@matrix-widget-toolkit/react@^1.0.3":
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/@matrix-widget-toolkit/react/-/react-1.0.3.tgz#23324fe9cdbf6cf70c62bd8d8b74ef367898fc72"
+  integrity sha512-OxV+9doZtxya5BhYkDtE4E6WuEYfD7DrynOD1HzsVxUFndvsaLx3Xva26HjlqBeFMm4+4pvs9o0DrLPPmM3Asw==
   dependencies:
-    "@matrix-widget-toolkit/api" "^1.0.1"
+    "@matrix-widget-toolkit/api" "^2.0.0"
     matrix-widget-api "^1.1.1"
     react "^17.0.2"
     react-error-boundary "^3.1.4"
