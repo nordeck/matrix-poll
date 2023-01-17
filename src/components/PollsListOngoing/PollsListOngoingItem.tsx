@@ -1,5 +1,5 @@
 /*
- * Copyright 2023 Nordeck IT + Consulting GmbH
+ * Copyright 2022 Nordeck IT + Consulting GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,8 +15,8 @@
  */
 
 import { StateEvent } from '@matrix-widget-toolkit/api';
-import CancelIcon from '@mui/icons-material/Cancel';
-import { Alert, Skeleton, Stack, Tooltip } from '@mui/material';
+import TimerOffIcon from '@mui/icons-material/TimerOff';
+import { Alert, Skeleton, Tooltip } from '@mui/material';
 import { unstable_useId as useId } from '@mui/utils';
 import { Fragment, ReactElement, useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -66,26 +66,30 @@ function PollMenuOngoingPoll({
         buttonLabel={t('pollsListOnGoingItem.moreSettings', 'More settings')}
       >
         <MenuButtonItem
-          color="error.main"
-          icon={<CancelIcon />}
+          icon={<TimerOffIcon />}
           onClick={handleClickOpenStopConfirm}
         >
-          {t('pollsListOnGoingItem.stopPoll', 'Stop poll')}
+          {t('pollsListOnGoingItem.stopPoll', 'End poll now')}
         </MenuButtonItem>
       </MenuButton>
+
       <ConfirmDeleteDialog
-        confirmTitle={t('dropdownItemStopPoll.confirmButton', 'Stop')}
+        confirmTitle={t(
+          'pollsListOnGoingItem.dropdownItemStopPoll.confirmButton',
+          'End now'
+        )}
         description={t(
-          'dropdownItemStopPoll.message',
-          'Are you sure you want to stop the timer for poll “{{title}}”?',
-          {
-            title: poll.content.title,
-          }
+          'pollsListOnGoingItem.dropdownItemStopPoll.message',
+          'Are you sure you want to end the poll “{{title}}”? All existing votes will be registered and no further voting will be possible.',
+          { title: poll.content.title }
         )}
         onCancel={handleCloseStopConfirm}
         onConfirm={handleClickStopConfirm}
         open={openStopConfirm}
-        title={t('dropdownItemStopPoll.stopTimer', 'Stop timer')}
+        title={t(
+          'pollsListOnGoingItem.dropdownItemStopPoll.endPollNow',
+          'End poll now'
+        )}
       />
     </>
   );
@@ -138,9 +142,7 @@ export const PollsListOngoingItem = ({ poll }: PollsListOngoingItemProps) => {
         }
         header={
           canCreatePoll && (
-            <Stack direction="row">
-              <PollMenuOngoingPoll aria-describedby={titleId} poll={poll} />
-            </Stack>
+            <PollMenuOngoingPoll aria-describedby={titleId} poll={poll} />
           )
         }
         headerInfos={
@@ -150,7 +152,7 @@ export const PollsListOngoingItem = ({ poll }: PollsListOngoingItemProps) => {
               endTime={poll.content.endTime}
               fallbackDuration={poll.content.duration}
               startTime={poll.content.startTime}
-              sx={{ top: '68px' }}
+              sx={{ marginTop: '-20px' }}
             />
           )
         }

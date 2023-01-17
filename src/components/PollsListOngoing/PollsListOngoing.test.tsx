@@ -16,7 +16,7 @@
 
 import { WidgetApiMockProvider } from '@matrix-widget-toolkit/react';
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
-import { render, screen, within } from '@testing-library/react';
+import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { DateTime } from 'luxon';
@@ -757,7 +757,7 @@ describe('<PollsListOngoing>', () => {
     ).not.toBeInTheDocument();
   });
 
-  it('should remove poll from ongoing list if poll stopped manually', async () => {
+  it('should show end poll now dialog and confirm stopping', async () => {
     render(<PollsListOngoing />, { wrapper: Wrapper });
 
     const activePollList = await screen.findByRole('list', {
@@ -766,20 +766,87 @@ describe('<PollsListOngoing>', () => {
     const activePollListItem = within(activePollList).getByRole('listitem', {
       name: 'Test poll open and visible',
     });
-    const moreSettings = within(activePollListItem).getByRole('button', {
-      name: 'More settings',
-    });
-    await userEvent.click(moreSettings);
+
     await userEvent.click(
-      screen.getByRole('menuitem', {
-        name: 'Stop poll',
+      within(activePollListItem).getByRole('button', {
+        name: 'More settings',
       })
     );
 
+    const menu = screen.getByRole('menu', { name: /more settings/i });
+
+    await userEvent.click(
+      within(menu).getByRole('menuitem', { name: 'End poll now' })
+    );
+
+    const dialog = screen.getByRole('dialog', {
+      name: 'End poll now',
+      description:
+        'Are you sure you want to end the poll “Test poll open and visible”? All existing votes will be registered and no further voting will be possible.',
+    });
     expect(
-      within(activePollList).queryByRole('listitem', {
-        name: 'Test poll open and visible',
+      within(dialog).getByText(
+        'Are you sure you want to end the poll “Test poll open and visible”? All existing votes will be registered and no further voting will be possible.'
+      )
+    ).toBeInTheDocument();
+
+    await userEvent.click(
+      within(dialog).getByRole('button', { name: 'End now' })
+    );
+
+    await waitFor(() => {
+      expect(dialog).not.toBeInTheDocument();
+    });
+
+    expect(widgetApi.sendStateEvent).toBeCalledWith(
+      'net.nordeck.poll',
+      expect.anything(),
+      { stateKey: 'poll-open-visible' }
+    );
+
+    await waitFor(() => {
+      expect(activePollListItem).not.toBeInTheDocument();
+    });
+  });
+
+  it('should show end poll now dialog and cancel stopping', async () => {
+    render(<PollsListOngoing />, { wrapper: Wrapper });
+
+    const activePollList = await screen.findByRole('list', {
+      name: /active polls/i,
+    });
+    const activePollListItem = within(activePollList).getByRole('listitem', {
+      name: 'Test poll open and visible',
+    });
+
+    await userEvent.click(
+      within(activePollListItem).getByRole('button', {
+        name: 'More settings',
       })
-    ).not.toBeInTheDocument();
+    );
+
+    const menu = screen.getByRole('menu', { name: /more settings/i });
+
+    await userEvent.click(
+      within(menu).getByRole('menuitem', { name: 'End poll now' })
+    );
+
+    const dialog = screen.getByRole('dialog', {
+      name: 'End poll now',
+      description:
+        'Are you sure you want to end the poll “Test poll open and visible”? All existing votes will be registered and no further voting will be possible.',
+    });
+    expect(
+      within(dialog).getByText(
+        'Are you sure you want to end the poll “Test poll open and visible”? All existing votes will be registered and no further voting will be possible.'
+      )
+    ).toBeInTheDocument();
+
+    await userEvent.click(
+      within(dialog).getByRole('button', { name: 'Cancel' })
+    );
+
+    expect(widgetApi.sendStateEvent).not.toBeCalled();
+    expect(activePollListItem).toBeInTheDocument();
   });
 });

@@ -48,16 +48,6 @@
     "movementCanceled": "Movement cancelled. The poll has returned to its starting position of {{startPosition}}.",
     "notOverDropTarget": "You are currently not dragging over any droppable area."
   },
-  "dropdownItemDeletePoll": {
-    "confirmButton": "Delete",
-    "deletePoll": "Delete poll",
-    "message": "Are you sure you want to delete the poll “{{title}}”?"
-  },
-  "dropdownItemStopPoll": {
-    "confirmButton": "Stop",
-    "message": "Are you sure you want to stop the timer for poll “{{title}}”?",
-    "stopTimer": "Stop timer"
-  },
   "getAnswerLabel": {
     "invalidAnswer": "Invalid"
   },
@@ -179,8 +169,13 @@
     "error": "Data could not be loaded."
   },
   "pollsListOnGoingItem": {
+    "dropdownItemStopPoll": {
+      "confirmButton": "End now",
+      "endPollNow": "End poll now",
+      "message": "Are you sure you want to end the poll “{{title}}”? All existing votes will be registered and no further voting will be possible."
+    },
     "moreSettings": "More settings",
-    "stopPoll": "Stop poll"
+    "stopPoll": "End poll now"
   },
   "pollsListUpcoming": {
     "notStartedPolls": "Not started polls"
@@ -188,6 +183,11 @@
   "pollsListUpcomingItem": {
     "drag": "Reorder polls",
     "dragInstructions": ". Press space bar to start a drag. When dragging you can use the arrow keys to move the item around and escape to cancel. Ensure your screen reader is in focus mode or forms mode.",
+    "dropdownItemDeletePoll": {
+      "confirmButton": "Delete",
+      "deletePoll": "Delete poll",
+      "message": "Are you sure you want to delete the poll “{{title}}”?"
+    },
     "editPoll": "Edit poll",
     "editPollModal": {
       "cancel": "Cancel",

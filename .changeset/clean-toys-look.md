@@ -2,4 +2,4 @@
 '@nordeck/matrix-poll-widget': minor
 ---
 
-end poll timer manually feature
+Add the option to end a poll early.
