@@ -98,6 +98,7 @@ export function PollCard({
       <CardContent sx={{ pt: 0, display: 'flex', flexWrap: 'wrap-reverse' }}>
         <PollInfoIcons pollId={pollId} showVotes={showVotes} />
       </CardContent>
+
       {headerInfos}
 
       <Divider />
