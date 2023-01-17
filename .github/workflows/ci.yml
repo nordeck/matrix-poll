@@ -69,6 +69,8 @@ jobs:
       - name: Generate Docker metadata
         id: meta
         uses: docker/metadata-action@v4
+        env:
+          DOCKER_METADATA_PR_HEAD_SHA: true
         with:
           images: ${{ env.DOCKER_IMAGE }}
           labels: |
@@ -83,7 +85,7 @@ jobs:
         env:
           DOCKER_IMAGE: ghcr.io/nordeck/matrix-poll-widget
         with:
-          push: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+          push: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' || github.event_name == 'pull_request' && secrets.GH_APP_OS_APP_ID != '' }}
           context: .
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
@@ -109,34 +111,32 @@ jobs:
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
     name: Deploy to Dev
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 5
     needs: build
-    env:
-      AWS_REGION: eu-central-1
     steps:
-      - uses: actions/checkout@v3
-
-      - name: configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v1
+      - name: Generate GitHub token
+        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+        id: generate_token
+        uses: tibdex/github-app-token@021a2405c7f990db57f5eae5397423dcc554159c # @v1.7.0
         with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ env.AWS_REGION  }}
+          app_id: ${{ secrets.GH_APP_OS_APP_ID }}
+          private_key: ${{ secrets.GH_APP_OS_PRIVATE_KEY }}
 
-      - name: Create Kubeconfig
-        run: |
-          # Extract the base64 encoded config data and write this to the KUBECONFIG
-          echo "${{ secrets.KUBECONFIG_DEV }}" | base64 -d > /tmp/config
-          chmod 600 /tmp/config
-
-          echo "KUBECONFIG=/tmp/config" >> $GITHUB_ENV
-
-      - name: Deploy to the dev cluster
-        run: helm -n default upgrade --install -f ./charts/matrix-poll-widget/values.dev.yaml --set image.tag=${{ needs.build.outputs.docker-tag }} matrix-poll-widget ./charts/matrix-poll-widget
-
-      - name: Cleanup Kubeconfig
-        if: always()
-        run: |
-          rm /tmp/config
+      - name: Trigger Workflow
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ steps.generate_token.outputs.token }}
+          script: |
+            github.rest.actions.createWorkflowDispatch({
+              owner: 'nordeck',
+              repo: '${{ secrets.GITOPS_DEPLOY_REPOSITORY }}',
+              workflow_id: 'deployment.yml',
+              ref: 'main',
+              inputs: {
+                environment: '${{ secrets.GITOPS_DEPLOY_ENVIRONMENT}}',
+                application: 'matrix-poll',
+                tag: '${{ github.sha }}'
+              }
+            })
 
       # TODO: E2E Tests?

@@ -1,14 +1,4 @@
-imagePullSecrets:
-  - name: dockerconfigjson-ghcr
-
-ingress:
-  enabled: true
-  className: nginx
-  annotations:
-    cert-manager.io/cluster-issuer: "letsencrypt-dns"
-
-settings:
-  hostname: dev.nordeck.systems
+# Use this file to add configurations for the dev environment and the PR deployments
 
 env:
   - name: REACT_APP_IGNORE_USER_IDS
