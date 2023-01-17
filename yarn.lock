@@ -2790,10 +2790,10 @@
   dependencies:
     "@types/node" "*"
 
-"@types/pdfmake@^0.2.1":
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/@types/pdfmake/-/pdfmake-0.2.1.tgz#5a2b4f6af28721413bc0c3c2278ec763b89e6e11"
-  integrity sha512-Of8rbi5CuMZrzyUDwEQE+8krGUstQ5SYKYsa1oIx8Z/ed0mh4LnpyMnz+ibYc7vw9RVmTsW2kLMdPOReZCeb3g==
+"@types/pdfmake@^0.2.2":
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/@types/pdfmake/-/pdfmake-0.2.2.tgz#5683262e97e9b0189745a8572c49c51ba87c1573"
+  integrity sha512-CBtkugrgklpXsZ9Wj/+cw+zYoeDnJxVev62ahwpdPCz/O405Wxr+iq76JgUiZc/QAo3P2lWbI2nYA5GrrSL8VQ==
   dependencies:
     "@types/node" "*"
     "@types/pdfkit" "*"
@@ -9888,10 +9888,10 @@ prettier-plugin-organize-imports@^3.2.1:
   resolved "https://registry.yarnpkg.com/prettier-plugin-organize-imports/-/prettier-plugin-organize-imports-3.2.1.tgz#7e0e0a18457e0166e740daaff1aed1c08069fcb9"
   integrity sha512-bty7C2Ecard5EOXirtzeCAqj4FU4epeuWrQt/Z+sh8UVEpBlBZ3m3KNPz2kFu7KgRTQx/C9o4/TdquPD1jOqjQ==
 
-prettier@^2.7.1, prettier@^2.8.1:
-  version "2.8.1"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.8.1.tgz#4e1fd11c34e2421bc1da9aea9bd8127cd0a35efc"
-  integrity sha512-lqGoSJBQNJidqCHE80vqZJHWHRFoNYsSpP9AjFhlhi9ODCJA541svILes/+/1GM3VaL/abZi7cpFzOpdR9UPKg==
+prettier@^2.7.1, prettier@^2.8.3:
+  version "2.8.3"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.8.3.tgz#ab697b1d3dd46fb4626fbe2f543afe0cc98d8632"
+  integrity sha512-tJ/oJ4amDihPoufT5sM0Z1SKEuKay8LfVAMlbbhnnkvt6BUserZylqo2PN+p9KeljLr0OHa2rXHU1T8reeoTrw==
 
 pretty-bytes@^5.3.0, pretty-bytes@^5.4.1:
   version "5.6.0"
