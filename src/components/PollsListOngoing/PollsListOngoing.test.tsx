@@ -162,6 +162,13 @@ describe('<PollsListOngoing>', () => {
       })
     );
 
+    expect(
+      within(activePollListItem).getByRole('button', {
+        name: 'More settings',
+        description: 'Test poll open and visible',
+      })
+    ).toBeInTheDocument();
+
     await expect(
       within(activePollListItem).findByRole('button', {
         name: 'See live result',
@@ -768,12 +775,10 @@ describe('<PollsListOngoing>', () => {
     });
 
     await userEvent.click(
-      within(activePollListItem).getByRole('button', {
-        name: 'More settings',
-      })
+      within(activePollListItem).getByRole('button', { name: 'More settings' })
     );
 
-    const menu = screen.getByRole('menu', { name: /more settings/i });
+    const menu = screen.getByRole('menu', { name: 'More settings' });
 
     await userEvent.click(
       within(menu).getByRole('menuitem', { name: 'End poll now' })
@@ -820,12 +825,10 @@ describe('<PollsListOngoing>', () => {
     });
 
     await userEvent.click(
-      within(activePollListItem).getByRole('button', {
-        name: 'More settings',
-      })
+      within(activePollListItem).getByRole('button', { name: 'More settings' })
     );
 
-    const menu = screen.getByRole('menu', { name: /more settings/i });
+    const menu = screen.getByRole('menu', { name: 'More settings' });
 
     await userEvent.click(
       within(menu).getByRole('menuitem', { name: 'End poll now' })
@@ -848,5 +851,28 @@ describe('<PollsListOngoing>', () => {
 
     expect(widgetApi.sendStateEvent).not.toBeCalled();
     expect(activePollListItem).toBeInTheDocument();
+  });
+
+  it('should hide the option to end polls now for non-moderators', async () => {
+    render(<PollsListOngoing />, { wrapper: Wrapper });
+
+    const activePollList = await screen.findByRole('list', {
+      name: /active polls/i,
+    });
+    const activePollListItem = within(activePollList).getByRole('listitem', {
+      name: 'Test poll open and visible',
+    });
+
+    const moreSettingsButton = within(activePollListItem).getByRole('button', {
+      name: 'More settings',
+    });
+
+    widgetApi.mockSendStateEvent(
+      mockPowerLevelsEvent({ content: { users_default: 0 } })
+    );
+
+    await waitFor(() => {
+      expect(moreSettingsButton).not.toBeInTheDocument();
+    });
   });
 });

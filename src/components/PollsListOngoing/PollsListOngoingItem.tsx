@@ -37,6 +37,7 @@ type PollsListOngoingItemProps = {
   poll: StateEvent<IPoll>;
   'aria-describedby'?: string;
 };
+
 function PollMenuOngoingPoll({
   poll,
   'aria-describedby': ariaDescribedBy,
