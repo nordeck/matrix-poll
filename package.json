@@ -65,7 +65,7 @@
     "eslint-config-react-app": "^7.0.1",
     "eslint-plugin-notice": "^0.9.10",
     "eslint-plugin-promise": "^6.1.1",
-    "husky": "^8.0.2",
+    "husky": "^8.0.3",
     "i18next-parser": "^7.2.0",
     "jest": "^27.4.3",
     "jest-axe": "^7.0.0",
