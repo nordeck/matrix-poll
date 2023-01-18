@@ -85,8 +85,13 @@ export function PollCard({
     <Card variant="outlined">
       <CardHeader
         action={header}
-        subheader={headerMeta}
-        sx={{ pb: 0 }}
+        subheader={
+          <>
+            {headerMeta}
+
+            <PollInfoIcons pollId={pollId} showVotes={showVotes} />
+          </>
+        }
         title={poll.title}
         titleTypographyProps={{
           id: titleId,
@@ -94,10 +99,6 @@ export function PollCard({
           component: 'h4',
         }}
       />
-
-      <CardContent sx={{ pt: 0, display: 'flex', flexWrap: 'wrap-reverse' }}>
-        <PollInfoIcons pollId={pollId} showVotes={showVotes} />
-      </CardContent>
 
       {headerInfos}
 
