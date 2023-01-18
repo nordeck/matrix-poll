@@ -805,7 +805,15 @@ describe('<PollsListOngoing>', () => {
 
     expect(widgetApi.sendStateEvent).toBeCalledWith(
       'net.nordeck.poll',
-      expect.anything(),
+      mockPoll({
+        state_key: 'poll-open-visible',
+        content: {
+          title: 'Test poll open and visible',
+          startTime: expect.any(String),
+          endTime: expect.any(String),
+          startEventId: '$start-event-id',
+        },
+      }).content,
       { stateKey: 'poll-open-visible' }
     );
 
