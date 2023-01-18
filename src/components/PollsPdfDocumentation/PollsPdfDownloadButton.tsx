@@ -15,7 +15,19 @@
  */
 
 import { useWidgetApi } from '@matrix-widget-toolkit/react';
-import { Button, Tooltip, Typography } from '@mui/material';
+import { LoadingButton } from '@mui/lab';
+import {
+  Alert,
+  AlertTitle,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Tooltip,
+  Typography,
+} from '@mui/material';
 import { unstable_useId as useId, visuallyHidden } from '@mui/utils';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
@@ -69,6 +81,9 @@ export const PollsPdfDownloadButton = () => {
   const { t } = useTranslation();
   const widgetApi = useWidgetApi();
   const dispatch = useAppDispatch();
+
+  const [pdfModalOpen, setPdfModalOpen] = useState<boolean>(false);
+  const [pdfWasGenerated, setPdfWasGenerated] = useState<boolean>(false);
 
   const [pdfUrl, setPdfUrl] = useState<string>();
   const { getUserDisplayName } = useUserDetails();
@@ -194,80 +209,91 @@ export const PollsPdfDownloadButton = () => {
     ]
   );
 
-  const { data: pdfContent, isLoading: isPdfContentLoading } =
-    useAppSelector(pdfContentSelector);
+  const {
+    data: pdfContent,
+    isLoading: isPdfContentLoading,
+    isError: isPdfContentError,
+  } = useAppSelector(pdfContentSelector);
 
-  // TODO: use isPdfContentError
+  const generatePDFAndOpenDialog = useCallback(() => {
+    setPdfModalOpen(true);
 
-  useEffect(() => {
-    if (isPdfContentLoading || !pdfContent) {
-      return;
+    if (pdfWasGenerated) {
+      return false;
     }
 
-    let blobUrl: string;
-    const columns: TDocumentDefinitions = {
-      pageMargins: [40, 80, 40, 40],
-      pageSize: 'A4',
-      content: pdfContent,
-      version: '1.5',
-      info: {
-        title: roomName,
-        author: authorName,
-      },
-      styles: {
-        tableHeader: {
-          alignment: 'center',
-          bold: true,
-          fontSize: 13,
+    if (pdfContent) {
+      let blobUrl: string;
+      const columns: TDocumentDefinitions = {
+        pageMargins: [40, 80, 40, 40],
+        pageSize: 'A4',
+        content: pdfContent,
+        version: '1.5',
+        info: {
+          title: roomName,
+          author: authorName,
         },
-        tableBody: {
-          alignment: 'center',
+        styles: {
+          tableHeader: {
+            alignment: 'center',
+            bold: true,
+            fontSize: 13,
+          },
+          tableBody: {
+            alignment: 'center',
+          },
+          list: {
+            margin: [5, 0, 0, 0],
+          },
         },
-        list: {
-          margin: [5, 0, 0, 0],
+        header() {
+          return createPdfPageHeader({
+            roomName,
+            roomMemberEvents: roomMemberEvents
+              ? selectRoomMembers(roomMemberEvents)
+              : [],
+            context: { t, getUserDisplayName },
+          });
         },
-      },
-      header() {
-        return createPdfPageHeader({
-          roomName,
-          roomMemberEvents: roomMemberEvents
-            ? selectRoomMembers(roomMemberEvents)
-            : [],
-          context: { t, getUserDisplayName },
-        });
-      },
-      footer(currentPage, pageCount): ContentText {
-        return {
-          text: t('pollsPdfDownloadButton.footer', {
-            defaultValue: '{{currentPage}} of {{pageCount}}',
-            currentPage,
-            pageCount,
-          }) as string,
-          alignment: 'center',
-          margin: [10, 10],
-        };
-      },
-    };
+        footer(currentPage, pageCount): ContentText {
+          return {
+            text: t('pollsPdfDownloadButton.footer', {
+              defaultValue: '{{currentPage}} of {{pageCount}}',
+              currentPage,
+              pageCount,
+            }) as string,
+            alignment: 'center',
+            margin: [10, 10],
+          };
+        },
+      };
 
-    const a = pdfMake.createPdf(columns);
-    a.getBlob((blob) => {
-      blobUrl = URL.createObjectURL(blob);
-      setPdfUrl(blobUrl);
-    });
+      const a = pdfMake.createPdf(columns);
+      a.getBlob((blob) => {
+        blobUrl = URL.createObjectURL(blob);
+        setPdfUrl(blobUrl);
+      });
 
-    return () => {
-      URL.revokeObjectURL(blobUrl);
-    };
+      setPdfWasGenerated(true);
+
+      return () => {
+        URL.revokeObjectURL(blobUrl);
+      };
+    }
   }, [
+    setPdfModalOpen,
     authorName,
     getUserDisplayName,
-    isPdfContentLoading,
     pdfContent,
     roomMemberEvents,
     roomName,
     t,
-    widgetApi.widgetParameters.userId,
+    pdfWasGenerated,
   ]);
+
+  const handleCloseModal = useCallback(() => {
+    setPdfModalOpen(false);
+  }, []);
 
   const descriptionId = useId();
   const description = t(
@@ -275,12 +301,14 @@ export const PollsPdfDownloadButton = () => {
     'The provided PDF is currently not accessible and can not be read using a screen reader.'
   );
 
+  const dialogTitleId = useId();
+  const dialogDescriptionId = useId();
+
   return (
     <>
       <Typography aria-hidden id={descriptionId} sx={visuallyHidden}>
         {description}
       </Typography>
-
       <Tooltip
         describeChild
         title={
@@ -292,20 +320,67 @@ export const PollsPdfDownloadButton = () => {
       >
         <Button
           aria-describedby={descriptionId}
-          component="a"
-          disabled={!pdfUrl}
-          download={`${roomName}.pdf`}
           fullWidth
-          href={pdfUrl}
-          target="_blank"
-          variant="outlined"
+          onClick={generatePDFAndOpenDialog}
+          variant="contained"
         >
           {t(
-            'pollsPdfDownloadButton.pdfDownload',
-            'Download PDF documentation'
+            'pollsPdfDownloadButton.generatePDF',
+            'Generate PDF documentation'
           )}
         </Button>
       </Tooltip>
+
+      <Dialog
+        aria-describedby={dialogDescriptionId}
+        aria-labelledby={dialogTitleId}
+        onClose={handleCloseModal}
+        open={pdfModalOpen}
+      >
+        <DialogTitle component="h3" id={dialogTitleId} sx={{ flex: 1 }}>
+          {t('pollsPdfDownloadModal.title', 'Download the PDF')}
+        </DialogTitle>
+
+        <DialogContent sx={{ pt: 0 }}>
+          <DialogContentText id={dialogDescriptionId}>
+            {t(
+              'pollsPdfDownloadModal.description',
+              'The PDF report is being generated and can be downloaded once it is ready.'
+            )}
+          </DialogContentText>
+          {isPdfContentError && (
+            <Alert role="status" severity="error" sx={{ my: 2 }}>
+              <AlertTitle>
+                {t(
+                  'pollsPdfDownloadModal.error',
+                  'Something went wrong while generating the PDF documentation.'
+                )}
+              </AlertTitle>
+            </Alert>
+          )}
+        </DialogContent>
+
+        <DialogActions>
+          <Button onClick={handleCloseModal} sx={{ mx: 1 }} variant="outlined">
+            {t('pollsPdfDownloadModal.cancel', 'Cancel')}
+          </Button>
+
+          <LoadingButton
+            aria-describedby={descriptionId}
+            component="a"
+            disabled={isPdfContentError}
+            download={`${roomName}.pdf`}
+            href={pdfUrl}
+            loading={isPdfContentLoading || !pdfContent || !pdfUrl}
+            target="_blank"
+            variant="contained"
+          >
+            {isPdfContentLoading || !pdfContent || !pdfUrl
+              ? t('pollsPdfDownloadModal.pdfLoading', 'Loading')
+              : t('pollsPdfDownloadModal.pdfDownload', 'Download')}
+          </LoadingButton>
+        </DialogActions>
+      </Dialog>
     </>
   );
 };

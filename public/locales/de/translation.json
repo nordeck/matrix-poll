@@ -212,8 +212,16 @@
   },
   "pollsPdfDownloadButton": {
     "footer": "{{currentPage}} von {{pageCount}}",
-    "pdfDownload": "PDF-Dokument herunterladen",
+    "generatePDF": "PDF-Dokumentation generieren",
     "tooltip": "Das bereitgestellte PDF ist aktuell nicht barrierefrei und kann nicht mit einem Screen Reader gelesen werden."
+  },
+  "pollsPdfDownloadModal": {
+    "cancel": "Abbrechen",
+    "description": "Der PDF-Bericht wird derzeit erstellt und kann heruntergeladen werden, sobald er fertig ist.",
+    "error": "Bei der Erstellung der PDF-Dokumentation ist ein Fehler aufgetreten.",
+    "pdfDownload": "Herunterladen",
+    "pdfLoading": "Wird geladen",
+    "title": "PDF herunterladen"
   },
   "pollStatusNotifications": {
     "endsSoon": "Die Abstimmung „{{title}}“ endet in {{remainingTime}}.",

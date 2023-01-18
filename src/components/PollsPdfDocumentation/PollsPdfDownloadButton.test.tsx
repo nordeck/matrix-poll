@@ -16,7 +16,8 @@
 
 import { WidgetApiMockProvider } from '@matrix-widget-toolkit/react';
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { isFunction } from 'lodash';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import { ComponentType, PropsWithChildren, useMemo } from 'react';
@@ -129,8 +130,51 @@ describe('<PollsPdfDownloadButton/>', () => {
     (URL.createObjectURL as jest.Mock).mockReturnValue('blob:url');
   });
 
-  it('should render PDF', async () => {
+  it('should show PDF generation button', async () => {
     render(<PollsPdfDownloadButton />, { wrapper: Wrapper });
+
+    expect(
+      await screen.findByRole('button', {
+        name: 'Generate PDF documentation',
+        description: /not accessible/i,
+      })
+    ).toBeInTheDocument();
+  });
+
+  it('should disable PDF download button while PDF is generated', async () => {
+    createPdfMockReturnValue.getBlob.mockImplementation(() => {});
+
+    render(<PollsPdfDownloadButton />, { wrapper: Wrapper });
+
+    userEvent.click(
+      await screen.findByRole('button', { name: 'Generate PDF documentation' })
+    );
+
+    const pdfDialog = await screen.findByRole('dialog', {
+      name: 'Download the PDF',
+      description:
+        'The PDF report is being generated and can be downloaded once it is ready.',
+    });
+
+    expect(
+      within(pdfDialog).getByRole('button', { name: 'Loading' })
+    ).toBeInTheDocument();
+
+    expect(
+      within(pdfDialog).getByRole('button', { name: 'Cancel' })
+    ).toBeInTheDocument();
+  });
+
+  it('should generate PDF on open dialog', async () => {
+    render(<PollsPdfDownloadButton />, { wrapper: Wrapper });
+
+    userEvent.click(
+      await screen.findByRole('button', { name: 'Generate PDF documentation' })
+    );
+
+    expect(
+      await screen.findByRole('dialog', { name: 'Download the PDF' })
+    ).toBeInTheDocument();
 
     await waitFor(() => {
       expect(createPdfMock).toHaveBeenLastCalledWith({
@@ -279,28 +323,57 @@ describe('<PollsPdfDownloadButton/>', () => {
     });
   });
 
-  it('should disable PDF download button while the PDF is generated', async () => {
-    createPdfMockReturnValue.getBlob.mockImplementation((cb) => {});
-
-    render(<PollsPdfDownloadButton />, { wrapper: Wrapper });
-
-    expect(
-      screen.getByRole('button', { name: /download pdf documentation/i })
-    ).toHaveAttribute('aria-disabled');
-  });
-
   it('should show PDF download button', async () => {
     render(<PollsPdfDownloadButton />, { wrapper: Wrapper });
 
+    userEvent.click(
+      await screen.findByRole('button', { name: 'Generate PDF documentation' })
+    );
+
     await waitFor(() => {
+      const pdfDialog = screen.getByRole('dialog', {
+        name: 'Download the PDF',
+        description:
+          'The PDF report is being generated and can be downloaded once it is ready.',
+      });
+
       expect(
-        screen.getByRole('link', {
-          name: /download pdf documentation/i,
+        within(pdfDialog).getByRole('link', {
+          name: 'Download',
           description: /not accessible/i,
         })
       ).toHaveAttribute('href', 'blob:url');
     });
 
     // TODO: how to test the URL.revokeObjectURL(blobUrl) ??????
+  });
+
+  it('should show error', async () => {
+    widgetApi.receiveStateEvents.mockRejectedValue(new Error('Some Error'));
+
+    render(<PollsPdfDownloadButton />, { wrapper: Wrapper });
+
+    userEvent.click(
+      await screen.findByRole('button', { name: 'Generate PDF documentation' })
+    );
+
+    expect(
+      await screen.findByRole('dialog', { name: 'Download the PDF' })
+    ).toBeInTheDocument();
+
+    await waitFor(() => {
+      const pdfDialog = screen.getByRole('dialog', {
+        name: 'Download the PDF',
+        description:
+          'The PDF report is being generated and can be downloaded once it is ready.',
+      });
+
+      const alert = within(pdfDialog).getByRole('status');
+      expect(
+        within(alert).getByText(
+          'Something went wrong while generating the PDF documentation.'
+        )
+      ).toBeInTheDocument();
+    });
   });
 });
