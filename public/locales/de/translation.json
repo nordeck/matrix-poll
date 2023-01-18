@@ -48,11 +48,6 @@
     "movementCanceled": "Verschieben abgebrochen. Die Abstimmung ist zu ihrer ursprünglichen Position {{startPosition}} zurückgekehrt.",
     "notOverDropTarget": "Du befindest dich aktuell nicht über einer gültigen Ablagestelle."
   },
-  "dropdownItemDeletePoll": {
-    "confirmButton": "Löschen",
-    "deletePoll": "Abstimmung löschen",
-    "message": "Möchtest du die Abstimmung {{title}} wirklich löschen?"
-  },
   "getAnswerLabel": {
     "invalidAnswer": "Ungültig"
   },
@@ -74,7 +69,7 @@
       "title": "Gruppe bearbeiten"
     },
     "hideParticipants": "Teilnehmerliste ausblenden",
-    "message": "Möchtest du die Gruppe {{title}} wirklich löschen?",
+    "message": "Möchtest du die Gruppe „{{title}}“ wirklich löschen?",
     "modalHeader": "Gruppe löschen",
     "moreSettings": "Mehr Einstellungen",
     "participants": "Teilnehmer:innen",
@@ -173,12 +168,26 @@
   "pollsListOngoing": {
     "error": "Die Daten konnten nicht geladen werden."
   },
+  "pollsListOnGoingItem": {
+    "dropdownItemStopPoll": {
+      "confirmButton": "Jetzt beenden",
+      "endPollNow": "Abstimmung jetzt beenden",
+      "message": "Möchtest du die Abstimmung „{{title}}“ wirklich beenden? Alle bereits abgegebenen Stimmen werden gezählt und es können keine neuen Stimmen abgegeben werden."
+    },
+    "moreSettings": "Mehr Einstellungen",
+    "stopPoll": "Abstimmung jetzt beenden"
+  },
   "pollsListUpcoming": {
     "notStartedPolls": "Nicht gestartete Abstimmungen"
   },
   "pollsListUpcomingItem": {
     "drag": "Reihenfolge der Abstimmungen ändern",
     "dragInstructions": ". Drücke Leerttaste um diese Abstimmung zu verschieben. Während des Verschiebens, nutze die Pfeiltasten um den Eintrag zu verschieben und Escape um es abzubrechen. Stelle sicher das dein Screen Reader im Fokus oder Formular Modus ist.",
+    "dropdownItemDeletePoll": {
+      "confirmButton": "Löschen",
+      "deletePoll": "Abstimmung löschen",
+      "message": "Möchtest du die Abstimmung „{{title}}“ wirklich löschen?"
+    },
     "editPoll": "Abstimmung bearbeiten",
     "editPollModal": {
       "cancel": "Abbrechen",

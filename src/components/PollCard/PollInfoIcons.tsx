@@ -120,6 +120,8 @@ export const PollInfoIcons = ({ pollId, showVotes }: IInfosIconsProps) => {
     <Stack
       alignItems="center"
       aria-label={t('infosIcons.title', 'Poll Details')}
+      color="text.primary"
+      columnGap={1}
       component="ul"
       direction="row"
       divider={
@@ -127,9 +129,9 @@ export const PollInfoIcons = ({ pollId, showVotes }: IInfosIconsProps) => {
           |
         </Typography>
       }
+      flexWrap="wrap"
       m={0}
       pl={0}
-      spacing={1}
       sx={{
         li: {
           listStyleType: 'none',

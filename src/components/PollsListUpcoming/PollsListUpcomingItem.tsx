@@ -122,20 +122,29 @@ function PollMenuUpcomingPoll({
           icon={<DeleteIcon />}
           onClick={handleClickOpenDeleteConfirm}
         >
-          {t('dropdownItemDeletePoll.deletePoll', 'Delete poll')}
+          {t(
+            'pollsListUpcomingItem.dropdownItemDeletePoll.deletePoll',
+            'Delete poll'
+          )}
         </MenuButtonItem>
       </MenuButton>
 
       <ConfirmDeleteDialog
-        confirmTitle={t('dropdownItemDeletePoll.confirmButton', 'Delete')}
-        description={t('dropdownItemDeletePoll.message', {
+        confirmTitle={t(
+          'pollsListUpcomingItem.dropdownItemDeletePoll.confirmButton',
+          'Delete'
+        )}
+        description={t('pollsListUpcomingItem.dropdownItemDeletePoll.message', {
           title: poll.content.title,
           defaultValue: 'Are you sure you want to delete the poll “{{title}}”?',
         })}
         onCancel={handleCloseDeleteConfirm}
         onConfirm={handleClickDeleteConfirm}
         open={openDeleteConfirm}
-        title={t('dropdownItemDeletePoll.deletePoll', 'Delete poll')}
+        title={t(
+          'pollsListUpcomingItem.dropdownItemDeletePoll.deletePoll',
+          'Delete poll'
+        )}
       />
     </>
   );

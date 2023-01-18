@@ -35,7 +35,7 @@ describe('<TimeDistance/>', () => {
       />
     );
 
-    expect(screen.getAllByText(/ends in 01:00/i)).toHaveLength(2);
+    expect(screen.getByText(/ends in 01:00/i)).toBeInTheDocument();
   });
 
   it('should use the current time if no start time is passed', () => {
@@ -44,7 +44,7 @@ describe('<TimeDistance/>', () => {
 
     render(<TimeDistance fallbackDuration={2} />);
 
-    expect(screen.getAllByText(/ends in 02:00/i)).toHaveLength(2);
+    expect(screen.getByText(/ends in 02:00/i)).toBeInTheDocument();
   });
 
   it('should use endTime if existing', () => {
@@ -59,7 +59,7 @@ describe('<TimeDistance/>', () => {
       />
     );
 
-    expect(screen.getAllByText(/ends in 02:00/i)).toHaveLength(2);
+    expect(screen.getByText(/ends in 02:00/i)).toBeInTheDocument();
   });
 
   it('should have no accessibility violations', async () => {
@@ -85,19 +85,19 @@ describe('<TimeDistance/>', () => {
       />
     );
 
-    expect(screen.getAllByText(/ends in 02:00/i)).toHaveLength(2);
+    expect(screen.getByText(/ends in 02:00/i)).toBeInTheDocument();
 
     act(() => {
       jest.advanceTimersByTime(30000);
     });
 
-    expect(screen.getAllByText(/ends in 01:30/i)).toHaveLength(2);
+    expect(screen.getByText(/ends in 01:30/i)).toBeInTheDocument();
 
     act(() => {
       jest.advanceTimersByTime(66000);
     });
 
-    expect(screen.getAllByText(/ends in 24/i)).toHaveLength(2);
+    expect(screen.getByText(/ends in 24/i)).toBeInTheDocument();
 
     act(() => {
       jest.advanceTimersByTime(24000);
@@ -112,12 +112,12 @@ describe('<TimeDistance/>', () => {
 
     render(<TimeDistance fallbackDuration={1} />);
 
-    expect(screen.getAllByText(/ends in 01:00/i)).toHaveLength(2);
+    expect(screen.getByText(/ends in 01:00/i)).toBeInTheDocument();
 
     act(() => {
       jest.advanceTimersByTime(4000);
     });
 
-    expect(screen.getAllByText(/ends in 01:00/i)).toHaveLength(2);
+    expect(screen.getByText(/ends in 01:00/i)).toBeInTheDocument();
   });
 });
