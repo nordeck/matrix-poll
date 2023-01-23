@@ -2055,7 +2055,7 @@
     globby "^11.0.0"
     read-yaml-file "^1.1.0"
 
-"@matrix-widget-toolkit/api@^1.0.1", "@matrix-widget-toolkit/api@^1.0.2":
+"@matrix-widget-toolkit/api@^1.0.1":
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/@matrix-widget-toolkit/api/-/api-1.0.2.tgz#fb3ad2a13044041f51c1be7250573d3775640b04"
   integrity sha512-T632qeHyIG/1Rp/ZaJqQ4UV7bX86RJZyu0ht2jZVOq80Bl9HdN+tuW1sHItbIe2DlyyefKPAgtT45dvrrA8xfQ==
@@ -2063,6 +2063,15 @@
     matrix-widget-api "^1.1.1"
     qs "^6.11.0"
     rxjs "^7.5.7"
+
+"@matrix-widget-toolkit/api@^3.0.1":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@matrix-widget-toolkit/api/-/api-3.0.1.tgz#cd4e5f9edc3972c9c34d55a9e578c15ba9898141"
+  integrity sha512-7pI87vxdi+L096eqw3syl6+MJd+lLNs397Pa8U5PBB/xSjK6Q6yv4KkB9K45cyuxv6zk1mg3pc2sl/p96qH0zw==
+  dependencies:
+    matrix-widget-api "^1.1.1"
+    qs "^6.11.0"
+    rxjs "^7.8.0"
 
 "@matrix-widget-toolkit/mui@^1.0.5":
   version "1.0.5"
