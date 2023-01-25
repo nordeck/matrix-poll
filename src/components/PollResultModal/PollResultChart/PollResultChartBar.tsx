@@ -61,6 +61,9 @@ export const PollResultChartBar = ({
 
   const options: charts.BarChartOptions = {
     theme,
+    color: {
+      scale: createObjectColors(results, theme),
+    },
     tooltip: {
       enabled: false,
     },
@@ -84,6 +87,49 @@ export const PollResultChartBar = ({
 
   return <SimpleBarChart data={results} options={options}></SimpleBarChart>;
 };
+
+export function generateColor(index: number, theme: charts.ChartTheme) {
+  const lightThemeColors = [
+    '#0A60FF',
+    '#5B5201',
+    '#7B24FF',
+    '#A20B54',
+    '#1F5C5A',
+    '#9c1a29f9',
+    '#8A3A0F',
+  ];
+  const darkThemeColors = [
+    '#8AB3FF',
+    '#CBB701',
+    '#C29EFF',
+    '#F684BB',
+    '#40BFBD',
+    '#EB8995',
+    '#ED905E',
+  ];
+  if (theme === 'white') {
+    return lightThemeColors[index];
+  } else {
+    return darkThemeColors[index];
+  }
+}
+
+export function createObjectColors(
+  data: SortedResults[],
+  theme: charts.ChartTheme
+) {
+  const colorsObject: string[][] = [];
+  let newIndex = 0;
+  data.forEach((d, i) => {
+    if (i >= 7) {
+      colorsObject.push([d.group, generateColor(newIndex, theme)]);
+      newIndex++;
+    } else {
+      colorsObject.push([d.group, generateColor(i, theme)]);
+    }
+  });
+  return Object.fromEntries(colorsObject);
+}
 
 // React currently only allow lazy loading for default exports
 // https://reactjs.org/docs/code-splitting.html#named-exports
