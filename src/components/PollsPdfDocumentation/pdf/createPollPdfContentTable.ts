@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import { t } from 'i18next';
 import { Content, ContentTable, TableCell } from 'pdfmake/interfaces';
 import { getAnswerLabel } from '../../../lib/getAnswerLabel';
 import { PollType } from '../../../model';
@@ -25,11 +26,10 @@ import {
   SelectPollResults,
   Votes,
 } from '../../../store';
-import { Context } from './types';
 
 export function createPollPdfContentTable(
   pollResult: SelectPollResults,
-  context: Context
+  getUserDisplayName: (userId: string) => string
 ): Content {
   const answerIds: AnswerId[] = [
     ...pollResult.poll.content.answers.map((a) => a.id),
@@ -48,12 +48,11 @@ export function createPollPdfContentTable(
                   pollResult,
                   group,
                   answerIds,
-                  context,
                 }),
                 ...generateUserRows({
                   votes: group.votes,
                   answerIds,
-                  context,
+                  getUserDisplayName,
                 }),
               ],
             })
@@ -68,12 +67,11 @@ export function createPollPdfContentTable(
             generateRowHeader({
               pollResult,
               answerIds,
-              context,
             }),
             ...generateUserRows({
               votes: pollResult.results.votes,
               answerIds,
-              context,
+              getUserDisplayName,
             }),
           ],
         }),
@@ -91,7 +89,6 @@ export function createPollPdfContentTable(
                     pollResult,
                     group,
                     answerIds,
-                    context,
                   }),
                 ],
               })
@@ -107,7 +104,9 @@ export function createPollPdfContentTable(
   }
 }
 
-// to give the table columns fix size. we have for now just tow option 4 or 5 columns and this function give the columns a suitable size depending on the answer size
+// to give the table columns fix size. we have for now just tow option 4 or 5
+// columns and this function give the columns a suitable size depending on the
+// answer size
 function columnsSizeValue(answerCount: number): string[] {
   if (answerCount === 3) {
     return ['66%', '10%', '10%', '14%'];
@@ -130,17 +129,13 @@ function generateTable(opts: {
   };
 }
 
-function generateRowHeader(opts: {
+function generateRowHeader({
+  pollResult,
+  answerIds,
+}: {
   pollResult: SelectPollResults;
   answerIds: AnswerId[];
-  context: Context;
 }): TableCell[] {
-  const {
-    pollResult,
-    answerIds,
-    context: { t },
-  } = opts;
-
   const votesByAnswer = getVoteAnswerCount(pollResult.results.votes);
 
   return [
@@ -169,19 +164,15 @@ function generateRowHeader(opts: {
   ];
 }
 
-function generateGroupRowHeader(opts: {
+function generateGroupRowHeader({
+  pollResult,
+  group,
+  answerIds,
+}: {
   pollResult: SelectPollResults;
   group: GroupResult;
   answerIds: AnswerId[];
-  context: Context;
 }): TableCell[] {
-  const {
-    pollResult,
-    group,
-    answerIds,
-    context: { t },
-  } = opts;
-
   const votesByAnswer = getVoteAnswerCount(group.votes);
 
   const radius = 15;
@@ -239,17 +230,15 @@ export function addBreakLineToTheName(name: string, answerIdsLength: number) {
   return userName?.join('\n');
 }
 
-function generateUserRows(opts: {
+function generateUserRows({
+  votes,
+  answerIds,
+  getUserDisplayName,
+}: {
   votes: Votes;
   answerIds: AnswerId[];
-  context: Context;
+  getUserDisplayName: (userId: string) => string;
 }): TableCell[][] {
-  const {
-    votes,
-    answerIds,
-    context: { t, getUserDisplayName },
-  } = opts;
-
   if (Object.entries(votes).length === 0) {
     return [
       [
@@ -272,10 +261,7 @@ function generateUserRows(opts: {
       style: {
         alignment: 'left',
       },
-      text: addBreakLineToTheName(
-        getUserDisplayName(userId),
-        opts.answerIds.length
-      ),
+      text: addBreakLineToTheName(getUserDisplayName(userId), answerIds.length),
     },
     ...answerIds.map((id) => ({
       style: 'tableBody',

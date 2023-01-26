@@ -29,15 +29,13 @@ import {
   Typography,
 } from '@mui/material';
 import { unstable_useId as useId, visuallyHidden } from '@mui/utils';
-import * as pdfMake from 'pdfmake/build/pdfmake';
-import * as pdfFonts from 'pdfmake/build/vfs_fonts';
-import { Content, ContentText, TDocumentDefinitions } from 'pdfmake/interfaces';
 import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { AsyncState, isDefined } from '../../lib/utils';
 import {
   RootState,
   selectGetVotes,
+  SelectPollResults,
   selectPollResults,
   selectPollsFinished,
   selectRoomMembers,
@@ -48,34 +46,9 @@ import {
   useGetRoomMembersQuery,
   useGetRoomNameQuery,
   useUserDetails,
+  voteApi,
 } from '../../store';
-import { voteApi } from '../../store/api/voteApi';
-import { createPdfPageHeader } from './components/createPdfPageHeader';
-import { createPollPdfContent } from './components/createPollPdfContent';
-import { zapfdingbats } from './zapfdingbats';
-
-initializeFonts(pdfMake);
-
-export function initializeFonts(pdf: typeof pdfMake) {
-  pdf.vfs = {
-    'ZapfDingbats.ttf': zapfdingbats,
-  };
-
-  Object.entries(pdfFonts.pdfMake.vfs).forEach(([n, f]) => {
-    pdf.vfs[n] = f;
-  });
-
-  pdf.fonts = {};
-  pdf.fonts['Roboto'] = {
-    normal: 'Roboto-Regular.ttf',
-    bold: 'Roboto-Medium.ttf',
-    italics: 'Roboto-Italic.ttf',
-    bolditalics: 'Roboto-MediumItalic.ttf',
-  };
-  pdf.fonts['ZapfDingbats'] = {
-    normal: 'ZapfDingbats.ttf',
-  };
-}
+import { createPollPdf } from './pdf';
 
 export const PollsPdfDownloadButton = () => {
   const { t } = useTranslation();
@@ -135,7 +108,7 @@ export const PollsPdfDownloadButton = () => {
   }, [dispatch, pollEvents]);
 
   const pdfContentSelector = useCallback(
-    (state: RootState): AsyncState<Content> => {
+    (state: RootState): AsyncState<SelectPollResults[]> => {
       if (isRoomMembersEventsError || isPollEventsError || isPowerLevelsError) {
         return { isLoading: false, isError: true };
       }
@@ -188,10 +161,7 @@ export const PollsPdfDownloadButton = () => {
 
       return {
         isLoading: false,
-        data: createPollPdfContent({
-          pollResults,
-          context: { t, getUserDisplayName },
-        }),
+        data: pollResults,
       };
     },
     [
@@ -202,15 +172,13 @@ export const PollsPdfDownloadButton = () => {
       isRoomMembersEventsLoading,
       isPowerLevelsLoading,
       pollEvents,
-      t,
-      getUserDisplayName,
       roomMemberEvents,
       powerLevels?.event,
     ]
   );
 
   const {
-    data: pdfContent,
+    data: pollResults,
     isLoading: isPdfContentLoading,
     isError: isPdfContentError,
   } = useAppSelector(pdfContentSelector);
@@ -222,57 +190,26 @@ export const PollsPdfDownloadButton = () => {
       return false;
     }
 
-    if (pdfContent) {
+    if (pollResults) {
       let blobUrl: string;
-      const columns: TDocumentDefinitions = {
-        pageMargins: [40, 80, 40, 40],
-        pageSize: 'A4',
-        content: pdfContent,
-        version: '1.5',
-        info: {
-          title: roomName,
-          author: authorName,
-        },
-        styles: {
-          tableHeader: {
-            alignment: 'center',
-            bold: true,
-            fontSize: 13,
-          },
-          tableBody: {
-            alignment: 'center',
-          },
-          list: {
-            margin: [5, 0, 0, 0],
-          },
-        },
-        header() {
-          return createPdfPageHeader({
-            roomName,
-            roomMemberEvents: roomMemberEvents
-              ? selectRoomMembers(roomMemberEvents)
-              : [],
-            context: { t, getUserDisplayName },
-          });
-        },
-        footer(currentPage, pageCount): ContentText {
-          return {
-            text: t('pollsPdfDownloadButton.footer', {
-              defaultValue: '{{currentPage}} of {{pageCount}}',
-              currentPage,
-              pageCount,
-            }) as string,
-            alignment: 'center',
-            margin: [10, 10],
-          };
-        },
-      };
 
-      const a = pdfMake.createPdf(columns);
-      a.getBlob((blob) => {
-        blobUrl = URL.createObjectURL(blob);
-        setPdfUrl(blobUrl);
-      });
+      createPollPdf({
+        roomName,
+        authorName,
+        pollResults,
+        roomMemberEvents: roomMemberEvents
+          ? selectRoomMembers(roomMemberEvents)
+          : [],
+        getUserDisplayName,
+      })
+        .then((blob) => {
+          blobUrl = URL.createObjectURL(blob);
+          setPdfUrl(blobUrl);
+          return;
+        })
+        .catch((ex) => {
+          // todo...
+        });
 
       setPdfWasGenerated(true);
 
@@ -281,14 +218,12 @@ export const PollsPdfDownloadButton = () => {
       };
     }
   }, [
-    setPdfModalOpen,
-    authorName,
-    getUserDisplayName,
-    pdfContent,
-    roomMemberEvents,
-    roomName,
-    t,
     pdfWasGenerated,
+    roomName,
+    authorName,
+    pollResults,
+    roomMemberEvents,
+    getUserDisplayName,
   ]);
 
   const handleCloseModal = useCallback(() => {
@@ -371,11 +306,11 @@ export const PollsPdfDownloadButton = () => {
             disabled={isPdfContentError}
             download={`${roomName}.pdf`}
             href={pdfUrl}
-            loading={isPdfContentLoading || !pdfContent || !pdfUrl}
+            loading={isPdfContentLoading || !pollResults || !pdfUrl}
             target="_blank"
             variant="contained"
           >
-            {isPdfContentLoading || !pdfContent || !pdfUrl
+            {isPdfContentLoading || !pollResults || !pdfUrl
               ? t('pollsPdfDownloadModal.pdfLoading', 'Loading')
               : t('pollsPdfDownloadModal.pdfDownload', 'Download')}
           </LoadingButton>

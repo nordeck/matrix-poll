@@ -35,6 +35,9 @@
   "createPollPdfContentTable": {
     "noVotesWereCast": "No votes were cast."
   },
+  "createPollPdfDefinition": {
+    "footer": "{{currentPage}} of {{pageCount}}"
+  },
   "createPollSpecifics": {
     "messageAbsent": "Absent: {{delegate}} ({{group}})",
     "messageRepresented": "Represented by: {{delegate}} ({{group}})",
@@ -211,7 +214,6 @@
     "title": "Deactivate PDF"
   },
   "pollsPdfDownloadButton": {
-    "footer": "{{currentPage}} of {{pageCount}}",
     "generatePDF": "Generate PDF documentation",
     "tooltip": "The provided PDF is currently not accessible and can not be read using a screen reader."
   },

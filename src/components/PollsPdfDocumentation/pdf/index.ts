@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Nordeck IT + Consulting GmbH
+ * Copyright 2023 Nordeck IT + Consulting GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,6 @@
  * limitations under the License.
  */
 
-import { TFunction } from 'i18next';
-
-export type Context = {
-  t: TFunction;
-  getUserDisplayName: (userId: string) => string;
-};
+// Always make sure to initialize fonts if PDFs are generated.
+import './initializeFonts';
+export { createPollPdf } from './createPollPdf';

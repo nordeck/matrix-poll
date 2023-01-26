@@ -16,6 +16,7 @@
 
 export { baseApi } from './baseApi';
 export {
+  pollApi,
   selectAllPolls,
   selectPollById,
   useDeletePollMutation,
@@ -63,4 +64,4 @@ export { usePowerLevels } from './usePowerLevels';
 export { useRerenderOnPollStatusChange } from './useRerenderOnPollStatusChange';
 export { useUserCanVote } from './useUserCanVote';
 export { useUserDetails } from './useUserDetails';
-export { useVoteMutation } from './voteApi';
+export { useVoteMutation, voteApi } from './voteApi';
