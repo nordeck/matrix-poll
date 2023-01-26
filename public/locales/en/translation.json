@@ -199,6 +199,13 @@
     },
     "moreSettings": "More settings"
   },
+  "pollsPdfDialog": {
+    "close": "Close",
+    "description": "The PDF documentation is being generated and can be downloaded once it is ready.",
+    "download": "Download",
+    "error": "Something went wrong while generating the PDF documentation.",
+    "title": "Download PDF"
+  },
   "pollsPdfDocumentation": {
     "closingConfirmButton": "Deactivate",
     "closingDialogHeader": "Deactivate PDF",
@@ -216,14 +223,6 @@
   "pollsPdfDownloadButton": {
     "generatePDF": "Generate PDF documentation",
     "tooltip": "The provided PDF is currently not accessible and can not be read using a screen reader."
-  },
-  "pollsPdfDownloadModal": {
-    "cancel": "Cancel",
-    "description": "The PDF report is being generated and can be downloaded once it is ready.",
-    "error": "Something went wrong while generating the PDF documentation.",
-    "pdfDownload": "Download",
-    "pdfLoading": "Loading",
-    "title": "Download the PDF"
   },
   "pollStatusNotifications": {
     "endsSoon": "The poll “{{title}}” ends in {{remainingTime}}.",

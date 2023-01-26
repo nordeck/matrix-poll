@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Nordeck IT + Consulting GmbH
+ * Copyright 2023 Nordeck IT + Consulting GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,11 +21,11 @@ import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { ComponentType, PropsWithChildren, useMemo } from 'react';
 import { Provider } from 'react-redux';
-import { createStore } from '../../store';
-import { PollsPdfDownloadButton } from './PollsPdfDownloadButton';
+import { createStore } from '../../../store';
+import { PollsPdfDialog } from './PollsPdfDialog';
 
 // The pdf library doesn't work in test, so we mock pdf generation completely
-jest.mock('./pdf', () => ({ createPollPdf: jest.fn() }));
+jest.mock('../pdf', () => ({ createPollPdf: jest.fn() }));
 
 let widgetApi: MockedWidgetApi;
 
@@ -33,7 +33,8 @@ afterEach(() => widgetApi.stop());
 
 beforeEach(() => (widgetApi = mockWidgetApi()));
 
-describe('<PollsPdfDownloadButton/>', () => {
+describe('<PollsPdfDialog>', () => {
+  const onClose = jest.fn();
   let Wrapper: ComponentType<PropsWithChildren<{}>>;
 
   beforeEach(() => {
@@ -49,33 +50,62 @@ describe('<PollsPdfDownloadButton/>', () => {
     jest.mocked(URL.createObjectURL).mockReturnValue('blob:url');
   });
 
-  it('should render without exploding', () => {
-    render(<PollsPdfDownloadButton />, { wrapper: Wrapper });
-
-    expect(
-      screen.getByRole('button', { name: 'Generate PDF documentation' })
-    ).toBeInTheDocument();
-  });
-
-  it('should open dialog', async () => {
-    render(<PollsPdfDownloadButton />, { wrapper: Wrapper });
-
-    await userEvent.click(
-      screen.getByRole('button', { name: 'Generate PDF documentation' })
-    );
+  it('should have no accessibility violations', async () => {
+    const { container } = render(<PollsPdfDialog onClose={onClose} open />, {
+      wrapper: Wrapper,
+    });
 
     const dialog = screen.getByRole('dialog', { name: 'Download PDF' });
 
     await expect(
       within(dialog).findByRole('link', { name: 'Download' })
     ).resolves.toBeInTheDocument();
+
+    expect(await axe(container)).toHaveNoViolations();
   });
 
-  it('should have no accessibility violations', async () => {
-    const { container } = render(<PollsPdfDownloadButton />, {
+  it('should render without exploding', async () => {
+    render(<PollsPdfDialog onClose={onClose} open />, {
       wrapper: Wrapper,
     });
 
-    expect(await axe(container)).toHaveNoViolations();
+    const dialog = screen.getByRole('dialog', {
+      name: 'Download PDF',
+      description:
+        'The PDF documentation is being generated and can be downloaded once it is ready.',
+    });
+
+    await expect(
+      within(dialog).findByRole('link', { name: 'Download' })
+    ).resolves.toBeInTheDocument();
+  });
+
+  it('should close dialog', async () => {
+    render(<PollsPdfDialog onClose={onClose} open />, {
+      wrapper: Wrapper,
+    });
+
+    const dialog = screen.getByRole('dialog', { name: 'Download PDF' });
+
+    await userEvent.click(
+      within(dialog).getByRole('button', { name: 'Close' })
+    );
+
+    expect(onClose).toBeCalled();
+  });
+
+  it('should close on download', async () => {
+    render(<PollsPdfDialog onClose={onClose} open />, {
+      wrapper: Wrapper,
+    });
+
+    const dialog = screen.getByRole('dialog', { name: 'Download PDF' });
+    const downloadLink = await within(dialog).findByRole('link', {
+      name: 'Download',
+    });
+
+    await userEvent.click(downloadLink);
+
+    expect(onClose).toBeCalled();
   });
 });
