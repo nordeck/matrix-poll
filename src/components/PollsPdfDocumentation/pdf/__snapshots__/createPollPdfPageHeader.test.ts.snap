@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`createPdfPageHeader should generate a pdf header and table 1`] = `
+exports[`createPollPdfPageHeader should generate a pdf header and table 1`] = `
 Array [
   Object {
     "stack": Array [

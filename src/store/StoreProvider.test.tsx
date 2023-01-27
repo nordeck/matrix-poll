@@ -15,7 +15,7 @@
  */
 
 import { WidgetApi } from '@matrix-widget-toolkit/api';
-import { useWidgetApi as useWidgetApiMocked } from '@matrix-widget-toolkit/react';
+import { useWidgetApi } from '@matrix-widget-toolkit/react';
 import { configureStore, createReducer } from '@reduxjs/toolkit';
 import { render, screen } from '@testing-library/react';
 import { TypedUseSelectorHook, useSelector } from 'react-redux';
@@ -24,10 +24,6 @@ import { StoreProvider } from './StoreProvider';
 
 jest.mock('./store');
 jest.mock('@matrix-widget-toolkit/react');
-
-const useWidgetApi = useWidgetApiMocked as jest.MockedFunction<
-  typeof useWidgetApiMocked
->;
 
 describe('StoreProvider', () => {
   it('should work', () => {
@@ -54,7 +50,7 @@ describe('StoreProvider', () => {
       },
     };
 
-    useWidgetApi.mockReturnValue(widgetApi as WidgetApi);
+    jest.mocked(useWidgetApi).mockReturnValue(widgetApi as WidgetApi);
 
     render(
       <StoreProvider>

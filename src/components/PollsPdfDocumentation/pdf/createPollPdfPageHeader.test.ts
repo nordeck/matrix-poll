@@ -14,13 +14,10 @@
  * limitations under the License.
  */
 
-import { t } from 'i18next';
 import { mockRoomMember } from '../../../lib/testUtils';
-import { createPdfPageHeader } from './createPdfPageHeader';
+import { createPollPdfPageHeader } from './createPollPdfPageHeader';
 
-describe('createPdfPageHeader', () => {
-  const getUserDisplayName = (id: string) => `Name of ${id}`;
-
+describe('createPollPdfPageHeader', () => {
   it('should generate a pdf header and table', () => {
     const roomMemberEvents = [
       mockRoomMember({
@@ -50,13 +47,9 @@ describe('createPdfPageHeader', () => {
     ];
 
     expect(
-      createPdfPageHeader({
+      createPollPdfPageHeader({
         roomName: 'PDF Test',
         roomMemberEvents,
-        context: {
-          t,
-          getUserDisplayName,
-        },
       })
     ).toMatchSnapshot();
   });

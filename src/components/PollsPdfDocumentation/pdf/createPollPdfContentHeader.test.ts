@@ -14,14 +14,11 @@
  * limitations under the License.
  */
 
-import { t } from 'i18next';
 import { mockPoll } from '../../../lib/testUtils';
 import { PollInvalidAnswer, SelectPollResults } from '../../../store';
 import { createPollPdfContentHeader } from './createPollPdfContentHeader';
 
 describe('createPollPdfContentHeader', () => {
-  const getUserDisplayName = (id: string) => `Name of ${id}`;
-
   it('should generate a header without groups on a single day', () => {
     const pollResult: SelectPollResults = {
       poll: mockPoll({
@@ -39,9 +36,7 @@ describe('createPollPdfContentHeader', () => {
       votingRights: ['@user-1', '@user-2'],
     };
 
-    expect(
-      createPollPdfContentHeader(5, pollResult, { t, getUserDisplayName })
-    ).toEqual([
+    expect(createPollPdfContentHeader(5, pollResult)).toEqual([
       {
         color: '#444',
         style: 'tableExample',
@@ -191,9 +186,7 @@ describe('createPollPdfContentHeader', () => {
       },
     };
 
-    expect(
-      createPollPdfContentHeader(5, pollResult, { t, getUserDisplayName })
-    ).toEqual([
+    expect(createPollPdfContentHeader(5, pollResult)).toEqual([
       {
         color: '#444',
         style: 'tableExample',
@@ -343,9 +336,7 @@ describe('createPollPdfContentHeader', () => {
       },
     };
 
-    expect(
-      createPollPdfContentHeader(5, pollResult, { t, getUserDisplayName })
-    ).toEqual([
+    expect(createPollPdfContentHeader(5, pollResult)).toEqual([
       {
         color: '#444',
         style: 'tableExample',

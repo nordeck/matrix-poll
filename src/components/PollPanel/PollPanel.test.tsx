@@ -28,7 +28,6 @@ import {
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
-import pdfMake from 'pdfmake/build/pdfmake';
 import { ComponentType, PropsWithChildren, useMemo } from 'react';
 import { act } from 'react-dom/test-utils';
 import { Provider } from 'react-redux';
@@ -42,12 +41,6 @@ import { createStore } from '../../store';
 import { PollModalResult } from '../CreatePollModal';
 import { PollPanel } from './PollPanel';
 
-jest.mock('pdfmake/build/pdfmake');
-
-const createPdfMock = pdfMake.createPdf as jest.MockedFunction<
-  typeof pdfMake.createPdf
->;
-
 let widgetApi: MockedWidgetApi;
 
 afterEach(() => widgetApi.stop());
@@ -60,17 +53,6 @@ describe('<PollPanel>', () => {
   let Wrapper: ComponentType<PropsWithChildren<{}>>;
 
   beforeEach(() => {
-    createPdfMock.mockReturnValue({
-      getBlob: jest.fn(),
-      download: jest.fn(),
-      getBase64: jest.fn(),
-      getBuffer: jest.fn(),
-      getDataUrl: jest.fn(),
-      getStream: jest.fn(),
-      open: jest.fn(),
-      print: jest.fn(),
-    });
-
     widgetApi.mockSendStateEvent(
       mockGroup({
         state_key: 'red-party',

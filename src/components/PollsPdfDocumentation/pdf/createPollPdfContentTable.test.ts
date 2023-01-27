@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 
-import { t } from 'i18next';
 import { mockPoll } from '../../../lib/testUtils';
 import { PollType } from '../../../model';
 import { PollInvalidAnswer, SelectPollResults } from '../../../store';
@@ -29,6 +28,7 @@ function mockResults(pollType: PollType): SelectPollResults {
       content: {
         pollType,
         startTime: '2020-01-01T03:33:55Z',
+        endTime: '2020-01-01T03:34:55Z',
       },
     }),
     results: {
@@ -93,7 +93,7 @@ describe('createPollPdfContentTable', () => {
     const pollResult = mockGroupedResults(PollType.ByName);
 
     expect(
-      createPollPdfContentTable(pollResult, { t, getUserDisplayName })
+      createPollPdfContentTable(pollResult, getUserDisplayName)
     ).toMatchSnapshot();
   });
 
@@ -101,7 +101,7 @@ describe('createPollPdfContentTable', () => {
     const pollResult = mockResults(PollType.ByName);
 
     expect(
-      createPollPdfContentTable(pollResult, { t, getUserDisplayName })
+      createPollPdfContentTable(pollResult, getUserDisplayName)
     ).toMatchSnapshot();
   });
 
@@ -109,32 +109,32 @@ describe('createPollPdfContentTable', () => {
     const pollResult = mockGroupedResults(PollType.Open);
 
     expect(
-      createPollPdfContentTable(pollResult, { t, getUserDisplayName })
+      createPollPdfContentTable(pollResult, getUserDisplayName)
     ).toMatchSnapshot();
   });
 
   it('should not generate table for "open" without groups', () => {
     const pollResult = mockResults(PollType.Open);
 
-    expect(
-      createPollPdfContentTable(pollResult, { t, getUserDisplayName })
-    ).toEqual([]);
+    expect(createPollPdfContentTable(pollResult, getUserDisplayName)).toEqual(
+      []
+    );
   });
 
   it('should not generate table for "secret" with groups', () => {
     const pollResult = mockGroupedResults(PollType.Secret);
 
-    expect(
-      createPollPdfContentTable(pollResult, { t, getUserDisplayName })
-    ).toEqual([]);
+    expect(createPollPdfContentTable(pollResult, getUserDisplayName)).toEqual(
+      []
+    );
   });
 
   it('should not generate table for "secret" without groups', () => {
     const pollResult = mockResults(PollType.Secret);
 
-    expect(
-      createPollPdfContentTable(pollResult, { t, getUserDisplayName })
-    ).toEqual([]);
+    expect(createPollPdfContentTable(pollResult, getUserDisplayName)).toEqual(
+      []
+    );
   });
 
   it('should add to the name a break line every 45 character if there is 3 answer columns', () => {
