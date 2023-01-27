@@ -22,12 +22,12 @@ import i18n from '../../i18n';
 import { IPoll } from '../../model';
 import {
   AppDispatch,
+  pollApi,
   RootState,
   selectPollsFinished,
   selectPollsOngoing,
   selectPollsUpcoming,
 } from '../../store';
-import { pollApi } from '../../store/api/pollApi';
 import { ShowNotificationFn } from './PollStatusNotificationsProvider';
 
 type PollStatus =

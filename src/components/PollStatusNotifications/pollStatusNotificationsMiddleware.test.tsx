@@ -18,8 +18,7 @@ import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
 import { waitFor } from '@testing-library/react';
 import { Duration } from 'luxon';
 import { mockPoll } from '../../lib/testUtils';
-import { createStore } from '../../store';
-import { pollApi } from '../../store/api/pollApi';
+import { createStore, pollApi } from '../../store';
 import {
   createPollStatusNotificationsMiddleware,
   normalizeDuration,

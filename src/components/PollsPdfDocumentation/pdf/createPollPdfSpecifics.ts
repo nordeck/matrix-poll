@@ -14,16 +14,15 @@
  * limitations under the License.
  */
 
+import { t } from 'i18next';
 import { Content } from 'pdfmake/interfaces';
 import { isDefined } from '../../../lib/utils';
 import { SelectPollResults } from '../../../store';
-import { Context } from './types';
 
-export function createPollSpecifics(
+export function createPollPdfSpecifics(
   pollResult: SelectPollResults,
-  context: Context
+  getUserDisplayName: (userId: string) => string
 ): Content {
-  const { t, getUserDisplayName } = context;
   const pollGroups = pollResult.poll.content.groups;
 
   const representativeList = pollGroups?.flatMap((g) =>

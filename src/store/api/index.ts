@@ -16,6 +16,7 @@
 
 export { baseApi } from './baseApi';
 export {
+  pollApi,
   selectAllPolls,
   selectPollById,
   useDeletePollMutation,
@@ -35,14 +36,15 @@ export {
   useGetPollSettingsQuery,
   usePatchPollSettingsMutation,
 } from './pollSettingsApi';
-export { useGetPowerLevelsQuery } from './powerLevelsApi';
+export { powerLevelsApi, useGetPowerLevelsQuery } from './powerLevelsApi';
 export {
+  roomMemberApi,
   selectActiveRoomMembers,
   selectRoomMember,
   selectRoomMembers,
   useGetRoomMembersQuery,
 } from './roomMemberApi';
-export { useGetRoomNameQuery } from './roomNameApi';
+export { roomNameApi, useGetRoomNameQuery } from './roomNameApi';
 export { selectPollsFinished } from './selectPollsFinished';
 export { selectPollsOngoing } from './selectPollsOngoing';
 export { selectPollsUpcoming } from './selectPollsUpcoming';
@@ -63,4 +65,4 @@ export { usePowerLevels } from './usePowerLevels';
 export { useRerenderOnPollStatusChange } from './useRerenderOnPollStatusChange';
 export { useUserCanVote } from './useUserCanVote';
 export { useUserDetails } from './useUserDetails';
-export { useVoteMutation } from './voteApi';
+export { useVoteMutation, voteApi } from './voteApi';
