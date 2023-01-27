@@ -33,7 +33,7 @@ export const PollsPdfDownloadButton = () => {
 
   return (
     <>
-      <Button fullWidth onClick={handleOpen} variant="contained">
+      <Button fullWidth onClick={handleOpen} variant="outlined">
         {t('pollsPdfDownloadButton.generatePDF', 'Generate PDF documentation')}
       </Button>
 

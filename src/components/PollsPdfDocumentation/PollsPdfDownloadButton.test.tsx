@@ -16,7 +16,7 @@
 
 import { WidgetApiMockProvider } from '@matrix-widget-toolkit/react';
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
-import { render, screen, within } from '@testing-library/react';
+import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { ComponentType, PropsWithChildren, useMemo } from 'react';
@@ -66,9 +66,13 @@ describe('<PollsPdfDownloadButton/>', () => {
 
     const dialog = screen.getByRole('dialog', { name: 'Download PDF' });
 
-    await expect(
-      within(dialog).findByRole('link', { name: 'Download' })
-    ).resolves.toBeInTheDocument();
+    await userEvent.click(
+      await within(dialog).findByRole('link', { name: 'Download' })
+    );
+
+    await waitFor(() => {
+      expect(dialog).not.toBeInTheDocument();
+    });
   });
 
   it('should have no accessibility violations', async () => {

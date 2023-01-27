@@ -26,11 +26,6 @@ import { PollType } from '../../model';
 import { createStore } from '../../store';
 import { PollsPdfDocumentation } from './PollsPdfDocumentation';
 
-// TODO: remove?
-jest.mock('pdfmake/build/pdfmake', () => ({
-  createPdf: () => ({ getBlob: jest.fn() }),
-}));
-
 let widgetApi: MockedWidgetApi;
 
 afterEach(() => widgetApi.stop());

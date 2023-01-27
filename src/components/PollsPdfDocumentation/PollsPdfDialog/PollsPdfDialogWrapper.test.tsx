@@ -44,6 +44,8 @@ describe('<PollsPdfDialogWrapper>', () => {
   let Wrapper: ComponentType<PropsWithChildren<{}>>;
 
   beforeEach(() => {
+    widgetApi.mockSendStateEvent(mockRoomMember());
+
     widgetApi.mockSendStateEvent(
       mockRoomMember({
         state_key: '@user-id',
@@ -67,7 +69,7 @@ describe('<PollsPdfDialogWrapper>', () => {
     );
 
     widgetApi.mockSendRoomEvent(
-      mockVote({ sender: 'user-alice', origin_server_ts: 1577923215000 })
+      mockVote({ sender: '@user-alice', origin_server_ts: 1577923215000 })
     );
 
     widgetApi.mockSendStateEvent(
@@ -91,13 +93,6 @@ describe('<PollsPdfDialogWrapper>', () => {
           title: 'Third Poll',
           groups: undefined,
         },
-      })
-    );
-
-    widgetApi.mockSendStateEvent(
-      mockRoomMember({
-        state_key: 'user-alice',
-        content: { displayname: 'Alice' },
       })
     );
 
@@ -153,11 +148,11 @@ describe('<PollsPdfDialogWrapper>', () => {
           },
           results: {
             votes: {
+              '@user-alice': PollInvalidAnswer,
               '@user-id': PollInvalidAnswer,
-              'user-alice': PollInvalidAnswer,
             },
           },
-          votingRights: ['@user-id', 'user-alice'],
+          votingRights: ['@user-alice', '@user-id'],
         },
         {
           poll: {
@@ -184,14 +179,27 @@ describe('<PollsPdfDialogWrapper>', () => {
           },
           results: {
             votes: {
+              '@user-alice': '1',
               '@user-id': PollInvalidAnswer,
-              'user-alice': '1',
             },
           },
-          votingRights: ['@user-id', 'user-alice'],
+          votingRights: ['@user-alice', '@user-id'],
         },
       ],
       roomMemberEvents: [
+        {
+          content: {
+            avatar_url: 'mxc://alice.png',
+            displayname: 'Alice',
+            membership: 'join',
+          },
+          event_id: '$event-id-0',
+          origin_server_ts: 0,
+          room_id: '!room-id',
+          sender: '@user-id',
+          state_key: '@user-alice',
+          type: 'm.room.member',
+        },
         {
           content: {
             avatar_url: 'mxc://alice.png',
@@ -203,19 +211,6 @@ describe('<PollsPdfDialogWrapper>', () => {
           room_id: '!room-id',
           sender: '@user-id',
           state_key: '@user-id',
-          type: 'm.room.member',
-        },
-        {
-          content: {
-            avatar_url: 'mxc://alice.png',
-            displayname: 'Alice',
-            membership: 'join',
-          },
-          event_id: '$event-id-0',
-          origin_server_ts: 0,
-          room_id: '!room-id',
-          sender: '@user-id',
-          state_key: 'user-alice',
           type: 'm.room.member',
         },
       ],
