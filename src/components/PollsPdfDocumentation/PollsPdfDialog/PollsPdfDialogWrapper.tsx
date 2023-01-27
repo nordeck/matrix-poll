@@ -106,6 +106,7 @@ export function PollsPdfDialogWrapper({ onClose }: { onClose: () => void }) {
       getUserDisplayName,
     });
     const url = URL.createObjectURL(blob);
+    urlRef.current = url;
 
     return { url, roomName };
   }, [dispatch]);

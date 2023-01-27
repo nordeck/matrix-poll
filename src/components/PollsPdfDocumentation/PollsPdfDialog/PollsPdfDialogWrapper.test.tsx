@@ -223,6 +223,21 @@ describe('<PollsPdfDialogWrapper>', () => {
     });
   });
 
+  it('should revoke URL on unload', async () => {
+    jest.mocked(createPollPdf).mockResolvedValue(new Blob(['value']));
+
+    const { unmount } = render(<PollsPdfDialogWrapper onClose={onClose} />, {
+      wrapper: Wrapper,
+    });
+
+    const link = await screen.findByRole('link', { name: 'Download' });
+    expect(link).toHaveAttribute('href', 'blob:url');
+
+    unmount();
+
+    expect(jest.mocked(URL.revokeObjectURL)).toBeCalledWith('blob:url');
+  });
+
   it('should handle error while generating PDF', async () => {
     jest.mocked(createPollPdf).mockRejectedValue(new Error('Failed'));
 
