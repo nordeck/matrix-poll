@@ -1,0 +1,229 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`createPollPdfDefinition should generate a pdf header and table 1`] = `
+Object {
+  "content": Array [
+    Array [
+      Object {
+        "marginTop": 20,
+        "pageBreak": undefined,
+        "stack": Array [
+          Array [
+            Object {
+              "color": "#444",
+              "style": "tableExample",
+              "table": Object {
+                "body": Array [
+                  Array [
+                    Object {
+                      "alignment": "left",
+                      "fillColor": "#aaa",
+                      "style": "tableHeader",
+                      "text": "1 - My Title",
+                    },
+                    Object {
+                      "alignment": "center",
+                      "fillColor": "#aaa",
+                      "style": "tableHeader",
+                      "text": "Open poll",
+                    },
+                  ],
+                  Array [
+                    Array [
+                      Object {
+                        "alignment": "left",
+                        "decoration": "underline",
+                        "lineHeight": 1,
+                        "margin": Array [
+                          0,
+                          2,
+                        ],
+                        "text": "General information",
+                      },
+                      Object {
+                        "alignment": "left",
+                        "lineHeight": 1.5,
+                        "text": "Jan 1, 3:33 AM - 3:34 AM",
+                      },
+                      Object {
+                        "alignment": "left",
+                        "decoration": "underline",
+                        "lineHeight": 1,
+                        "margin": Array [
+                          0,
+                          2,
+                        ],
+                        "text": "Voting information",
+                      },
+                      Object {
+                        "style": "list",
+                        "ul": Array [
+                          Object {
+                            "alignment": "left",
+                            "text": "Voting persons: 1",
+                          },
+                        ],
+                      },
+                    ],
+                    Array [
+                      Array [
+                        Object {
+                          "alignment": "left",
+                          "decoration": "underline",
+                          "margin": Array [
+                            0,
+                            2,
+                          ],
+                          "text": "Total voting result",
+                        },
+                        Object {
+                          "alignment": "left",
+                          "margin": Array [
+                            0,
+                            2,
+                          ],
+                          "text": "Cast votes: 1",
+                        },
+                        Array [
+                          Object {
+                            "style": "list",
+                            "ul": Array [
+                              Object {
+                                "alignment": "left",
+                                "text": "Yes: 1",
+                              },
+                            ],
+                          },
+                          Object {
+                            "style": "list",
+                            "ul": Array [
+                              Object {
+                                "alignment": "left",
+                                "text": "No: 0",
+                              },
+                            ],
+                          },
+                          Object {
+                            "style": "list",
+                            "ul": Array [
+                              Object {
+                                "alignment": "left",
+                                "text": "Invalid: 0",
+                              },
+                            ],
+                          },
+                        ],
+                      ],
+                    ],
+                  ],
+                  Array [
+                    Object {
+                      "border": Array [
+                        true,
+                        false,
+                        true,
+                        false,
+                      ],
+                      "colSpan": 2,
+                      "decoration": "underline",
+                      "text": "Description",
+                    },
+                  ],
+                  Array [
+                    Object {
+                      "border": Array [
+                        true,
+                        false,
+                        true,
+                        true,
+                      ],
+                      "colSpan": 2,
+                      "margin": Array [
+                        0,
+                        3,
+                      ],
+                      "text": "My Description",
+                    },
+                  ],
+                  Array [
+                    Object {
+                      "border": Array [
+                        true,
+                        false,
+                        true,
+                        false,
+                      ],
+                      "colSpan": 2,
+                      "decoration": "underline",
+                      "text": "Voting question",
+                    },
+                  ],
+                  Array [
+                    Object {
+                      "alignment": "left",
+                      "bold": true,
+                      "border": Array [
+                        true,
+                        false,
+                        true,
+                        true,
+                      ],
+                      "colSpan": 2,
+                      "fontSize": 14,
+                      "margin": Array [
+                        0,
+                        3,
+                      ],
+                      "style": "tableHeader",
+                      "text": "My Question",
+                    },
+                  ],
+                ],
+                "headerRows": 1,
+                "widths": Array [
+                  "65%",
+                  "35%",
+                ],
+              },
+            },
+          ],
+          Array [],
+          Array [],
+        ],
+      },
+    ],
+  ],
+  "footer": [Function],
+  "header": [Function],
+  "info": Object {
+    "author": "Author Name",
+    "title": "Room Name",
+  },
+  "pageMargins": Array [
+    40,
+    80,
+    40,
+    40,
+  ],
+  "pageSize": "A4",
+  "styles": Object {
+    "list": Object {
+      "margin": Array [
+        5,
+        0,
+        0,
+        0,
+      ],
+    },
+    "tableBody": Object {
+      "alignment": "center",
+    },
+    "tableHeader": Object {
+      "alignment": "center",
+      "bold": true,
+      "fontSize": 13,
+    },
+  },
+  "version": "1.5",
+}
+`;

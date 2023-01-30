@@ -35,6 +35,9 @@
   "createPollPdfContentTable": {
     "noVotesWereCast": "Es wurden keine Stimmen abgegeben."
   },
+  "createPollPdfDefinition": {
+    "footer": "{{currentPage}} von {{pageCount}}"
+  },
   "createPollSpecifics": {
     "messageAbsent": "Abwesend: {{delegate}} ({{group}})",
     "messageRepresented": "Vertreten durch: {{delegate}} ({{group}})",
@@ -196,6 +199,13 @@
     },
     "moreSettings": "Mehr Einstellungen"
   },
+  "pollsPdfDialog": {
+    "close": "Schließen",
+    "description": "Die PDF-Dokumentation wird derzeit erstellt und kann heruntergeladen werden, sobald er fertig ist.",
+    "download": "Herunterladen",
+    "error": "Bei der Erstellung der PDF-Dokumentation ist ein Fehler aufgetreten.",
+    "title": "PDF herunterladen"
+  },
   "pollsPdfDocumentation": {
     "closingConfirmButton": "Deaktivieren",
     "closingDialogHeader": "PDF deaktivieren",
@@ -211,8 +221,7 @@
     "title": "PDF deaktivieren"
   },
   "pollsPdfDownloadButton": {
-    "footer": "{{currentPage}} von {{pageCount}}",
-    "pdfDownload": "PDF-Dokument herunterladen",
+    "generatePDF": "PDF-Dokumentation generieren",
     "tooltip": "Das bereitgestellte PDF ist aktuell nicht barrierefrei und kann nicht mit einem Screen Reader gelesen werden."
   },
   "pollStatusNotifications": {

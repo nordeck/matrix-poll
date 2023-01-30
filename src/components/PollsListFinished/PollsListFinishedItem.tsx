@@ -22,7 +22,7 @@ import { Fragment } from 'react';
 import { useTranslation } from 'react-i18next';
 import { formatPollDate } from '../../lib/formatPollDate';
 import { IPoll } from '../../model';
-import { usePollResults } from '../../store/api/usePollResults';
+import { usePollResults } from '../../store';
 import { PollCard } from '../PollCard';
 import { PollResultModal } from '../PollResultModal';
 import { PollsListItem } from '../PollsListContainer';
