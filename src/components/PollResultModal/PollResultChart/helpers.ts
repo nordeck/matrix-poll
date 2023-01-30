@@ -21,3 +21,34 @@ export function generateScale(results: Array<{ value: number }>): number[] {
 
   return range(0, maxValue + 1);
 }
+
+const lightThemeColors = [
+  '#0A60FF',
+  '#5B5201',
+  '#7B24FF',
+  '#A20B54',
+  '#1F5C5A',
+  '#9c1a29f9',
+  '#8A3A0F',
+];
+const darkThemeColors = [
+  '#8AB3FF',
+  '#CBB701',
+  '#C29EFF',
+  '#F684BB',
+  '#40BFBD',
+  '#EB8995',
+  '#ED905E',
+];
+
+// you can call this as `createAnswersColorScale(results.map((r) => r.group), theme)`
+export function createAnswersColorScale(
+  answers: string[],
+  theme: string
+): Record<string, string> {
+  const themeColors = theme === 'dark' ? darkThemeColors : lightThemeColors;
+
+  return Object.fromEntries(
+    answers.map((answer, i) => [answer, themeColors[i % themeColors.length]])
+  );
+}

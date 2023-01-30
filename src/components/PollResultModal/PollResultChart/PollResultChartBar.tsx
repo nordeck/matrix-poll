@@ -16,6 +16,7 @@
 
 import { interfaces as charts } from '@carbon/charts';
 import { SimpleBarChart } from '@carbon/charts-react';
+import { useThemeSelection } from '@matrix-widget-toolkit/react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { getAnswerLabel } from '../../../lib/getAnswerLabel';
@@ -25,7 +26,7 @@ import {
   PollInvalidAnswer,
   SelectPollResults,
 } from '../../../store';
-import { generateScale } from './helpers';
+import { createAnswersColorScale, generateScale } from './helpers';
 import './styles.scss';
 import { useCarbonTheme } from './useCarbonTheme';
 
@@ -39,12 +40,13 @@ interface PollResultChartBarProps {
   isFinished?: boolean;
 }
 
-export const PollResultChartBar = ({
+const PollResultChartBar = ({
   pollResults,
   isFinished,
 }: PollResultChartBarProps) => {
   const { t } = useTranslation();
-  const theme = useCarbonTheme();
+  const { theme } = useThemeSelection();
+  const carbonTheme = useCarbonTheme();
 
   const answerIds: AnswerId[] = isFinished
     ? [...pollResults.poll.content.answers.map((a) => a.id), PollInvalidAnswer]
@@ -60,9 +62,12 @@ export const PollResultChartBar = ({
   });
 
   const options: charts.BarChartOptions = {
-    theme,
+    theme: carbonTheme,
     color: {
-      scale: createObjectColors(results, theme),
+      scale: createAnswersColorScale(
+        results.map((r) => r.group),
+        theme
+      ),
     },
     tooltip: {
       enabled: false,
@@ -87,49 +92,6 @@ export const PollResultChartBar = ({
 
   return <SimpleBarChart data={results} options={options}></SimpleBarChart>;
 };
-
-export function generateColor(index: number, theme: charts.ChartTheme) {
-  const lightThemeColors = [
-    '#0A60FF',
-    '#5B5201',
-    '#7B24FF',
-    '#A20B54',
-    '#1F5C5A',
-    '#9c1a29f9',
-    '#8A3A0F',
-  ];
-  const darkThemeColors = [
-    '#8AB3FF',
-    '#CBB701',
-    '#C29EFF',
-    '#F684BB',
-    '#40BFBD',
-    '#EB8995',
-    '#ED905E',
-  ];
-  if (theme === 'white') {
-    return lightThemeColors[index];
-  } else {
-    return darkThemeColors[index];
-  }
-}
-
-export function createObjectColors(
-  data: SortedResults[],
-  theme: charts.ChartTheme
-) {
-  const colorsObject: string[][] = [];
-  let newIndex = 0;
-  data.forEach((d, i) => {
-    if (i >= 7) {
-      colorsObject.push([d.group, generateColor(newIndex, theme)]);
-      newIndex++;
-    } else {
-      colorsObject.push([d.group, generateColor(i, theme)]);
-    }
-  });
-  return Object.fromEntries(colorsObject);
-}
 
 // React currently only allow lazy loading for default exports
 // https://reactjs.org/docs/code-splitting.html#named-exports
