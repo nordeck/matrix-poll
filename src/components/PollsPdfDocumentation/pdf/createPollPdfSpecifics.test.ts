@@ -14,12 +14,11 @@
  * limitations under the License.
  */
 
-import { t } from 'i18next';
 import { mockPoll } from '../../../lib/testUtils';
 import { SelectPollResults } from '../../../store';
-import { createPollSpecifics } from './createPollSpecifics';
+import { createPollPdfSpecifics } from './createPollPdfSpecifics';
 
-describe('createPollSpecifics', () => {
+describe('createPollPdfSpecifics', () => {
   const getUserDisplayName = (id: string) => `Name of ${id}`;
 
   it('should generate a poll specifics content if there is a group and someone is represented', () => {
@@ -64,7 +63,7 @@ describe('createPollSpecifics', () => {
     };
 
     expect(
-      createPollSpecifics(pollResult, { t, getUserDisplayName })
+      createPollPdfSpecifics(pollResult, getUserDisplayName)
     ).toMatchSnapshot();
   });
 
@@ -113,7 +112,7 @@ describe('createPollSpecifics', () => {
     };
 
     expect(
-      createPollSpecifics(pollResult, { t, getUserDisplayName })
+      createPollPdfSpecifics(pollResult, getUserDisplayName)
     ).toMatchSnapshot();
   });
 
@@ -132,7 +131,7 @@ describe('createPollSpecifics', () => {
     };
 
     expect(
-      createPollSpecifics(pollResult, { t, getUserDisplayName })
+      createPollPdfSpecifics(pollResult, getUserDisplayName)
     ).toMatchSnapshot();
   });
 
@@ -177,7 +176,7 @@ describe('createPollSpecifics', () => {
     };
 
     expect(
-      createPollSpecifics(pollResult, { t, getUserDisplayName })
+      createPollPdfSpecifics(pollResult, getUserDisplayName)
     ).toMatchSnapshot();
   });
 });

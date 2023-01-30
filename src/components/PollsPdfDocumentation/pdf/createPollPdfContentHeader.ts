@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import { t } from 'i18next';
 import { Content } from 'pdfmake/interfaces';
 import { formatPollDate } from '../../../lib/formatPollDate';
 import { getAnswerLabel } from '../../../lib/getAnswerLabel';
@@ -24,15 +25,11 @@ import {
   PollInvalidAnswer,
   SelectPollResults,
 } from '../../../store';
-import { Context } from './types';
 
 export function createPollPdfContentHeader(
   pollIndex: number,
-  pollResult: SelectPollResults,
-  context: Context
+  pollResult: SelectPollResults
 ): Content {
-  const { t } = context;
-
   const pollTypeTitle = getPollTypeLabel(pollResult, t);
 
   const participantCount = pollResult.votingRights.length ?? 0;
