@@ -2055,26 +2055,26 @@
     globby "^11.0.0"
     read-yaml-file "^1.1.0"
 
-"@matrix-widget-toolkit/api@^1.0.1", "@matrix-widget-toolkit/api@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@matrix-widget-toolkit/api/-/api-1.0.2.tgz#fb3ad2a13044041f51c1be7250573d3775640b04"
-  integrity sha512-T632qeHyIG/1Rp/ZaJqQ4UV7bX86RJZyu0ht2jZVOq80Bl9HdN+tuW1sHItbIe2DlyyefKPAgtT45dvrrA8xfQ==
+"@matrix-widget-toolkit/api@^3.0.0", "@matrix-widget-toolkit/api@^3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@matrix-widget-toolkit/api/-/api-3.1.0.tgz#71c7495b54677b3680ce376cbe0a4cc58bd0c5b4"
+  integrity sha512-cvysIn2vY/4WNFQCs/ExLQkVyrgDDmJQxKH8Twi/fKyUyrm7jq8legOdOKCeAOmmqJ3iD3Ayhc1mcPOAaUYSIw==
   dependencies:
     matrix-widget-api "^1.1.1"
     qs "^6.11.0"
-    rxjs "^7.5.7"
+    rxjs "^7.8.0"
 
-"@matrix-widget-toolkit/mui@^1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@matrix-widget-toolkit/mui/-/mui-1.0.5.tgz#3fc1c0469c818937e96b948cb7ee5e4c08fee077"
-  integrity sha512-Z5dy3cJoAxRp04JD6Q6fq3Ue6S2T2rA0Ij/Y6EOp/Zj6Zd4Kb7gkk6VX8dCJhs9d6NCr6f7fLViWb0YQvEG+kQ==
+"@matrix-widget-toolkit/mui@^1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@matrix-widget-toolkit/mui/-/mui-1.0.7.tgz#fb405b56910dfe85a8697da90ff4f831170db2a7"
+  integrity sha512-lPgF9wCTQW4RPfHSom2vWPD2X2QSqxKK3t/mYN8/r3scBcbwPwqSUzKE2jwJ7UJgvYBcira69NakCEfwZ9b19g==
   dependencies:
     "@emotion/cache" "^11.10.5"
     "@emotion/react" "^11.10.5"
     "@emotion/styled" "^11.10.5"
     "@fontsource/inter" "^4.5.14"
-    "@matrix-widget-toolkit/api" "^1.0.1"
-    "@matrix-widget-toolkit/react" "^1.0.2"
+    "@matrix-widget-toolkit/api" "^3.0.0"
+    "@matrix-widget-toolkit/react" "^1.0.4"
     "@mui/icons-material" "^5.11.0"
     "@mui/material" "^5.11.3"
     "@mui/utils" "^5.11.2"
@@ -2086,26 +2086,26 @@
     react-i18next "^12.0.0"
     react-use "^17.4.0"
 
-"@matrix-widget-toolkit/react@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@matrix-widget-toolkit/react/-/react-1.0.2.tgz#f0152ebab601221a6f043f44339022867648639b"
-  integrity sha512-8QSLXImHFfzS6FNkl2yrBHvpCJiYu9zW0eyYJVbaKBXWx2tGpzcoF9eQdHuXp3Vd1UJbCenzdS9+JmdfwShANw==
+"@matrix-widget-toolkit/react@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@matrix-widget-toolkit/react/-/react-1.0.4.tgz#4613ee029603a4b4a5c0eff3030d6880980924dc"
+  integrity sha512-C0ydI323UwALIMSuY4omZbtLUw+P1un6Irq/E8jNrnb5MzEsqZvM2+Hwj7YbaOGBSyvzjYGuLqhU43Bmtojzvw==
   dependencies:
-    "@matrix-widget-toolkit/api" "^1.0.1"
+    "@matrix-widget-toolkit/api" "^3.0.0"
     matrix-widget-api "^1.1.1"
     react "^17.0.2"
     react-error-boundary "^3.1.4"
     react-use "^17.4.0"
 
-"@matrix-widget-toolkit/testing@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@matrix-widget-toolkit/testing/-/testing-1.0.1.tgz#f24a2f9ac41c52609bacbab9d039167c974a8cf3"
-  integrity sha512-g+StFlGPEEaIG9Nl6EGduLE5ls6SLSU5nTJTcrXddOV20XwMJooy6qIRqnKVZpCSRn6DF9MTkqscD/zXSO6j5g==
+"@matrix-widget-toolkit/testing@^2.2.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@matrix-widget-toolkit/testing/-/testing-2.2.0.tgz#34c8b0685cb97e0ba47cfe7813b471f2ee0f64e1"
+  integrity sha512-qkbOy6dlWY6XHi4Ll51v4jcSgvjwIPI5OEqO7bG5OOHw6krNVDN5gzswBve3t8BKy1nxlTG3quXkSsA3zHBB3g==
   dependencies:
-    "@matrix-widget-toolkit/api" "^1.0.1"
+    "@matrix-widget-toolkit/api" "^3.1.0"
     lodash "^4.17.21"
     matrix-widget-api "^1.1.1"
-    rxjs "^7.5.7"
+    rxjs "^7.8.0"
 
 "@mui/base@5.0.0-alpha.115":
   version "5.0.0-alpha.115"

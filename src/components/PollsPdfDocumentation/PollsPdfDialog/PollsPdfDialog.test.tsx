@@ -104,7 +104,7 @@ describe('<PollsPdfDialog>', () => {
       name: 'Download',
     });
 
-    await userEvent.click(downloadLink);
+    await userEvent.click(downloadLink, { skipHover: true });
 
     expect(onClose).toBeCalled();
   });
