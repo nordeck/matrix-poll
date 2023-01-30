@@ -41,7 +41,6 @@ const darkThemeColors = [
   '#ED905E',
 ];
 
-// you can call this as `createAnswersColorScale(results.map((r) => r.group), theme)`
 export function createAnswersColorScale(
   answers: string[],
   theme: string

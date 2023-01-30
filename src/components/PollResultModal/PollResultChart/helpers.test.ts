@@ -30,8 +30,10 @@ describe('generateScale', () => {
     const result: Array<{ value: number }> = [];
     expect(generateScale(result)).toEqual([0]);
   });
+});
 
-  it.only('should repeat the colors if the answers are more then 7', () => {
+describe('createAnswersColorScale', () => {
+  it('should repeat the colors if the answers are more then 7', () => {
     const answers = [
       'Yes',
       'No',
