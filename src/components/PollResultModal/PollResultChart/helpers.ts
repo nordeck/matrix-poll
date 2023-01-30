@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import { Theme } from '@matrix-widget-toolkit/react';
 import { max, range } from 'lodash';
 
 export function generateScale(results: Array<{ value: number }>): number[] {
@@ -28,7 +29,7 @@ const lightThemeColors = [
   '#7B24FF',
   '#A20B54',
   '#1F5C5A',
-  '#9c1a29f9',
+  '#9E1F2E',
   '#8A3A0F',
 ];
 const darkThemeColors = [
@@ -43,7 +44,7 @@ const darkThemeColors = [
 
 export function createAnswersColorScale(
   answers: string[],
-  theme: string
+  theme: Theme
 ): Record<string, string> {
   const themeColors = theme === 'dark' ? darkThemeColors : lightThemeColors;
 
