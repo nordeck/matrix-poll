@@ -16,6 +16,7 @@
 
 import { interfaces as charts } from '@carbon/charts';
 import { SimpleBarChart } from '@carbon/charts-react';
+import { useThemeSelection } from '@matrix-widget-toolkit/react';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { getAnswerLabel } from '../../../lib/getAnswerLabel';
@@ -25,7 +26,7 @@ import {
   PollInvalidAnswer,
   SelectPollResults,
 } from '../../../store';
-import { generateScale } from './helpers';
+import { createAnswersColorScale, generateScale } from './helpers';
 import './styles.scss';
 import { useCarbonTheme } from './useCarbonTheme';
 
@@ -39,12 +40,13 @@ interface PollResultChartBarProps {
   isFinished?: boolean;
 }
 
-export const PollResultChartBar = ({
+const PollResultChartBar = ({
   pollResults,
   isFinished,
 }: PollResultChartBarProps) => {
   const { t } = useTranslation();
-  const theme = useCarbonTheme();
+  const { theme } = useThemeSelection();
+  const carbonTheme = useCarbonTheme();
 
   const answerIds: AnswerId[] = isFinished
     ? [...pollResults.poll.content.answers.map((a) => a.id), PollInvalidAnswer]
@@ -60,7 +62,13 @@ export const PollResultChartBar = ({
   });
 
   const options: charts.BarChartOptions = {
-    theme,
+    theme: carbonTheme,
+    color: {
+      scale: createAnswersColorScale(
+        results.map((r) => r.group),
+        theme
+      ),
+    },
     tooltip: {
       enabled: false,
     },

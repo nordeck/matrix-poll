@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import { generateScale } from './helpers';
+import { createAnswersColorScale, generateScale } from './helpers';
 
 describe('generateScale', () => {
   it('should generate an array of even numbers for the chart bar', () => {
@@ -29,5 +29,30 @@ describe('generateScale', () => {
   it('should generate an array with default value if there is no result', () => {
     const result: Array<{ value: number }> = [];
     expect(generateScale(result)).toEqual([0]);
+  });
+});
+
+describe('createAnswersColorScale', () => {
+  it('should repeat the colors if the answers are more then 7', () => {
+    const answers = [
+      'Yes',
+      'No',
+      'Maybe',
+      'Of course',
+      "I don't know yet",
+      'Not sure',
+      'Probably Yes',
+      'Probably No',
+    ];
+    expect(createAnswersColorScale(answers, 'dark')).toEqual({
+      "I don't know yet": '#40BFBD',
+      Maybe: '#C29EFF',
+      No: '#CBB701',
+      'Not sure': '#EB8995',
+      'Of course': '#F684BB',
+      'Probably No': '#8AB3FF',
+      'Probably Yes': '#ED905E',
+      Yes: '#8AB3FF',
+    });
   });
 });
