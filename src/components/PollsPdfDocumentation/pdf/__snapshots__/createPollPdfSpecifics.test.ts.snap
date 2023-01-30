@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`createPollSpecifics should generate a poll specifics content if there is a group and someone is represented 1`] = `
+exports[`createPollPdfSpecifics should generate a poll specifics content if there is a group and someone is represented 1`] = `
 Array [
   Object {
     "color": "#444",
@@ -55,7 +55,7 @@ Array [
 ]
 `;
 
-exports[`createPollSpecifics should generate a poll specifics content if there is a group with absent delegate without representing 1`] = `
+exports[`createPollPdfSpecifics should generate a poll specifics content if there is a group with absent delegate without representing 1`] = `
 Array [
   Object {
     "color": "#444",
@@ -94,7 +94,7 @@ Array [
 ]
 `;
 
-exports[`createPollSpecifics should generate a poll specifics content if there is a group, someone is representing someone else and someone is not represented 1`] = `
+exports[`createPollPdfSpecifics should generate a poll specifics content if there is a group, someone is representing someone else and someone is not represented 1`] = `
 Array [
   Object {
     "color": "#444",
@@ -155,4 +155,4 @@ Array [
 ]
 `;
 
-exports[`createPollSpecifics should not generate a poll specifics content if there is no group 1`] = `Array []`;
+exports[`createPollPdfSpecifics should not generate a poll specifics content if there is no group 1`] = `Array []`;

@@ -26,10 +26,6 @@ import { PollType } from '../../model';
 import { createStore } from '../../store';
 import { PollsPdfDocumentation } from './PollsPdfDocumentation';
 
-jest.mock('pdfmake/build/pdfmake', () => ({
-  createPdf: () => ({ getBlob: jest.fn() }),
-}));
-
 let widgetApi: MockedWidgetApi;
 
 afterEach(() => widgetApi.stop());
@@ -65,8 +61,12 @@ describe('<PollsPdfDocumentation>', () => {
   it('should render without exploding', async () => {
     render(<PollsPdfDocumentation />, { wrapper: Wrapper });
 
+    await expect(
+      screen.findByRole('button', { name: 'Generate PDF documentation' })
+    ).resolves.toBeInTheDocument();
+
     await userEvent.click(
-      await screen.findByRole('button', {
+      screen.getByRole('button', {
         name: /more settings/i,
         expanded: false,
       }),
@@ -84,6 +84,12 @@ describe('<PollsPdfDocumentation>', () => {
     });
 
     expect(await axe(container)).toHaveNoViolations();
+  });
+
+  it('should have no accessibility violations, with open settings', async () => {
+    const { container } = render(<PollsPdfDocumentation />, {
+      wrapper: Wrapper,
+    });
 
     await userEvent.click(
       await screen.findByRole('button', {

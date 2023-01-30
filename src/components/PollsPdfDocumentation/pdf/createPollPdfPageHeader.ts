@@ -18,17 +18,16 @@ import {
   RoomMemberStateEventContent,
   StateEvent,
 } from '@matrix-widget-toolkit/api';
+import { t } from 'i18next';
 import { Column, Content } from 'pdfmake/interfaces';
-import { Context } from './types';
 
-export function createPdfPageHeader(opts: {
+export function createPollPdfPageHeader({
+  roomName,
+  roomMemberEvents,
+}: {
   roomName: string;
   roomMemberEvents: StateEvent<RoomMemberStateEventContent>[];
-  context: Context;
 }): Content {
-  const { roomName, roomMemberEvents, context } = opts;
-  const { t } = context;
-
   const invitedUsersCount = roomMemberEvents.filter(
     (e) => e.content.membership === 'invite'
   ).length;
