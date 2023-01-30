@@ -18,22 +18,22 @@ import { Content } from 'pdfmake/interfaces';
 import { SelectPollResults } from '../../../store';
 import { createPollPdfContentHeader } from './createPollPdfContentHeader';
 import { createPollPdfContentTable } from './createPollPdfContentTable';
-import { createPollSpecifics } from './createPollSpecifics';
-import { Context } from './types';
+import { createPollPdfSpecifics } from './createPollPdfSpecifics';
 
-export function createPollPdfContent(opts: {
+export function createPollPdfContent({
+  pollResults,
+  getUserDisplayName,
+}: {
   pollResults: SelectPollResults[];
-  context: Context;
+  getUserDisplayName: (userId: string) => string;
 }): Content {
-  const { pollResults, context } = opts;
-
   return [
     pollResults.map((pollResult, i) => {
       return {
         stack: [
-          createPollPdfContentHeader(i, pollResult, context),
-          createPollSpecifics(pollResult, context),
-          createPollPdfContentTable(pollResult, context),
+          createPollPdfContentHeader(i, pollResult),
+          createPollPdfSpecifics(pollResult, getUserDisplayName),
+          createPollPdfContentTable(pollResult, getUserDisplayName),
         ],
         marginTop: 20,
         pageBreak: i < pollResults.length - 1 ? 'after' : undefined,

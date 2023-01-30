@@ -18,16 +18,13 @@ import { getEnvironment } from '@matrix-widget-toolkit/mui';
 import SettingsApplicationsIcon from '@mui/icons-material/SettingsApplications';
 import { Box, Collapse, Stack, ToggleButton, Tooltip } from '@mui/material';
 import { unstable_useId as useId } from '@mui/utils';
-import React, { Suspense, useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { selectPollsFinished, useGetPollsQuery } from '../../store';
 import { SectionHeadingDivider } from '../HeadingDivider';
 import { PollsPdfDocumentationSettings } from './PollsPdfDocumentationSettings';
+import { PollsPdfDownloadButton } from './PollsPdfDownloadButton';
 import { useCanDownloadPdf } from './useCanDownloadPdf';
-
-const PollsPdfDownloadButton = React.lazy(
-  () => import('./PollsPdfDownloadButton')
-);
 
 export const PollsPdfDocumentation = () => {
   const { t } = useTranslation();
@@ -54,47 +51,42 @@ export const PollsPdfDocumentation = () => {
   }
 
   return (
-    <Suspense fallback={<></>}>
-      <Stack aria-labelledby={headingId} component="section">
-        <SectionHeadingDivider
-          id={headingId}
-          title={t('pollsPdfDocumentation.documentation', 'Documentation')}
-        />
+    <Stack aria-labelledby={headingId} component="section">
+      <SectionHeadingDivider
+        id={headingId}
+        title={t('pollsPdfDocumentation.documentation', 'Documentation')}
+      />
 
-        <Box m={2}>
-          <Box maxWidth={327} mx="auto">
-            <Stack direction="row" gap={1}>
-              <PollsPdfDownloadButton />
+      <Box m={2}>
+        <Box maxWidth={327} mx="auto">
+          <Stack direction="row" gap={1}>
+            <PollsPdfDownloadButton />
 
-              {showDeactivateSection && (
-                <Tooltip
-                  title={t(
-                    'pollsPdfDocumentation.moreSetting',
-                    'More settings'
-                  )}
+            {showDeactivateSection && (
+              <Tooltip
+                title={t('pollsPdfDocumentation.moreSetting', 'More settings')}
+              >
+                <ToggleButton
+                  aria-controls={moreSettings ? moreSettingsId : undefined}
+                  aria-expanded={moreSettings}
+                  color="primary"
+                  onClick={handleToggleMoreSettings}
+                  selected={moreSettings}
+                  value="more"
                 >
-                  <ToggleButton
-                    aria-controls={moreSettings ? moreSettingsId : undefined}
-                    aria-expanded={moreSettings}
-                    color="primary"
-                    onClick={handleToggleMoreSettings}
-                    selected={moreSettings}
-                    value="more"
-                  >
-                    <SettingsApplicationsIcon />
-                  </ToggleButton>
-                </Tooltip>
-              )}
-            </Stack>
+                  <SettingsApplicationsIcon />
+                </ToggleButton>
+              </Tooltip>
+            )}
+          </Stack>
 
-            <Collapse in={moreSettings} mountOnEnter unmountOnExit>
-              <Box id={moreSettingsId} mt={2}>
-                <PollsPdfDocumentationSettings />
-              </Box>
-            </Collapse>
-          </Box>
+          <Collapse in={moreSettings} mountOnEnter unmountOnExit>
+            <Box id={moreSettingsId} mt={2}>
+              <PollsPdfDocumentationSettings />
+            </Box>
+          </Collapse>
         </Box>
-      </Stack>
-    </Suspense>
+      </Box>
+    </Stack>
   );
 };
