@@ -2064,6 +2064,15 @@
     qs "^6.11.0"
     rxjs "^7.5.7"
 
+"@matrix-widget-toolkit/api@^3.0.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@matrix-widget-toolkit/api/-/api-3.1.0.tgz#71c7495b54677b3680ce376cbe0a4cc58bd0c5b4"
+  integrity sha512-cvysIn2vY/4WNFQCs/ExLQkVyrgDDmJQxKH8Twi/fKyUyrm7jq8legOdOKCeAOmmqJ3iD3Ayhc1mcPOAaUYSIw==
+  dependencies:
+    matrix-widget-api "^1.1.1"
+    qs "^6.11.0"
+    rxjs "^7.8.0"
+
 "@matrix-widget-toolkit/mui@^1.0.5":
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/@matrix-widget-toolkit/mui/-/mui-1.0.5.tgz#3fc1c0469c818937e96b948cb7ee5e4c08fee077"
@@ -2086,12 +2095,12 @@
     react-i18next "^12.0.0"
     react-use "^17.4.0"
 
-"@matrix-widget-toolkit/react@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@matrix-widget-toolkit/react/-/react-1.0.2.tgz#f0152ebab601221a6f043f44339022867648639b"
-  integrity sha512-8QSLXImHFfzS6FNkl2yrBHvpCJiYu9zW0eyYJVbaKBXWx2tGpzcoF9eQdHuXp3Vd1UJbCenzdS9+JmdfwShANw==
+"@matrix-widget-toolkit/react@^1.0.2", "@matrix-widget-toolkit/react@^1.0.4":
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/@matrix-widget-toolkit/react/-/react-1.0.4.tgz#4613ee029603a4b4a5c0eff3030d6880980924dc"
+  integrity sha512-C0ydI323UwALIMSuY4omZbtLUw+P1un6Irq/E8jNrnb5MzEsqZvM2+Hwj7YbaOGBSyvzjYGuLqhU43Bmtojzvw==
   dependencies:
-    "@matrix-widget-toolkit/api" "^1.0.1"
+    "@matrix-widget-toolkit/api" "^3.0.0"
     matrix-widget-api "^1.1.1"
     react "^17.0.2"
     react-error-boundary "^3.1.4"
