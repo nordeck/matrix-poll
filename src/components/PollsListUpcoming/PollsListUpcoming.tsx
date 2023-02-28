@@ -16,8 +16,7 @@
 
 import { StateEvent } from '@matrix-widget-toolkit/api';
 import { Box, Stack } from '@mui/material';
-import { unstable_useId as useId } from '@mui/utils';
-import { ReactElement, useCallback, useMemo } from 'react';
+import { ReactElement, StrictMode, useCallback, useId, useMemo } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
 import { useTranslation } from 'react-i18next';
 import { IPoll } from '../../model';
@@ -94,7 +93,12 @@ export const PollsListUpcoming = (): ReactElement => {
                     key={item.state_key}
                   >
                     {(provided) => (
-                      <PollsListUpcomingItem poll={item} provided={provided} />
+                      <StrictMode>
+                        <PollsListUpcomingItem
+                          poll={item}
+                          provided={provided}
+                        />
+                      </StrictMode>
                     )}
                   </Draggable>
                 ))}

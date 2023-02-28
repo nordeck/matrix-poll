@@ -26,8 +26,7 @@ import {
   TextField,
   Tooltip,
 } from '@mui/material';
-import { unstable_useId as useId } from '@mui/utils';
-import { ChangeEvent, FormEvent, useCallback, useState } from 'react';
+import { ChangeEvent, FormEvent, useCallback, useId, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ellipsis } from '../../lib/ellipsis';
 import {

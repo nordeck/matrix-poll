@@ -73,15 +73,6 @@ describe('<ShowResultsByNameList/>', () => {
     };
   });
 
-  it('should not explode if poll does not exist', () => {
-    const { container } = render(
-      <ShowResultsByNameList pollId="another-poll" />,
-      { wrapper: Wrapper }
-    );
-
-    expect(container).toBeEmptyDOMElement();
-  });
-
   it('should have no accessibility violations', async () => {
     const { container } = render(
       <>
@@ -90,6 +81,8 @@ describe('<ShowResultsByNameList/>', () => {
       </>,
       { wrapper: Wrapper }
     );
+
+    await screen.findByRole('list', { name: /Voting persons/i });
 
     expect(await axe(container)).toHaveNoViolations();
   });

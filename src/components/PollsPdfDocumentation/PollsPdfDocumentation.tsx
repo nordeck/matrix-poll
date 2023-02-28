@@ -17,8 +17,7 @@
 import { getEnvironment } from '@matrix-widget-toolkit/mui';
 import SettingsApplicationsIcon from '@mui/icons-material/SettingsApplications';
 import { Box, Collapse, Stack, ToggleButton, Tooltip } from '@mui/material';
-import { unstable_useId as useId } from '@mui/utils';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useId, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { selectPollsFinished, useGetPollsQuery } from '../../store';
 import { SectionHeadingDivider } from '../HeadingDivider';

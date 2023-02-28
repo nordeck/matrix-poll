@@ -25,8 +25,13 @@ import {
   Stack,
   Tooltip,
 } from '@mui/material';
-import { unstable_useId as useId } from '@mui/utils';
-import { AriaAttributes, ReactElement, useCallback, useState } from 'react';
+import {
+  AriaAttributes,
+  ReactElement,
+  useCallback,
+  useId,
+  useState,
+} from 'react';
 import { useTranslation } from 'react-i18next';
 import { IPoll } from '../../model';
 import { PollResultModalContent } from './PollResultModalContent';

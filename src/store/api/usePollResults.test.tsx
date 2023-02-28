@@ -16,7 +16,7 @@
 
 import { getEnvironment } from '@matrix-widget-toolkit/mui';
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
-import { renderHook } from '@testing-library/react-hooks';
+import { renderHook, waitFor } from '@testing-library/react';
 import { DateTime } from 'luxon';
 import { ComponentType, PropsWithChildren, useState } from 'react';
 import { Provider } from 'react-redux';
@@ -59,12 +59,14 @@ describe('selectPollResults', () => {
   it('should return error', async () => {
     widgetApi.receiveStateEvents.mockRejectedValue(new Error('Some error'));
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
       { wrapper: Wrapper }
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+    });
 
     expect(result.current).toEqual({ isLoading: false, isError: true });
   });
@@ -72,7 +74,7 @@ describe('selectPollResults', () => {
   it('should return error, when vote loading is skipped', async () => {
     widgetApi.receiveStateEvents.mockRejectedValue(new Error('Some error'));
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () =>
         usePollResults('my-poll', {
           includeInvalidVotes: true,
@@ -81,7 +83,9 @@ describe('selectPollResults', () => {
       { wrapper: Wrapper }
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+    });
 
     expect(result.current).toEqual({ isLoading: false, isError: true });
   });
@@ -101,12 +105,14 @@ describe('selectPollResults', () => {
       })
     );
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
       { wrapper: Wrapper }
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+    });
 
     expect(result.current).toEqual({ isLoading: false, isError: true });
   });
@@ -127,7 +133,7 @@ describe('selectPollResults', () => {
     );
     widgetApi.mockSendStateEvent(mockRoomMember({ state_key: '@user' }));
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () =>
         usePollResults('my-poll', {
           includeInvalidVotes: true,
@@ -136,7 +142,9 @@ describe('selectPollResults', () => {
       { wrapper: Wrapper }
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+    });
 
     expect(result.current).toEqual({
       isLoading: false,
@@ -149,18 +157,20 @@ describe('selectPollResults', () => {
   });
 
   it('should return undefined when no poll was found', async () => {
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
       { wrapper: Wrapper }
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+    });
 
     expect(result.current).toEqual({ isLoading: false, value: undefined });
   });
 
   it('should return undefined when no poll was found, when vote loading is skipped', async () => {
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () =>
         usePollResults('my-poll', {
           includeInvalidVotes: true,
@@ -169,7 +179,9 @@ describe('selectPollResults', () => {
       { wrapper: Wrapper }
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+    });
 
     expect(result.current).toEqual({ isLoading: false, value: undefined });
   });
@@ -185,12 +197,14 @@ describe('selectPollResults', () => {
     );
     widgetApi.mockSendStateEvent(mockRoomMember({ state_key: '@user' }));
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
       { wrapper: Wrapper }
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+    });
 
     expect(result.current).toEqual({
       isLoading: false,
@@ -267,12 +281,14 @@ describe('selectPollResults', () => {
       })
     );
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
       { wrapper: Wrapper }
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+    });
 
     expect(result.current).toEqual({
       isLoading: false,
@@ -321,7 +337,7 @@ describe('selectPollResults', () => {
       })
     );
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () =>
         usePollResults('my-poll', {
           includeInvalidVotes: true,
@@ -330,7 +346,9 @@ describe('selectPollResults', () => {
       { wrapper: Wrapper }
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+    });
 
     expect(result.current).toEqual({
       isLoading: false,
@@ -383,12 +401,14 @@ describe('selectPollResults', () => {
       })
     );
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
       { wrapper: Wrapper }
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+    });
 
     expect(result.current).toEqual({
       isLoading: false,
@@ -444,12 +464,14 @@ describe('selectPollResults', () => {
       })
     );
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
       { wrapper: Wrapper }
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+    });
 
     expect(result.current).toEqual({
       isLoading: false,
@@ -488,12 +510,14 @@ describe('selectPollResults', () => {
       })
     );
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: false }),
       { wrapper: Wrapper }
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+    });
 
     expect(result.current).toEqual({
       isLoading: false,
@@ -542,12 +566,14 @@ describe('selectPollResults', () => {
       })
     );
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
       { wrapper: Wrapper }
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+    });
 
     expect(result.current).toEqual({
       isLoading: false,
@@ -617,12 +643,14 @@ describe('selectPollResults', () => {
       })
     );
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: false }),
       { wrapper: Wrapper }
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+    });
 
     expect(result.current).toEqual({
       isLoading: false,
@@ -700,12 +728,14 @@ describe('selectPollResults', () => {
       })
     );
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
       { wrapper: Wrapper }
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+    });
 
     expect(result.current).toEqual({
       isLoading: false,
@@ -779,12 +809,14 @@ describe('selectPollResults', () => {
       })
     );
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
       { wrapper: Wrapper }
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+    });
 
     expect(result.current).toEqual({
       isLoading: false,
@@ -852,12 +884,14 @@ describe('selectPollResults', () => {
       })
     );
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
       { wrapper: Wrapper }
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+    });
 
     expect(result.current).toEqual({
       isLoading: false,
@@ -913,12 +947,14 @@ describe('selectPollResults', () => {
       })
     );
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
       { wrapper: Wrapper }
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+    });
 
     expect(result.current).toEqual({
       isLoading: false,
@@ -998,12 +1034,14 @@ describe('selectPollResults', () => {
       })
     );
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
       { wrapper: Wrapper }
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+    });
 
     expect(result.current).toEqual({
       isLoading: false,
@@ -1087,12 +1125,14 @@ describe('selectPollResults', () => {
       })
     );
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
       { wrapper: Wrapper }
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+    });
 
     expect(result.current).toEqual({
       isLoading: false,
@@ -1167,12 +1207,14 @@ describe('selectPollResults', () => {
       })
     );
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
       { wrapper: Wrapper }
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+    });
 
     expect(result.current).toEqual({
       isLoading: false,
@@ -1237,12 +1279,14 @@ describe('selectPollResults', () => {
       })
     );
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
       { wrapper: Wrapper }
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+    });
 
     expect(result.current).toEqual({
       isLoading: false,
@@ -1311,12 +1355,14 @@ describe('selectPollResults', () => {
       })
     );
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
       { wrapper: Wrapper }
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+    });
 
     expect(result.current).toEqual({
       isLoading: false,
@@ -1372,12 +1418,14 @@ describe('selectPollResults', () => {
       })
     );
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
       { wrapper: Wrapper }
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+    });
 
     expect(result.current).toEqual({
       isLoading: false,
@@ -1432,12 +1480,14 @@ describe('selectPollResults', () => {
       })
     );
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
       { wrapper: Wrapper }
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+    });
 
     expect(result.current).toEqual({
       isLoading: false,
@@ -1504,12 +1554,14 @@ describe('selectPollResults', () => {
       })
     );
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
       { wrapper: Wrapper }
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+    });
 
     expect(result.current).toEqual({
       isLoading: false,
@@ -1568,12 +1620,14 @@ describe('selectPollResults', () => {
       })
     );
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
       { wrapper: Wrapper }
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+    });
 
     expect(result.current).toEqual({
       isLoading: false,
@@ -1631,12 +1685,14 @@ describe('selectPollResults', () => {
       })
     );
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
       { wrapper: Wrapper }
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+    });
 
     expect(result.current).toEqual({
       isLoading: false,
@@ -1699,12 +1755,14 @@ describe('selectPollResults', () => {
       })
     );
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
       { wrapper: Wrapper }
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+    });
 
     expect(result.current).toEqual({
       isLoading: false,
@@ -1777,12 +1835,14 @@ describe('selectPollResults', () => {
       })
     );
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
       { wrapper: Wrapper }
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+    });
 
     expect(result.current).toEqual({
       isLoading: false,

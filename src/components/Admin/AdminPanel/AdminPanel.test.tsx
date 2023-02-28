@@ -253,7 +253,7 @@ describe('<AdminPanel/>', () => {
     });
   });
 
-  it('should not be able to create a group as a guest', () => {
+  it('should not be able to create a group as a guest', async () => {
     widgetApi.mockSendStateEvent(
       mockPowerLevelsEvent({
         content: { users_default: 0 },
@@ -261,6 +261,8 @@ describe('<AdminPanel/>', () => {
     );
 
     render(<AdminPanel />, { wrapper: Wrapper });
+
+    await screen.findByRole('listitem', { name: /group 0/i });
 
     expect(screen.queryByRole('navigation')).not.toBeInTheDocument();
   });

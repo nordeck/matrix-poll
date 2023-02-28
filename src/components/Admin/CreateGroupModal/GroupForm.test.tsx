@@ -47,6 +47,14 @@ describe('<GroupForm/>', () => {
         },
       })
     );
+    widgetApi.mockSendStateEvent(
+      mockRoomMember({
+        state_key: '@user-charlie',
+        content: {
+          displayname: 'Charlie',
+        },
+      })
+    );
 
     Wrapper = ({ children }: PropsWithChildren<{}>) => {
       const store = useMemo(() => createStore({ widgetApi }), []);
@@ -54,7 +62,7 @@ describe('<GroupForm/>', () => {
     };
   });
 
-  it('should render without exploding', () => {
+  it('should render without exploding', async () => {
     render(<GroupForm onGroupChange={jest.fn()} />, { wrapper: Wrapper });
 
     expect(
@@ -75,12 +83,13 @@ describe('<GroupForm/>', () => {
       })
     ).toBeInTheDocument();
 
-    expect(
+    await userEvent.click(
       screen.getByRole('combobox', {
         expanded: false,
         name: /Assign delegate/i,
       })
-    ).toBeInTheDocument();
+    );
+    await screen.findByRole('option', { name: /Bob/i });
 
     const listRepresentatives = screen.getByRole('list', {
       name: /Representatives/i,
@@ -92,12 +101,14 @@ describe('<GroupForm/>', () => {
       })
     ).toBeInTheDocument();
 
-    expect(
+    await userEvent.click(
       screen.getByRole('combobox', {
         expanded: false,
         name: /Assign representative/i,
       })
-    ).toBeInTheDocument();
+    );
+
+    await screen.findByRole('option', { name: /Bob/i });
   });
 
   it('should add delegate and representative', async () => {
@@ -158,6 +169,7 @@ describe('<GroupForm/>', () => {
       expect(screen.getAllByRole('option').map((e) => e.textContent)).toEqual([
         'Alice',
         'Bob',
+        'Charlie',
       ]);
     });
 
@@ -175,6 +187,7 @@ describe('<GroupForm/>', () => {
     await waitFor(() => {
       expect(screen.getAllByRole('option').map((e) => e.textContent)).toEqual([
         'Alice',
+        'Charlie',
       ]);
     });
   });
@@ -201,6 +214,7 @@ describe('<GroupForm/>', () => {
     await waitFor(() => {
       expect(screen.getAllByRole('option').map((e) => e.textContent)).toEqual([
         'Alice',
+        'Charlie',
       ]);
     });
   });
@@ -219,6 +233,7 @@ describe('<GroupForm/>', () => {
       expect(screen.getAllByRole('option').map((e) => e.textContent)).toEqual([
         'Alice',
         'Bob',
+        'Charlie',
       ]);
     });
 
@@ -235,6 +250,7 @@ describe('<GroupForm/>', () => {
     await waitFor(() => {
       expect(screen.getAllByRole('option').map((e) => e.textContent)).toEqual([
         'Alice',
+        'Charlie',
       ]);
     });
   });
@@ -253,6 +269,7 @@ describe('<GroupForm/>', () => {
       expect(screen.getAllByRole('option').map((e) => e.textContent)).toEqual([
         'Alice',
         'Bob',
+        'Charlie',
       ]);
     });
 
@@ -270,6 +287,7 @@ describe('<GroupForm/>', () => {
     await waitFor(() => {
       expect(screen.getAllByRole('option').map((e) => e.textContent)).toEqual([
         'Alice',
+        'Charlie',
       ]);
     });
   });
@@ -414,10 +432,16 @@ describe('<GroupForm/>', () => {
       wrapper: Wrapper,
     });
 
+    await userEvent.click(
+      screen.getByRole('combobox', { name: /Assign representative/i })
+    );
+    await screen.findByRole('option', { name: /Bob/i });
+    await userEvent.keyboard('{escape}');
+
     expect(await axe(container)).toHaveNoViolations();
   });
 
-  it('should edit an existing group', () => {
+  it('should edit an existing group', async () => {
     const onGroupChange = jest.fn();
     const group = mockGroup({
       content: {
@@ -458,6 +482,11 @@ describe('<GroupForm/>', () => {
     expect(
       within(listRepresentatives).getByRole('listitem', { name: /alice/i })
     ).toBeInTheDocument();
+
+    await userEvent.click(
+      screen.getByRole('combobox', { name: /Assign representative/i })
+    );
+    await screen.findByRole('option', { name: 'Charlie' });
   });
 
   it('should edit members of the group', async () => {

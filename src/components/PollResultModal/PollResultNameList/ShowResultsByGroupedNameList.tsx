@@ -15,8 +15,7 @@
  */
 
 import { List } from '@mui/material';
-import { unstable_useId as useId } from '@mui/utils';
-import React, { ReactElement } from 'react';
+import React, { ReactElement, useId } from 'react';
 import { useTranslation } from 'react-i18next';
 import { GroupResult, SelectPollResults, usePollResults } from '../../../store';
 import { GroupHeader } from '../../GroupHeader';

@@ -16,7 +16,7 @@
 
 import { WidgetApiMockProvider } from '@matrix-widget-toolkit/react';
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
-import { renderHook } from '@testing-library/react-hooks';
+import { renderHook, waitFor } from '@testing-library/react';
 import { ComponentType, PropsWithChildren } from 'react';
 import { mockPowerLevelsEvent } from '../../lib/testUtils';
 import { StoreProvider } from '../StoreProvider';
@@ -38,7 +38,7 @@ beforeEach(() => {
 });
 
 describe('usePowerLevels', () => {
-  it('should have no power while loading', () => {
+  it('should have no power while loading', async () => {
     const { result } = renderHook(() => usePowerLevels(), {
       wrapper,
     });
@@ -48,6 +48,15 @@ describe('usePowerLevels', () => {
       canCreatePollSettings: undefined,
       canCreateGroups: undefined,
       canCreateVote: undefined,
+    });
+
+    await waitFor(() => {
+      expect(result.current).toEqual({
+        canCreatePoll: true,
+        canCreatePollSettings: true,
+        canCreateGroups: true,
+        canCreateVote: true,
+      });
     });
   });
 
@@ -65,7 +74,7 @@ describe('usePowerLevels', () => {
       })
     );
 
-    const { result, waitFor } = renderHook(() => usePowerLevels(), {
+    const { result } = renderHook(() => usePowerLevels(), {
       wrapper,
     });
 
@@ -93,7 +102,7 @@ describe('usePowerLevels', () => {
       })
     );
 
-    const { result, waitFor } = renderHook(() => usePowerLevels(), {
+    const { result } = renderHook(() => usePowerLevels(), {
       wrapper,
     });
 
@@ -121,7 +130,7 @@ describe('usePowerLevels', () => {
       })
     );
 
-    const { result, waitFor } = renderHook(() => usePowerLevels(), {
+    const { result } = renderHook(() => usePowerLevels(), {
       wrapper,
     });
 
@@ -149,7 +158,7 @@ describe('usePowerLevels', () => {
       })
     );
 
-    const { result, waitFor } = renderHook(() => usePowerLevels(), {
+    const { result } = renderHook(() => usePowerLevels(), {
       wrapper,
     });
 

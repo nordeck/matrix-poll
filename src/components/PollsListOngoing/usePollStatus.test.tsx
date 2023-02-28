@@ -16,10 +16,10 @@
 
 import { WidgetApiMockProvider } from '@matrix-widget-toolkit/react';
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
-import { renderHook } from '@testing-library/react-hooks';
+import { renderHook, waitFor } from '@testing-library/react';
 import { ComponentType, PropsWithChildren, useMemo } from 'react';
 import { Provider } from 'react-redux';
-import { mockPoll, mockVote } from '../../lib/testUtils';
+import { mockPoll, mockPollStart, mockVote } from '../../lib/testUtils';
 import { createStore } from '../../store';
 import { usePollStatus } from './usePollStatus';
 
@@ -46,12 +46,13 @@ describe('usePollStatus', () => {
   });
 
   it('should handle poll that is not in the redux store', async () => {
-    const { result, waitForValueToChange } = renderHook(
-      () => usePollStatus('unknown-poll-id'),
-      { wrapper: Wrapper }
-    );
+    const { result } = renderHook(() => usePollStatus('unknown-poll-id'), {
+      wrapper: Wrapper,
+    });
 
-    await waitForValueToChange(() => result.current.isLoading);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+    });
 
     expect(result.current).toEqual({
       isLoading: false,
@@ -65,6 +66,7 @@ describe('usePollStatus', () => {
   });
 
   it('should handle poll', async () => {
+    widgetApi.mockSendRoomEvent(mockPollStart());
     widgetApi.mockSendStateEvent(
       mockPoll({
         content: {
@@ -79,12 +81,13 @@ describe('usePollStatus', () => {
       })
     );
 
-    const { result, waitForValueToChange } = renderHook(
-      () => usePollStatus('poll-0'),
-      { wrapper: Wrapper }
-    );
+    const { result } = renderHook(() => usePollStatus('poll-0'), {
+      wrapper: Wrapper,
+    });
 
-    await waitForValueToChange(() => result.current.isLoading);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+    });
 
     expect(result.current).toEqual({
       isLoading: false,

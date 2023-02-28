@@ -17,9 +17,9 @@
 import { useWidgetApi } from '@matrix-widget-toolkit/react';
 import AddIcon from '@mui/icons-material/Add';
 import { Box, Button, Divider, Stack, Typography } from '@mui/material';
-import { unstable_useId as useId, visuallyHidden } from '@mui/utils';
+import { visuallyHidden } from '@mui/utils';
 import { ModalButtonKind } from 'matrix-widget-api';
-import { ReactElement, useCallback } from 'react';
+import { ReactElement, useCallback, useId } from 'react';
 import { useTranslation } from 'react-i18next';
 import * as uuid from 'uuid';
 import {

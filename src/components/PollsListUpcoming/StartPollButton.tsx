@@ -25,9 +25,8 @@ import {
   DialogContentText,
   DialogTitle,
 } from '@mui/material';
-import { unstable_useId as useId } from '@mui/utils';
 import { isEqual } from 'lodash';
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useId, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { IPoll } from '../../model';
 import {

@@ -20,8 +20,7 @@ import {
   ListItemProps,
   ListItemText,
 } from '@mui/material';
-import { unstable_useId as useId } from '@mui/utils';
-import { ReactNode } from 'react';
+import { ReactNode, useId } from 'react';
 import { MemberAvatar } from '../../components/MemberAvatar';
 import { ellipsis } from '../../lib/ellipsis';
 import { useUserDetails } from '../../store';

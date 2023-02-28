@@ -18,7 +18,7 @@ import { useWidgetApi } from '@matrix-widget-toolkit/react';
 import AddIcon from '@mui/icons-material/Add';
 import { Box, Button, Divider, Stack } from '@mui/material';
 import { ModalButtonKind } from 'matrix-widget-api';
-import { ReactElement, useCallback } from 'react';
+import { ReactElement, StrictMode, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import * as uuid from 'uuid';
 import {
@@ -103,30 +103,34 @@ export function PollPanel(): ReactElement {
             },
         }}
       >
-        {canCreatePoll && <PollsPdfDocumentation />}
+        <StrictMode>{canCreatePoll && <PollsPdfDocumentation />}</StrictMode>
 
-        <PollsListOngoing />
+        <StrictMode>
+          <PollsListOngoing />
+        </StrictMode>
 
         {hasUpcomingPolls && <PollsListUpcoming />}
 
-        {hasFinishedPolls && <PollsListFinished />}
+        <StrictMode>{hasFinishedPolls && <PollsListFinished />}</StrictMode>
       </Box>
 
-      {canCreatePoll && (
-        <Box component="nav" px={2}>
-          <Divider />
-          <Box maxWidth={327} mx="auto" my={2}>
-            <Button
-              fullWidth
-              onClick={handleCreatePoll}
-              startIcon={<AddIcon />}
-              variant="contained"
-            >
-              {t('pollPanel.createPoll', 'Create new poll')}
-            </Button>
+      <StrictMode>
+        {canCreatePoll && (
+          <Box component="nav" px={2}>
+            <Divider />
+            <Box maxWidth={327} mx="auto" my={2}>
+              <Button
+                fullWidth
+                onClick={handleCreatePoll}
+                startIcon={<AddIcon />}
+                variant="contained"
+              >
+                {t('pollPanel.createPoll', 'Create new poll')}
+              </Button>
+            </Box>
           </Box>
-        </Box>
-      )}
+        )}
+      </StrictMode>
     </Stack>
   );
 }

@@ -24,8 +24,7 @@ import {
   Stack,
   Tooltip,
 } from '@mui/material';
-import { unstable_useId as useId } from '@mui/utils';
-import React, { Suspense } from 'react';
+import React, { Suspense, useId } from 'react';
 import { useTranslation } from 'react-i18next';
 import { PollsPdfDialogContent } from './PollsPdfDialogContent';
 

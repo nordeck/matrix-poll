@@ -15,16 +15,21 @@
  */
 
 import { Typography } from '@mui/material';
-import { PropsWithChildren } from 'react';
+import { ReactNode } from 'react';
+import { TransChild } from 'react-i18next/TransWithoutContext';
 
-export function DisplayNameWordBreak({ children }: PropsWithChildren<{}>) {
+export function DisplayNameWordBreak({
+  children,
+}: {
+  children?: TransChild | TransChild[];
+}) {
   return (
     <Typography
       component="span"
       sx={{ wordBreak: 'break-all' }}
       variant="inherit"
     >
-      {children}
+      {children as ReactNode}
     </Typography>
   );
 }

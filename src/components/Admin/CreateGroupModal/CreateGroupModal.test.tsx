@@ -58,6 +58,12 @@ describe('<CreateGroupModal>', () => {
   it('should have no accessibility violations', async () => {
     const { container } = render(<CreateGroupModal />, { wrapper: Wrapper });
 
+    await userEvent.click(
+      screen.getByRole('combobox', { name: /Assign delegate/i })
+    );
+    await screen.findByRole('option', { name: /bob/i });
+    await userEvent.keyboard('{escape}');
+
     expect(await axe(container)).toHaveNoViolations();
   });
 

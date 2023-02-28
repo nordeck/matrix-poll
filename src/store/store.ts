@@ -20,7 +20,11 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { baseApi } from './api';
 
 const loggerMiddleware = () => (next: Function) => (action: Action) => {
-  if (process.env.NODE_ENV === 'development') {
+  if (
+    process.env.NODE_ENV === 'development' &&
+    typeof action.type === 'string' &&
+    !action.type.includes('internal_probeSubscription')
+  ) {
     console.log('LOGGER', action.type);
   }
   return next(action);

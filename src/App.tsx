@@ -15,7 +15,7 @@
  */
 
 import { Box } from '@mui/material';
-import { useState } from 'react';
+import { StrictMode, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { PollPanel } from './components';
 import { AdminPanel } from './components/Admin/AdminPanel';
@@ -36,10 +36,31 @@ function App() {
       <Box height="100vh">
         <Routes>
           <Route element={<PollPanel />} index />
-          <Route element={<CreatePollModal />} path="create-poll" />
+          <Route
+            element={
+              <StrictMode>
+                <CreatePollModal />
+              </StrictMode>
+            }
+            path="create-poll"
+          />
           <Route path="/admin">
-            <Route element={<AdminPanel />} index />
-            <Route element={<CreateGroupModal />} path="create-group" />
+            <Route
+              element={
+                <StrictMode>
+                  <AdminPanel />
+                </StrictMode>
+              }
+              index
+            />
+            <Route
+              element={
+                <StrictMode>
+                  <CreateGroupModal />
+                </StrictMode>
+              }
+              path="create-group"
+            />
           </Route>
         </Routes>
       </Box>

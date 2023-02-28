@@ -98,6 +98,7 @@ describe('<PollPanel>', () => {
       mockPoll({
         state_key: 'poll-1',
         content: {
+          title: 'My title 1',
           startTime: '3999-12-31T00:00:00Z',
           endTime: '3999-12-31T00:01:00Z',
         },
@@ -107,6 +108,7 @@ describe('<PollPanel>', () => {
       mockPoll({
         state_key: 'poll-2',
         content: {
+          title: 'My title 2',
           startTime: '2020-01-01T00:00:00Z',
           endTime: '2020-01-01T00:01:00Z',
         },
@@ -138,17 +140,24 @@ describe('<PollPanel>', () => {
       screen.getByRole('list', { name: /finished polls/i })
     ).toBeInTheDocument();
 
-    const nav = await screen.findByRole('navigation');
+    expect(
+      await screen.findByRole('listitem', { name: 'My Title' })
+    ).toBeInTheDocument();
 
-    await expect(
-      within(nav).findByRole('button', { name: /create new poll/i })
-    ).resolves.toBeInTheDocument();
+    const nav = await screen.findByRole('navigation');
+    within(nav).getByRole('button', { name: /create new poll/i });
   });
 
   it('should have no accessibility violations', async () => {
     const { container } = render(<PollPanel />, {
       wrapper: Wrapper,
     });
+
+    await screen.findByRole('navigation');
+
+    expect(
+      await screen.findByRole('listitem', { name: 'My Title' })
+    ).toBeInTheDocument();
 
     expect(await axe(container)).toHaveNoViolations();
   });
@@ -188,7 +197,9 @@ describe('<PollPanel>', () => {
       description: /My Title \. Press space bar to start a drag./,
     });
 
-    reorderButton.focus();
+    act(() => {
+      reorderButton.focus();
+    });
 
     // Move the element one up by pressing space, arrow up and space to drop it
     // again.
@@ -404,7 +415,7 @@ describe('<PollPanel>', () => {
     });
   });
 
-  it('should not be able to create a poll as a guest', () => {
+  it('should not be able to create a poll as a guest', async () => {
     widgetApi.mockSendStateEvent(
       mockPowerLevelsEvent({
         content: { users_default: 0 },
@@ -412,6 +423,10 @@ describe('<PollPanel>', () => {
     );
 
     render(<PollPanel />, { wrapper: Wrapper });
+
+    expect(
+      await screen.findByRole('listitem', { name: 'My Title' })
+    ).toBeInTheDocument();
 
     expect(screen.queryByRole('navigation')).not.toBeInTheDocument();
   });

@@ -19,6 +19,7 @@ import { Button } from '@mui/material';
 import { render, screen } from '@testing-library/react';
 import { ComponentType, PropsWithChildren } from 'react';
 import { Provider } from 'react-redux';
+import { mockRoomMember } from '../../lib/testUtils';
 import { createStore } from '../../store';
 import { UserListItem } from './UserListItem';
 
@@ -32,6 +33,12 @@ describe('<UserListItem/>', () => {
   let wrapper: ComponentType<PropsWithChildren<{}>>;
 
   beforeEach(() => {
+    widgetApi.mockSendStateEvent(
+      mockRoomMember({
+        content: { avatar_url: undefined },
+      })
+    );
+
     const store = createStore({ widgetApi });
 
     wrapper = ({ children }) => {
@@ -39,21 +46,22 @@ describe('<UserListItem/>', () => {
     };
   });
 
-  it('should render without exploding', () => {
-    render(<UserListItem userId="myUser" />, { wrapper });
+  it('should render without exploding', async () => {
+    render(<UserListItem userId="@user-alice" />, { wrapper });
 
-    expect(screen.getByText(/myuser/i)).toBeInTheDocument();
-    expect(screen.getByText('M')).toHaveAttribute('aria-hidden', 'true');
+    expect(await screen.findByText('Alice')).toBeInTheDocument();
+    expect(screen.getByText('A')).toHaveAttribute('aria-hidden', 'true');
   });
 
-  it('should render with custom children exploding', () => {
+  it('should render with custom children exploding', async () => {
     render(
-      <UserListItem userId="myUser">
+      <UserListItem userId="@user-alice">
         <Button>Test</Button>
       </UserListItem>,
       { wrapper }
     );
 
+    expect(await screen.findByText('Alice')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /test/i })).toBeInTheDocument();
   });
 });

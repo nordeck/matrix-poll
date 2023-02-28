@@ -16,12 +16,12 @@
 
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { IconButton, Menu } from '@mui/material';
-import { unstable_useId as useId } from '@mui/utils';
 import React, {
   DispatchWithoutAction,
   MouseEvent,
   PropsWithChildren,
   useCallback,
+  useId,
   useState,
 } from 'react';
 

@@ -16,12 +16,12 @@
 
 import { hasRoomEventPower } from '@matrix-widget-toolkit/api';
 import { Box, Grid, TextField } from '@mui/material';
-import { unstable_useId as useId } from '@mui/utils';
 import {
   ChangeEvent,
   ReactElement,
   useCallback,
   useEffect,
+  useId,
   useMemo,
   useState,
 } from 'react';

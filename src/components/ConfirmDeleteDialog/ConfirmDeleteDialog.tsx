@@ -22,8 +22,7 @@ import {
   DialogContentText,
   DialogTitle,
 } from '@mui/material';
-import { unstable_useId as useId } from '@mui/utils';
-import { DispatchWithoutAction } from 'react';
+import { DispatchWithoutAction, useId } from 'react';
 import { useTranslation } from 'react-i18next';
 
 type ConfirmDeleteDialogProps = {

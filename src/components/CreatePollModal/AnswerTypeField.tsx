@@ -21,9 +21,8 @@ import {
   Radio,
   RadioGroup,
 } from '@mui/material';
-import { unstable_useId as useId } from '@mui/utils';
 import { t } from 'i18next';
-import { ChangeEvent, Dispatch, useCallback, useEffect } from 'react';
+import { ChangeEvent, Dispatch, useCallback, useEffect, useId } from 'react';
 import { useTranslation } from 'react-i18next';
 import { IPollAnswer } from '../../model';
 

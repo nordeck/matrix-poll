@@ -25,6 +25,7 @@ import {
   IPoll,
   IPollSettings,
   IVote,
+  PollStartEvent,
   PollType,
   ResultType,
   RoomNameEvent,
@@ -173,6 +174,33 @@ export function mockPoll({
       ...content,
     },
     state_key,
+    origin_server_ts,
+    event_id,
+    room_id: '!room-id',
+  };
+}
+
+/**
+ * Create a poll start event with known test data.
+ *
+ * @remarks Only use for tests
+ */
+export function mockPollStart({
+  event_id = '$start-event-id',
+  origin_server_ts = 0,
+  content = {},
+}: {
+  state_key?: string;
+  event_id?: string;
+  origin_server_ts?: number;
+  content?: Partial<PollStartEvent>;
+} = {}): RoomEvent<PollStartEvent> {
+  return {
+    type: 'net.nordeck.poll.start',
+    sender: '@user-id',
+    content: {
+      ...content,
+    },
     origin_server_ts,
     event_id,
     room_id: '!room-id',

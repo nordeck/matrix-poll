@@ -21,9 +21,14 @@ import {
   InputAdornment,
   TextField,
 } from '@mui/material';
-import { unstable_useId as useId } from '@mui/utils';
 import { isEqual } from 'lodash';
-import { HTMLAttributes, useCallback, useMemo } from 'react';
+import {
+  HTMLAttributes,
+  SyntheticEvent,
+  useCallback,
+  useId,
+  useMemo,
+} from 'react';
 import { useTranslation } from 'react-i18next';
 import { PollGroup, VotingRight } from '../../model';
 import {
@@ -107,7 +112,8 @@ export const VotingRightDropdown = ({
   );
 
   const handleOnChange = useCallback(
-    (_, value: VotingRight) => onVotingRightChange(delegateId, value),
+    (_: SyntheticEvent, value: VotingRight) =>
+      onVotingRightChange(delegateId, value),
     [delegateId, onVotingRightChange]
   );
 

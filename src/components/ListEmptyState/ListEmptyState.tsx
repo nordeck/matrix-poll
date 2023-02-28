@@ -15,7 +15,7 @@
  */
 
 import { ListItem, ListItemText } from '@mui/material';
-import { unstable_useId as useId } from '@mui/utils';
+import { useId } from 'react';
 
 export function ListEmptyState({ message }: { message: string }) {
   const id = useId();

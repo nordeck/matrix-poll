@@ -16,9 +16,9 @@
 
 import { WidgetApiMockProvider } from '@matrix-widget-toolkit/react';
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
-import { renderHook } from '@testing-library/react-hooks';
+import { renderHook, waitFor } from '@testing-library/react';
 import { ComponentType, PropsWithChildren } from 'react';
-import { mockPoll, mockVote } from '../../lib/testUtils';
+import { mockPoll, mockPollStart, mockVote } from '../../lib/testUtils';
 import { StoreProvider } from '../StoreProvider';
 import { useGetVotes } from './useGetVotes';
 
@@ -39,12 +39,13 @@ beforeEach(() => {
 
 describe('useGetVotes', () => {
   it('should handle missing poll', async () => {
-    const { result, waitForValueToChange } = renderHook(
-      () => useGetVotes('another-poll-id'),
-      { wrapper }
-    );
+    const { result } = renderHook(() => useGetVotes('another-poll-id'), {
+      wrapper,
+    });
 
-    await waitForValueToChange(() => result.current.isLoading);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+    });
 
     expect(result.current).toEqual({ isLoading: false, data: [] });
   });
@@ -52,17 +53,19 @@ describe('useGetVotes', () => {
   it('should report error', async () => {
     widgetApi.receiveStateEvents.mockRejectedValue(new Error('some error'));
 
-    const { result, waitForValueToChange } = renderHook(
-      () => useGetVotes('another-poll-id'),
-      { wrapper }
-    );
+    const { result } = renderHook(() => useGetVotes('another-poll-id'), {
+      wrapper,
+    });
 
-    await waitForValueToChange(() => result.current.isLoading);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+    });
 
     expect(result.current).toEqual({ isLoading: false, isError: true });
   });
 
   it('should accept votes for the poll', async () => {
+    widgetApi.mockSendRoomEvent(mockPollStart());
     widgetApi.mockSendStateEvent(
       mockPoll({
         state_key: 'poll-0',
@@ -103,12 +106,11 @@ describe('useGetVotes', () => {
       ),
     ];
 
-    const { result, waitForValueToChange } = renderHook(
-      () => useGetVotes('poll-0'),
-      { wrapper }
-    );
+    const { result } = renderHook(() => useGetVotes('poll-0'), { wrapper });
 
-    await waitForValueToChange(() => result.current.isLoading);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+    });
 
     expect(result.current).toEqual({
       isLoading: false,
@@ -117,6 +119,7 @@ describe('useGetVotes', () => {
   });
 
   it('should sort the votes by voting time', async () => {
+    widgetApi.mockSendRoomEvent(mockPollStart());
     widgetApi.mockSendStateEvent(
       mockPoll({
         state_key: 'poll-0',
@@ -151,12 +154,11 @@ describe('useGetVotes', () => {
       ),
     ];
 
-    const { result, waitForValueToChange } = renderHook(
-      () => useGetVotes('poll-0'),
-      { wrapper }
-    );
+    const { result } = renderHook(() => useGetVotes('poll-0'), { wrapper });
 
-    await waitForValueToChange(() => result.current.isLoading);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+    });
 
     expect(result.current).toEqual({
       isLoading: false,
@@ -165,6 +167,7 @@ describe('useGetVotes', () => {
   });
 
   it('should use the first vote of a user', async () => {
+    widgetApi.mockSendRoomEvent(mockPollStart());
     widgetApi.mockSendStateEvent(
       mockPoll({
         state_key: 'poll-0',
@@ -194,12 +197,11 @@ describe('useGetVotes', () => {
       ),
     ];
 
-    const { result, waitForValueToChange } = renderHook(
-      () => useGetVotes('poll-0'),
-      { wrapper }
-    );
+    const { result } = renderHook(() => useGetVotes('poll-0'), { wrapper });
 
-    await waitForValueToChange(() => result.current.isLoading);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+    });
 
     expect(result.current).toEqual({
       isLoading: false,
@@ -208,6 +210,7 @@ describe('useGetVotes', () => {
   });
 
   it('should skip votes for an unknown answer', async () => {
+    widgetApi.mockSendRoomEvent(mockPollStart());
     widgetApi.mockSendStateEvent(
       mockPoll({
         state_key: 'poll-0',
@@ -235,12 +238,11 @@ describe('useGetVotes', () => {
       ),
     ];
 
-    const { result, waitForValueToChange } = renderHook(
-      () => useGetVotes('poll-0'),
-      { wrapper }
-    );
+    const { result } = renderHook(() => useGetVotes('poll-0'), { wrapper });
 
-    await waitForValueToChange(() => result.current.isLoading);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+    });
 
     expect(result.current).toEqual({
       isLoading: false,
@@ -249,6 +251,7 @@ describe('useGetVotes', () => {
   });
 
   it('should skip votes outside of the poll duration', async () => {
+    widgetApi.mockSendRoomEvent(mockPollStart());
     widgetApi.mockSendStateEvent(
       mockPoll({
         state_key: 'poll-0',
@@ -289,12 +292,11 @@ describe('useGetVotes', () => {
       ),
     ];
 
-    const { result, waitForValueToChange } = renderHook(
-      () => useGetVotes('poll-0'),
-      { wrapper }
-    );
+    const { result } = renderHook(() => useGetVotes('poll-0'), { wrapper });
 
-    await waitForValueToChange(() => result.current.isLoading);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+    });
 
     expect(result.current).toEqual({
       isLoading: false,

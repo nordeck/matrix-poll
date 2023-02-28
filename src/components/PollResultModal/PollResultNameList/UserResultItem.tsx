@@ -15,7 +15,7 @@
  */
 
 import { Typography } from '@mui/material';
-import { unstable_useId as useId } from '@mui/utils';
+import { useId } from 'react';
 import { useTranslation } from 'react-i18next';
 import { getAnswerLabel } from '../../../lib/getAnswerLabel';
 import { AnswerId, SelectPollResults } from '../../../store';

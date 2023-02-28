@@ -21,9 +21,8 @@ import {
   Radio,
   RadioGroup,
 } from '@mui/material';
-import { unstable_useId as useId } from '@mui/utils';
 import { t } from 'i18next';
-import { ChangeEvent, useCallback } from 'react';
+import { ChangeEvent, useCallback, useId } from 'react';
 import { IPollAnswer } from '../../model';
 
 export type PollCardVoteFormAnswersProps = {

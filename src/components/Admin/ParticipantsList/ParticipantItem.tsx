@@ -18,9 +18,8 @@ import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import ClearIcon from '@mui/icons-material/Clear';
 import { IconButton, Tooltip } from '@mui/material';
-import { unstable_useId as useId } from '@mui/utils';
 import { t } from 'i18next';
-import { ReactElement, useCallback } from 'react';
+import { ReactElement, useCallback, useId } from 'react';
 import { UserListItem } from '../../UserListItem/UserListItem';
 
 type ParticipantItemProps = {

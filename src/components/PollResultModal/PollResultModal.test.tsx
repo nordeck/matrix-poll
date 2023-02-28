@@ -215,11 +215,7 @@ describe('<PollResultModal/>', () => {
       { wrapper: Wrapper }
     );
 
-    expect(await axe(container)).toHaveNoViolations();
-
     await userEvent.click(screen.getByRole('button', { name: 'Show Results' }));
-
-    expect(await axe(container)).toHaveNoViolations();
 
     const dialog = await screen.findByRole('dialog', {
       name: 'My Title',

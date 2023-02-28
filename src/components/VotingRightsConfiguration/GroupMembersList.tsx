@@ -15,8 +15,7 @@
  */
 
 import { Alert, AlertTitle, List } from '@mui/material';
-import { unstable_useId as useId } from '@mui/utils';
-import React, { useCallback } from 'react';
+import React, { useCallback, useId } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { PollGroup, VotingRight } from '../../model/IPoll';
 import { usePowerLevels, useUserDetails } from '../../store';

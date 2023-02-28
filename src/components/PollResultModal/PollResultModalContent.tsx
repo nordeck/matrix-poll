@@ -28,8 +28,7 @@ import {
   Skeleton,
   Typography,
 } from '@mui/material';
-import { unstable_useId as useId } from '@mui/utils';
-import React, { Suspense, useCallback, useState } from 'react';
+import React, { Suspense, useCallback, useId, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ellipsis } from '../../lib/ellipsis';
 import { IPoll, PollType } from '../../model';

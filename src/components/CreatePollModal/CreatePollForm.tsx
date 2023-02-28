@@ -32,9 +32,9 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import { unstable_useId as useId, visuallyHidden } from '@mui/utils';
+import { visuallyHidden } from '@mui/utils';
 import { isEqual } from 'lodash';
-import { ChangeEvent, useCallback, useEffect, useState } from 'react';
+import { ChangeEvent, useCallback, useEffect, useId, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { IPoll, IPollAnswer, PollType, ResultType } from '../../model';
 import { PollGroup } from '../../model/IPoll';

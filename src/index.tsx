@@ -17,7 +17,7 @@
 import { WidgetApiImpl } from '@matrix-widget-toolkit/api';
 import { getEnvironment, getNonce } from '@matrix-widget-toolkit/mui';
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { BrowserRouter as Router } from 'react-router-dom';
 import AppContainer from './AppContainer';
 import './i18n';
@@ -42,11 +42,16 @@ const widgetApiPromise = WidgetApiImpl.create({
   capabilities: widgetCapabilities,
 });
 
-ReactDOM.render(
-  <React.StrictMode>
-    <Router>
-      <AppContainer widgetApiPromise={widgetApiPromise} />
-    </Router>
-  </React.StrictMode>,
-  document.getElementById('root')
+const container = document.getElementById('root');
+const root = createRoot(container!);
+root.render(
+  // TODO: react-beautiful-dnd doesn't support StrictMode in React>=18. We
+  // disabled it globally and added it selectively to all components that
+  // don't use rbdnd. We should revert this change if the library gets an
+  // update. See also: https://github.com/atlassian/react-beautiful-dnd/issues/2350
+  //<React.StrictMode>
+  <Router>
+    <AppContainer widgetApiPromise={widgetApiPromise} />
+  </Router>
+  //</React.StrictMode>
 );

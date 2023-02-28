@@ -80,10 +80,14 @@ describe('<PollCard/>', () => {
       { wrapper: Wrapper }
     );
 
+    await expect(
+      screen.findByRole('listitem', { name: /open poll/i })
+    ).resolves.toBeInTheDocument();
+
     expect(await axe(container)).toHaveNoViolations();
   });
 
-  it('should render custom content in all slots', () => {
+  it('should render custom content in all slots', async () => {
     render(
       <PollCard
         extra={<p>Extra Slot</p>}
@@ -96,6 +100,10 @@ describe('<PollCard/>', () => {
       </PollCard>,
       { wrapper: Wrapper }
     );
+
+    await expect(
+      screen.findByRole('listitem', { name: /open poll/i })
+    ).resolves.toBeInTheDocument();
 
     expect(screen.getByText(/header slot/i)).toBeInTheDocument();
     expect(screen.getByText(/header meta slot/i)).toBeInTheDocument();

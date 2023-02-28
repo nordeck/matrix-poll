@@ -83,6 +83,10 @@ describe('<PollsPdfDocumentation>', () => {
       wrapper: Wrapper,
     });
 
+    await expect(
+      screen.findByRole('button', { name: 'Generate PDF documentation' })
+    ).resolves.toBeInTheDocument();
+
     expect(await axe(container)).toHaveNoViolations();
   });
 

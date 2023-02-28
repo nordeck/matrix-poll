@@ -16,7 +16,7 @@
 
 import { WidgetApiMockProvider } from '@matrix-widget-toolkit/react';
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
-import { renderHook } from '@testing-library/react-hooks';
+import { renderHook, waitFor } from '@testing-library/react';
 import { ComponentType, PropsWithChildren } from 'react';
 import { mockPoll, mockPowerLevelsEvent } from '../../lib/testUtils';
 import { StoreProvider } from '../StoreProvider';
@@ -57,6 +57,10 @@ describe('useUserCanVote', () => {
     });
 
     expect(result.current).toEqual({ isLoading: true });
+
+    await waitFor(() => {
+      expect(result.current).toEqual({ data: false, isLoading: false });
+    });
   });
 
   it('should return reject if a userId is missing', async () => {
@@ -64,29 +68,33 @@ describe('useUserCanVote', () => {
       wrapper,
     });
 
-    expect(result.current).toEqual({ isLoading: false, data: false });
+    await waitFor(() => {
+      expect(result.current).toEqual({ isLoading: false, data: false });
+    });
   });
 
   it('should return error', async () => {
     widgetApi.receiveStateEvents.mockRejectedValue(new Error('Some error'));
 
-    const { result, waitForValueToChange } = renderHook(
-      () => useUserCanVote('poll-1', 'user-1'),
-      { wrapper }
-    );
+    const { result } = renderHook(() => useUserCanVote('poll-1', 'user-1'), {
+      wrapper,
+    });
 
-    await waitForValueToChange(() => result.current.isLoading);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+    });
 
     expect(result.current).toEqual({ isLoading: false, isError: true });
   });
 
   it('should return reject if a poll does not exist', async () => {
-    const { result, waitForValueToChange } = renderHook(
-      () => useUserCanVote('poll-1', 'user-1'),
-      { wrapper }
-    );
+    const { result } = renderHook(() => useUserCanVote('poll-1', 'user-1'), {
+      wrapper,
+    });
 
-    await waitForValueToChange(() => result.current.isLoading);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+    });
 
     expect(result.current).toEqual({ isLoading: false, data: false });
   });
@@ -99,12 +107,13 @@ describe('useUserCanVote', () => {
     });
 
     it('should accept vote of user with the correct power', async () => {
-      const { result, waitForValueToChange } = renderHook(
-        () => useUserCanVote('poll-1', 'user-1'),
-        { wrapper }
-      );
+      const { result } = renderHook(() => useUserCanVote('poll-1', 'user-1'), {
+        wrapper,
+      });
 
-      await waitForValueToChange(() => result.current.isLoading);
+      await waitFor(() => {
+        expect(result.current.isLoading).toBe(false);
+      });
 
       expect(result.current).toEqual({ isLoading: false, data: true });
     });
@@ -122,12 +131,13 @@ describe('useUserCanVote', () => {
         })
       );
 
-      const { result, waitForValueToChange } = renderHook(
-        () => useUserCanVote('poll-1', 'user-1'),
-        { wrapper }
-      );
+      const { result } = renderHook(() => useUserCanVote('poll-1', 'user-1'), {
+        wrapper,
+      });
 
-      await waitForValueToChange(() => result.current.isLoading);
+      await waitFor(() => {
+        expect(result.current.isLoading).toBe(false);
+      });
 
       expect(result.current).toEqual({ isLoading: false, data: false });
     });
@@ -162,12 +172,14 @@ describe('useUserCanVote', () => {
     });
 
     it('should accept vote from delegate with correct power', async () => {
-      const { result, waitForValueToChange } = renderHook(
+      const { result } = renderHook(
         () => useUserCanVote('poll-1', '@delegate'),
         { wrapper }
       );
 
-      await waitForValueToChange(() => result.current.isLoading);
+      await waitFor(() => {
+        expect(result.current.isLoading).toBe(false);
+      });
 
       expect(result.current).toEqual({ isLoading: false, data: true });
     });
@@ -185,23 +197,27 @@ describe('useUserCanVote', () => {
         })
       );
 
-      const { result, waitForValueToChange } = renderHook(
+      const { result } = renderHook(
         () => useUserCanVote('poll-1', '@delegate'),
         { wrapper }
       );
 
-      await waitForValueToChange(() => result.current.isLoading);
+      await waitFor(() => {
+        expect(result.current.isLoading).toBe(false);
+      });
 
       expect(result.current).toEqual({ isLoading: false, data: false });
     });
 
     it('should accept vote from representative that votes for a delegate with correct power', async () => {
-      const { result, waitForValueToChange } = renderHook(
+      const { result } = renderHook(
         () => useUserCanVote('poll-1', '@representative-represents'),
         { wrapper }
       );
 
-      await waitForValueToChange(() => result.current.isLoading);
+      await waitFor(() => {
+        expect(result.current.isLoading).toBe(false);
+      });
 
       expect(result.current).toEqual({ isLoading: false, data: true });
     });
@@ -219,34 +235,39 @@ describe('useUserCanVote', () => {
         })
       );
 
-      const { result, waitForValueToChange } = renderHook(
+      const { result } = renderHook(
         () => useUserCanVote('poll-1', '@representative-represents'),
         { wrapper }
       );
 
-      await waitForValueToChange(() => result.current.isLoading);
+      await waitFor(() => {
+        expect(result.current.isLoading).toBe(false);
+      });
 
       expect(result.current).toEqual({ isLoading: false, data: false });
     });
 
     it('should reject vote from absent delegate with correct power', async () => {
-      const { result, waitForValueToChange } = renderHook(
+      const { result } = renderHook(
         () => useUserCanVote('poll-1', '@delegate-absent'),
         { wrapper }
       );
 
-      await waitForValueToChange(() => result.current.isLoading);
+      await waitFor(() => {
+        expect(result.current.isLoading).toBe(false);
+      });
 
       expect(result.current).toEqual({ isLoading: false, data: false });
     });
 
     it('should reject vote from a guest with correct power', async () => {
-      const { result, waitForValueToChange } = renderHook(
-        () => useUserCanVote('poll-1', '@guest'),
-        { wrapper }
-      );
+      const { result } = renderHook(() => useUserCanVote('poll-1', '@guest'), {
+        wrapper,
+      });
 
-      await waitForValueToChange(() => result.current.isLoading);
+      await waitFor(() => {
+        expect(result.current.isLoading).toBe(false);
+      });
 
       expect(result.current).toEqual({ isLoading: false, data: false });
     });

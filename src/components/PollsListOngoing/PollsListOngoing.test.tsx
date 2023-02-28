@@ -21,9 +21,11 @@ import userEvent from '@testing-library/user-event';
 import { axe } from 'jest-axe';
 import { DateTime } from 'luxon';
 import { ComponentType, PropsWithChildren, useMemo } from 'react';
+import { act } from 'react-dom/test-utils';
 import { Provider } from 'react-redux';
 import {
   mockPoll,
+  mockPollStart,
   mockPowerLevelsEvent,
   mockRoomMember,
   mockVote,
@@ -60,6 +62,7 @@ describe('<PollsListOngoing>', () => {
       })
     );
 
+    widgetApi.mockSendRoomEvent(mockPollStart());
     widgetApi.mockSendStateEvent(
       mockPoll({
         state_key: 'poll-open-visible',
@@ -135,11 +138,25 @@ describe('<PollsListOngoing>', () => {
   });
 
   it('should have no accessibility violations', async () => {
+    widgetApi.mockSendRoomEvent(
+      mockVote({
+        content: {
+          pollId: 'poll-open-visible',
+          answerId: '1',
+        },
+        origin_server_ts: Date.now(),
+      })
+    );
+
     const { container } = render(<PollsListOngoing />, {
       wrapper: Wrapper,
     });
 
-    expect(await axe(container)).toHaveNoViolations();
+    await screen.findByRole('button', { name: 'See live result' });
+
+    await act(async () => {
+      expect(await axe(container)).toHaveNoViolations();
+    });
   });
 
   it('should have an accessible description that refers to the poll title', async () => {
@@ -191,7 +208,7 @@ describe('<PollsListOngoing>', () => {
     ).toBeInTheDocument();
   });
 
-  it('should show the header of polls list', () => {
+  it('should show the header of polls list', async () => {
     render(<PollsListOngoing />, {
       wrapper: Wrapper,
     });
@@ -199,6 +216,10 @@ describe('<PollsListOngoing>', () => {
     expect(
       screen.getByRole('heading', { level: 3, name: /active Polls/i })
     ).toBeInTheDocument();
+
+    await waitFor(() => {
+      expect(screen.getByText('5')).toBeInTheDocument();
+    });
   });
 
   it('should show List of polls', async () => {

@@ -76,6 +76,8 @@ describe('<PollInfosIcons/>', () => {
       wrapper: Wrapper,
     });
 
+    await screen.findByRole('list', { name: /poll details/i });
+
     expect(await axe(container)).toHaveNoViolations();
   });
 

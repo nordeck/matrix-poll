@@ -17,8 +17,7 @@
 import { StateEvent } from '@matrix-widget-toolkit/api';
 import TimerOffIcon from '@mui/icons-material/TimerOff';
 import { Alert, Skeleton, Tooltip } from '@mui/material';
-import { unstable_useId as useId } from '@mui/utils';
-import { Fragment, ReactElement, useCallback, useState } from 'react';
+import { Fragment, ReactElement, useCallback, useId, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { IPoll } from '../../model';
 import { usePowerLevels, useStopPollMutation } from '../../store';

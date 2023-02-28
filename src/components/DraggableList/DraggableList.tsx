@@ -19,6 +19,7 @@ import { Box } from '@mui/material';
 import {
   ReactElement,
   ReactNode,
+  StrictMode,
   useCallback,
   useEffect,
   useState,
@@ -173,19 +174,21 @@ export function DraggableList<T>({
     >
       <Droppable droppableId="list" isDropDisabled={disabled}>
         {(provided) => (
-          <Box
-            {...provided.droppableProps}
-            ref={provided.innerRef}
-            sx={{
-              '& [data-rbd-placeholder-context-id]': {
-                listStyleType: 'none',
-              },
-            }}
-          >
-            {children(items)}
+          <StrictMode>
+            <Box
+              {...provided.droppableProps}
+              ref={provided.innerRef}
+              sx={{
+                '& [data-rbd-placeholder-context-id]': {
+                  listStyleType: 'none',
+                },
+              }}
+            >
+              {children(items)}
 
-            {provided.placeholder}
-          </Box>
+              {provided.placeholder}
+            </Box>
+          </StrictMode>
         )}
       </Droppable>
     </DragDropContext>

@@ -17,8 +17,7 @@
 import { StateEvent } from '@matrix-widget-toolkit/api';
 import CheckIcon from '@mui/icons-material/Check';
 import { Alert, Skeleton } from '@mui/material';
-import { unstable_useId as useId } from '@mui/utils';
-import { Fragment } from 'react';
+import { Fragment, useId } from 'react';
 import { useTranslation } from 'react-i18next';
 import { formatPollDate } from '../../lib/formatPollDate';
 import { IPoll } from '../../model';

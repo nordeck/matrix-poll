@@ -103,6 +103,12 @@ describe('<PollsListUpcoming>', () => {
   it('should have no accessibility violations', async () => {
     const { container } = render(<PollsListUpcoming />, { wrapper: Wrapper });
 
+    await screen.findByRole('listitem', { name: 'My Title' });
+    await screen.findByRole('button', {
+      name: 'Start',
+      description: 'My Title',
+    });
+
     expect(await axe(container)).toHaveNoViolations();
   });
 

@@ -15,8 +15,7 @@
  */
 
 import { List, ListSubheader } from '@mui/material';
-import { unstable_useId as useId } from '@mui/utils';
-import { ReactElement, useMemo } from 'react';
+import { ReactElement, useId, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ListEmptyState } from '../../ListEmptyState';
 import { ParticipantItem } from './ParticipantItem';

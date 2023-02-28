@@ -29,9 +29,8 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-import { unstable_useId as useId } from '@mui/utils';
 import { ModalButtonKind } from 'matrix-widget-api';
-import { ReactElement, useCallback, useMemo, useState } from 'react';
+import { ReactElement, useCallback, useId, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ellipsis } from '../../../lib/ellipsis';
 import { GroupContent } from '../../../model';
