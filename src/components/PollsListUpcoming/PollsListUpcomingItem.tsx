@@ -193,7 +193,7 @@ export const PollsListUpcomingItem = ({
               >
                 <Typography id={reorderInstructionsId} sx={visuallyHidden}>
                   {/* When concatenating multiple texts with aria-describedby,
-                    we have to take care outself that the screen reader does a
+                    we have to take care ourself that the screen reader does a
                     break when reading them. Therefore the next text starts with
                     a full stop. */}
                   {t(

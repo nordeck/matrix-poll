@@ -17,7 +17,7 @@
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
 import { waitFor } from '@testing-library/react';
 import { range } from 'lodash';
-import { mockVote } from '../../lib/testUtils';
+import { mockPollStart, mockVote } from '../../lib/testUtils';
 import { IVote } from '../../model';
 import { createStore } from '../store';
 import { voteApi } from './voteApi';
@@ -81,6 +81,7 @@ describe('getVotes', () => {
   });
 
   it('should only return votes for a poll if they relate to the poll event', async () => {
+    widgetApi.mockSendRoomEvent(mockPollStart());
     const vote0 = widgetApi.mockSendRoomEvent(
       mockVote({ origin_server_ts: 900 })
     );
@@ -132,6 +133,10 @@ describe('getVotes', () => {
   });
 
   it('should read all votes for a poll when it exceeds the page size', async () => {
+    widgetApi.mockSendRoomEvent(
+      mockPollStart({ event_id: '$another-start-event' })
+    );
+
     const votes = range(0, 51).map((idx) =>
       widgetApi.mockSendRoomEvent(
         mockVote({
@@ -256,6 +261,8 @@ describe('getVotes', () => {
   });
 
   it('should observe votes if they relate to the poll event', async () => {
+    widgetApi.mockSendRoomEvent(mockPollStart());
+
     const store = createStore({ widgetApi });
 
     store.dispatch(

@@ -20,7 +20,7 @@ import { render, screen, within } from '@testing-library/react';
 import { axe } from 'jest-axe';
 import { ComponentType, PropsWithChildren, useMemo } from 'react';
 import { Provider } from 'react-redux';
-import { mockPoll } from '../../lib/testUtils';
+import { mockPoll, mockPollStart } from '../../lib/testUtils';
 import { createStore } from '../../store';
 import { PollsListFinished } from './PollsListFinished';
 
@@ -34,6 +34,11 @@ describe('<PollsListFinished/>', () => {
   let Wrapper: ComponentType<PropsWithChildren<{}>>;
 
   beforeEach(() => {
+    widgetApi.mockSendRoomEvent(mockPollStart());
+    widgetApi.mockSendRoomEvent(
+      mockPollStart({ event_id: '$start-event-id2' })
+    );
+
     widgetApi.mockSendStateEvent(
       mockPoll({
         content: {
