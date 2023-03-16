@@ -19,7 +19,7 @@ import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
 import { renderHook } from '@testing-library/react-hooks';
 import { ComponentType, PropsWithChildren, useMemo } from 'react';
 import { Provider } from 'react-redux';
-import { mockPoll, mockVote } from '../../lib/testUtils';
+import { mockPoll, mockPollStart, mockVote } from '../../lib/testUtils';
 import { createStore } from '../../store';
 import { usePollStatus } from './usePollStatus';
 
@@ -65,6 +65,7 @@ describe('usePollStatus', () => {
   });
 
   it('should handle poll', async () => {
+    widgetApi.mockSendRoomEvent(mockPollStart());
     widgetApi.mockSendStateEvent(
       mockPoll({
         content: {

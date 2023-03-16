@@ -18,7 +18,7 @@ import { WidgetApiMockProvider } from '@matrix-widget-toolkit/react';
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
 import { renderHook } from '@testing-library/react-hooks';
 import { ComponentType, PropsWithChildren } from 'react';
-import { mockPoll, mockVote } from '../../lib/testUtils';
+import { mockPoll, mockPollStart, mockVote } from '../../lib/testUtils';
 import { StoreProvider } from '../StoreProvider';
 import { useGetVotes } from './useGetVotes';
 
@@ -63,6 +63,7 @@ describe('useGetVotes', () => {
   });
 
   it('should accept votes for the poll', async () => {
+    widgetApi.mockSendRoomEvent(mockPollStart());
     widgetApi.mockSendStateEvent(
       mockPoll({
         state_key: 'poll-0',
@@ -117,6 +118,7 @@ describe('useGetVotes', () => {
   });
 
   it('should sort the votes by voting time', async () => {
+    widgetApi.mockSendRoomEvent(mockPollStart());
     widgetApi.mockSendStateEvent(
       mockPoll({
         state_key: 'poll-0',
@@ -165,6 +167,7 @@ describe('useGetVotes', () => {
   });
 
   it('should use the first vote of a user', async () => {
+    widgetApi.mockSendRoomEvent(mockPollStart());
     widgetApi.mockSendStateEvent(
       mockPoll({
         state_key: 'poll-0',
@@ -208,6 +211,7 @@ describe('useGetVotes', () => {
   });
 
   it('should skip votes for an unknown answer', async () => {
+    widgetApi.mockSendRoomEvent(mockPollStart());
     widgetApi.mockSendStateEvent(
       mockPoll({
         state_key: 'poll-0',
@@ -249,6 +253,7 @@ describe('useGetVotes', () => {
   });
 
   it('should skip votes outside of the poll duration', async () => {
+    widgetApi.mockSendRoomEvent(mockPollStart());
     widgetApi.mockSendStateEvent(
       mockPoll({
         state_key: 'poll-0',

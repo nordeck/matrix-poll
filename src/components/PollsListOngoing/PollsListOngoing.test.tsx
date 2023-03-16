@@ -24,6 +24,7 @@ import { ComponentType, PropsWithChildren, useMemo } from 'react';
 import { Provider } from 'react-redux';
 import {
   mockPoll,
+  mockPollStart,
   mockPowerLevelsEvent,
   mockRoomMember,
   mockVote,
@@ -60,6 +61,7 @@ describe('<PollsListOngoing>', () => {
       })
     );
 
+    widgetApi.mockSendRoomEvent(mockPollStart());
     widgetApi.mockSendStateEvent(
       mockPoll({
         state_key: 'poll-open-visible',
