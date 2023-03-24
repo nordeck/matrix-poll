@@ -185,7 +185,7 @@
   },
   "pollsListUpcomingItem": {
     "drag": "Reihenfolge der Abstimmungen ändern",
-    "dragInstructions": ". Drücke Leerttaste um diese Abstimmung zu verschieben. Während des Verschiebens, nutze die Pfeiltasten um den Eintrag zu verschieben und Escape um es abzubrechen. Stelle sicher das dein Screen Reader im Fokus oder Formular Modus ist.",
+    "dragInstructions": ". Drücke Leertaste um diese Abstimmung zu verschieben. Während des Verschiebens, nutze die Pfeiltasten um den Eintrag zu verschieben und Escape um es abzubrechen. Stelle sicher das dein Screen Reader im Fokus oder Formular Modus ist.",
     "dropdownItemDeletePoll": {
       "confirmButton": "Löschen",
       "deletePoll": "Abstimmung löschen",
