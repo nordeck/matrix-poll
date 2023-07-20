@@ -52,7 +52,7 @@ describe('<PollsPdfDialogWrapper>', () => {
         content: {
           displayname: 'My User',
         },
-      })
+      }),
     );
 
     widgetApi.mockSendStateEvent(
@@ -65,11 +65,11 @@ describe('<PollsPdfDialogWrapper>', () => {
           pollType: PollType.ByName,
           groups: undefined,
         },
-      })
+      }),
     );
 
     widgetApi.mockSendRoomEvent(
-      mockVote({ sender: '@user-alice', origin_server_ts: 1577923215000 })
+      mockVote({ sender: '@user-alice', origin_server_ts: 1577923215000 }),
     );
 
     widgetApi.mockSendStateEvent(
@@ -81,7 +81,7 @@ describe('<PollsPdfDialogWrapper>', () => {
           title: 'First Poll',
           groups: undefined,
         },
-      })
+      }),
     );
 
     widgetApi.mockSendStateEvent(
@@ -93,7 +93,7 @@ describe('<PollsPdfDialogWrapper>', () => {
           title: 'Third Poll',
           groups: undefined,
         },
-      })
+      }),
     );
 
     widgetApi.mockSendStateEvent(mockRoomName());
@@ -239,7 +239,7 @@ describe('<PollsPdfDialogWrapper>', () => {
     render(<PollsPdfDialogWrapper onClose={onClose} />, { wrapper: Wrapper });
 
     await expect(screen.findByRole('status')).resolves.toHaveTextContent(
-      'Something went wrong while generating the PDF documentation.'
+      'Something went wrong while generating the PDF documentation.',
     );
   });
 
@@ -248,13 +248,13 @@ describe('<PollsPdfDialogWrapper>', () => {
       () =>
         new Promise(() => {
           /* Never resolves */
-        })
+        }),
     );
 
     render(<PollsPdfDialogWrapper onClose={onClose} />, { wrapper: Wrapper });
 
     expect(
-      screen.getByRole('progressbar', { name: 'Download' })
+      screen.getByRole('progressbar', { name: 'Download' }),
     ).toBeInTheDocument();
   });
 });

@@ -40,7 +40,7 @@ export const PollsPdfDocumentation = () => {
 
   const handleToggleMoreSettings = useCallback(
     () => setMoreSettings((v) => !v),
-    []
+    [],
   );
 
   const headingId = useId();

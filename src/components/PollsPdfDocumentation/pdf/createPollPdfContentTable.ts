@@ -29,7 +29,7 @@ import {
 
 export function createPollPdfContentTable(
   pollResult: SelectPollResults,
-  getUserDisplayName: (userId: string) => string
+  getUserDisplayName: (userId: string) => string,
 ): Content {
   const answerIds: AnswerId[] = [
     ...pollResult.poll.content.answers.map((a) => a.id),
@@ -55,7 +55,7 @@ export function createPollPdfContentTable(
                   getUserDisplayName,
                 }),
               ],
-            })
+            }),
           ),
         ];
       }
@@ -91,7 +91,7 @@ export function createPollPdfContentTable(
                     answerIds,
                   }),
                 ],
-              })
+              }),
             ),
           ],
         ];
@@ -248,7 +248,7 @@ function generateUserRows({
           },
           text: t(
             'createPollPdfContentTable.noVotesWereCast',
-            'No votes were cast.'
+            'No votes were cast.',
           ),
           colSpan: answerIds.length + 1,
         },

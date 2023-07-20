@@ -27,7 +27,7 @@ describe('isValidPollSettingsEvent', () => {
         room_id: '!room-id',
         sender: '@user-id',
         type: 'net.nordeck.poll.settings',
-      })
+      }),
     ).toBe(true);
   });
 
@@ -44,7 +44,7 @@ describe('isValidPollSettingsEvent', () => {
         room_id: '!room-id',
         sender: '@user-id',
         type: 'net.nordeck.poll.settings',
-      })
+      }),
     ).toBe(true);
   });
 
@@ -62,7 +62,7 @@ describe('isValidPollSettingsEvent', () => {
         room_id: '!room-id',
         sender: '@user-id',
         type: 'net.nordeck.poll.settings',
-      })
+      }),
     ).toBe(true);
   });
 
@@ -90,7 +90,7 @@ describe('isValidPollSettingsEvent', () => {
         room_id: '!room-id',
         sender: '@user-id',
         type: 'net.nordeck.poll.settings',
-      })
+      }),
     ).toBe(false);
   });
 });

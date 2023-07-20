@@ -56,21 +56,21 @@ export function PollsPdfDialogWrapper({ onClose }: { onClose: () => void }) {
       : '';
 
     const { event: roomNameEvent } = await dispatch(
-      roomNameApi.endpoints.getRoomName.initiate()
+      roomNameApi.endpoints.getRoomName.initiate(),
     ).unwrap();
     const roomName = roomNameEvent?.content.name ?? 'UnknownRoom';
 
     const roomMembersResult = await dispatch(
-      roomMemberApi.endpoints.getRoomMembers.initiate()
+      roomMemberApi.endpoints.getRoomMembers.initiate(),
     ).unwrap();
     const roomMemberEvents = selectRoomMembers(roomMembersResult);
 
     const { event: powerLevelsEvent } = await dispatch(
-      powerLevelsApi.endpoints.getPowerLevels.initiate()
+      powerLevelsApi.endpoints.getPowerLevels.initiate(),
     ).unwrap();
 
     const pollsResult = await dispatch(
-      pollApi.endpoints.getPolls.initiate()
+      pollApi.endpoints.getPolls.initiate(),
     ).unwrap();
     const finishedPolls = selectPollsFinished(pollsResult);
     const pollResults: SelectPollResults[] = [];
@@ -80,7 +80,7 @@ export function PollsPdfDialogWrapper({ onClose }: { onClose: () => void }) {
         voteApi.endpoints.getVotes.initiate({
           pollId: pollEvent.state_key,
           pollStartEventId: pollEvent.content.startEventId,
-        })
+        }),
       ).unwrap();
       const vote = selectGetVotes(pollEvent, votesEvents);
 
@@ -89,7 +89,7 @@ export function PollsPdfDialogWrapper({ onClose }: { onClose: () => void }) {
         vote,
         roomMembersResult,
         powerLevelsEvent,
-        { includeInvalidVotes: true }
+        { includeInvalidVotes: true },
       );
 
       if (result) {

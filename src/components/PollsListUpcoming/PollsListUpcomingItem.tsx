@@ -96,7 +96,7 @@ function PollMenuUpcomingPoll({
           },
         ],
         data: { poll: poll.content },
-      }
+      },
     );
 
     if (pollData) {
@@ -124,7 +124,7 @@ function PollMenuUpcomingPoll({
         >
           {t(
             'pollsListUpcomingItem.dropdownItemDeletePoll.deletePoll',
-            'Delete poll'
+            'Delete poll',
           )}
         </MenuButtonItem>
       </MenuButton>
@@ -132,7 +132,7 @@ function PollMenuUpcomingPoll({
       <ConfirmDeleteDialog
         confirmTitle={t(
           'pollsListUpcomingItem.dropdownItemDeletePoll.confirmButton',
-          'Delete'
+          'Delete',
         )}
         description={t('pollsListUpcomingItem.dropdownItemDeletePoll.message', {
           title: poll.content.title,
@@ -143,7 +143,7 @@ function PollMenuUpcomingPoll({
         open={openDeleteConfirm}
         title={t(
           'pollsListUpcomingItem.dropdownItemDeletePoll.deletePoll',
-          'Delete poll'
+          'Delete poll',
         )}
       />
     </>
@@ -198,7 +198,7 @@ export const PollsListUpcomingItem = ({
                     a full stop. */}
                   {t(
                     'pollsListUpcomingItem.dragInstructions',
-                    '. Press space bar to start a drag. When dragging you can use the arrow keys to move the item around and escape to cancel. Ensure your screen reader is in focus mode or forms mode.'
+                    '. Press space bar to start a drag. When dragging you can use the arrow keys to move the item around and escape to cancel. Ensure your screen reader is in focus mode or forms mode.',
                   )}
                 </Typography>
                 <DragHandleIcon />

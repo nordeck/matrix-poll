@@ -33,7 +33,7 @@ describe('getPowerLevels', () => {
     await expect(
       store
         .dispatch(powerLevelsApi.endpoints.getPowerLevels.initiate())
-        .unwrap()
+        .unwrap(),
     ).resolves.toEqual({ event: undefined });
   });
 
@@ -45,7 +45,7 @@ describe('getPowerLevels', () => {
     await expect(
       store
         .dispatch(powerLevelsApi.endpoints.getPowerLevels.initiate())
-        .unwrap()
+        .unwrap(),
     ).resolves.toEqual({
       event: expect.objectContaining({
         content: {
@@ -63,7 +63,7 @@ describe('getPowerLevels', () => {
     await expect(
       store
         .dispatch(powerLevelsApi.endpoints.getPowerLevels.initiate())
-        .unwrap()
+        .unwrap(),
     ).rejects.toEqual({
       message: 'Could not load power levels: Some Error',
       name: 'LoadFailed',
@@ -79,30 +79,30 @@ describe('getPowerLevels', () => {
 
     await waitFor(() =>
       expect(
-        powerLevelsApi.endpoints.getPowerLevels.select()(store.getState()).data
+        powerLevelsApi.endpoints.getPowerLevels.select()(store.getState()).data,
       ).toEqual({
         event: expect.objectContaining({
           content: {
             users_default: 100,
           },
         }),
-      })
+      }),
     );
 
     widgetApi.mockSendStateEvent(
-      mockPowerLevelsEvent({ content: { users_default: 50 } })
+      mockPowerLevelsEvent({ content: { users_default: 50 } }),
     );
 
     await waitFor(() =>
       expect(
-        powerLevelsApi.endpoints.getPowerLevels.select()(store.getState()).data
+        powerLevelsApi.endpoints.getPowerLevels.select()(store.getState()).data,
       ).toEqual({
         event: expect.objectContaining({
           content: {
             users_default: 50,
           },
         }),
-      })
+      }),
     );
   });
 });

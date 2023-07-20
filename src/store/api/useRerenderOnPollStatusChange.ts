@@ -74,6 +74,6 @@ export function useRerenderOnPollStatusChange() {
       pollCount: pollsState ? selectAllPolls(pollsState).length : 0,
       renderTimer,
     }),
-    [pollsState, renderTimer]
+    [pollsState, renderTimer],
   );
 }

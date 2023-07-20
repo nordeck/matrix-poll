@@ -39,7 +39,7 @@ describe('isValidGroupEvent', () => {
         room_id: '!room-id',
         sender: '@user-id',
         type: 'net.nordeck.poll.group',
-      })
+      }),
     ).toBe(true);
   });
 
@@ -61,7 +61,7 @@ describe('isValidGroupEvent', () => {
         room_id: '!room-id',
         sender: '@user-id',
         type: 'net.nordeck.poll.group',
-      })
+      }),
     ).toBe(true);
   });
 
@@ -102,7 +102,7 @@ describe('isValidGroupEvent', () => {
         room_id: '!room-id',
         sender: '@user-id',
         type: 'net.nordeck.poll.group',
-      })
+      }),
     ).toBe(false);
   });
 });
@@ -137,7 +137,7 @@ describe('migratePollGroupSchema', () => {
             },
           },
         },
-      })
+      }),
     );
   });
 
@@ -174,7 +174,7 @@ describe('migratePollGroupSchema', () => {
             },
           },
         },
-      })
+      }),
     );
   });
 
@@ -206,7 +206,7 @@ describe('migratePollGroupSchema', () => {
             },
           },
         },
-      })
+      }),
     );
   });
 });

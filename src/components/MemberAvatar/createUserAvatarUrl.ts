@@ -18,8 +18,8 @@ import { getEnvironment } from '@matrix-widget-toolkit/mui';
 
 export const createUserAvatarUrl = (memberAvatar: string): string => {
   return `${getEnvironment(
-    'REACT_APP_HOME_SERVER_URL'
+    'REACT_APP_HOME_SERVER_URL',
   )}/_matrix/media/r0/thumbnail/${memberAvatar.slice(
-    'mxc://'.length
+    'mxc://'.length,
   )}?width=43&height=43&method=crop`;
 };

@@ -66,7 +66,7 @@ const PollResultChartBar = ({
     color: {
       scale: createAnswersColorScale(
         results.map((r) => r.group),
-        theme
+        theme,
       ),
     },
     tooltip: {

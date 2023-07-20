@@ -51,14 +51,14 @@ describe('<PollsListOngoing>', () => {
         state_key: '@user-bob',
         event_id: '$event-id-1',
         content: { displayname: 'Bob', avatar_url: undefined },
-      })
+      }),
     );
     widgetApi.mockSendStateEvent(
       mockRoomMember({
         state_key: '@user-charlie',
         event_id: '$event-id-2',
         content: { displayname: 'charlie', avatar_url: undefined },
-      })
+      }),
     );
 
     widgetApi.mockSendRoomEvent(mockPollStart());
@@ -71,7 +71,7 @@ describe('<PollsListOngoing>', () => {
           endTime: DateTime.now().plus({ minute: 1 }).toISO(),
           startEventId: '$start-event-id',
         },
-      })
+      }),
     );
     widgetApi.mockSendStateEvent(
       mockPoll({
@@ -84,7 +84,7 @@ describe('<PollsListOngoing>', () => {
           startTime: new Date().toISOString(),
           endTime: DateTime.now().plus({ minute: 1 }).toISO(),
         },
-      })
+      }),
     );
     widgetApi.mockSendStateEvent(
       mockPoll({
@@ -97,7 +97,7 @@ describe('<PollsListOngoing>', () => {
           startTime: new Date().toISOString(),
           endTime: DateTime.now().plus({ minute: 1 }).toISO(),
         },
-      })
+      }),
     );
     widgetApi.mockSendStateEvent(
       mockPoll({
@@ -110,7 +110,7 @@ describe('<PollsListOngoing>', () => {
           startTime: new Date().toISOString(),
           endTime: DateTime.now().plus({ minute: 1 }).toISO(),
         },
-      })
+      }),
     );
     widgetApi.mockSendStateEvent(
       mockPoll({
@@ -123,7 +123,7 @@ describe('<PollsListOngoing>', () => {
           startTime: new Date().toISOString(),
           endTime: DateTime.now().plus({ minute: 1 }).toISO(),
         },
-      })
+      }),
     );
 
     Wrapper = ({ children }: PropsWithChildren<{}>) => {
@@ -161,21 +161,21 @@ describe('<PollsListOngoing>', () => {
           answerId: '1',
         },
         origin_server_ts: Date.now(),
-      })
+      }),
     );
 
     expect(
       within(activePollListItem).getByRole('button', {
         name: 'More settings',
         description: 'Test poll open and visible',
-      })
+      }),
     ).toBeInTheDocument();
 
     await expect(
       within(activePollListItem).findByRole('button', {
         name: 'See live result',
         description: 'Test poll open and visible',
-      })
+      }),
     ).resolves.toBeInTheDocument();
   });
 
@@ -189,7 +189,7 @@ describe('<PollsListOngoing>', () => {
     expect(
       within(list).getByRole('listitem', {
         name: /there are no active polls/i,
-      })
+      }),
     ).toBeInTheDocument();
   });
 
@@ -199,7 +199,7 @@ describe('<PollsListOngoing>', () => {
     });
 
     expect(
-      screen.getByRole('heading', { level: 3, name: /active Polls/i })
+      screen.getByRole('heading', { level: 3, name: /active Polls/i }),
     ).toBeInTheDocument();
   });
 
@@ -212,27 +212,27 @@ describe('<PollsListOngoing>', () => {
     expect(
       within(pollsList).getByRole('listitem', {
         name: 'Test poll open and visible',
-      })
+      }),
     ).toBeInTheDocument();
     expect(
       within(pollsList).getByRole('listitem', {
         name: 'Test poll by name and visible',
-      })
+      }),
     ).toBeInTheDocument();
     expect(
       within(pollsList).getByRole('listitem', {
         name: 'Test poll secret and visible',
-      })
+      }),
     ).toBeInTheDocument();
     expect(
       within(pollsList).getByRole('listitem', {
         name: 'Test poll open and invisible',
-      })
+      }),
     ).toBeInTheDocument();
     expect(
       within(pollsList).getByRole('listitem', {
         name: 'Test poll secret and invisible',
-      })
+      }),
     ).toBeInTheDocument();
   });
 
@@ -244,7 +244,7 @@ describe('<PollsListOngoing>', () => {
           startTime: new Date().toISOString(),
           endTime: DateTime.now().plus({ minute: 1 }).toISO(),
         },
-      })
+      }),
     );
 
     render(<PollsListOngoing />, { wrapper: Wrapper });
@@ -261,13 +261,13 @@ describe('<PollsListOngoing>', () => {
 
     // poll icon type
     expect(
-      within(pollItem).getByRole('listitem', { name: /Open/i })
+      within(pollItem).getByRole('listitem', { name: /Open/i }),
     ).toBeInTheDocument();
     expect(
-      within(pollItem).getByRole('listitem', { name: /4 voters/i })
+      within(pollItem).getByRole('listitem', { name: /4 voters/i }),
     ).toBeInTheDocument();
     expect(
-      within(pollItem).getByRole('listitem', { name: /0 voting persons/i })
+      within(pollItem).getByRole('listitem', { name: /0 voting persons/i }),
     ).toBeInTheDocument();
 
     // poll question
@@ -284,13 +284,13 @@ describe('<PollsListOngoing>', () => {
     widgetApi.mockSendStateEvent(
       mockPowerLevelsEvent({
         content: { events_default: 0, users_default: 100, state_default: 100 },
-      })
+      }),
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
         origin_server_ts: new Date().getTime(),
         content: { pollId: 'poll-open-visible' },
-      })
+      }),
     );
 
     render(<PollsListOngoing />, { wrapper: Wrapper });
@@ -303,11 +303,11 @@ describe('<PollsListOngoing>', () => {
     });
 
     expect(
-      within(pollItem).getByRole('button', { name: /See Live Result/i })
+      within(pollItem).getByRole('button', { name: /See Live Result/i }),
     ).toBeInTheDocument();
 
     expect(
-      within(pollItem).getByRole('button', { name: /vote/i })
+      within(pollItem).getByRole('button', { name: /vote/i }),
     ).toBeInTheDocument();
   });
 
@@ -315,7 +315,7 @@ describe('<PollsListOngoing>', () => {
     widgetApi.mockSendStateEvent(
       mockPowerLevelsEvent({
         content: { events_default: 0, users_default: 100, state_default: 100 },
-      })
+      }),
     );
 
     render(<PollsListOngoing />, { wrapper: Wrapper });
@@ -328,11 +328,11 @@ describe('<PollsListOngoing>', () => {
     });
 
     expect(
-      within(pollItem).queryByRole('button', { name: /See Live Result/i })
+      within(pollItem).queryByRole('button', { name: /See Live Result/i }),
     ).not.toBeInTheDocument();
 
     expect(
-      within(pollItem).getByRole('button', { name: /vote/i })
+      within(pollItem).getByRole('button', { name: /vote/i }),
     ).toBeInTheDocument();
   });
 
@@ -340,13 +340,13 @@ describe('<PollsListOngoing>', () => {
     widgetApi.mockSendStateEvent(
       mockPowerLevelsEvent({
         content: { events_default: 0, users_default: 100, state_default: 100 },
-      })
+      }),
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
         origin_server_ts: new Date().getTime(),
         content: { pollId: 'poll-secret-visible' },
-      })
+      }),
     );
 
     render(<PollsListOngoing />, { wrapper: Wrapper });
@@ -359,11 +359,11 @@ describe('<PollsListOngoing>', () => {
     });
 
     expect(
-      within(pollItem).queryByRole('button', { name: /See Live Result/i })
+      within(pollItem).queryByRole('button', { name: /See Live Result/i }),
     ).not.toBeInTheDocument();
 
     expect(
-      within(pollItem).getByRole('button', { name: /vote/i })
+      within(pollItem).getByRole('button', { name: /vote/i }),
     ).toBeInTheDocument();
   });
 
@@ -416,14 +416,14 @@ describe('<PollsListOngoing>', () => {
     widgetApi.mockSendStateEvent(
       mockPowerLevelsEvent({
         content: { events_default: 0, users_default: 100, state_default: 100 },
-      })
+      }),
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
         origin_server_ts: new Date().getTime(),
         sender: '@user-charlie',
         content: { answerId: '2', pollId: 'poll-open-visible' },
-      })
+      }),
     );
 
     render(<PollsListOngoing />, { wrapper: Wrapper });
@@ -440,7 +440,7 @@ describe('<PollsListOngoing>', () => {
     expect(within(pollItem).getByText(/No/i)).toBeInTheDocument();
 
     expect(
-      within(pollItem).getByRole('button', { name: /See Live Result/i })
+      within(pollItem).getByRole('button', { name: /See Live Result/i }),
     ).toBeInTheDocument();
   });
 
@@ -448,20 +448,20 @@ describe('<PollsListOngoing>', () => {
     widgetApi.mockSendStateEvent(
       mockPowerLevelsEvent({
         content: { events_default: 0, users_default: 100, state_default: 100 },
-      })
+      }),
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
         origin_server_ts: new Date().getTime(),
         content: { pollId: 'poll-secret-visible' },
-      })
+      }),
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
         origin_server_ts: new Date().getTime(),
         sender: '@user-charlie',
         content: { answerId: '2', pollId: 'poll-secret-visible' },
-      })
+      }),
     );
 
     render(<PollsListOngoing />, { wrapper: Wrapper });
@@ -478,7 +478,7 @@ describe('<PollsListOngoing>', () => {
     expect(within(pollItem).getByText(/No/i)).toBeInTheDocument();
 
     expect(
-      within(pollItem).getByRole('button', { name: /See Live Result/i })
+      within(pollItem).getByRole('button', { name: /See Live Result/i }),
     ).toBeDisabled();
   });
 
@@ -486,13 +486,13 @@ describe('<PollsListOngoing>', () => {
     widgetApi.mockSendStateEvent(
       mockPowerLevelsEvent({
         content: { users_default: 0, events_default: 50, state_default: 100 },
-      })
+      }),
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
         origin_server_ts: new Date().getTime(),
         content: { pollId: 'poll-open-visible' },
-      })
+      }),
     );
 
     render(<PollsListOngoing />, { wrapper: Wrapper });
@@ -504,17 +504,17 @@ describe('<PollsListOngoing>', () => {
       name: 'Test poll open and visible',
     });
     expect(
-      within(pollItem).queryByRole('button', { name: /vote/i })
+      within(pollItem).queryByRole('button', { name: /vote/i }),
     ).not.toBeInTheDocument();
 
     expect(
       within(pollItem).queryByText(
-        /You will see the result when the voting ends./i
-      )
+        /You will see the result when the voting ends./i,
+      ),
     ).not.toBeInTheDocument();
 
     expect(
-      within(pollItem).getByRole('button', { name: /See Live Result/i })
+      within(pollItem).getByRole('button', { name: /See Live Result/i }),
     ).toBeInTheDocument();
   });
 
@@ -522,7 +522,7 @@ describe('<PollsListOngoing>', () => {
     widgetApi.mockSendStateEvent(
       mockPowerLevelsEvent({
         content: { users_default: 0, events_default: 50, state_default: 100 },
-      })
+      }),
     );
 
     render(<PollsListOngoing />, { wrapper: Wrapper });
@@ -535,17 +535,17 @@ describe('<PollsListOngoing>', () => {
     });
 
     expect(
-      within(pollItem).queryByRole('button', { name: /vote/i })
+      within(pollItem).queryByRole('button', { name: /vote/i }),
     ).not.toBeInTheDocument();
 
     expect(
       within(pollItem).getByText(
-        /You will see the result as soon as a first vote has been cast./i
-      )
+        /You will see the result as soon as a first vote has been cast./i,
+      ),
     ).toBeInTheDocument();
 
     expect(
-      within(pollItem).queryByRole('button', { name: /See Live Result/i })
+      within(pollItem).queryByRole('button', { name: /See Live Result/i }),
     ).not.toBeInTheDocument();
   });
 
@@ -553,7 +553,7 @@ describe('<PollsListOngoing>', () => {
     widgetApi.mockSendStateEvent(
       mockPowerLevelsEvent({
         content: { users_default: 0, events_default: 50, state_default: 100 },
-      })
+      }),
     );
 
     render(<PollsListOngoing />, { wrapper: Wrapper });
@@ -566,17 +566,17 @@ describe('<PollsListOngoing>', () => {
     });
 
     expect(
-      within(pollItem).queryByRole('button', { name: /vote/i })
+      within(pollItem).queryByRole('button', { name: /vote/i }),
     ).not.toBeInTheDocument();
 
     expect(
       within(pollItem).getByText(
-        /You will see the result when the voting ends./i
-      )
+        /You will see the result when the voting ends./i,
+      ),
     ).toBeInTheDocument();
 
     expect(
-      within(pollItem).queryByRole('button', { name: /See Live Result/i })
+      within(pollItem).queryByRole('button', { name: /See Live Result/i }),
     ).not.toBeInTheDocument();
   });
 
@@ -584,13 +584,13 @@ describe('<PollsListOngoing>', () => {
     widgetApi.mockSendStateEvent(
       mockPowerLevelsEvent({
         content: { users_default: 0, events_default: 50 },
-      })
+      }),
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
         origin_server_ts: new Date().getTime(),
         content: { pollId: 'poll-secret-invisible' },
-      })
+      }),
     );
 
     render(<PollsListOngoing />, { wrapper: Wrapper });
@@ -603,17 +603,17 @@ describe('<PollsListOngoing>', () => {
     });
 
     expect(
-      within(pollItem).queryByRole('button', { name: /vote/i })
+      within(pollItem).queryByRole('button', { name: /vote/i }),
     ).not.toBeInTheDocument();
 
     expect(
       within(pollItem).getByText(
-        /You will see the result when the voting ends./i
-      )
+        /You will see the result when the voting ends./i,
+      ),
     ).toBeInTheDocument();
 
     expect(
-      within(pollItem).queryByRole('button', { name: /See Live Result/i })
+      within(pollItem).queryByRole('button', { name: /See Live Result/i }),
     ).not.toBeInTheDocument();
   });
 
@@ -621,13 +621,13 @@ describe('<PollsListOngoing>', () => {
     widgetApi.mockSendStateEvent(
       mockPowerLevelsEvent({
         content: { users_default: 0, events_default: 50 },
-      })
+      }),
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
         origin_server_ts: new Date().getTime(),
         content: { pollId: 'poll-secret-visible' },
-      })
+      }),
     );
 
     render(<PollsListOngoing />, { wrapper: Wrapper });
@@ -640,17 +640,17 @@ describe('<PollsListOngoing>', () => {
     });
 
     expect(
-      within(pollItem).queryByRole('button', { name: /vote/i })
+      within(pollItem).queryByRole('button', { name: /vote/i }),
     ).not.toBeInTheDocument();
 
     expect(
       within(pollItem).getByText(
-        /You will see the result as soon as a first vote has been cast./i
-      )
+        /You will see the result as soon as a first vote has been cast./i,
+      ),
     ).toBeInTheDocument();
 
     expect(
-      within(pollItem).queryByRole('button', { name: /See Live Result/i })
+      within(pollItem).queryByRole('button', { name: /See Live Result/i }),
     ).not.toBeInTheDocument();
   });
 
@@ -658,14 +658,14 @@ describe('<PollsListOngoing>', () => {
     widgetApi.mockSendStateEvent(
       mockPowerLevelsEvent({
         content: { users_default: 100, events_default: 50, state_default: 100 },
-      })
+      }),
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
         origin_server_ts: new Date().getTime(),
         sender: '@user-charlie',
         content: { answerId: '1', pollId: 'poll-open-invisible' },
-      })
+      }),
     );
 
     render(<PollsListOngoing />, { wrapper: Wrapper });
@@ -678,17 +678,17 @@ describe('<PollsListOngoing>', () => {
     });
 
     expect(
-      within(pollItem).queryByRole('button', { name: /vote/i })
+      within(pollItem).queryByRole('button', { name: /vote/i }),
     ).not.toBeInTheDocument();
 
     expect(
       within(pollItem).queryByText(
-        /You will see the result when the voting ends./i
-      )
+        /You will see the result when the voting ends./i,
+      ),
     ).not.toBeInTheDocument();
 
     expect(
-      within(pollItem).getByRole('button', { name: /See Live Result/i })
+      within(pollItem).getByRole('button', { name: /See Live Result/i }),
     ).not.toBeDisabled();
   });
 
@@ -696,14 +696,14 @@ describe('<PollsListOngoing>', () => {
     widgetApi.mockSendStateEvent(
       mockPowerLevelsEvent({
         content: { users_default: 50, events_default: 50, state_default: 100 },
-      })
+      }),
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
         origin_server_ts: new Date().getTime(),
         sender: '@user-charlie',
         content: { answerId: '1', pollId: 'poll-open-invisible' },
-      })
+      }),
     );
 
     render(<PollsListOngoing />, { wrapper: Wrapper });
@@ -716,13 +716,13 @@ describe('<PollsListOngoing>', () => {
     });
 
     expect(
-      within(pollItem).queryByRole('button', { name: /vote/i })
+      within(pollItem).queryByRole('button', { name: /vote/i }),
     ).not.toBeInTheDocument();
 
     expect(within(pollItem).getByText(/yes/i)).toBeInTheDocument();
 
     expect(
-      within(pollItem).getByRole('button', { name: /See Live Result/i })
+      within(pollItem).getByRole('button', { name: /See Live Result/i }),
     ).toBeDisabled();
   });
 
@@ -738,7 +738,7 @@ describe('<PollsListOngoing>', () => {
     });
 
     expect(
-      within(activePollListItem).getByTestId('votesLoadingPollOngoing')
+      within(activePollListItem).getByTestId('votesLoadingPollOngoing'),
     ).toBeInTheDocument();
   });
 
@@ -755,14 +755,14 @@ describe('<PollsListOngoing>', () => {
 
     const alert = await within(activePollListItem).findByRole('status');
     expect(
-      within(alert).getByText('Data could not be loaded.')
+      within(alert).getByText('Data could not be loaded.'),
     ).toBeInTheDocument();
 
     expect(
       within(activePollListItem).queryByRole('button', {
         name: 'See live result',
         description: 'Test poll open and visible',
-      })
+      }),
     ).not.toBeInTheDocument();
   });
 
@@ -777,13 +777,13 @@ describe('<PollsListOngoing>', () => {
     });
 
     await userEvent.click(
-      within(activePollListItem).getByRole('button', { name: 'More settings' })
+      within(activePollListItem).getByRole('button', { name: 'More settings' }),
     );
 
     const menu = screen.getByRole('menu', { name: 'More settings' });
 
     await userEvent.click(
-      within(menu).getByRole('menuitem', { name: 'End poll now' })
+      within(menu).getByRole('menuitem', { name: 'End poll now' }),
     );
 
     const dialog = screen.getByRole('dialog', {
@@ -793,12 +793,12 @@ describe('<PollsListOngoing>', () => {
     });
     expect(
       within(dialog).getByText(
-        'Are you sure you want to end the poll “Test poll open and visible”? All existing votes will be registered and no further voting will be possible.'
-      )
+        'Are you sure you want to end the poll “Test poll open and visible”? All existing votes will be registered and no further voting will be possible.',
+      ),
     ).toBeInTheDocument();
 
     await userEvent.click(
-      within(dialog).getByRole('button', { name: 'End now' })
+      within(dialog).getByRole('button', { name: 'End now' }),
     );
 
     await waitFor(() => {
@@ -816,7 +816,7 @@ describe('<PollsListOngoing>', () => {
           startEventId: '$start-event-id',
         },
       }).content,
-      { stateKey: 'poll-open-visible' }
+      { stateKey: 'poll-open-visible' },
     );
 
     await waitFor(() => {
@@ -835,13 +835,13 @@ describe('<PollsListOngoing>', () => {
     });
 
     await userEvent.click(
-      within(activePollListItem).getByRole('button', { name: 'More settings' })
+      within(activePollListItem).getByRole('button', { name: 'More settings' }),
     );
 
     const menu = screen.getByRole('menu', { name: 'More settings' });
 
     await userEvent.click(
-      within(menu).getByRole('menuitem', { name: 'End poll now' })
+      within(menu).getByRole('menuitem', { name: 'End poll now' }),
     );
 
     const dialog = screen.getByRole('dialog', {
@@ -851,12 +851,12 @@ describe('<PollsListOngoing>', () => {
     });
     expect(
       within(dialog).getByText(
-        'Are you sure you want to end the poll “Test poll open and visible”? All existing votes will be registered and no further voting will be possible.'
-      )
+        'Are you sure you want to end the poll “Test poll open and visible”? All existing votes will be registered and no further voting will be possible.',
+      ),
     ).toBeInTheDocument();
 
     await userEvent.click(
-      within(dialog).getByRole('button', { name: 'Cancel' })
+      within(dialog).getByRole('button', { name: 'Cancel' }),
     );
 
     expect(widgetApi.sendStateEvent).not.toBeCalled();
@@ -878,7 +878,7 @@ describe('<PollsListOngoing>', () => {
     });
 
     widgetApi.mockSendStateEvent(
-      mockPowerLevelsEvent({ content: { users_default: 0 } })
+      mockPowerLevelsEvent({ content: { users_default: 0 } }),
     );
 
     await waitFor(() => {

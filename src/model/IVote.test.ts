@@ -29,7 +29,7 @@ describe('isValidVoteEvent', () => {
         room_id: '!room-id',
         sender: '@user-id',
         type: 'net.nordeck.poll.vote',
-      })
+      }),
     ).toBe(true);
   });
 
@@ -46,7 +46,7 @@ describe('isValidVoteEvent', () => {
         room_id: '!room-id',
         sender: '@user-id',
         type: 'net.nordeck.poll.vote',
-      })
+      }),
     ).toBe(true);
   });
 
@@ -66,7 +66,7 @@ describe('isValidVoteEvent', () => {
         room_id: '!room-id',
         sender: '@user-id',
         type: 'net.nordeck.poll.vote',
-      })
+      }),
     ).toBe(true);
   });
 
@@ -99,7 +99,7 @@ describe('isValidVoteEvent', () => {
         room_id: '!room-id',
         sender: '@user-id',
         type: 'net.nordeck.poll.vote',
-      })
+      }),
     ).toBe(false);
   });
 });

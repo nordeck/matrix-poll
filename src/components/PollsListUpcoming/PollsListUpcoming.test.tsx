@@ -59,7 +59,7 @@ describe('<PollsListUpcoming>', () => {
             },
           },
         },
-      })
+      }),
     );
     widgetApi.mockSendStateEvent(
       mockGroup({
@@ -74,7 +74,7 @@ describe('<PollsListUpcoming>', () => {
             },
           },
         },
-      })
+      }),
     );
 
     widgetApi.mockSendStateEvent(mockPoll());
@@ -87,7 +87,7 @@ describe('<PollsListUpcoming>', () => {
           description: 'My Other Description',
           groups: undefined,
         },
-      })
+      }),
     );
 
     Wrapper = ({ children }: PropsWithChildren<{}>) => {
@@ -114,21 +114,21 @@ describe('<PollsListUpcoming>', () => {
     });
     const notStartedPollListItem = await within(notStartedPollList).findByRole(
       'listitem',
-      { name: 'My Title' }
+      { name: 'My Title' },
     );
 
     expect(
       within(notStartedPollListItem).getByRole('button', {
         name: 'More settings',
         description: 'My Title',
-      })
+      }),
     ).toBeInTheDocument();
 
     expect(
       within(notStartedPollListItem).getByRole('button', {
         name: 'Start',
         description: 'My Title',
-      })
+      }),
     ).toBeInTheDocument();
   });
 
@@ -136,22 +136,22 @@ describe('<PollsListUpcoming>', () => {
     render(<PollsListUpcoming />, { wrapper: Wrapper });
 
     expect(
-      screen.getByRole('heading', { level: 3, name: /not started polls/i })
+      screen.getByRole('heading', { level: 3, name: /not started polls/i }),
     ).toBeInTheDocument();
     await expect(screen.findByText('2')).resolves.toBeInTheDocument();
 
     const pollList = screen.getByRole('list', { name: /not started polls/i });
     expect(
-      within(pollList).getByRole('listitem', { name: 'My Title' })
+      within(pollList).getByRole('listitem', { name: 'My Title' }),
     ).toBeInTheDocument();
     expect(
-      within(pollList).getByRole('listitem', { name: 'My Other Title' })
+      within(pollList).getByRole('listitem', { name: 'My Other Title' }),
     ).toBeInTheDocument();
   });
 
   it('should show readonly list for non-moderators', async () => {
     widgetApi.mockSendStateEvent(
-      mockPowerLevelsEvent({ content: { users_default: 0 } })
+      mockPowerLevelsEvent({ content: { users_default: 0 } }),
     );
 
     render(<PollsListUpcoming />, { wrapper: Wrapper });
@@ -162,10 +162,10 @@ describe('<PollsListUpcoming>', () => {
     });
 
     expect(
-      within(pollListItem).queryByRole('button', { name: 'Start' })
+      within(pollListItem).queryByRole('button', { name: 'Start' }),
     ).not.toBeInTheDocument();
     expect(
-      within(pollListItem).queryByRole('listbox', { name: 'More settings' })
+      within(pollListItem).queryByRole('listbox', { name: 'More settings' }),
     ).not.toBeInTheDocument();
   });
 
@@ -178,17 +178,17 @@ describe('<PollsListUpcoming>', () => {
     });
 
     await userEvent.click(
-      within(pollListItem).getByRole('button', { name: 'Start' })
+      within(pollListItem).getByRole('button', { name: 'Start' }),
     );
 
     const dialog = screen.getByRole('dialog', { name: 'Start poll' });
 
     expect(
-      within(dialog).getByText('Are you sure you want to start the poll?')
+      within(dialog).getByText('Are you sure you want to start the poll?'),
     ).toBeInTheDocument();
 
     await userEvent.click(
-      within(dialog).getByRole('button', { name: 'Start' })
+      within(dialog).getByRole('button', { name: 'Start' }),
     );
 
     await waitFor(() => expect(dialog).not.toBeInTheDocument(), {
@@ -204,7 +204,7 @@ describe('<PollsListUpcoming>', () => {
           endTime: expect.any(String),
         },
       }).content,
-      { stateKey: 'poll-0' }
+      { stateKey: 'poll-0' },
     );
   });
 
@@ -217,18 +217,18 @@ describe('<PollsListUpcoming>', () => {
     });
 
     await userEvent.click(
-      within(pollListItem).getByRole('button', { name: 'Start' })
+      within(pollListItem).getByRole('button', { name: 'Start' }),
     );
 
     const dialog = screen.getByRole('dialog', { name: 'Start poll' });
 
     expect(
-      within(dialog).getByText('Are you sure you want to start the poll?')
+      within(dialog).getByText('Are you sure you want to start the poll?'),
     ).toBeInTheDocument();
 
     expect(within(dialog).getByText('My Other Title')).toBeInTheDocument();
     expect(
-      within(dialog).getByText('My Other Description')
+      within(dialog).getByText('My Other Description'),
     ).toBeInTheDocument();
     expect(within(dialog).getByText('My Other Question')).toBeInTheDocument();
     expect(within(dialog).getByText('Ends in 01:00')).toBeInTheDocument();
@@ -238,13 +238,13 @@ describe('<PollsListUpcoming>', () => {
     });
     expect(radioGroup).toHaveAccessibleDescription('My Other Question');
     expect(
-      within(radioGroup).getByRole('radio', { name: 'Yes' })
+      within(radioGroup).getByRole('radio', { name: 'Yes' }),
     ).toBeInTheDocument();
     expect(
-      within(radioGroup).getByRole('radio', { name: 'No' })
+      within(radioGroup).getByRole('radio', { name: 'No' }),
     ).toBeInTheDocument();
     expect(
-      within(dialog).getByRole('button', { name: 'See live result' })
+      within(dialog).getByRole('button', { name: 'See live result' }),
     ).toBeInTheDocument();
   });
 
@@ -257,13 +257,13 @@ describe('<PollsListUpcoming>', () => {
     });
 
     await userEvent.click(
-      within(pollListItem).getByRole('button', { name: 'Start' })
+      within(pollListItem).getByRole('button', { name: 'Start' }),
     );
 
     const dialog = screen.getByRole('dialog', { name: 'Start poll' });
 
     expect(
-      within(dialog).getByText('Are you sure you want to start the poll?')
+      within(dialog).getByText('Are you sure you want to start the poll?'),
     ).toBeInTheDocument();
 
     const redPartyList = within(dialog).getByRole('list', {
@@ -271,13 +271,13 @@ describe('<PollsListUpcoming>', () => {
     });
 
     expect(
-      within(redPartyList).getByRole('listitem', { name: '@user-alice' })
+      within(redPartyList).getByRole('listitem', { name: '@user-alice' }),
     ).toHaveTextContent(/Present/);
     expect(
-      within(redPartyList).getByRole('listitem', { name: '@user-bob' })
+      within(redPartyList).getByRole('listitem', { name: '@user-bob' }),
     ).toHaveTextContent(/Present/);
     expect(
-      within(redPartyList).getByRole('listitem', { name: '@user-charlie' })
+      within(redPartyList).getByRole('listitem', { name: '@user-charlie' }),
     ).toHaveTextContent(/Present/);
 
     const bluePartyList = within(dialog).getByRole('list', {
@@ -285,12 +285,12 @@ describe('<PollsListUpcoming>', () => {
     });
 
     expect(
-      within(bluePartyList).getByRole('listitem', { name: '@user-dameon' })
+      within(bluePartyList).getByRole('listitem', { name: '@user-dameon' }),
     ).toHaveTextContent(/Present/);
 
     await waitFor(() => {
       expect(
-        within(dialog).queryByText(/Changes in the groups/i)
+        within(dialog).queryByText(/Changes in the groups/i),
       ).not.toBeInTheDocument();
     });
   });
@@ -307,17 +307,17 @@ describe('<PollsListUpcoming>', () => {
     });
 
     await userEvent.click(
-      within(pollListItem).getByRole('button', { name: 'Start' })
+      within(pollListItem).getByRole('button', { name: 'Start' }),
     );
 
     const dialog = screen.getByRole('dialog', { name: 'Start poll' });
 
     expect(
-      within(dialog).getByText('Are you sure you want to start the poll?')
+      within(dialog).getByText('Are you sure you want to start the poll?'),
     ).toBeInTheDocument();
 
     expect(
-      within(dialog).getByText(/Changes in the groups/i)
+      within(dialog).getByText(/Changes in the groups/i),
     ).toBeInTheDocument();
   });
 
@@ -330,7 +330,7 @@ describe('<PollsListUpcoming>', () => {
             '@user-alice': 20,
           },
         },
-      })
+      }),
     );
 
     render(<PollsListUpcoming />, { wrapper: Wrapper });
@@ -341,7 +341,7 @@ describe('<PollsListUpcoming>', () => {
     });
 
     await userEvent.click(
-      within(pollListItem).getByRole('button', { name: 'Start' })
+      within(pollListItem).getByRole('button', { name: 'Start' }),
     );
 
     const dialog = screen.getByRole('dialog', { name: 'Start poll' });
@@ -353,8 +353,8 @@ describe('<PollsListUpcoming>', () => {
 
       expect(
         withMarkup(within(aliceItem).getByText)(
-          /user-alice has an insufficient power level and will not be able to vote./
-        )
+          /user-alice has an insufficient power level and will not be able to vote./,
+        ),
       ).toBeInTheDocument();
     });
   });
@@ -385,7 +385,7 @@ describe('<PollsListUpcoming>', () => {
             },
           ],
         },
-      })
+      }),
     );
 
     render(<PollsListUpcoming />, { wrapper: Wrapper });
@@ -396,17 +396,17 @@ describe('<PollsListUpcoming>', () => {
     });
 
     await userEvent.click(
-      within(pollListItem).getByRole('button', { name: 'Start' })
+      within(pollListItem).getByRole('button', { name: 'Start' }),
     );
 
     const dialog = screen.getByRole('dialog', { name: 'Start poll' });
 
     const alert = within(dialog).getByRole('status');
     expect(
-      within(alert).getByText('This poll has no voters.')
+      within(alert).getByText('This poll has no voters.'),
     ).toBeInTheDocument();
     expect(
-      within(alert).getByText('Please add voters to the poll.')
+      within(alert).getByText('Please add voters to the poll.'),
     ).toBeInTheDocument();
   });
 
@@ -444,7 +444,7 @@ describe('<PollsListUpcoming>', () => {
             },
           ],
         },
-      })
+      }),
     );
 
     render(<PollsListUpcoming />, { wrapper: Wrapper });
@@ -455,17 +455,17 @@ describe('<PollsListUpcoming>', () => {
     });
 
     await userEvent.click(
-      within(pollListItem).getByRole('button', { name: 'Start' })
+      within(pollListItem).getByRole('button', { name: 'Start' }),
     );
 
     const dialog = screen.getByRole('dialog', { name: 'Start poll' });
 
     const alert = within(dialog).getByRole('status');
     expect(
-      within(alert).getByText('This poll has no voters.')
+      within(alert).getByText('This poll has no voters.'),
     ).toBeInTheDocument();
     expect(
-      within(alert).getByText('Please add voters to the poll.')
+      within(alert).getByText('Please add voters to the poll.'),
     ).toBeInTheDocument();
   });
 
@@ -478,17 +478,17 @@ describe('<PollsListUpcoming>', () => {
     });
 
     await userEvent.click(
-      within(pollListItem).getByRole('button', { name: 'Start' })
+      within(pollListItem).getByRole('button', { name: 'Start' }),
     );
 
     const dialog = screen.getByRole('dialog', { name: 'Start poll' });
 
     expect(
-      within(dialog).getByText('Are you sure you want to start the poll?')
+      within(dialog).getByText('Are you sure you want to start the poll?'),
     ).toBeInTheDocument();
 
     await userEvent.click(
-      within(dialog).getByRole('button', { name: 'Cancel' })
+      within(dialog).getByRole('button', { name: 'Cancel' }),
     );
 
     await waitFor(() => expect(dialog).not.toBeInTheDocument(), {
@@ -510,13 +510,13 @@ describe('<PollsListUpcoming>', () => {
     });
 
     await userEvent.click(
-      within(pollListItem).getByRole('button', { name: 'More settings' })
+      within(pollListItem).getByRole('button', { name: 'More settings' }),
     );
 
     const menu = screen.getByRole('menu', { name: /more settings/i });
 
     await userEvent.click(
-      within(menu).getByRole('menuitem', { name: 'Edit poll' })
+      within(menu).getByRole('menuitem', { name: 'Edit poll' }),
     );
 
     await waitFor(() => {
@@ -527,15 +527,15 @@ describe('<PollsListUpcoming>', () => {
     });
 
     expect(
-      within(pollList).getByRole('listitem', { name: 'New Title' })
+      within(pollList).getByRole('listitem', { name: 'New Title' }),
     ).toBeInTheDocument();
 
     await waitFor(() =>
       expect(widgetApi.sendStateEvent).toBeCalledWith(
         'net.nordeck.poll',
         mockPoll({ content: { title: 'New Title' } }).content,
-        { stateKey: 'poll-0' }
-      )
+        { stateKey: 'poll-0' },
+      ),
     );
   });
 
@@ -548,13 +548,13 @@ describe('<PollsListUpcoming>', () => {
     });
 
     await userEvent.click(
-      within(pollListItem).getByRole('button', { name: 'More settings' })
+      within(pollListItem).getByRole('button', { name: 'More settings' }),
     );
 
     const menu = screen.getByRole('menu', { name: /more settings/i });
 
     await userEvent.click(
-      within(menu).getByRole('menuitem', { name: 'Edit poll' })
+      within(menu).getByRole('menuitem', { name: 'Edit poll' }),
     );
 
     await waitFor(() => {
@@ -578,28 +578,28 @@ describe('<PollsListUpcoming>', () => {
     await userEvent.click(
       within(pollListItem).getByRole('button', {
         name: 'More settings',
-      })
+      }),
     );
 
     const menu = screen.getByRole('menu', { name: /more settings/i });
 
     await userEvent.click(
-      within(menu).getByRole('menuitem', { name: 'Delete poll' })
+      within(menu).getByRole('menuitem', { name: 'Delete poll' }),
     );
 
     const dialog = screen.getByRole('dialog', { name: 'Delete poll' });
 
     expect(dialog).toHaveAccessibleDescription(
-      'Are you sure you want to delete the poll “My Title”?'
+      'Are you sure you want to delete the poll “My Title”?',
     );
     expect(
       within(dialog).getByText(
-        'Are you sure you want to delete the poll “My Title”?'
-      )
+        'Are you sure you want to delete the poll “My Title”?',
+      ),
     ).toBeInTheDocument();
 
     await userEvent.click(
-      within(dialog).getByRole('button', { name: 'Delete' })
+      within(dialog).getByRole('button', { name: 'Delete' }),
     );
 
     await waitFor(() => {
@@ -609,7 +609,7 @@ describe('<PollsListUpcoming>', () => {
     expect(widgetApi.sendStateEvent).toBeCalledWith(
       'net.nordeck.poll',
       {},
-      { stateKey: 'poll-0' }
+      { stateKey: 'poll-0' },
     );
   });
 
@@ -622,28 +622,28 @@ describe('<PollsListUpcoming>', () => {
     });
 
     await userEvent.click(
-      within(pollListItem).getByRole('button', { name: 'More settings' })
+      within(pollListItem).getByRole('button', { name: 'More settings' }),
     );
 
     const menu = screen.getByRole('menu', { name: /more settings/i });
 
     await userEvent.click(
-      within(menu).getByRole('menuitem', { name: 'Delete poll' })
+      within(menu).getByRole('menuitem', { name: 'Delete poll' }),
     );
 
     const dialog = screen.getByRole('dialog', { name: 'Delete poll' });
 
     expect(dialog).toHaveAccessibleDescription(
-      'Are you sure you want to delete the poll “My Title”?'
+      'Are you sure you want to delete the poll “My Title”?',
     );
     expect(
       within(dialog).getByText(
-        'Are you sure you want to delete the poll “My Title”?'
-      )
+        'Are you sure you want to delete the poll “My Title”?',
+      ),
     ).toBeInTheDocument();
 
     await userEvent.click(
-      within(dialog).getByRole('button', { name: 'Cancel' })
+      within(dialog).getByRole('button', { name: 'Cancel' }),
     );
 
     await waitFor(() => {

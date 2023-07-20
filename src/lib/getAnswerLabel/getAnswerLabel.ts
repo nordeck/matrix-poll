@@ -31,7 +31,7 @@ import { AnswerId } from '../../store';
 export function getAnswerLabel(
   pollEvent: StateEvent<IPoll>,
   answerId: AnswerId | undefined,
-  context: { t: TFunction }
+  context: { t: TFunction },
 ): string {
   if (typeof answerId === 'string') {
     const answer = pollEvent.content.answers.find((a) => a.id === answerId);

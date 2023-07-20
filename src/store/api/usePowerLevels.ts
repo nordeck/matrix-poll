@@ -50,22 +50,22 @@ export function usePowerLevels({
     canCreatePoll = hasStateEventPower(
       powerLevels?.event?.content,
       userId,
-      STATE_EVENT_POLL
+      STATE_EVENT_POLL,
     );
     canCreatePollSettings = hasStateEventPower(
       powerLevels?.event?.content,
       userId,
-      STATE_EVENT_POLL_SETTINGS
+      STATE_EVENT_POLL_SETTINGS,
     );
     canCreateGroups = hasStateEventPower(
       powerLevels?.event?.content,
       userId,
-      STATE_EVENT_POLL_GROUP
+      STATE_EVENT_POLL_GROUP,
     );
     canCreateVote = hasRoomEventPower(
       powerLevels?.event?.content,
       userId,
-      ROOM_EVENT_VOTE
+      ROOM_EVENT_VOTE,
     );
   }
 

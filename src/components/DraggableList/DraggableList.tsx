@@ -36,7 +36,7 @@ import { useTranslation } from 'react-i18next';
 export function sortItems<T>(
   items: T[],
   sourceIndex: number,
-  targetIndex: number
+  targetIndex: number,
 ): T[] {
   const sortedItems = [...items];
   const [reorderedItem] = sortedItems.splice(sourceIndex, 1);
@@ -78,11 +78,11 @@ export function DraggableList<T>({
           {
             startPosition: initial.source.index + 1,
             totalCount: items.length,
-          }
-        )
+          },
+        ),
       );
     },
-    [items.length, t]
+    [items.length, t],
   );
 
   const handleDragUpdate = useCallback(
@@ -91,8 +91,8 @@ export function DraggableList<T>({
         announce(
           t(
             'draggableList.notOverDropTarget',
-            'You are currently not dragging over any droppable area.'
-          )
+            'You are currently not dragging over any droppable area.',
+          ),
         );
       } else {
         announce(
@@ -102,12 +102,12 @@ export function DraggableList<T>({
             {
               position: update.destination.index + 1,
               totalCount: items.length,
-            }
-          )
+            },
+          ),
         );
       }
     },
-    [items.length, t]
+    [items.length, t],
   );
 
   const handleDragEnd = useCallback(
@@ -119,8 +119,8 @@ export function DraggableList<T>({
             'Movement cancelled. The poll has returned to its starting position of {{startPosition}}.',
             {
               startPosition: result.source.index + 1,
-            }
-          )
+            },
+          ),
         );
         return;
       }
@@ -130,8 +130,8 @@ export function DraggableList<T>({
           t(
             'draggableList.droppedOnNoDropTarget',
             'The poll has been dropped while not over a location. The poll has returned to its starting position of {{startPosition}}.',
-            { startPosition: result.source.index + 1 }
-          )
+            { startPosition: result.source.index + 1 },
+          ),
         );
         return;
       }
@@ -143,8 +143,8 @@ export function DraggableList<T>({
           {
             startPosition: result.source.index + 1,
             destinationPosition: result.destination.index + 1,
-          }
-        )
+          },
+        ),
       );
 
       if (result.destination.index === result.source.index) {
@@ -160,7 +160,7 @@ export function DraggableList<T>({
         return sortedItems;
       });
     },
-    [onDrop, t]
+    [onDrop, t],
   );
 
   return (

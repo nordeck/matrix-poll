@@ -100,7 +100,7 @@ export const PollInfoIcons = ({ pollId, showVotes }: IInfosIconsProps) => {
 
   const voteCount = pollResultsWithVotes
     ? Object.values(pollResultsWithVotes.results.votes).filter(
-        (vote) => vote !== PollInvalidAnswer
+        (vote) => vote !== PollInvalidAnswer,
       ).length
     : 0;
 
@@ -112,7 +112,7 @@ export const PollInfoIcons = ({ pollId, showVotes }: IInfosIconsProps) => {
   });
   const castVoteLabelLoading = t(
     'infosIcons.castVotes_loading',
-    'Votes loading'
+    'Votes loading',
   );
   const pollTypeLabel = getPollTypeLabel(pollResults, t);
 

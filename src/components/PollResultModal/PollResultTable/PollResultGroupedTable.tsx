@@ -65,7 +65,7 @@ export function PollResultGroupedTable({
         };
       });
     }),
-    (r) => r.answer
+    (r) => r.answer,
   );
 
   return (

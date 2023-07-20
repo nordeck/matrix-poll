@@ -62,7 +62,7 @@ describe('usePowerLevels', () => {
           state_default: 100,
           users_default: 0,
         },
-      })
+      }),
     );
 
     const { result, waitFor } = renderHook(() => usePowerLevels(), {
@@ -90,7 +90,7 @@ describe('usePowerLevels', () => {
           state_default: 100,
           users_default: 0,
         },
-      })
+      }),
     );
 
     const { result, waitFor } = renderHook(() => usePowerLevels(), {
@@ -118,7 +118,7 @@ describe('usePowerLevels', () => {
           state_default: 100,
           users_default: 0,
         },
-      })
+      }),
     );
 
     const { result, waitFor } = renderHook(() => usePowerLevels(), {
@@ -146,7 +146,7 @@ describe('usePowerLevels', () => {
           state_default: 100,
           users_default: 0,
         },
-      })
+      }),
     );
 
     const { result, waitFor } = renderHook(() => usePowerLevels(), {

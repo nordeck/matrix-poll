@@ -339,7 +339,7 @@ describe('syncPollGroupsWithRoomGroups', () => {
     ][0].content.groups;
 
     expect(userPermissionHasChange(groups, powerLevelsEvent.content)).toBe(
-      true
+      true,
     );
   });
 
@@ -383,7 +383,7 @@ describe('syncPollGroupsWithRoomGroups', () => {
     ][0].content.groups;
 
     expect(userPermissionHasChange(groups, powerLevelsEvent.content)).toBe(
-      false
+      false,
     );
   });
 });

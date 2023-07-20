@@ -44,11 +44,11 @@ const darkThemeColors = [
 
 export function createAnswersColorScale(
   answers: string[],
-  theme: Theme
+  theme: Theme,
 ): Record<string, string> {
   const themeColors = theme === 'dark' ? darkThemeColors : lightThemeColors;
 
   return Object.fromEntries(
-    answers.map((answer, i) => [answer, themeColors[i % themeColors.length]])
+    answers.map((answer, i) => [answer, themeColors[i % themeColors.length]]),
   );
 }

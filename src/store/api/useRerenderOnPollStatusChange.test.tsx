@@ -51,12 +51,12 @@ describe('useRerenderOnPollStatusChange', () => {
           startTime: '2020-01-01T09:59:00Z',
           endTime: '2020-01-01T10:00:00Z',
         },
-      })
+      }),
     );
 
     const { result, waitForNextUpdate } = renderHook(
       () => useRerenderOnPollStatusChange(),
-      { wrapper }
+      { wrapper },
     );
 
     await waitForNextUpdate();

@@ -41,8 +41,8 @@ describe('getCanViewResults', () => {
         getCanViewResults({
           poll: poll as IPoll,
           canCreatePoll,
-        })
+        }),
       ).toEqual(expectedResult);
-    }
+    },
   );
 });

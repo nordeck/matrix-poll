@@ -30,7 +30,7 @@ describe('getAnswerLabel', () => {
 
   it('should return fallback label if answer is invalid', () => {
     expect(getAnswerLabel(mockPoll(), PollInvalidAnswer, { t })).toBe(
-      'Invalid'
+      'Invalid',
     );
   });
 });

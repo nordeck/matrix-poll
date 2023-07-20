@@ -43,7 +43,7 @@ describe('<PollsPdfDocumentation>', () => {
           startTime: '2020-01-01T03:33:55Z',
           endTime: '2020-01-01T03:34:55Z',
         },
-      })
+      }),
     );
 
     widgetApi.mockSendStateEvent(mockPollSettings());
@@ -62,7 +62,7 @@ describe('<PollsPdfDocumentation>', () => {
     render(<PollsPdfDocumentation />, { wrapper: Wrapper });
 
     await expect(
-      screen.findByRole('button', { name: 'Generate PDF documentation' })
+      screen.findByRole('button', { name: 'Generate PDF documentation' }),
     ).resolves.toBeInTheDocument();
 
     await userEvent.click(
@@ -70,11 +70,11 @@ describe('<PollsPdfDocumentation>', () => {
         name: /more settings/i,
         expanded: false,
       }),
-      { skipHover: true }
+      { skipHover: true },
     );
 
     expect(
-      screen.getByRole('heading', { name: /deactivate pdf/i })
+      screen.getByRole('heading', { name: /deactivate pdf/i }),
     ).toBeInTheDocument();
   });
 
@@ -96,7 +96,7 @@ describe('<PollsPdfDocumentation>', () => {
         name: /more settings/i,
         expanded: false,
       }),
-      { skipHover: true }
+      { skipHover: true },
     );
 
     expect(await axe(container)).toHaveNoViolations();

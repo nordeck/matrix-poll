@@ -45,7 +45,7 @@ describe('<MemberAvatar/>', () => {
     render(<MemberAvatar userId="@user-alice" />, { wrapper: Wrapper });
 
     await expect(
-      screen.findByRole('img', { hidden: true })
+      screen.findByRole('img', { hidden: true }),
     ).resolves.toBeInTheDocument();
   });
 
@@ -55,7 +55,7 @@ describe('<MemberAvatar/>', () => {
     });
 
     await expect(
-      screen.findByRole('img', { hidden: true })
+      screen.findByRole('img', { hidden: true }),
     ).resolves.toBeInTheDocument();
 
     expect(await axe(container)).toHaveNoViolations();
@@ -65,16 +65,16 @@ describe('<MemberAvatar/>', () => {
     render(<MemberAvatar userId="@user-alice" />, { wrapper: Wrapper });
 
     await expect(
-      screen.findByRole('img', { hidden: true })
+      screen.findByRole('img', { hidden: true }),
     ).resolves.toHaveAttribute(
       'src',
-      expect.stringMatching(/\/_matrix\/media\/r0\/thumbnail\/alice/i)
+      expect.stringMatching(/\/_matrix\/media\/r0\/thumbnail\/alice/i),
     );
   });
 
   it('should render first letter', async () => {
     widgetApi.mockSendStateEvent(
-      mockRoomMember({ content: { avatar_url: undefined } })
+      mockRoomMember({ content: { avatar_url: undefined } }),
     );
 
     render(<MemberAvatar userId="@user-alice" />, { wrapper: Wrapper });

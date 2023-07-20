@@ -44,7 +44,7 @@ describe('isValidPollEvent', () => {
         room_id: '!room-id',
         sender: '@user-id',
         type: 'net.nordeck.poll',
-      })
+      }),
     ).toBe(true);
   });
 
@@ -71,7 +71,7 @@ describe('isValidPollEvent', () => {
         room_id: '!room-id',
         sender: '@user-id',
         type: 'net.nordeck.poll',
-      })
+      }),
     ).toBe(true);
   });
 
@@ -112,7 +112,7 @@ describe('isValidPollEvent', () => {
         room_id: '!room-id',
         sender: '@user-id',
         type: 'net.nordeck.poll',
-      })
+      }),
     ).toBe(true);
   });
 
@@ -160,7 +160,7 @@ describe('isValidPollEvent', () => {
         room_id: '!room-id',
         sender: '@user-id',
         type: 'net.nordeck.poll',
-      })
+      }),
     ).toBe(true);
   });
 
@@ -254,7 +254,7 @@ describe('isValidPollEvent', () => {
         room_id: '!room-id',
         sender: '@user-id',
         type: 'net.nordeck.poll',
-      })
+      }),
     ).toBe(false);
   });
 
@@ -342,7 +342,7 @@ describe('isValidPollEvent', () => {
         room_id: '!room-id',
         sender: '@user-id',
         type: 'net.nordeck.poll',
-      })
+      }),
     ).toBe(false);
   });
 });
@@ -363,7 +363,7 @@ describe('migratePollSchema', () => {
           endTime: '2020-01-01T10:06:00.000Z',
           duration: 6,
         },
-      })
+      }),
     );
   });
 
@@ -383,7 +383,7 @@ describe('migratePollSchema', () => {
           endTime: '2020-01-01T10:08:00Z',
           duration: 6,
         },
-      })
+      }),
     );
   });
 });
