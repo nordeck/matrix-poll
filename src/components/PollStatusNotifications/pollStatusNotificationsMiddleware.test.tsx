@@ -52,7 +52,7 @@ describe('pollStatusNotificationsMiddleware', () => {
 
     await waitFor(() => {
       expect(
-        pollApi.endpoints.getPolls.select()(store.getState()).isSuccess
+        pollApi.endpoints.getPolls.select()(store.getState()).isSuccess,
       ).toBe(true);
     });
 
@@ -62,13 +62,13 @@ describe('pollStatusNotificationsMiddleware', () => {
           startTime: '2022-08-11T09:53:00Z',
           endTime: '2022-08-11T09:54:00Z',
         },
-      })
+      }),
     );
 
     await waitFor(() => {
       expect(showNotification).toBeCalledWith(
         'info',
-        'The poll “My Title” was started and ends in 45 seconds.'
+        'The poll “My Title” was started and ends in 45 seconds.',
       );
     });
 
@@ -80,7 +80,7 @@ describe('pollStatusNotificationsMiddleware', () => {
     jest.setSystemTime(new Date('2022-08-11T09:53:15Z'));
 
     widgetApi.mockSendStateEvent(
-      mockPoll({ content: { startTime: '2022-08-11T09:53:00Z' } })
+      mockPoll({ content: { startTime: '2022-08-11T09:53:00Z' } }),
     );
 
     const middleware = createPollStatusNotificationsMiddleware({
@@ -94,7 +94,7 @@ describe('pollStatusNotificationsMiddleware', () => {
 
     await waitFor(() => {
       expect(
-        pollApi.endpoints.getPolls.select()(store.getState()).isSuccess
+        pollApi.endpoints.getPolls.select()(store.getState()).isSuccess,
       ).toBe(true);
     });
 
@@ -111,7 +111,7 @@ describe('pollStatusNotificationsMiddleware', () => {
           startTime: '2022-08-11T09:53:00Z',
           endTime: '2022-08-11T09:54:00Z',
         },
-      })
+      }),
     );
 
     const middleware = createPollStatusNotificationsMiddleware({
@@ -125,7 +125,7 @@ describe('pollStatusNotificationsMiddleware', () => {
 
     await waitFor(() => {
       expect(
-        pollApi.endpoints.getPolls.select()(store.getState()).isSuccess
+        pollApi.endpoints.getPolls.select()(store.getState()).isSuccess,
       ).toBe(true);
     });
 
@@ -133,7 +133,7 @@ describe('pollStatusNotificationsMiddleware', () => {
 
     expect(showNotification).toBeCalledWith(
       'info',
-      'The poll “My Title” ends in 30 seconds.'
+      'The poll “My Title” ends in 30 seconds.',
     );
     expect(showNotification).toBeCalledTimes(1);
   });
@@ -148,7 +148,7 @@ describe('pollStatusNotificationsMiddleware', () => {
           startTime: '2022-08-11T09:53:00Z',
           endTime: '2022-08-11T09:54:00Z',
         },
-      })
+      }),
     );
 
     const middleware = createPollStatusNotificationsMiddleware({
@@ -162,13 +162,13 @@ describe('pollStatusNotificationsMiddleware', () => {
 
     await waitFor(() => {
       expect(
-        pollApi.endpoints.getPolls.select()(store.getState()).isSuccess
+        pollApi.endpoints.getPolls.select()(store.getState()).isSuccess,
       ).toBe(true);
     });
 
     expect(showNotification).toBeCalledWith(
       'info',
-      'The poll “My Title” ends in 30 seconds.'
+      'The poll “My Title” ends in 30 seconds.',
     );
     expect(showNotification).toBeCalledTimes(1);
   });
@@ -183,7 +183,7 @@ describe('pollStatusNotificationsMiddleware', () => {
           startTime: '2022-08-11T09:53:00Z',
           endTime: '2022-08-11T09:54:00Z',
         },
-      })
+      }),
     );
 
     const middleware = createPollStatusNotificationsMiddleware({
@@ -197,7 +197,7 @@ describe('pollStatusNotificationsMiddleware', () => {
 
     await waitFor(() => {
       expect(
-        pollApi.endpoints.getPolls.select()(store.getState()).isSuccess
+        pollApi.endpoints.getPolls.select()(store.getState()).isSuccess,
       ).toBe(true);
     });
 
@@ -205,7 +205,7 @@ describe('pollStatusNotificationsMiddleware', () => {
 
     expect(showNotification).toBeCalledWith(
       'info',
-      'The poll “My Title” ends in 15 seconds.'
+      'The poll “My Title” ends in 15 seconds.',
     );
     expect(showNotification).toBeCalledTimes(2);
   });
@@ -220,7 +220,7 @@ describe('pollStatusNotificationsMiddleware', () => {
           startTime: '2022-08-11T09:53:00Z',
           endTime: '2022-08-11T09:54:00Z',
         },
-      })
+      }),
     );
 
     const middleware = createPollStatusNotificationsMiddleware({
@@ -234,13 +234,13 @@ describe('pollStatusNotificationsMiddleware', () => {
 
     await waitFor(() => {
       expect(
-        pollApi.endpoints.getPolls.select()(store.getState()).isSuccess
+        pollApi.endpoints.getPolls.select()(store.getState()).isSuccess,
       ).toBe(true);
     });
 
     expect(showNotification).toBeCalledWith(
       'info',
-      'The poll “My Title” ends in 15 seconds.'
+      'The poll “My Title” ends in 15 seconds.',
     );
     expect(showNotification).toBeCalledTimes(1);
   });
@@ -255,7 +255,7 @@ describe('pollStatusNotificationsMiddleware', () => {
           startTime: '2022-08-11T09:53:00Z',
           endTime: '2022-08-11T09:54:00Z',
         },
-      })
+      }),
     );
 
     const middleware = createPollStatusNotificationsMiddleware({
@@ -269,7 +269,7 @@ describe('pollStatusNotificationsMiddleware', () => {
 
     await waitFor(() => {
       expect(
-        pollApi.endpoints.getPolls.select()(store.getState()).isSuccess
+        pollApi.endpoints.getPolls.select()(store.getState()).isSuccess,
       ).toBe(true);
     });
 
@@ -277,7 +277,7 @@ describe('pollStatusNotificationsMiddleware', () => {
 
     expect(showNotification).toBeCalledWith(
       'info',
-      'The poll “My Title” ended.'
+      'The poll “My Title” ended.',
     );
     expect(showNotification).toBeCalledTimes(3);
   });
@@ -307,8 +307,8 @@ describe('normalizeDuration', () => {
       expect(
         normalizeDuration(Duration.fromMillis(duration)).toHuman({
           listStyle: 'long',
-        })
+        }),
       ).toEqual(expected);
-    }
+    },
   );
 });

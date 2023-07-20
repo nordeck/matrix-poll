@@ -21,7 +21,7 @@ import { SelectPollResults } from '../../../store';
 
 export function createPollPdfSpecifics(
   pollResult: SelectPollResults,
-  getUserDisplayName: (userId: string) => string
+  getUserDisplayName: (userId: string) => string,
 ): Content {
   const pollGroups = pollResult.poll.content.groups;
 
@@ -43,7 +43,7 @@ export function createPollPdfSpecifics(
 
         return undefined;
       })
-      .filter(isDefined)
+      .filter(isDefined),
   );
 
   if (!pollGroups || !representativeList?.length) {
@@ -74,7 +74,7 @@ export function createPollPdfSpecifics(
                         {
                           delegate: getUserDisplayName(r.delegate),
                           group: r.group,
-                        }
+                        },
                       ),
                       ...(r.representedBy
                         ? [
@@ -85,7 +85,7 @@ export function createPollPdfSpecifics(
                               {
                                 delegate: getUserDisplayName(r.representedBy),
                                 group: r.group,
-                              }
+                              },
                             ),
                           ]
                         : []),

@@ -61,7 +61,7 @@ describe('selectPollResults', () => {
 
     const { result, waitForValueToChange } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
-      { wrapper: Wrapper }
+      { wrapper: Wrapper },
     );
 
     await waitForValueToChange(() => result.current.isLoading);
@@ -78,7 +78,7 @@ describe('selectPollResults', () => {
           includeInvalidVotes: true,
           skipLoadingVotes: true,
         }),
-      { wrapper: Wrapper }
+      { wrapper: Wrapper },
     );
 
     await waitForValueToChange(() => result.current.isLoading);
@@ -98,12 +98,12 @@ describe('selectPollResults', () => {
           endTime: '2020-01-01T00:01:00Z',
           startEventId: '$start-event-id',
         },
-      })
+      }),
     );
 
     const { result, waitForValueToChange } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
-      { wrapper: Wrapper }
+      { wrapper: Wrapper },
     );
 
     await waitForValueToChange(() => result.current.isLoading);
@@ -123,7 +123,7 @@ describe('selectPollResults', () => {
           endTime: '2020-01-01T00:01:00Z',
           startEventId: '$start-event-id',
         },
-      })
+      }),
     );
     widgetApi.mockSendStateEvent(mockRoomMember({ state_key: '@user' }));
 
@@ -133,7 +133,7 @@ describe('selectPollResults', () => {
           includeInvalidVotes: true,
           skipLoadingVotes: true,
         }),
-      { wrapper: Wrapper }
+      { wrapper: Wrapper },
     );
 
     await waitForValueToChange(() => result.current.isLoading);
@@ -151,7 +151,7 @@ describe('selectPollResults', () => {
   it('should return undefined when no poll was found', async () => {
     const { result, waitForValueToChange } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
-      { wrapper: Wrapper }
+      { wrapper: Wrapper },
     );
 
     await waitForValueToChange(() => result.current.isLoading);
@@ -166,7 +166,7 @@ describe('selectPollResults', () => {
           includeInvalidVotes: true,
           skipLoadingVotes: true,
         }),
-      { wrapper: Wrapper }
+      { wrapper: Wrapper },
     );
 
     await waitForValueToChange(() => result.current.isLoading);
@@ -181,13 +181,13 @@ describe('selectPollResults', () => {
         content: {
           groups: undefined,
         },
-      })
+      }),
     );
     widgetApi.mockSendStateEvent(mockRoomMember({ state_key: '@user' }));
 
     const { result, waitForValueToChange } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
-      { wrapper: Wrapper }
+      { wrapper: Wrapper },
     );
 
     await waitForValueToChange(() => result.current.isLoading);
@@ -217,16 +217,16 @@ describe('selectPollResults', () => {
           events_default: 0,
           users_default: 0,
         },
-      })
+      }),
     );
     widgetApi.mockSendStateEvent(
-      mockRoomMember({ state_key: '@user-with-power-1' })
+      mockRoomMember({ state_key: '@user-with-power-1' }),
     );
     widgetApi.mockSendStateEvent(
-      mockRoomMember({ state_key: '@user-with-power-2' })
+      mockRoomMember({ state_key: '@user-with-power-2' }),
     );
     widgetApi.mockSendStateEvent(
-      mockRoomMember({ state_key: '@user-without-power' })
+      mockRoomMember({ state_key: '@user-without-power' }),
     );
     const poll = widgetApi.mockSendStateEvent(
       mockPoll({
@@ -240,7 +240,7 @@ describe('selectPollResults', () => {
           ],
           groups: undefined,
         },
-      })
+      }),
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
@@ -248,7 +248,7 @@ describe('selectPollResults', () => {
         event_id: '0',
         content: { pollId: 'my-poll', answerId: '1' },
         origin_server_ts: Date.now(),
-      })
+      }),
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
@@ -256,7 +256,7 @@ describe('selectPollResults', () => {
         event_id: '1',
         content: { pollId: 'my-poll', answerId: '1' },
         origin_server_ts: Date.now(),
-      })
+      }),
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
@@ -264,12 +264,12 @@ describe('selectPollResults', () => {
         event_id: '2',
         content: { pollId: 'my-poll', answerId: '2' },
         origin_server_ts: Date.now(),
-      })
+      }),
     );
 
     const { result, waitForValueToChange } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
-      { wrapper: Wrapper }
+      { wrapper: Wrapper },
     );
 
     await waitForValueToChange(() => result.current.isLoading);
@@ -296,7 +296,7 @@ describe('selectPollResults', () => {
 
   it('should not return any votes, when vote loading is skipped', async () => {
     widgetApi.mockSendStateEvent(
-      mockRoomMember({ state_key: '@user-with-power-1' })
+      mockRoomMember({ state_key: '@user-with-power-1' }),
     );
     const poll = widgetApi.mockSendStateEvent(
       mockPoll({
@@ -310,7 +310,7 @@ describe('selectPollResults', () => {
           ],
           groups: undefined,
         },
-      })
+      }),
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
@@ -318,7 +318,7 @@ describe('selectPollResults', () => {
         event_id: '0',
         content: { pollId: 'my-poll', answerId: '1' },
         origin_server_ts: Date.now(),
-      })
+      }),
     );
 
     const { result, waitForValueToChange } = renderHook(
@@ -327,7 +327,7 @@ describe('selectPollResults', () => {
           includeInvalidVotes: true,
           skipLoadingVotes: true,
         }),
-      { wrapper: Wrapper }
+      { wrapper: Wrapper },
     );
 
     await waitForValueToChange(() => result.current.isLoading);
@@ -360,13 +360,13 @@ describe('selectPollResults', () => {
           events_default: 0,
           users_default: 0,
         },
-      })
+      }),
     );
     widgetApi.mockSendStateEvent(
-      mockRoomMember({ state_key: '@user-with-power-1' })
+      mockRoomMember({ state_key: '@user-with-power-1' }),
     );
     widgetApi.mockSendStateEvent(
-      mockRoomMember({ state_key: '@user-without-power' })
+      mockRoomMember({ state_key: '@user-without-power' }),
     );
     const poll = widgetApi.mockSendStateEvent(
       mockPoll({
@@ -380,12 +380,12 @@ describe('selectPollResults', () => {
           ],
           groups: undefined,
         },
-      })
+      }),
     );
 
     const { result, waitForValueToChange } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
-      { wrapper: Wrapper }
+      { wrapper: Wrapper },
     );
 
     await waitForValueToChange(() => result.current.isLoading);
@@ -418,16 +418,16 @@ describe('selectPollResults', () => {
           events_default: 0,
           users_default: 0,
         },
-      })
+      }),
     );
     widgetApi.mockSendStateEvent(
-      mockRoomMember({ state_key: '@user-with-power-1' })
+      mockRoomMember({ state_key: '@user-with-power-1' }),
     );
     widgetApi.mockSendStateEvent(
       mockRoomMember({
         state_key: '@user-with-power-2',
         content: { membership: 'leave' },
-      })
+      }),
     );
     const poll = widgetApi.mockSendStateEvent(
       mockPoll({
@@ -441,12 +441,12 @@ describe('selectPollResults', () => {
           ],
           groups: undefined,
         },
-      })
+      }),
     );
 
     const { result, waitForValueToChange } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
-      { wrapper: Wrapper }
+      { wrapper: Wrapper },
     );
 
     await waitForValueToChange(() => result.current.isLoading);
@@ -468,10 +468,10 @@ describe('selectPollResults', () => {
   it('should ignore missing answers if not enabled without groups', async () => {
     widgetApi.mockSendStateEvent(mockPowerLevelsEvent());
     widgetApi.mockSendStateEvent(
-      mockRoomMember({ state_key: '@user-with-power-1' })
+      mockRoomMember({ state_key: '@user-with-power-1' }),
     );
     widgetApi.mockSendStateEvent(
-      mockRoomMember({ state_key: '@user-with-power-2' })
+      mockRoomMember({ state_key: '@user-with-power-2' }),
     );
     const poll = widgetApi.mockSendStateEvent(
       mockPoll({
@@ -485,12 +485,12 @@ describe('selectPollResults', () => {
           ],
           groups: undefined,
         },
-      })
+      }),
     );
 
     const { result, waitForValueToChange } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: false }),
-      { wrapper: Wrapper }
+      { wrapper: Wrapper },
     );
 
     await waitForValueToChange(() => result.current.isLoading);
@@ -539,12 +539,12 @@ describe('selectPollResults', () => {
             },
           ],
         },
-      })
+      }),
     );
 
     const { result, waitForValueToChange } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
-      { wrapper: Wrapper }
+      { wrapper: Wrapper },
     );
 
     await waitForValueToChange(() => result.current.isLoading);
@@ -614,12 +614,12 @@ describe('selectPollResults', () => {
             },
           ],
         },
-      })
+      }),
     );
 
     const { result, waitForValueToChange } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: false }),
-      { wrapper: Wrapper }
+      { wrapper: Wrapper },
     );
 
     await waitForValueToChange(() => result.current.isLoading);
@@ -682,7 +682,7 @@ describe('selectPollResults', () => {
             },
           ],
         },
-      })
+      }),
     );
 
     widgetApi.mockSendRoomEvent(
@@ -690,19 +690,19 @@ describe('selectPollResults', () => {
         sender: '@user-delegate-1',
         content: { pollId: 'my-poll', answerId: '1' },
         origin_server_ts: Date.now(),
-      })
+      }),
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
         sender: '@user-delegate-2',
         content: { pollId: 'my-poll', answerId: '2' },
         origin_server_ts: Date.now(),
-      })
+      }),
     );
 
     const { result, waitForValueToChange } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
-      { wrapper: Wrapper }
+      { wrapper: Wrapper },
     );
 
     await waitForValueToChange(() => result.current.isLoading);
@@ -769,19 +769,19 @@ describe('selectPollResults', () => {
             },
           ],
         },
-      })
+      }),
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
         sender: '@user-delegate-1',
         content: { pollId: 'my-poll', answerId: '1' },
         origin_server_ts: Date.now(),
-      })
+      }),
     );
 
     const { result, waitForValueToChange } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
-      { wrapper: Wrapper }
+      { wrapper: Wrapper },
     );
 
     await waitForValueToChange(() => result.current.isLoading);
@@ -842,19 +842,19 @@ describe('selectPollResults', () => {
             },
           ],
         },
-      })
+      }),
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
         sender: '@user-backup',
         content: { pollId: 'my-poll', answerId: '1' },
         origin_server_ts: Date.now(),
-      })
+      }),
     );
 
     const { result, waitForValueToChange } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
-      { wrapper: Wrapper }
+      { wrapper: Wrapper },
     );
 
     await waitForValueToChange(() => result.current.isLoading);
@@ -910,12 +910,12 @@ describe('selectPollResults', () => {
             },
           ],
         },
-      })
+      }),
     );
 
     const { result, waitForValueToChange } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
-      { wrapper: Wrapper }
+      { wrapper: Wrapper },
     );
 
     await waitForValueToChange(() => result.current.isLoading);
@@ -981,26 +981,26 @@ describe('selectPollResults', () => {
             },
           ],
         },
-      })
+      }),
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
         sender: '@user-delegate-1',
         content: { pollId: 'my-poll', answerId: '1' },
         origin_server_ts: Date.now(),
-      })
+      }),
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
         sender: '@user-delegate-2',
         content: { pollId: 'my-poll', answerId: '2' },
         origin_server_ts: Date.now(),
-      })
+      }),
     );
 
     const { result, waitForValueToChange } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
-      { wrapper: Wrapper }
+      { wrapper: Wrapper },
     );
 
     await waitForValueToChange(() => result.current.isLoading);
@@ -1077,19 +1077,19 @@ describe('selectPollResults', () => {
             },
           ],
         },
-      })
+      }),
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
         sender: '@user-backup',
         content: { pollId: 'my-poll', answerId: '1' },
         origin_server_ts: Date.now(),
-      })
+      }),
     );
 
     const { result, waitForValueToChange } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
-      { wrapper: Wrapper }
+      { wrapper: Wrapper },
     );
 
     await waitForValueToChange(() => result.current.isLoading);
@@ -1157,19 +1157,19 @@ describe('selectPollResults', () => {
             },
           ],
         },
-      })
+      }),
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
         sender: '@user-backup',
         content: { pollId: 'my-poll', answerId: '1' },
         origin_server_ts: Date.now(),
-      })
+      }),
     );
 
     const { result, waitForValueToChange } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
-      { wrapper: Wrapper }
+      { wrapper: Wrapper },
     );
 
     await waitForValueToChange(() => result.current.isLoading);
@@ -1227,19 +1227,19 @@ describe('selectPollResults', () => {
             },
           ],
         },
-      })
+      }),
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
         sender: '@user-delegate-2',
         content: { pollId: 'my-poll', answerId: '1' },
         origin_server_ts: Date.now(),
-      })
+      }),
     );
 
     const { result, waitForValueToChange } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
-      { wrapper: Wrapper }
+      { wrapper: Wrapper },
     );
 
     await waitForValueToChange(() => result.current.isLoading);
@@ -1272,7 +1272,7 @@ describe('selectPollResults', () => {
       .mockImplementation((name, defaultValue) =>
         name === 'REACT_APP_IGNORE_USER_IDS'
           ? '@user-with-power-2'
-          : defaultValue
+          : defaultValue,
       );
 
     widgetApi.mockSendStateEvent(
@@ -1288,13 +1288,13 @@ describe('selectPollResults', () => {
           events_default: 0,
           users_default: 0,
         },
-      })
+      }),
     );
     widgetApi.mockSendStateEvent(
-      mockRoomMember({ state_key: '@user-with-power-1' })
+      mockRoomMember({ state_key: '@user-with-power-1' }),
     );
     widgetApi.mockSendStateEvent(
-      mockRoomMember({ state_key: '@user-with-power-2' })
+      mockRoomMember({ state_key: '@user-with-power-2' }),
     );
     const poll = widgetApi.mockSendStateEvent(
       mockPoll({
@@ -1308,12 +1308,12 @@ describe('selectPollResults', () => {
           ],
           groups: undefined,
         },
-      })
+      }),
     );
 
     const { result, waitForValueToChange } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
-      { wrapper: Wrapper }
+      { wrapper: Wrapper },
     );
 
     await waitForValueToChange(() => result.current.isLoading);
@@ -1355,26 +1355,26 @@ describe('selectPollResults', () => {
             },
           ],
         },
-      })
+      }),
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
         sender: '@user-delegate',
         content: { pollId: 'my-poll', answerId: '1' },
         origin_server_ts: Date.now(),
-      })
+      }),
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
         sender: '@user-1',
         content: { pollId: 'my-poll', answerId: '2' },
         origin_server_ts: Date.now(),
-      })
+      }),
     );
 
     const { result, waitForValueToChange } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
-      { wrapper: Wrapper }
+      { wrapper: Wrapper },
     );
 
     await waitForValueToChange(() => result.current.isLoading);
@@ -1422,19 +1422,19 @@ describe('selectPollResults', () => {
             },
           ],
         },
-      })
+      }),
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
         sender: '@user-delegate',
         content: { pollId: 'my-poll', answerId: '1' },
         origin_server_ts: Date.now(),
-      })
+      }),
     );
 
     const { result, waitForValueToChange } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
-      { wrapper: Wrapper }
+      { wrapper: Wrapper },
     );
 
     await waitForValueToChange(() => result.current.isLoading);
@@ -1487,26 +1487,26 @@ describe('selectPollResults', () => {
             },
           ],
         },
-      })
+      }),
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
         sender: '@user-delegate',
         content: { pollId: 'my-poll', answerId: '1' },
         origin_server_ts: Date.now(),
-      })
+      }),
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
         sender: '@user-backup',
         content: { pollId: 'my-poll', answerId: '1' },
         origin_server_ts: Date.now(),
-      })
+      }),
     );
 
     const { result, waitForValueToChange } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
-      { wrapper: Wrapper }
+      { wrapper: Wrapper },
     );
 
     await waitForValueToChange(() => result.current.isLoading);
@@ -1549,7 +1549,7 @@ describe('selectPollResults', () => {
           ],
           groups: undefined,
         },
-      })
+      }),
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
@@ -1557,7 +1557,7 @@ describe('selectPollResults', () => {
         content: { pollId: 'my-poll', answerId: '1' },
         event_id: 'event-0',
         origin_server_ts: Date.now(),
-      })
+      }),
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
@@ -1565,12 +1565,12 @@ describe('selectPollResults', () => {
         content: { pollId: 'my-poll', answerId: '2' },
         event_id: 'event-1',
         origin_server_ts: Date.now(),
-      })
+      }),
     );
 
     const { result, waitForValueToChange } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
-      { wrapper: Wrapper }
+      { wrapper: Wrapper },
     );
 
     await waitForValueToChange(() => result.current.isLoading);
@@ -1612,7 +1612,7 @@ describe('selectPollResults', () => {
             },
           ],
         },
-      })
+      }),
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
@@ -1620,7 +1620,7 @@ describe('selectPollResults', () => {
         content: { pollId: 'my-poll', answerId: '1' },
         event_id: 'event-1',
         origin_server_ts: Date.now(),
-      })
+      }),
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
@@ -1628,12 +1628,12 @@ describe('selectPollResults', () => {
         content: { pollId: 'my-poll', answerId: '2' },
         event_id: 'event-2',
         origin_server_ts: Date.now(),
-      })
+      }),
     );
 
     const { result, waitForValueToChange } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
-      { wrapper: Wrapper }
+      { wrapper: Wrapper },
     );
 
     await waitForValueToChange(() => result.current.isLoading);
@@ -1672,7 +1672,7 @@ describe('selectPollResults', () => {
           endTime: '2020-01-01T01:01:00Z',
           duration: 1,
         },
-      })
+      }),
     );
     // too early
     widgetApi.mockSendRoomEvent(
@@ -1680,7 +1680,7 @@ describe('selectPollResults', () => {
         sender: '@user-1',
         content: { pollId: 'my-poll', answerId: '1' },
         origin_server_ts: new Date('2020-01-01T00:59:59Z').getTime(),
-      })
+      }),
     );
     // correct
     widgetApi.mockSendRoomEvent(
@@ -1688,7 +1688,7 @@ describe('selectPollResults', () => {
         sender: '@user-2',
         content: { pollId: 'my-poll', answerId: '1' },
         origin_server_ts: new Date('2020-01-01T01:00:00Z').getTime(),
-      })
+      }),
     );
     // too late
     widgetApi.mockSendRoomEvent(
@@ -1696,12 +1696,12 @@ describe('selectPollResults', () => {
         sender: '@user-3',
         content: { pollId: 'my-poll', answerId: '1' },
         origin_server_ts: new Date('2020-01-01T01:01:00Z').getTime(),
-      })
+      }),
     );
 
     const { result, waitForValueToChange } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
-      { wrapper: Wrapper }
+      { wrapper: Wrapper },
     );
 
     await waitForValueToChange(() => result.current.isLoading);
@@ -1750,7 +1750,7 @@ describe('selectPollResults', () => {
             },
           ],
         },
-      })
+      }),
     );
     // too early
     widgetApi.mockSendRoomEvent(
@@ -1758,7 +1758,7 @@ describe('selectPollResults', () => {
         sender: '@user-1',
         content: { pollId: 'my-poll', answerId: '1' },
         origin_server_ts: new Date('2020-01-01T00:59:59Z').getTime(),
-      })
+      }),
     );
     // correct
     widgetApi.mockSendRoomEvent(
@@ -1766,7 +1766,7 @@ describe('selectPollResults', () => {
         sender: '@user-2',
         content: { pollId: 'my-poll', answerId: '1' },
         origin_server_ts: new Date('2020-01-01T01:00:00Z').getTime(),
-      })
+      }),
     );
     // too late
     widgetApi.mockSendRoomEvent(
@@ -1774,12 +1774,12 @@ describe('selectPollResults', () => {
         sender: '@user-3',
         content: { pollId: 'my-poll', answerId: '1' },
         origin_server_ts: new Date('2020-01-01T01:01:00Z').getTime(),
-      })
+      }),
     );
 
     const { result, waitForValueToChange } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
-      { wrapper: Wrapper }
+      { wrapper: Wrapper },
     );
 
     await waitForValueToChange(() => result.current.isLoading);

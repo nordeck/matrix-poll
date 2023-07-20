@@ -33,13 +33,13 @@ describe('getPolls', () => {
     const poll0 = widgetApi.mockSendStateEvent(
       mockPoll({
         origin_server_ts: 5,
-      })
+      }),
     );
     const poll1 = widgetApi.mockSendStateEvent(
       mockPoll({
         state_key: 'poll-1',
         origin_server_ts: 4,
-      })
+      }),
     );
     const poll2 = widgetApi.mockSendStateEvent(
       mockPoll({
@@ -49,7 +49,7 @@ describe('getPolls', () => {
           startTime: '2022-09-29T14:13:23Z',
           endTime: '2022-09-29T14:14:23Z',
         },
-      })
+      }),
     );
     const poll3 = widgetApi.mockSendStateEvent(
       mockPoll({
@@ -60,7 +60,7 @@ describe('getPolls', () => {
           endTime: '2022-09-29T14:14:23Z',
           startEventId: '$start-event-id',
         },
-      })
+      }),
     );
     const poll4 = widgetApi.mockSendStateEvent(
       mockPoll({
@@ -70,13 +70,13 @@ describe('getPolls', () => {
           startTime: '2022-09-30T14:13:23Z',
           endTime: '2022-09-30T14:14:23Z',
         },
-      })
+      }),
     );
 
     const store = createStore({ widgetApi });
 
     await expect(
-      store.dispatch(pollApi.endpoints.getPolls.initiate()).unwrap()
+      store.dispatch(pollApi.endpoints.getPolls.initiate()).unwrap(),
     ).resolves.toEqual({
       entities: {
         [poll0.state_key]: poll0,
@@ -102,7 +102,7 @@ describe('getPolls', () => {
           startTime: '2020-01-01T10:00:00Z',
           duration: 6,
         },
-      })
+      }),
     );
     const eventNew = widgetApi.mockSendStateEvent(
       mockPoll({
@@ -112,13 +112,13 @@ describe('getPolls', () => {
           endTime: '2020-01-01T10:08:00Z',
         },
         state_key: 'poll-1',
-      })
+      }),
     );
 
     const store = createStore({ widgetApi });
 
     await expect(
-      store.dispatch(pollApi.endpoints.getPolls.initiate()).unwrap()
+      store.dispatch(pollApi.endpoints.getPolls.initiate()).unwrap(),
     ).resolves.toEqual({
       ids: [eventOld.state_key, eventNew.state_key],
       entities: {
@@ -141,8 +141,8 @@ describe('getPolls', () => {
 
     await waitFor(() =>
       expect(
-        pollApi.endpoints.getPolls.select()(store.getState()).data
-      ).toEqual({ entities: {}, ids: [] })
+        pollApi.endpoints.getPolls.select()(store.getState()).data,
+      ).toEqual({ entities: {}, ids: [] }),
     );
 
     const eventOld = widgetApi.mockSendStateEvent(
@@ -151,12 +151,12 @@ describe('getPolls', () => {
           startTime: '2020-01-01T10:00:00Z',
           duration: 6,
         },
-      })
+      }),
     );
 
     await waitFor(() =>
       expect(
-        pollApi.endpoints.getPolls.select()(store.getState()).data
+        pollApi.endpoints.getPolls.select()(store.getState()).data,
       ).toEqual({
         ids: [eventOld.state_key],
         entities: {
@@ -168,7 +168,7 @@ describe('getPolls', () => {
             }),
           }),
         },
-      })
+      }),
     );
   });
 
@@ -176,7 +176,7 @@ describe('getPolls', () => {
     const store = createStore({ widgetApi });
 
     await expect(
-      store.dispatch(pollApi.endpoints.getPolls.initiate()).unwrap()
+      store.dispatch(pollApi.endpoints.getPolls.initiate()).unwrap(),
     ).resolves.toEqual({ entities: {}, ids: [] });
   });
 
@@ -186,7 +186,7 @@ describe('getPolls', () => {
     const store = createStore({ widgetApi });
 
     await expect(
-      store.dispatch(pollApi.endpoints.getPolls.initiate()).unwrap()
+      store.dispatch(pollApi.endpoints.getPolls.initiate()).unwrap(),
     ).rejects.toEqual({
       message: 'Could not load polls: Some Error',
       name: 'LoadFailed',
@@ -200,21 +200,21 @@ describe('getPolls', () => {
 
     await waitFor(() =>
       expect(
-        pollApi.endpoints.getPolls.select()(store.getState()).data
-      ).toEqual({ entities: {}, ids: [] })
+        pollApi.endpoints.getPolls.select()(store.getState()).data,
+      ).toEqual({ entities: {}, ids: [] }),
     );
 
     const poll = widgetApi.mockSendStateEvent(mockPoll());
 
     await waitFor(() =>
       expect(
-        pollApi.endpoints.getPolls.select()(store.getState()).data
+        pollApi.endpoints.getPolls.select()(store.getState()).data,
       ).toEqual({
         entities: {
           [poll.state_key]: poll,
         },
         ids: [poll.state_key],
-      })
+      }),
     );
   });
 
@@ -226,13 +226,13 @@ describe('getPolls', () => {
 
     await waitFor(() =>
       expect(
-        pollApi.endpoints.getPolls.select()(store.getState()).data
+        pollApi.endpoints.getPolls.select()(store.getState()).data,
       ).toEqual({
         entities: {
           [poll.state_key]: poll,
         },
         ids: [poll.state_key],
-      })
+      }),
     );
 
     // Delete poll
@@ -248,8 +248,8 @@ describe('getPolls', () => {
 
     await waitFor(() =>
       expect(
-        pollApi.endpoints.getPolls.select()(store.getState()).data
-      ).toEqual({ entities: {}, ids: [] })
+        pollApi.endpoints.getPolls.select()(store.getState()).data,
+      ).toEqual({ entities: {}, ids: [] }),
     );
   });
 });
@@ -265,9 +265,9 @@ describe('updatePoll', () => {
           pollApi.endpoints.updatePoll.initiate({
             pollId: 'poll-0',
             content: poll,
-          })
+          }),
         )
-        .unwrap()
+        .unwrap(),
     ).resolves.toEqual({
       event: expect.objectContaining({
         content: poll,
@@ -297,9 +297,9 @@ describe('updatePoll', () => {
           pollApi.endpoints.updatePoll.initiate({
             pollId: 'poll-0',
             content: poll,
-          })
+          }),
         )
-        .unwrap()
+        .unwrap(),
     ).resolves.toEqual({
       event: expect.objectContaining({
         content: poll,
@@ -323,9 +323,9 @@ describe('updatePoll', () => {
           pollApi.endpoints.updatePoll.initiate({
             pollId: 'poll-0',
             content: mockPoll().content,
-          })
+          }),
         )
-        .unwrap()
+        .unwrap(),
     ).rejects.toEqual({
       name: 'UpdateFailed',
       message: 'Could not update poll: Some Error',
@@ -343,7 +343,7 @@ describe('updatePoll', () => {
         pollApi.endpoints.updatePoll.initiate({
           pollId: 'poll-0',
           content: poll,
-        })
+        }),
       )
       .unwrap();
     await store
@@ -351,7 +351,7 @@ describe('updatePoll', () => {
         pollApi.endpoints.updatePoll.initiate({
           pollId: 'poll-0',
           content: poll,
-        })
+        }),
       )
       .unwrap();
   });
@@ -371,15 +371,15 @@ describe('startPoll', () => {
         .dispatch(
           pollApi.endpoints.startPoll.initiate({
             pollId: 'poll-0',
-          })
+          }),
         )
-        .unwrap()
+        .unwrap(),
     ).resolves.toEqual({});
 
     expect(widgetApi.sendRoomEvent).toHaveBeenNthCalledWith(
       1,
       'net.nordeck.poll.start',
-      {}
+      {},
     );
 
     const startEventId = (await widgetApi.sendRoomEvent.mock.results[0].value)
@@ -394,7 +394,7 @@ describe('startPoll', () => {
           startEventId,
         },
       }).content,
-      { stateKey: 'poll-0' }
+      { stateKey: 'poll-0' },
     );
   });
 
@@ -408,9 +408,9 @@ describe('startPoll', () => {
         .dispatch(
           pollApi.endpoints.startPoll.initiate({
             pollId: 'poll-0',
-          })
+          }),
         )
-        .unwrap()
+        .unwrap(),
     ).rejects.toEqual({
       name: 'UpdateFailed',
       message: 'Could not start poll: Some Error',
@@ -428,14 +428,14 @@ describe('startPoll', () => {
       .dispatch(
         pollApi.endpoints.startPoll.initiate({
           pollId: 'poll-0',
-        })
+        }),
       )
       .unwrap();
     await store
       .dispatch(
         pollApi.endpoints.startPoll.initiate({
           pollId: 'poll-0',
-        })
+        }),
       )
       .unwrap();
 
@@ -458,7 +458,7 @@ describe('stopPoll', () => {
           endTime: '2022-10-05T10:17:23.000Z',
           startEventId: '$start-event-id',
         },
-      })
+      }),
     );
 
     await expect(
@@ -466,9 +466,9 @@ describe('stopPoll', () => {
         .dispatch(
           pollApi.endpoints.stopPoll.initiate({
             pollId: 'poll-0',
-          })
+          }),
         )
-        .unwrap()
+        .unwrap(),
     ).resolves.toEqual({
       event: expect.objectContaining({
         content: mockPoll({
@@ -490,7 +490,7 @@ describe('stopPoll', () => {
           startEventId: '$start-event-id',
         },
       }).content,
-      { stateKey: 'poll-0' }
+      { stateKey: 'poll-0' },
     );
   });
 
@@ -504,9 +504,9 @@ describe('stopPoll', () => {
         .dispatch(
           pollApi.endpoints.stopPoll.initiate({
             pollId: 'poll-0',
-          })
+          }),
         )
-        .unwrap()
+        .unwrap(),
     ).rejects.toEqual({
       name: 'UpdateFailed',
       message: 'Could not stop poll: Some Error',
@@ -527,15 +527,15 @@ describe('deletePoll', () => {
         .dispatch(
           pollApi.endpoints.deletePoll.initiate({
             pollId: 'poll-0',
-          })
+          }),
         )
-        .unwrap()
+        .unwrap(),
     ).resolves.toEqual({});
 
     expect(widgetApi.sendStateEvent).toBeCalledWith(
       'net.nordeck.poll',
       {},
-      { stateKey: 'poll-0' }
+      { stateKey: 'poll-0' },
     );
   });
 
@@ -549,9 +549,9 @@ describe('deletePoll', () => {
         .dispatch(
           pollApi.endpoints.deletePoll.initiate({
             pollId: 'poll-0',
-          })
+          }),
         )
-        .unwrap()
+        .unwrap(),
     ).rejects.toEqual({
       name: 'UpdateFailed',
       message: 'Could not delete poll: Some Error',
@@ -569,14 +569,14 @@ describe('deletePoll', () => {
       .dispatch(
         pollApi.endpoints.deletePoll.initiate({
           pollId: 'poll-0',
-        })
+        }),
       )
       .unwrap();
     await store
       .dispatch(
         pollApi.endpoints.deletePoll.initiate({
           pollId: 'poll-0',
-        })
+        }),
       )
       .unwrap();
   });

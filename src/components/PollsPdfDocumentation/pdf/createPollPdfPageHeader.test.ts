@@ -50,7 +50,7 @@ describe('createPollPdfPageHeader', () => {
       createPollPdfPageHeader({
         roomName: 'PDF Test',
         roomMemberEvents,
-      })
+      }),
     ).toMatchSnapshot();
   });
 });

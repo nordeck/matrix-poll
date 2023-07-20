@@ -44,7 +44,7 @@ describe('createPollPdfDefinition', () => {
         pollResults: [pollResult],
         roomMemberEvents: [roomMember],
         getUserDisplayName,
-      })
+      }),
     ).toMatchSnapshot();
   });
 });

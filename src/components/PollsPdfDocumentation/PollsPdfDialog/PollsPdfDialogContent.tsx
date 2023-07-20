@@ -36,7 +36,7 @@ export function PollsPdfDialogContent({
   const descriptionId = useId();
   const description = t(
     'pollsPdfDownloadButton.tooltip',
-    'The provided PDF is currently not accessible and can not be read using a screen reader.'
+    'The provided PDF is currently not accessible and can not be read using a screen reader.',
   );
 
   return (
@@ -45,7 +45,7 @@ export function PollsPdfDialogContent({
         <Alert role="status" severity="error" sx={{ my: 2 }}>
           {t(
             'pollsPdfDialog.error',
-            'Something went wrong while generating the PDF documentation.'
+            'Something went wrong while generating the PDF documentation.',
           )}
         </Alert>
       )}

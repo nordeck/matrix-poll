@@ -77,7 +77,7 @@ function GroupedNameList({
           <ListEmptyState
             message={t(
               'showResultsByGroupedNameList.noVotesWereCast',
-              'No votes were cast.'
+              'No votes were cast.',
             )}
           />
         )}

@@ -33,7 +33,7 @@ describe('selectPollsUpcoming', () => {
       mockPoll({
         state_key: 'poll-1',
         content: { startTime: '2022-08-11T17:33:00Z' },
-      })
+      }),
     );
 
     const store = createStore({ widgetApi });
@@ -48,13 +48,13 @@ describe('selectPollsUpcoming', () => {
   it('should sort upcoming polls', async () => {
     const poll0 = widgetApi.mockSendStateEvent(mockPoll());
     const poll1 = widgetApi.mockSendStateEvent(
-      mockPoll({ state_key: 'poll-1' })
+      mockPoll({ state_key: 'poll-1' }),
     );
     const poll2 = widgetApi.mockSendStateEvent(
-      mockPoll({ state_key: 'poll-2', origin_server_ts: 1000 })
+      mockPoll({ state_key: 'poll-2', origin_server_ts: 1000 }),
     );
     const poll3 = widgetApi.mockSendStateEvent(
-      mockPoll({ state_key: 'poll-3', origin_server_ts: 400 })
+      mockPoll({ state_key: 'poll-3', origin_server_ts: 400 }),
     );
 
     const store = createStore({ widgetApi });

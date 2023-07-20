@@ -41,7 +41,7 @@ describe('selectPollsFinished', () => {
           startTime: '2022-08-11T17:33:00Z',
           endTime: '2022-08-11T17:34:00Z',
         },
-      })
+      }),
     );
     widgetApi.mockSendStateEvent(
       mockPoll({
@@ -50,7 +50,7 @@ describe('selectPollsFinished', () => {
           startTime: '2022-08-11T17:33:00.001Z',
           endTime: '2022-08-11T17:34:00.001Z',
         },
-      })
+      }),
     );
 
     const store = createStore({ widgetApi });

@@ -48,7 +48,7 @@ describe('useUserDetails', () => {
       expect(result.current.getUserDisplayName('@user-alice')).toBe('Alice');
     });
     expect(result.current.getUserDisplayName('@other-user-id')).toBe(
-      '@other-user-id'
+      '@other-user-id',
     );
   });
 });

@@ -36,7 +36,7 @@ describe('createPollPdfContent', () => {
       createPollPdfContent({
         pollResults: [pollResult, pollResult],
         getUserDisplayName,
-      })
+      }),
     ).toMatchSnapshot();
   });
 });

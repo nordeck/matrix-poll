@@ -46,7 +46,7 @@ export const pollSettingsApi = baseApi.injectEndpoints({
         try {
           const events = await widgetApi.receiveStateEvents(
             STATE_EVENT_POLL_SETTINGS,
-            { stateKey: widgetApi.widgetParameters.roomId }
+            { stateKey: widgetApi.widgetParameters.roomId },
           );
 
           return {
@@ -66,7 +66,7 @@ export const pollSettingsApi = baseApi.injectEndpoints({
 
       async onCacheEntryAdded(
         _,
-        { cacheDataLoaded, cacheEntryRemoved, extra, updateCachedData }
+        { cacheDataLoaded, cacheEntryRemoved, extra, updateCachedData },
       ) {
         const { widgetApi } = extra as ThunkExtraArgument;
 
@@ -100,16 +100,16 @@ export const pollSettingsApi = baseApi.injectEndpoints({
         try {
           const pollSettingsEvents = await widgetApi.receiveStateEvents(
             STATE_EVENT_POLL_SETTINGS,
-            { stateKey: widgetApi.widgetParameters.roomId }
+            { stateKey: widgetApi.widgetParameters.roomId },
           );
           const pollSettingsEvent = last(
-            pollSettingsEvents.filter(isValidPollSettingsEvent)
+            pollSettingsEvents.filter(isValidPollSettingsEvent),
           );
 
           const pollSettings = merge(
             {},
             pollSettingsEvent?.content ?? {},
-            changes
+            changes,
           );
 
           if (
@@ -123,7 +123,7 @@ export const pollSettingsApi = baseApi.injectEndpoints({
           const event = await widgetApi.sendStateEvent(
             STATE_EVENT_POLL_SETTINGS,
             pollSettings,
-            { stateKey: widgetApi.widgetParameters.roomId }
+            { stateKey: widgetApi.widgetParameters.roomId },
           );
 
           return { data: { event } };

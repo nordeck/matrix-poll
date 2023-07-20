@@ -32,7 +32,7 @@ describe('<TimeDistance/>', () => {
       <TimeDistance
         endTime="2020-01-01T00:02:00Z"
         startTime="2020-01-01T00:00:00Z"
-      />
+      />,
     );
 
     expect(screen.getByText(/ends in 01:00/i)).toBeInTheDocument();
@@ -56,7 +56,7 @@ describe('<TimeDistance/>', () => {
         endTime="2020-01-01T00:03:00Z"
         fallbackDuration={5}
         startTime="2020-01-01T00:00:00Z"
-      />
+      />,
     );
 
     expect(screen.getByText(/ends in 02:00/i)).toBeInTheDocument();
@@ -68,7 +68,7 @@ describe('<TimeDistance/>', () => {
         endTime="2020-01-01T00:01:00Z"
         fallbackDuration={2}
         startTime="2020-01-01T00:00:00Z"
-      />
+      />,
     );
 
     expect(await axe(container)).toHaveNoViolations();
@@ -82,7 +82,7 @@ describe('<TimeDistance/>', () => {
       <TimeDistance
         endTime="2020-01-01T00:02:00Z"
         startTime="2020-01-01T00:00:00Z"
-      />
+      />,
     );
 
     expect(screen.getByText(/ends in 02:00/i)).toBeInTheDocument();

@@ -48,7 +48,7 @@ export function PollCardVoteFormContent({
         });
       }
     },
-    [poll.startEventId, pollId, selectedAnswerId, vote]
+    [poll.startEventId, pollId, selectedAnswerId, vote],
   );
 
   return (

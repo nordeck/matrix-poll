@@ -45,7 +45,7 @@ describe('<PollsPdfDocumentationSettings>', () => {
           pollType: PollType.Open,
           startTime: '2020-01-01T03:33:55Z',
         },
-      })
+      }),
     );
 
     widgetApi.mockSendStateEvent(mockPollSettings());
@@ -63,14 +63,14 @@ describe('<PollsPdfDocumentationSettings>', () => {
 
     const form = screen.getByRole('form', { name: /deactivate pdf/i });
     expect(
-      within(form).getByRole('heading', { level: 4, name: /deactivate pdf/i })
+      within(form).getByRole('heading', { level: 4, name: /deactivate pdf/i }),
     ).toBeInTheDocument();
 
     expect(
       within(form).getByRole('spinbutton', {
         name: 'Deactivate after weeks (required)',
         description: '',
-      })
+      }),
     ).toBeInTheDocument();
 
     const button = within(form).getByRole('button', {
@@ -98,7 +98,7 @@ describe('<PollsPdfDocumentationSettings>', () => {
         content: {
           pdfButtonDisabledAfter: '2020-01-14T09:00:00Z',
         },
-      })
+      }),
     );
 
     render(<PollsPdfDocumentationSettings />, {
@@ -109,12 +109,12 @@ describe('<PollsPdfDocumentationSettings>', () => {
 
     const alert = await within(form).findByRole('status');
     expect(
-      within(alert).getByText(/pdf will be deactivated/i)
+      within(alert).getByText(/pdf will be deactivated/i),
     ).toBeInTheDocument();
     expect(
       within(alert).getByText(
-        /the download of the pdf document will be deactivated on january 14, 2020(,| at) 9:00 am/i
-      )
+        /the download of the pdf document will be deactivated on january 14, 2020(,| at) 9:00 am/i,
+      ),
     ).toBeInTheDocument();
   });
 
@@ -132,7 +132,7 @@ describe('<PollsPdfDocumentationSettings>', () => {
     const form = screen.getByRole('form', { name: /deactivate pdf/i });
 
     await userEventAT.click(
-      within(form).getByRole('button', { name: /deactivate pdf now/i })
+      within(form).getByRole('button', { name: /deactivate pdf now/i }),
     );
 
     const deleteModal = screen.getByRole('dialog', {
@@ -140,15 +140,15 @@ describe('<PollsPdfDocumentationSettings>', () => {
     });
 
     expect(deleteModal).toHaveAccessibleDescription(
-      /you are about to deactivate the pdf download/i
+      /you are about to deactivate the pdf download/i,
     );
 
     expect(
-      within(deleteModal).getByRole('button', { name: 'Cancel' })
+      within(deleteModal).getByRole('button', { name: 'Cancel' }),
     ).toBeInTheDocument();
 
     await userEventAT.click(
-      within(deleteModal).getByRole('button', { name: 'Deactivate' })
+      within(deleteModal).getByRole('button', { name: 'Deactivate' }),
     );
 
     await waitFor(() => {
@@ -159,7 +159,7 @@ describe('<PollsPdfDocumentationSettings>', () => {
     expect(widgetApi.sendStateEvent).toBeCalledWith(
       'net.nordeck.poll.settings',
       { pdfButtonDisabledAfter: '2020-01-01T10:00:00.000Z' },
-      { stateKey: '!room-id' }
+      { stateKey: '!room-id' },
     );
   });
 
@@ -188,15 +188,15 @@ describe('<PollsPdfDocumentationSettings>', () => {
     const alert = await within(form).findByRole('status');
     expect(
       within(alert).getByText(
-        /the download of the pdf document will be deactivated on january 22, 2020(,| at) 10:00 am/i
-      )
+        /the download of the pdf document will be deactivated on january 22, 2020(,| at) 10:00 am/i,
+      ),
     ).toBeInTheDocument();
 
     expect(widgetApi.sendStateEvent).toBeCalledTimes(1);
     expect(widgetApi.sendStateEvent).toBeCalledWith(
       'net.nordeck.poll.settings',
       { pdfButtonDisabledAfter: '2020-01-22T10:00:00.000Z' },
-      { stateKey: '!room-id' }
+      { stateKey: '!room-id' },
     );
   });
 
@@ -221,7 +221,7 @@ describe('<PollsPdfDocumentationSettings>', () => {
     expect(durationInput).toHaveAccessibleDescription('A duration is required');
     expect(durationInput).toBeInvalid();
     expect(
-      within(form).getByRole('button', { name: 'Set deactivation time' })
+      within(form).getByRole('button', { name: 'Set deactivation time' }),
     ).toBeDisabled();
   });
 });

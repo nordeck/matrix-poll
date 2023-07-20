@@ -90,8 +90,8 @@ export function createPollStatusNotificationsMiddleware({
             remainingTime: normalizeDuration(endTime.diffNow()).toHuman({
               listStyle: 'long',
             }),
-          }
-        )
+          },
+        ),
       );
     } else if (status === 'reached_half' || status === 'reached_last_quarter') {
       showNotification(
@@ -104,8 +104,8 @@ export function createPollStatusNotificationsMiddleware({
             remainingTime: normalizeDuration(endTime.diffNow()).toHuman({
               listStyle: 'long',
             }),
-          }
-        )
+          },
+        ),
       );
     } else if (status === 'finished') {
       showNotification(
@@ -115,7 +115,7 @@ export function createPollStatusNotificationsMiddleware({
           remainingTime: normalizeDuration(endTime.diffNow()).toHuman({
             listStyle: 'long',
           }),
-        })
+        }),
       );
     }
   }
@@ -143,7 +143,7 @@ export function createPollStatusNotificationsMiddleware({
         // in the future.
         pollsNextTimer[pollId] = setTimeout(
           () => refreshNotifications(),
-          dateTime.diffNow().toMillis() % 0x7fffffff
+          dateTime.diffNow().toMillis() % 0x7fffffff,
         );
       }
 
@@ -174,7 +174,7 @@ export function createPollStatusNotificationsMiddleware({
 
           const timeDiff = DateTime.fromISO(content.endTime).diff(
             DateTime.fromISO(content.startTime),
-            'minute'
+            'minute',
           );
           const duration = Math.floor(timeDiff.as('minutes'));
 
@@ -286,7 +286,7 @@ export function createPollStatusNotificationsMiddleware({
  */
 export function normalizeDuration(duration: Duration): Duration {
   let normalizedDuration = Duration.fromMillis(
-    Math.round(duration.toMillis() / 1000) * 1000
+    Math.round(duration.toMillis() / 1000) * 1000,
   );
 
   const units: DurationUnit[] = [];

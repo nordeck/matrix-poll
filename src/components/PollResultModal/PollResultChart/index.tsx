@@ -18,5 +18,5 @@ import { lazy } from 'react';
 
 export const PollResultChartBar = lazy(() => import('./PollResultChartBar'));
 export const PollResultGroupedChartBar = lazy(
-  () => import('./PollResultGroupedChartBar')
+  () => import('./PollResultGroupedChartBar'),
 );

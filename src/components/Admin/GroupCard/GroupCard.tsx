@@ -109,7 +109,7 @@ function GroupCardMenu({
           },
         ],
         data: { group, groupId },
-      }
+      },
     );
 
     if (groupData) {

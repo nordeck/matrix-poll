@@ -59,7 +59,7 @@ export const PollResultGroupedChartBar = ({
     Object.values(pollResults.groupedResults).map((group) => [
       group.abbreviation,
       group.color,
-    ])
+    ]),
   );
 
   const results = Object.values(pollResults.groupedResults).flatMap((group) => {

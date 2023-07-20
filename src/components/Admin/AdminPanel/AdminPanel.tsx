@@ -66,7 +66,7 @@ export function AdminPanel(): ReactElement {
             label: t('adminPanel.createGroupModal.cancel', 'Cancel'),
           },
         ],
-      }
+      },
     );
 
     if (data) {
@@ -112,11 +112,11 @@ export function AdminPanel(): ReactElement {
                     canCreateGroups
                       ? t(
                           'adminPanel.noGroupsAdminMessage',
-                          'You have to create a group first.'
+                          'You have to create a group first.',
                         )
                       : t(
                           'adminPanel.noGroupsUserMessage',
-                          'An admin has to create a group first.'
+                          'An admin has to create a group first.',
                         )
                   }
                 />

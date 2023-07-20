@@ -47,7 +47,7 @@ function mockDateTimeFormatTimeZone(timeZone: string): void {
   jest
     .spyOn(Intl, 'DateTimeFormat')
     .mockImplementation(
-      (locale, options) => new DateTimeFormat(locale, { ...options, timeZone })
+      (locale, options) => new DateTimeFormat(locale, { ...options, timeZone }),
     );
 }
 
