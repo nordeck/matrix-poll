@@ -32,16 +32,16 @@ describe('<PollsListContainer/>', () => {
             <div id="poll-2">Poll 2</div>
           </PollsListItem>
         </PollsListContainer>
-      </>
+      </>,
     );
 
     const list = screen.getByRole('list', { name: /polls/i });
 
     expect(
-      within(list).getByRole('listitem', { name: /poll 1/i })
+      within(list).getByRole('listitem', { name: /poll 1/i }),
     ).toBeInTheDocument();
     expect(
-      within(list).getByRole('listitem', { name: /poll 2/i })
+      within(list).getByRole('listitem', { name: /poll 2/i }),
     ).toBeInTheDocument();
   });
 
@@ -54,7 +54,7 @@ describe('<PollsListContainer/>', () => {
         <PollsListItem>
           <div>Poll 2</div>
         </PollsListItem>
-      </PollsListContainer>
+      </PollsListContainer>,
     );
 
     expect(await axe(container)).toHaveNoViolations();

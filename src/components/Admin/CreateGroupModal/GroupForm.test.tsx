@@ -45,7 +45,7 @@ describe('<GroupForm/>', () => {
         content: {
           displayname: 'Bob',
         },
-      })
+      }),
     );
 
     Wrapper = ({ children }: PropsWithChildren<{}>) => {
@@ -61,7 +61,7 @@ describe('<GroupForm/>', () => {
       screen.getByRole('textbox', {
         name: 'Group title (required)',
         description: '',
-      })
+      }),
     ).toBeInTheDocument();
 
     const colorElement = screen.getByLabelText('Group color (required)');
@@ -72,14 +72,14 @@ describe('<GroupForm/>', () => {
     expect(
       within(listDelegates).getByRole('listitem', {
         name: /No delegates have been assigned yet/i,
-      })
+      }),
     ).toBeInTheDocument();
 
     expect(
       screen.getByRole('combobox', {
         expanded: false,
         name: /Assign delegate/i,
-      })
+      }),
     ).toBeInTheDocument();
 
     const listRepresentatives = screen.getByRole('list', {
@@ -89,14 +89,14 @@ describe('<GroupForm/>', () => {
     expect(
       within(listRepresentatives).getByRole('listitem', {
         name: /No representatives have been assigned yet/i,
-      })
+      }),
     ).toBeInTheDocument();
 
     expect(
       screen.getByRole('combobox', {
         expanded: false,
         name: /Assign representative/i,
-      })
+      }),
     ).toBeInTheDocument();
   });
 
@@ -109,17 +109,17 @@ describe('<GroupForm/>', () => {
       screen.getByRole('combobox', {
         expanded: false,
         name: /Assign delegate/i,
-      })
+      }),
     );
 
     await userEvent.click(await screen.findByRole('option', { name: /Bob/i }));
 
     expect(
-      within(listDelegates).getByRole('listitem', { name: /Bob/i })
+      within(listDelegates).getByRole('listitem', { name: /Bob/i }),
     ).toBeInTheDocument();
 
     expect(
-      screen.getByRole('list', { name: /Delegates: 1/i })
+      screen.getByRole('list', { name: /Delegates: 1/i }),
     ).toBeInTheDocument();
 
     const listRepresentatives = screen.getByRole('list', {
@@ -130,17 +130,17 @@ describe('<GroupForm/>', () => {
       screen.getByRole('combobox', {
         expanded: false,
         name: /Assign representative/i,
-      })
+      }),
     );
 
     await userEvent.click(screen.getByRole('option', { name: /alice/i }));
 
     expect(
-      within(listRepresentatives).getByRole('listitem', { name: /alice/i })
+      within(listRepresentatives).getByRole('listitem', { name: /alice/i }),
     ).toBeInTheDocument();
 
     expect(
-      screen.getByRole('list', { name: /Representatives: 1/i })
+      screen.getByRole('list', { name: /Representatives: 1/i }),
     ).toBeInTheDocument();
   });
 
@@ -151,7 +151,7 @@ describe('<GroupForm/>', () => {
       screen.getByRole('combobox', {
         expanded: false,
         name: /Assign delegate/i,
-      })
+      }),
     );
 
     await waitFor(() => {
@@ -169,7 +169,7 @@ describe('<GroupForm/>', () => {
             '@user-bob': { memberRole: 'representative' },
           },
         },
-      })
+      }),
     );
 
     await waitFor(() => {
@@ -186,7 +186,7 @@ describe('<GroupForm/>', () => {
       screen.getByRole('combobox', {
         expanded: false,
         name: /Assign delegate/i,
-      })
+      }),
     );
 
     await userEvent.click(await screen.findByRole('option', { name: /Bob/i }));
@@ -195,7 +195,7 @@ describe('<GroupForm/>', () => {
       screen.getByRole('combobox', {
         expanded: false,
         name: /Assign delegate/i,
-      })
+      }),
     );
 
     await waitFor(() => {
@@ -212,7 +212,7 @@ describe('<GroupForm/>', () => {
       screen.getByRole('combobox', {
         expanded: false,
         name: /Assign delegate/i,
-      })
+      }),
     );
 
     await waitFor(() => {
@@ -229,7 +229,7 @@ describe('<GroupForm/>', () => {
           membership: 'leave',
           displayname: 'Bob',
         },
-      })
+      }),
     );
 
     await waitFor(() => {
@@ -246,7 +246,7 @@ describe('<GroupForm/>', () => {
       screen.getByRole('combobox', {
         expanded: false,
         name: /Assign delegate/i,
-      })
+      }),
     );
 
     await waitFor(() => {
@@ -264,7 +264,7 @@ describe('<GroupForm/>', () => {
           },
           events_default: 50,
         },
-      })
+      }),
     );
 
     await waitFor(() => {
@@ -283,7 +283,7 @@ describe('<GroupForm/>', () => {
       screen.getByRole('combobox', {
         expanded: false,
         name: /Assign delegate/i,
-      })
+      }),
     );
 
     await userEvent.click(await screen.findByRole('option', { name: /Bob/i }));
@@ -295,7 +295,7 @@ describe('<GroupForm/>', () => {
     await userEvent.click(
       within(userDelegate).getByRole('button', {
         name: /Change to representative/i,
-      })
+      }),
     );
     expect(userDelegate).not.toBeInTheDocument();
 
@@ -307,13 +307,13 @@ describe('<GroupForm/>', () => {
       'listitem',
       {
         name: /Bob/i,
-      }
+      },
     );
 
     await userEvent.click(
       within(userRepresentative).getByRole('button', {
         name: /Change to delegate/i,
-      })
+      }),
     );
 
     expect(userRepresentative).not.toBeInTheDocument();
@@ -321,7 +321,7 @@ describe('<GroupForm/>', () => {
     expect(
       within(listDelegates).getByRole('listitem', {
         name: /Bob/i,
-      })
+      }),
     ).toBeInTheDocument();
   });
 
@@ -334,7 +334,7 @@ describe('<GroupForm/>', () => {
       screen.getByRole('combobox', {
         expanded: false,
         name: /Assign delegate/i,
-      })
+      }),
     );
 
     await userEvent.click(await screen.findByRole('option', { name: /Bob/i }));
@@ -346,7 +346,7 @@ describe('<GroupForm/>', () => {
     await userEvent.click(
       within(userBob).getByRole('button', {
         name: /Remove/i,
-      })
+      }),
     );
 
     expect(userBob).not.toBeInTheDocument();
@@ -359,7 +359,7 @@ describe('<GroupForm/>', () => {
       screen.getByRole('combobox', {
         expanded: false,
         name: /Assign representative/i,
-      })
+      }),
     );
 
     await userEvent.click(screen.getByRole('option', { name: /alice/i }));
@@ -371,7 +371,7 @@ describe('<GroupForm/>', () => {
     await userEvent.click(
       within(userAlice).getByRole('button', {
         name: /Remove/i,
-      })
+      }),
     );
 
     expect(userAlice).not.toBeInTheDocument();
@@ -386,18 +386,18 @@ describe('<GroupForm/>', () => {
       screen.getByRole('textbox', {
         name: 'Group title (required)',
       }),
-      'Red Party'
+      'Red Party',
     );
 
     await userEvent.click(
       screen.getByRole('combobox', {
         expanded: false,
         name: /Assign delegate/i,
-      })
+      }),
     );
 
     await userEvent.click(
-      await screen.findByRole('option', { name: /alice/i })
+      await screen.findByRole('option', { name: /alice/i }),
     );
 
     expect(onGroupChange).toHaveBeenLastCalledWith({
@@ -452,11 +452,11 @@ describe('<GroupForm/>', () => {
     });
 
     expect(
-      within(listDelegates).getByRole('listitem', { name: /Bob/i })
+      within(listDelegates).getByRole('listitem', { name: /Bob/i }),
     ).toBeInTheDocument();
 
     expect(
-      within(listRepresentatives).getByRole('listitem', { name: /alice/i })
+      within(listRepresentatives).getByRole('listitem', { name: /alice/i }),
     ).toBeInTheDocument();
   });
 
@@ -488,18 +488,18 @@ describe('<GroupForm/>', () => {
     await userEvent.click(
       within(userBob).getByRole('button', {
         name: /Remove/i,
-      })
+      }),
     );
 
     await userEvent.click(
       screen.getByRole('combobox', {
         expanded: false,
         name: /Assign delegate/i,
-      })
+      }),
     );
 
     await expect(
-      screen.findByRole('option', { name: /Bob/i })
+      screen.findByRole('option', { name: /Bob/i }),
     ).resolves.toBeInTheDocument();
   });
 

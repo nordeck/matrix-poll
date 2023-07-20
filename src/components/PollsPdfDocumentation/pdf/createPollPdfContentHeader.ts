@@ -28,14 +28,14 @@ import {
 
 export function createPollPdfContentHeader(
   pollIndex: number,
-  pollResult: SelectPollResults
+  pollResult: SelectPollResults,
 ): Content {
   const pollTypeTitle = getPollTypeLabel(pollResult, t);
 
   const participantCount = pollResult.votingRights.length ?? 0;
 
   const voteCount = Object.values(pollResult.results.votes ?? {}).filter(
-    (vote) => vote !== PollInvalidAnswer
+    (vote) => vote !== PollInvalidAnswer,
   ).length;
 
   const answerIds: AnswerId[] = [
@@ -71,7 +71,7 @@ export function createPollPdfContentHeader(
               {
                 text: t(
                   'createPollPdfContentHeader.general',
-                  'General information'
+                  'General information',
                 ),
                 alignment: 'left',
                 decoration: 'underline',
@@ -81,7 +81,7 @@ export function createPollPdfContentHeader(
               {
                 text: formatPollDate(
                   pollResult.poll.content.startTime,
-                  pollResult.poll.content.endTime
+                  pollResult.poll.content.endTime,
                 ),
                 alignment: 'left',
                 lineHeight: 1.5,
@@ -89,7 +89,7 @@ export function createPollPdfContentHeader(
               {
                 text: t(
                   'createPollPdfContentHeader.votingInformation',
-                  'Voting information'
+                  'Voting information',
                 ),
                 alignment: 'left',
                 decoration: 'underline',
@@ -102,7 +102,7 @@ export function createPollPdfContentHeader(
                     text: t(
                       'createPollPdfContentHeader.eligibleMembers',
                       'Voting persons: {{count}}',
-                      { count: participantCount }
+                      { count: participantCount },
                     ),
                     alignment: 'left',
                   },
@@ -115,7 +115,7 @@ export function createPollPdfContentHeader(
                 {
                   text: `${t(
                     'createPollPdfContentHeader.totalVotingResult',
-                    'Total voting result'
+                    'Total voting result',
                   )}`,
                   alignment: 'left',
                   decoration: 'underline',
@@ -125,7 +125,7 @@ export function createPollPdfContentHeader(
                   text: t(
                     'createPollPdfContentHeader.castVotes',
                     'Cast votes: {{count}}',
-                    { count: voteCount }
+                    { count: voteCount },
                   ),
                   alignment: 'left',
                   margin: [0, 2],

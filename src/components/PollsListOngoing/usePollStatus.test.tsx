@@ -48,7 +48,7 @@ describe('usePollStatus', () => {
   it('should handle poll that is not in the redux store', async () => {
     const { result, waitForValueToChange } = renderHook(
       () => usePollStatus('unknown-poll-id'),
-      { wrapper: Wrapper }
+      { wrapper: Wrapper },
     );
 
     await waitForValueToChange(() => result.current.isLoading);
@@ -72,17 +72,17 @@ describe('usePollStatus', () => {
           startTime: '2020-01-01T00:00:00Z',
           startEventId: '$start-event-id',
         },
-      })
+      }),
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
         origin_server_ts: new Date('2020-01-01T00:00:01Z').getTime(),
-      })
+      }),
     );
 
     const { result, waitForValueToChange } = renderHook(
       () => usePollStatus('poll-0'),
-      { wrapper: Wrapper }
+      { wrapper: Wrapper },
     );
 
     await waitForValueToChange(() => result.current.isLoading);

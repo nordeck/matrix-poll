@@ -33,7 +33,7 @@ enum AnswerType {
 }
 
 export function createAnswer(
-  type: AnswerType = AnswerType.YesNoAbstain
+  type: AnswerType = AnswerType.YesNoAbstain,
 ): IPollAnswer[] {
   switch (type) {
     case AnswerType.YesNo:
@@ -81,7 +81,7 @@ export function AnswerTypeField({ value, onChange }: AnswerTypeFieldProps) {
       const type = event.target.value as AnswerType;
       onChange(createAnswer(type));
     },
-    [onChange]
+    [onChange],
   );
 
   useEffect(() => {

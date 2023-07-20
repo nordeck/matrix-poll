@@ -49,7 +49,7 @@ describe('<GroupCard/>', () => {
           membership: 'join',
           avatar_url: undefined,
         },
-      })
+      }),
     );
 
     group = widgetApi.mockSendStateEvent(
@@ -60,7 +60,7 @@ describe('<GroupCard/>', () => {
             'user-bob': { memberRole: 'representative' },
           },
         },
-      })
+      }),
     );
 
     Wrapper = ({ children }: PropsWithChildren<{}>) => {
@@ -83,14 +83,14 @@ describe('<GroupCard/>', () => {
     const item = screen.getByRole('listitem', { name: /group 0/i });
 
     expect(
-      within(item).getByRole('heading', { name: /group 0/i, level: 4 })
+      within(item).getByRole('heading', { name: /group 0/i, level: 4 }),
     ).toBeInTheDocument();
 
     expect(
-      await within(item).findByRole('button', { name: /more settings/i })
+      await within(item).findByRole('button', { name: /more settings/i }),
     ).toBeInTheDocument();
     expect(
-      within(item).getByRole('heading', { name: /Participants/i, level: 5 })
+      within(item).getByRole('heading', { name: /Participants/i, level: 5 }),
     ).toBeInTheDocument();
     const showParticipantsButton = within(item).getByRole('button', {
       name: /Show Participants list/i,
@@ -110,7 +110,7 @@ describe('<GroupCard/>', () => {
     const item = screen.getByRole('listitem', { name: /group 0/i });
 
     await userEvent.click(
-      within(item).getByRole('button', { name: /Show participants/i })
+      within(item).getByRole('button', { name: /Show participants/i }),
     );
 
     const section = within(item).getByRole('region', {
@@ -122,7 +122,7 @@ describe('<GroupCard/>', () => {
     });
 
     expect(
-      within(delegatesList).getByRole('listitem', { name: /Alice/i })
+      within(delegatesList).getByRole('listitem', { name: /Alice/i }),
     ).toBeInTheDocument();
 
     const representativesList = within(section).getByRole('list', {
@@ -130,7 +130,7 @@ describe('<GroupCard/>', () => {
     });
 
     expect(
-      within(representativesList).getByRole('listitem', { name: /Bob/i })
+      within(representativesList).getByRole('listitem', { name: /Bob/i }),
     ).toBeInTheDocument();
   });
 
@@ -144,7 +144,7 @@ describe('<GroupCard/>', () => {
     await userEvent.click(
       await within(item).findByRole('button', {
         name: /more settings/i,
-      })
+      }),
     );
 
     expect(
@@ -152,13 +152,13 @@ describe('<GroupCard/>', () => {
         name: /more settings/i,
         expanded: true,
         hidden: true,
-      })
+      }),
     ).toBeInTheDocument();
 
     const menu = screen.getByRole('menu', { name: /more settings/i });
 
     await userEvent.click(
-      within(menu).getByRole('menuitem', { name: /delete group/i })
+      within(menu).getByRole('menuitem', { name: /delete group/i }),
     );
 
     const deleteModal = screen.getByRole('dialog', {
@@ -166,7 +166,7 @@ describe('<GroupCard/>', () => {
     });
 
     await userEvent.click(
-      within(deleteModal).getByRole('button', { name: 'Delete' })
+      within(deleteModal).getByRole('button', { name: 'Delete' }),
     );
 
     await waitFor(() => {
@@ -176,7 +176,7 @@ describe('<GroupCard/>', () => {
     expect(widgetApi.sendStateEvent).toBeCalledWith(
       'net.nordeck.poll.group',
       {},
-      { stateKey: 'group-0' }
+      { stateKey: 'group-0' },
     );
   });
 
@@ -190,7 +190,7 @@ describe('<GroupCard/>', () => {
     await userEvent.click(
       await within(item).findByRole('button', {
         name: /more settings/i,
-      })
+      }),
     );
 
     expect(
@@ -198,13 +198,13 @@ describe('<GroupCard/>', () => {
         name: /more settings/i,
         expanded: true,
         hidden: true,
-      })
+      }),
     ).toBeInTheDocument();
 
     const menu = screen.getByRole('menu', { name: /more settings/i });
 
     await userEvent.click(
-      within(menu).getByRole('menuitem', { name: /delete group/i })
+      within(menu).getByRole('menuitem', { name: /delete group/i }),
     );
 
     const deleteModal = screen.getByRole('dialog', {
@@ -212,7 +212,7 @@ describe('<GroupCard/>', () => {
     });
 
     await userEvent.click(
-      within(deleteModal).getByRole('button', { name: 'Cancel' })
+      within(deleteModal).getByRole('button', { name: 'Cancel' }),
     );
 
     await waitFor(() => {
@@ -234,13 +234,13 @@ describe('<GroupCard/>', () => {
     await userEvent.click(
       await within(groupListItem).findByRole('button', {
         name: 'More settings',
-      })
+      }),
     );
 
     const menu = screen.getByRole('menu', { name: /more settings/i });
 
     await userEvent.click(
-      within(menu).getByRole('menuitem', { name: 'Edit group' })
+      within(menu).getByRole('menuitem', { name: 'Edit group' }),
     );
 
     await waitFor(() => {
@@ -250,7 +250,7 @@ describe('<GroupCard/>', () => {
         {
           buttons: expect.any(Array),
           data: { group: group.content, groupId: 'group-0' },
-        }
+        },
       );
     });
     expect(widgetApi.sendStateEvent).not.toBeCalled();
@@ -278,13 +278,13 @@ describe('<GroupCard/>', () => {
     await userEvent.click(
       await within(groupListItem).findByRole('button', {
         name: 'More settings',
-      })
+      }),
     );
 
     const menu = screen.getByRole('menu', { name: /more settings/i });
 
     await userEvent.click(
-      within(menu).getByRole('menuitem', { name: 'Edit group' })
+      within(menu).getByRole('menuitem', { name: 'Edit group' }),
     );
 
     await waitFor(() => {
@@ -294,7 +294,7 @@ describe('<GroupCard/>', () => {
         {
           buttons: expect.any(Array),
           data: { group: group.content, groupId: 'group-0' },
-        }
+        },
       );
     });
 
@@ -302,8 +302,8 @@ describe('<GroupCard/>', () => {
       expect(widgetApi.sendStateEvent).toBeCalledWith(
         'net.nordeck.poll.group',
         newGroup.content,
-        { stateKey: 'group-0' }
-      )
+        { stateKey: 'group-0' },
+      ),
     );
   });
 });

@@ -35,7 +35,7 @@ describe('getPollSettings', () => {
     await expect(
       store
         .dispatch(pollSettingsApi.endpoints.getPollSettings.initiate())
-        .unwrap()
+        .unwrap(),
     ).resolves.toEqual({ event });
   });
 
@@ -45,7 +45,7 @@ describe('getPollSettings', () => {
     await expect(
       store
         .dispatch(pollSettingsApi.endpoints.getPollSettings.initiate())
-        .unwrap()
+        .unwrap(),
     ).resolves.toEqual({ event: undefined });
   });
 
@@ -57,7 +57,7 @@ describe('getPollSettings', () => {
     await expect(
       store
         .dispatch(pollSettingsApi.endpoints.getPollSettings.initiate())
-        .unwrap()
+        .unwrap(),
     ).rejects.toEqual({
       message: 'Could not load poll settings: Some Error',
       name: 'LoadFailed',
@@ -72,8 +72,8 @@ describe('getPollSettings', () => {
     await waitFor(() =>
       expect(
         pollSettingsApi.endpoints.getPollSettings.select()(store.getState())
-          .data
-      ).toEqual({ event: undefined })
+          .data,
+      ).toEqual({ event: undefined }),
     );
 
     const event = widgetApi.mockSendStateEvent(mockPollSettings());
@@ -81,8 +81,8 @@ describe('getPollSettings', () => {
     await waitFor(() =>
       expect(
         pollSettingsApi.endpoints.getPollSettings.select()(store.getState())
-          .data
-      ).toEqual({ event })
+          .data,
+      ).toEqual({ event }),
     );
   });
 });
@@ -96,9 +96,9 @@ describe('patchPollSettings', () => {
         .dispatch(
           pollSettingsApi.endpoints.patchPollSettings.initiate({
             changes: { pollsOrder: ['poll-0'] },
-          })
+          }),
         )
-        .unwrap()
+        .unwrap(),
     ).resolves.toEqual({
       event: expect.objectContaining({
         content: { pollsOrder: ['poll-0'] },
@@ -109,7 +109,7 @@ describe('patchPollSettings', () => {
     expect(widgetApi.sendStateEvent).toBeCalledWith(
       'net.nordeck.poll.settings',
       { pollsOrder: ['poll-0'] },
-      { stateKey: '!room-id' }
+      { stateKey: '!room-id' },
     );
   });
 
@@ -121,7 +121,7 @@ describe('patchPollSettings', () => {
         content: {
           pdfButtonDisabledAfter: '2022-09-28T00:00:00Z',
         },
-      })
+      }),
     );
 
     await expect(
@@ -129,9 +129,9 @@ describe('patchPollSettings', () => {
         .dispatch(
           pollSettingsApi.endpoints.patchPollSettings.initiate({
             changes: { pollsOrder: ['poll-0'] },
-          })
+          }),
         )
-        .unwrap()
+        .unwrap(),
     ).resolves.toEqual({
       event: expect.objectContaining({
         content: {
@@ -148,7 +148,7 @@ describe('patchPollSettings', () => {
         pollsOrder: ['poll-0'],
         pdfButtonDisabledAfter: '2022-09-28T00:00:00Z',
       },
-      { stateKey: '!room-id' }
+      { stateKey: '!room-id' },
     );
   });
 
@@ -162,9 +162,9 @@ describe('patchPollSettings', () => {
         .dispatch(
           pollSettingsApi.endpoints.patchPollSettings.initiate({
             changes: { pollsOrder: ['poll-0'] },
-          })
+          }),
         )
-        .unwrap()
+        .unwrap(),
     ).rejects.toEqual({
       name: 'UpdateFailed',
       message: 'Could not update poll settings: Some Error',
@@ -182,7 +182,7 @@ describe('patchPollSettings', () => {
           changes: {
             pollsOrder: ['poll-1', 'poll-2'],
           },
-        })
+        }),
       )
       .unwrap();
     await store
@@ -191,7 +191,7 @@ describe('patchPollSettings', () => {
           changes: {
             pollsOrder: ['poll-1', 'poll-2'],
           },
-        })
+        }),
       )
       .unwrap();
   });

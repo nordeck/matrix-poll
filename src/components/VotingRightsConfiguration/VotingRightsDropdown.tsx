@@ -62,7 +62,7 @@ export const VotingRightDropdown = ({
       ([id, content]) => ({
         id,
         content,
-      })
+      }),
     );
     const representatives = groupMembers
       .filter((m) => m.content.memberRole === 'representative')
@@ -82,9 +82,9 @@ export const VotingRightDropdown = ({
           (v) =>
             v &&
             v.state === 'represented' &&
-            v.representedBy === representativeId
+            v.representedBy === representativeId,
         );
-      }
+      },
     );
 
     return [
@@ -103,12 +103,12 @@ export const VotingRightDropdown = ({
 
   const getOptionLabel = useCallback(
     (option: VotingRight) => getVotingRightLabel(option, t, getUserDisplayName),
-    [getUserDisplayName, t]
+    [getUserDisplayName, t],
   );
 
   const handleOnChange = useCallback(
     (_, value: VotingRight) => onVotingRightChange(delegateId, value),
-    [delegateId, onVotingRightChange]
+    [delegateId, onVotingRightChange],
   );
 
   const renderInput = useCallback(
@@ -127,7 +127,7 @@ export const VotingRightDropdown = ({
         label={t('pollForm.attendance', 'Attendance')}
       />
     ),
-    [ariaDescribedBy, t, votingRight]
+    [ariaDescribedBy, t, votingRight],
   );
 
   const renderOption = useCallback(
@@ -136,7 +136,7 @@ export const VotingRightDropdown = ({
         <VotingRightView votingRight={option} />
       </Box>
     ),
-    []
+    [],
   );
 
   const id = useId();

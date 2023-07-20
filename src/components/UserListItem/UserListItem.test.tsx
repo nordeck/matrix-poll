@@ -51,7 +51,7 @@ describe('<UserListItem/>', () => {
       <UserListItem userId="myUser">
         <Button>Test</Button>
       </UserListItem>,
-      { wrapper }
+      { wrapper },
     );
 
     expect(screen.getByRole('button', { name: /test/i })).toBeInTheDocument();

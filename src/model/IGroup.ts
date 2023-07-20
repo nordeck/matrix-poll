@@ -47,7 +47,7 @@ const groupContentSchema = Joi.object<GroupContent, true>({
 }).unknown();
 
 export function isValidGroupEvent(
-  event: StateEvent<unknown>
+  event: StateEvent<unknown>,
 ): event is StateEvent<GroupContent> {
   return isValidEvent(event, STATE_EVENT_POLL_GROUP, groupContentSchema);
 }
@@ -58,7 +58,7 @@ export function isValidGroupEvent(
  * Should be done on every read from the room.
  */
 export function migratePollGroupSchema(
-  pollGroupEvent: StateEvent<GroupContent>
+  pollGroupEvent: StateEvent<GroupContent>,
 ): StateEvent<GroupContent> {
   return {
     ...pollGroupEvent,
@@ -86,7 +86,7 @@ export function migratePollGroupSchema(
               // make sure we can handle old groups that don't include a memberRole yet
               memberRole: p.memberRole ?? 'delegate',
             },
-          ])
+          ]),
       ),
     },
   };

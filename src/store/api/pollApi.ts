@@ -74,7 +74,7 @@ export const pollApi = baseApi.injectEndpoints({
           return {
             data: pollsEntityAdapter.addMany(
               initialState,
-              events.filter(isValidPollEvent).map(migratePollSchema)
+              events.filter(isValidPollEvent).map(migratePollSchema),
             ),
           };
         } catch (e) {
@@ -89,7 +89,7 @@ export const pollApi = baseApi.injectEndpoints({
 
       async onCacheEntryAdded(
         _,
-        { cacheDataLoaded, cacheEntryRemoved, extra, updateCachedData }
+        { cacheDataLoaded, cacheEntryRemoved, extra, updateCachedData },
       ) {
         const { widgetApi } = extra as ThunkExtraArgument;
 
@@ -100,7 +100,7 @@ export const pollApi = baseApi.injectEndpoints({
           .observeStateEvents(STATE_EVENT_POLL)
           .pipe(
             bufferTime(0),
-            filter((list) => list.length > 0)
+            filter((list) => list.length > 0),
           )
           .subscribe((events) => {
             // update the cached data if the event changes in the room
@@ -109,7 +109,7 @@ export const pollApi = baseApi.injectEndpoints({
               .map(migratePollSchema);
             const eventIdsToDelete = events
               .filter(
-                (e) => e.type === STATE_EVENT_POLL && isEqual(e.content, {})
+                (e) => e.type === STATE_EVENT_POLL && isEqual(e.content, {}),
               )
               .map((e) => e.state_key);
 
@@ -139,7 +139,7 @@ export const pollApi = baseApi.injectEndpoints({
         try {
           const pollEvents = await widgetApi.receiveStateEvents(
             STATE_EVENT_POLL,
-            { stateKey: pollId }
+            { stateKey: pollId },
           );
           const pollEvent = last(pollEvents.filter(isValidPollEvent));
 
@@ -177,7 +177,7 @@ export const pollApi = baseApi.injectEndpoints({
         try {
           const pollEvents = await widgetApi.receiveStateEvents(
             STATE_EVENT_POLL,
-            { stateKey: pollId }
+            { stateKey: pollId },
           );
           const pollEvent = last(pollEvents.filter(isValidPollEvent));
 
@@ -192,7 +192,7 @@ export const pollApi = baseApi.injectEndpoints({
 
           const startEvent = await widgetApi.sendRoomEvent<PollStartEvent>(
             ROOM_EVENT_POLL_START,
-            {}
+            {},
           );
 
           const startTime = DateTime.now();
@@ -235,7 +235,7 @@ export const pollApi = baseApi.injectEndpoints({
         try {
           const pollEvents = await widgetApi.receiveStateEvents(
             STATE_EVENT_POLL,
-            { stateKey: pollId }
+            { stateKey: pollId },
           );
           const pollEvent = last(pollEvents.filter(isValidPollEvent));
 
@@ -285,7 +285,7 @@ export const pollApi = baseApi.injectEndpoints({
         try {
           const pollGroupEvents = await widgetApi.receiveStateEvents(
             STATE_EVENT_POLL,
-            { stateKey: pollId }
+            { stateKey: pollId },
           );
           const pollGroupEvent = last(pollGroupEvents.filter(isValidPollEvent));
 
@@ -297,7 +297,7 @@ export const pollApi = baseApi.injectEndpoints({
           await widgetApi.sendStateEvent(
             STATE_EVENT_POLL,
             {},
-            { stateKey: pollId }
+            { stateKey: pollId },
           );
 
           return { data: {} };

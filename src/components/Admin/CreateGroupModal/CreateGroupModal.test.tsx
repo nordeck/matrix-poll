@@ -42,7 +42,7 @@ describe('<CreateGroupModal>', () => {
         state_key: 'user-bob',
         event_id: 'event-id-1',
         content: { displayname: 'Bob', avatar_url: undefined },
-      })
+      }),
     );
 
     Wrapper = ({ children }: PropsWithChildren<{}>) => {
@@ -69,20 +69,20 @@ describe('<CreateGroupModal>', () => {
 
     await userEvent.type(
       screen.getByRole('textbox', { name: /group title/i }),
-      'My Group'
+      'My Group',
     );
 
     await userEvent.click(
       screen.getByRole('combobox', {
         expanded: false,
         name: /Assign delegate/i,
-      })
+      }),
     );
     await userEvent.click(await screen.findByRole('option', { name: /bob/i }));
 
     expect(widgetApi.setModalButtonEnabled).toHaveBeenLastCalledWith(
       'net.nordeck.create.group.submit',
-      true
+      true,
     );
 
     subject.next('net.nordeck.create.group.submit');
@@ -110,7 +110,7 @@ describe('<CreateGroupModal>', () => {
 
     expect(widgetApi.setModalButtonEnabled).toHaveBeenLastCalledWith(
       'net.nordeck.create.group.submit',
-      false
+      false,
     );
 
     const textBox = screen.getByRole('textbox', { name: /group title/i });
@@ -119,14 +119,14 @@ describe('<CreateGroupModal>', () => {
 
     expect(widgetApi.setModalButtonEnabled).toHaveBeenLastCalledWith(
       'net.nordeck.create.group.submit',
-      true
+      true,
     );
 
     await userEvent.clear(textBox);
 
     expect(widgetApi.setModalButtonEnabled).toHaveBeenLastCalledWith(
       'net.nordeck.create.group.submit',
-      false
+      false,
     );
   });
 

@@ -21,7 +21,7 @@ import { selectAllPolls } from './pollApi';
 
 export function selectPollsUpcoming(
   state: EntityState<StateEvent<IPoll>>,
-  pollsOrder: string[] = []
+  pollsOrder: string[] = [],
 ): StateEvent<IPoll>[] {
   return selectAllPolls(state)
     .filter((p) => p.content.startTime === undefined)

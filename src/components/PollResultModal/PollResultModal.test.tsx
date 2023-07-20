@@ -74,20 +74,20 @@ describe('<PollResultModal/>', () => {
             },
           ],
         },
-      })
+      }),
     );
 
     widgetApi.mockSendStateEvent(
       mockRoomMember({
         state_key: 'user-alice',
         content: { displayname: 'Alice' },
-      })
+      }),
     );
     widgetApi.mockSendStateEvent(
       mockRoomMember({
         state_key: 'user-bob',
         content: { displayname: 'Bob' },
-      })
+      }),
     );
 
     widgetApi.mockSendRoomEvent(
@@ -98,7 +98,7 @@ describe('<PollResultModal/>', () => {
           pollId: 'poll-0',
           answerId: '1',
         },
-      })
+      }),
     );
 
     Wrapper = ({ children }: PropsWithChildren<{}>) => {
@@ -119,7 +119,7 @@ describe('<PollResultModal/>', () => {
         pollId="poll-0"
         pollIsFinished
       />,
-      { wrapper: Wrapper }
+      { wrapper: Wrapper },
     );
 
     await userEvent.click(screen.getByRole('button', { name: 'Show Results' }));
@@ -130,13 +130,13 @@ describe('<PollResultModal/>', () => {
     });
 
     expect(
-      within(dialog).getByRole('region', { name: 'My Question' })
+      within(dialog).getByRole('region', { name: 'My Question' }),
     ).toBeInTheDocument();
     expect(
-      within(dialog).getByRole('region', { name: 'Results' })
+      within(dialog).getByRole('region', { name: 'Results' }),
     ).toBeInTheDocument();
     expect(
-      within(dialog).getByRole('region', { name: 'Voting persons' })
+      within(dialog).getByRole('region', { name: 'Voting persons' }),
     ).toBeInTheDocument();
 
     await userEvent.click(screen.getByRole('button', { name: 'Close' }));
@@ -172,7 +172,7 @@ describe('<PollResultModal/>', () => {
             },
           ],
         },
-      })
+      }),
     );
 
     render(
@@ -182,7 +182,7 @@ describe('<PollResultModal/>', () => {
         pollId="poll-0"
         pollIsFinished
       />,
-      { wrapper: Wrapper }
+      { wrapper: Wrapper },
     );
 
     await userEvent.click(screen.getByRole('button', { name: 'Show Results' }));
@@ -193,10 +193,10 @@ describe('<PollResultModal/>', () => {
     });
 
     expect(
-      within(dialog).getByRole('region', { name: 'My Question' })
+      within(dialog).getByRole('region', { name: 'My Question' }),
     ).toBeInTheDocument();
     expect(
-      within(dialog).queryByRole('region', { name: 'Voting persons' })
+      within(dialog).queryByRole('region', { name: 'Voting persons' }),
     ).not.toBeInTheDocument();
 
     await userEvent.click(screen.getByRole('button', { name: 'Close' }));
@@ -212,7 +212,7 @@ describe('<PollResultModal/>', () => {
         pollId="poll-0"
         pollIsFinished
       />,
-      { wrapper: Wrapper }
+      { wrapper: Wrapper },
     );
 
     expect(await axe(container)).toHaveNoViolations();
@@ -227,14 +227,14 @@ describe('<PollResultModal/>', () => {
     });
 
     await userEvent.click(
-      within(dialog).getByRole('button', { name: /result display mode/i })
+      within(dialog).getByRole('button', { name: /result display mode/i }),
     );
     await userEvent.click(
-      screen.getByRole('option', { name: /result by group/i })
+      screen.getByRole('option', { name: /result by group/i }),
     );
 
     expect(
-      within(dialog).getByRole('heading', { name: 'Group 1' })
+      within(dialog).getByRole('heading', { name: 'Group 1' }),
     ).toBeInTheDocument();
 
     expect(await axe(container)).toHaveNoViolations();

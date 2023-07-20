@@ -53,11 +53,11 @@ describe('<CreatePollModal>', () => {
 
     await userEvent.type(
       screen.getByRole('textbox', { name: /title/i }),
-      'Poll Title'
+      'Poll Title',
     );
     await userEvent.type(
       screen.getByRole('textbox', { name: /question/i }),
-      'Poll Question'
+      'Poll Question',
     );
     await userEvent.click(screen.getByRole('radio', { name: 'Yes | No' }));
 
@@ -82,16 +82,16 @@ describe('<CreatePollModal>', () => {
 
     await userEvent.type(
       screen.getByRole('textbox', { name: /title/i }),
-      'Poll Title'
+      'Poll Title',
     );
     await userEvent.type(
       screen.getByRole('textbox', { name: /question/i }),
-      'Poll Question'
+      'Poll Question',
     );
 
     expect(widgetApi.setModalButtonEnabled).toHaveBeenLastCalledWith(
       'net.nordeck.poll.submit',
-      true
+      true,
     );
 
     // should disable button when required fields are missing
@@ -99,7 +99,7 @@ describe('<CreatePollModal>', () => {
 
     expect(widgetApi.setModalButtonEnabled).toHaveBeenLastCalledWith(
       'net.nordeck.poll.submit',
-      false
+      false,
     );
   });
 

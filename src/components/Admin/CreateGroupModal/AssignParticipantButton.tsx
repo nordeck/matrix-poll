@@ -54,13 +54,13 @@ export function AssignParticipantButton({
   const handleGetOptionLabel = useCallback(
     (event: StateEvent<RoomMemberStateEventContent>) =>
       getUserDisplayName(event.state_key),
-    [getUserDisplayName]
+    [getUserDisplayName],
   );
 
   const handleOnChange = useCallback(
     async (
       _: SyntheticEvent,
-      event: StateEvent<RoomMemberStateEventContent> | null
+      event: StateEvent<RoomMemberStateEventContent> | null,
     ) => {
       setInputValue('');
 
@@ -68,13 +68,13 @@ export function AssignParticipantButton({
         onAdd(event.state_key);
       }
     },
-    [onAdd]
+    [onAdd],
   );
   const handleOnInputChange = useCallback(
     (_: SyntheticEvent, value: string) => {
       setInputValue(value);
     },
-    []
+    [],
   );
 
   const handleRenderInput = useCallback(
@@ -95,13 +95,13 @@ export function AssignParticipantButton({
         />
       );
     },
-    [label]
+    [label],
   );
 
   const handleRenderOption = useCallback(
     (
       props: HTMLAttributes<HTMLLIElement>,
-      event: StateEvent<RoomMemberStateEventContent>
+      event: StateEvent<RoomMemberStateEventContent>,
     ): ReactNode => {
       return (
         <UserListItem
@@ -111,7 +111,7 @@ export function AssignParticipantButton({
         />
       );
     },
-    []
+    [],
   );
 
   return (
@@ -122,7 +122,7 @@ export function AssignParticipantButton({
       inputValue={inputValue}
       noOptionsText={t(
         'assignParticipantsView.selectNoParticipants',
-        'There are no unassigned participants in this room.'
+        'There are no unassigned participants in this room.',
       )}
       onChange={handleOnChange}
       onInputChange={handleOnInputChange}
