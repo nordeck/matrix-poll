@@ -20,7 +20,7 @@ import { SelectPollResults } from '../../store';
 
 export function getPollTypeLabel(
   pollResult: SelectPollResults,
-  t: TFunction
+  t: TFunction,
 ): string {
   const pollType = pollResult.poll.content.pollType;
 

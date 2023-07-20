@@ -48,10 +48,10 @@ export const PollsListUpcoming = (): ReactElement => {
       pollsState
         ? selectPollsUpcoming(
             pollsState,
-            pollSettings?.event?.content.pollsOrder
+            pollSettings?.event?.content.pollsOrder,
           )
         : [],
-    [pollSettings?.event?.content.pollsOrder, pollsState]
+    [pollSettings?.event?.content.pollsOrder, pollsState],
   );
 
   const handleSortPollDrop = useCallback(
@@ -64,7 +64,7 @@ export const PollsListUpcoming = (): ReactElement => {
         },
       }).unwrap();
     },
-    [patchPollSettings]
+    [patchPollSettings],
   );
 
   const headingId = useId();

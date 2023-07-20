@@ -51,7 +51,7 @@ describe('<AdminPanel/>', () => {
           membership: 'join',
           avatar_url: undefined,
         },
-      })
+      }),
     );
 
     widgetApi.mockSendStateEvent(
@@ -62,7 +62,7 @@ describe('<AdminPanel/>', () => {
             'user-bob': { memberRole: 'representative' },
           },
         },
-      })
+      }),
     );
 
     Wrapper = ({ children }: PropsWithChildren<{}>) => {
@@ -81,7 +81,7 @@ describe('<AdminPanel/>', () => {
     const { container } = render(<AdminPanel />, { wrapper: Wrapper });
 
     await expect(
-      screen.findByRole('list', { name: /groups/i })
+      screen.findByRole('list', { name: /groups/i }),
     ).resolves.toBeInTheDocument();
 
     expect(await axe(container)).toHaveNoViolations();
@@ -96,20 +96,20 @@ describe('<AdminPanel/>', () => {
     });
 
     expect(
-      within(item).getByRole('heading', { name: /group 0/i, level: 4 })
+      within(item).getByRole('heading', { name: /group 0/i, level: 4 }),
     ).toBeInTheDocument();
 
     await expect(
       within(item).findByRole('button', {
         name: /more settings/i,
         description: 'GROUP 0',
-      })
+      }),
     ).resolves.toBeInTheDocument();
 
     const nav = screen.getByRole('navigation');
 
     expect(
-      within(nav).getByRole('button', { name: /create new group/i })
+      within(nav).getByRole('button', { name: /create new group/i }),
     ).toBeInTheDocument();
   });
 
@@ -123,7 +123,7 @@ describe('<AdminPanel/>', () => {
     expect(
       within(list).getByRole('listitem', {
         name: /you have to create a group first/i,
-      })
+      }),
     ).toBeInTheDocument();
   });
 
@@ -132,7 +132,7 @@ describe('<AdminPanel/>', () => {
     widgetApi.mockSendStateEvent(
       mockPowerLevelsEvent({
         content: { users_default: 0 },
-      })
+      }),
     );
 
     render(<AdminPanel />, { wrapper: Wrapper });
@@ -142,7 +142,7 @@ describe('<AdminPanel/>', () => {
     expect(
       within(list).getByRole('listitem', {
         name: /an admin has to create a group first/i,
-      })
+      }),
     ).toBeInTheDocument();
   });
 
@@ -155,13 +155,13 @@ describe('<AdminPanel/>', () => {
     });
 
     await userEvent.click(
-      await within(item).findByRole('button', { name: /more settings/i })
+      await within(item).findByRole('button', { name: /more settings/i }),
     );
 
     const menu = screen.getByRole('menu', { name: /more settings/i });
 
     await userEvent.click(
-      within(menu).getByRole('menuitem', { name: /delete group/i })
+      within(menu).getByRole('menuitem', { name: /delete group/i }),
     );
 
     const deleteModal = screen.getByRole('dialog', {
@@ -169,7 +169,7 @@ describe('<AdminPanel/>', () => {
     });
 
     await userEvent.click(
-      within(deleteModal).getByRole('button', { name: 'Delete' })
+      within(deleteModal).getByRole('button', { name: 'Delete' }),
     );
 
     await waitFor(() => {
@@ -185,7 +185,7 @@ describe('<AdminPanel/>', () => {
     const nav = await screen.findByRole('navigation');
 
     await userEvent.click(
-      within(nav).getByRole('button', { name: /create new group/i })
+      within(nav).getByRole('button', { name: /create new group/i }),
     );
 
     expect(widgetApi.openModal).toBeCalledWith(
@@ -205,7 +205,7 @@ describe('<AdminPanel/>', () => {
             label: 'Cancel',
           },
         ],
-      }
+      },
     );
 
     expect(widgetApi.sendStateEvent).not.toBeCalled();
@@ -221,7 +221,7 @@ describe('<AdminPanel/>', () => {
     const nav = await screen.findByRole('navigation');
 
     await userEvent.click(
-      within(nav).getByRole('button', { name: /create new group/i })
+      within(nav).getByRole('button', { name: /create new group/i }),
     );
 
     expect(widgetApi.openModal).toBeCalledWith(
@@ -241,14 +241,14 @@ describe('<AdminPanel/>', () => {
             label: 'Cancel',
           },
         ],
-      }
+      },
     );
 
     await waitFor(() => {
       expect(widgetApi.sendStateEvent).toBeCalledWith(
         'net.nordeck.poll.group',
         { abbreviation: 'GROUP 0', color: '#07f556', members: {} },
-        { stateKey: expect.any(String) }
+        { stateKey: expect.any(String) },
       );
     });
   });
@@ -257,7 +257,7 @@ describe('<AdminPanel/>', () => {
     widgetApi.mockSendStateEvent(
       mockPowerLevelsEvent({
         content: { users_default: 0 },
-      })
+      }),
     );
 
     render(<AdminPanel />, { wrapper: Wrapper });

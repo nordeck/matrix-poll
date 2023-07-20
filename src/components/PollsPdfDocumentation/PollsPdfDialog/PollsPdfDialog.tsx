@@ -32,7 +32,7 @@ import { PollsPdfDialogContent } from './PollsPdfDialogContent';
 // Load the wrapper component lazily. This makes sure that we don't load the
 // full PDF code if no PDFs are generated.
 const PollsPdfDialogWrapper = React.lazy(
-  () => import('./PollsPdfDialogWrapper')
+  () => import('./PollsPdfDialogWrapper'),
 );
 
 export function PollsPdfDialog({
@@ -69,7 +69,7 @@ export function PollsPdfDialog({
         <DialogContentText id={dialogDescriptionId}>
           {t(
             'pollsPdfDialog.description',
-            'The PDF documentation is being generated and can be downloaded once it is ready.'
+            'The PDF documentation is being generated and can be downloaded once it is ready.',
           )}
         </DialogContentText>
 

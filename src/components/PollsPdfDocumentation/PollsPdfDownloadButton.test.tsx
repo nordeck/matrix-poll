@@ -53,7 +53,7 @@ describe('<PollsPdfDownloadButton/>', () => {
     render(<PollsPdfDownloadButton />, { wrapper: Wrapper });
 
     expect(
-      screen.getByRole('button', { name: 'Generate PDF documentation' })
+      screen.getByRole('button', { name: 'Generate PDF documentation' }),
     ).toBeInTheDocument();
   });
 
@@ -61,13 +61,13 @@ describe('<PollsPdfDownloadButton/>', () => {
     render(<PollsPdfDownloadButton />, { wrapper: Wrapper });
 
     await userEvent.click(
-      screen.getByRole('button', { name: 'Generate PDF documentation' })
+      screen.getByRole('button', { name: 'Generate PDF documentation' }),
     );
 
     const dialog = screen.getByRole('dialog', { name: 'Download PDF' });
 
     await userEvent.click(
-      await within(dialog).findByRole('link', { name: 'Download' })
+      await within(dialog).findByRole('link', { name: 'Download' }),
     );
 
     await waitFor(() => {

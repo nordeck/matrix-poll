@@ -27,7 +27,7 @@ describe('<PollsPdfDialogContent>', () => {
       <PollsPdfDialogContent
         onClose={onClose}
         value={{ url: 'https://example.com/test.pdf', roomName: 'My Room' }}
-      />
+      />,
     );
 
     const downloadButton = screen.getByRole('link', {
@@ -38,7 +38,7 @@ describe('<PollsPdfDialogContent>', () => {
     expect(downloadButton).toBeEnabled();
     expect(downloadButton).toHaveAttribute(
       'href',
-      'https://example.com/test.pdf'
+      'https://example.com/test.pdf',
     );
     expect(downloadButton).toHaveAttribute('download', 'My Room.pdf');
 
@@ -53,10 +53,10 @@ describe('<PollsPdfDialogContent>', () => {
     expect(
       screen.getByRole('button', {
         name: 'Download',
-      })
+      }),
     ).toHaveAttribute('aria-disabled', 'true');
     expect(
-      screen.getByRole('progressbar', { name: 'Download' })
+      screen.getByRole('progressbar', { name: 'Download' }),
     ).toBeInTheDocument();
   });
 
@@ -66,10 +66,10 @@ describe('<PollsPdfDialogContent>', () => {
     expect(
       screen.getByRole('button', {
         name: 'Download',
-      })
+      }),
     ).toHaveAttribute('aria-disabled', 'true');
     expect(screen.getByRole('status')).toHaveTextContent(
-      'Something went wrong while generating the PDF documentation.'
+      'Something went wrong while generating the PDF documentation.',
     );
   });
 
@@ -78,7 +78,7 @@ describe('<PollsPdfDialogContent>', () => {
       <PollsPdfDialogContent
         onClose={onClose}
         value={{ url: 'https://example.com/test.pdf', roomName: 'My Room' }}
-      />
+      />,
     );
 
     expect(await axe(container)).toHaveNoViolations();
@@ -86,7 +86,7 @@ describe('<PollsPdfDialogContent>', () => {
 
   it('should have no accessibility violations while loading', async () => {
     const { container } = render(
-      <PollsPdfDialogContent loading onClose={onClose} />
+      <PollsPdfDialogContent loading onClose={onClose} />,
     );
 
     expect(await axe(container)).toHaveNoViolations();
@@ -94,7 +94,7 @@ describe('<PollsPdfDialogContent>', () => {
 
   it('should have no accessibility violations on error', async () => {
     const { container } = render(
-      <PollsPdfDialogContent error onClose={onClose} />
+      <PollsPdfDialogContent error onClose={onClose} />,
     );
 
     expect(await axe(container)).toHaveNoViolations();

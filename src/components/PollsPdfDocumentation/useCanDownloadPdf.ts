@@ -22,7 +22,7 @@ import { IPollSettings } from '../../model';
 import { useGetPollSettingsQuery } from '../../store';
 
 function evaluateCanDownloadPdf(
-  pollSettings: StateEvent<IPollSettings> | undefined
+  pollSettings: StateEvent<IPollSettings> | undefined,
 ): boolean {
   return (
     !pollSettings?.content?.pdfButtonDisabledAfter ||

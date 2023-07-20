@@ -48,7 +48,7 @@ export function MemberAvatar({ userId, className }: MemberAvatarProps) {
       memberEvent
         ? getRoomMemberDisplayName(memberEvent, allRoomMembers)
         : userId,
-    [allRoomMembers, memberEvent, userId]
+    [allRoomMembers, memberEvent, userId],
   );
 
   const avatarUrl = useMemo(() => {

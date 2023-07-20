@@ -77,19 +77,19 @@ function PollMenuOngoingPoll({
       <ConfirmDeleteDialog
         confirmTitle={t(
           'pollsListOnGoingItem.dropdownItemStopPoll.confirmButton',
-          'End now'
+          'End now',
         )}
         description={t(
           'pollsListOnGoingItem.dropdownItemStopPoll.message',
           'Are you sure you want to end the poll “{{title}}”? All existing votes will be registered and no further voting will be possible.',
-          { title: poll.content.title }
+          { title: poll.content.title },
         )}
         onCancel={handleCloseStopConfirm}
         onConfirm={handleClickStopConfirm}
         open={openStopConfirm}
         title={t(
           'pollsListOnGoingItem.dropdownItemStopPoll.endPollNow',
-          'End poll now'
+          'End poll now',
         )}
       />
     </>
@@ -115,7 +115,7 @@ export const PollsListOngoingItem = ({ poll }: PollsListOngoingItemProps) => {
 
   const tooltipText = t(
     'resultVoteView.resultIsInvisible',
-    'You will see the result when the voting ends.'
+    'You will see the result when the voting ends.',
   );
 
   return (

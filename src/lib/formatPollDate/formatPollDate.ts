@@ -28,7 +28,7 @@ const withDateFormat = {
 
 export const formatPollDate = (
   date: string | undefined,
-  endTime: string | undefined
+  endTime: string | undefined,
 ) => {
   const startDate = date ? DateTime.fromISO(date) : DateTime.now();
   const endDate = endTime ? DateTime.fromISO(endTime) : undefined;

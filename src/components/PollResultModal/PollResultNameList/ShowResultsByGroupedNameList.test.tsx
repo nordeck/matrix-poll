@@ -60,20 +60,20 @@ describe('<ShowResultsByGroupedNameList/>', () => {
             },
           ],
         },
-      })
+      }),
     );
 
     widgetApi.mockSendStateEvent(
       mockRoomMember({
         state_key: 'user-alice',
         content: { displayname: 'Alice' },
-      })
+      }),
     );
     widgetApi.mockSendStateEvent(
       mockRoomMember({
         state_key: 'user-bob',
         content: { displayname: 'Bob' },
-      })
+      }),
     );
 
     widgetApi.mockSendRoomEvent(
@@ -84,7 +84,7 @@ describe('<ShowResultsByGroupedNameList/>', () => {
           pollId: 'poll-0',
           answerId: '1',
         },
-      })
+      }),
     );
 
     Wrapper = ({ children }: PropsWithChildren<{}>) => {
@@ -100,7 +100,7 @@ describe('<ShowResultsByGroupedNameList/>', () => {
   it('should not explode if poll does not exist', () => {
     const { container } = render(
       <ShowResultsByGroupedNameList pollId="another-poll" />,
-      { wrapper: Wrapper }
+      { wrapper: Wrapper },
     );
 
     expect(container).toBeEmptyDOMElement();
@@ -114,12 +114,12 @@ describe('<ShowResultsByGroupedNameList/>', () => {
           startTime: new Date().toISOString(),
           groups: undefined,
         },
-      })
+      }),
     );
 
     const { container } = render(
       <ShowResultsByGroupedNameList pollId="poll-0" />,
-      { wrapper: Wrapper }
+      { wrapper: Wrapper },
     );
 
     expect(container).toBeEmptyDOMElement();
@@ -128,7 +128,7 @@ describe('<ShowResultsByGroupedNameList/>', () => {
   it('should have no accessibility violations', async () => {
     const { container } = render(
       <ShowResultsByGroupedNameList pollId="poll-0" />,
-      { wrapper: Wrapper }
+      { wrapper: Wrapper },
     );
 
     expect(await axe(container)).toHaveNoViolations();
@@ -151,7 +151,7 @@ describe('<ShowResultsByGroupedNameList/>', () => {
     const group2List = screen.getByRole('list', { name: /group 2/i });
     const emptyListItem = within(group2List).getByRole('listitem');
     expect(
-      within(emptyListItem).getByText(/no votes were cast\./i)
+      within(emptyListItem).getByText(/no votes were cast\./i),
     ).toBeInTheDocument();
   });
 

@@ -25,7 +25,7 @@ describe('<GroupAvatar/>', () => {
 
     expect(screen.getByTestId('avatarGROUP 0')).toHaveAttribute(
       'aria-hidden',
-      'true'
+      'true',
     );
   });
 

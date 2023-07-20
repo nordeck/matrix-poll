@@ -29,7 +29,7 @@ type ParticipantItemProps = {
   onRemoveMember?: (participant: string) => void;
   onChangeDelegation?: (
     participant: string,
-    type: 'representative' | 'delegate'
+    type: 'representative' | 'delegate',
   ) => void;
 };
 

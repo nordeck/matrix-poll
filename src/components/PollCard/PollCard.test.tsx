@@ -47,7 +47,7 @@ describe('<PollCard/>', () => {
           startTime: new Date().toISOString(),
           groups: undefined,
         },
-      })
+      }),
     );
 
     widgetApi.mockSendStateEvent(mockPowerLevelsEvent());
@@ -67,17 +67,17 @@ describe('<PollCard/>', () => {
     expect(screen.getByText(/my question/i)).toBeInTheDocument();
     expect(screen.getByText(/my description/i)).toBeInTheDocument();
     await expect(
-      screen.findByRole('listitem', { name: /open poll/i })
+      screen.findByRole('listitem', { name: /open poll/i }),
     ).resolves.toBeInTheDocument();
     expect(
-      screen.getByRole('listitem', { name: /0 voters/i })
+      screen.getByRole('listitem', { name: /0 voters/i }),
     ).toBeInTheDocument();
   });
 
   it('should have no accessibility violations', async () => {
     const { container } = render(
       <PollCard poll={poll.content} pollId={poll.state_key} />,
-      { wrapper: Wrapper }
+      { wrapper: Wrapper },
     );
 
     expect(await axe(container)).toHaveNoViolations();
@@ -94,7 +94,7 @@ describe('<PollCard/>', () => {
       >
         <p>Children</p>
       </PollCard>,
-      { wrapper: Wrapper }
+      { wrapper: Wrapper },
     );
 
     expect(screen.getByText(/header slot/i)).toBeInTheDocument();
@@ -108,31 +108,31 @@ describe('<PollCard/>', () => {
       mockRoomMember({
         state_key: 'user-1',
         content: { membership: 'join' },
-      })
+      }),
     );
     widgetApi.mockSendStateEvent(
       mockRoomMember({
         state_key: 'user-2',
         content: { membership: 'invite' },
-      })
+      }),
     );
     widgetApi.mockSendStateEvent(
       mockRoomMember({
         state_key: 'user-3',
         content: { membership: 'leave' },
-      })
+      }),
     );
     widgetApi.mockSendStateEvent(
       mockRoomMember({
         state_key: 'user-4',
         content: { membership: 'ban' },
-      })
+      }),
     );
     widgetApi.mockSendStateEvent(
       mockRoomMember({
         state_key: 'user-5',
         content: { membership: 'knock' },
-      })
+      }),
     );
 
     widgetApi.mockSendRoomEvent(
@@ -140,21 +140,21 @@ describe('<PollCard/>', () => {
         sender: 'user-1',
         origin_server_ts: Date.now(),
         content: { pollId: 'poll-0', answerId: '1' },
-      })
+      }),
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
         sender: 'user-2',
         origin_server_ts: Date.now(),
         content: { pollId: 'poll-0', answerId: '2' },
-      })
+      }),
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
         sender: 'user-3',
         origin_server_ts: Date.now(),
         content: { pollId: 'poll-0', answerId: '1' },
-      })
+      }),
     );
 
     render(<PollCard poll={poll.content} pollId={poll.state_key} showVotes />, {
@@ -162,10 +162,10 @@ describe('<PollCard/>', () => {
     });
 
     await expect(
-      screen.findByRole('listitem', { name: /3 voters/i })
+      screen.findByRole('listitem', { name: /3 voters/i }),
     ).resolves.toBeInTheDocument();
     expect(
-      screen.getByRole('listitem', { name: /3 voting persons/i })
+      screen.getByRole('listitem', { name: /3 voting persons/i }),
     ).toBeInTheDocument();
   });
 
@@ -174,20 +174,20 @@ describe('<PollCard/>', () => {
       mockPoll({
         state_key: 'poll-0',
         content: { groups: undefined },
-      })
+      }),
     );
 
     widgetApi.mockSendStateEvent(
       mockRoomMember({
         state_key: 'user-1',
         content: { membership: 'join' },
-      })
+      }),
     );
     widgetApi.mockSendStateEvent(
       mockRoomMember({
         state_key: 'user-2',
         content: { membership: 'invite' },
-      })
+      }),
     );
 
     render(<PollCard poll={poll.content} pollId={poll.state_key} />, {
@@ -195,10 +195,10 @@ describe('<PollCard/>', () => {
     });
 
     await expect(
-      screen.findByRole('listitem', { name: /2 voters/i })
+      screen.findByRole('listitem', { name: /2 voters/i }),
     ).resolves.toBeInTheDocument();
     expect(
-      screen.queryByRole('listitem', { name: /voting persons/i })
+      screen.queryByRole('listitem', { name: /voting persons/i }),
     ).not.toBeInTheDocument();
   });
 
@@ -207,13 +207,13 @@ describe('<PollCard/>', () => {
       mockRoomMember({
         state_key: 'user-1',
         content: { membership: 'join' },
-      })
+      }),
     );
     widgetApi.mockSendStateEvent(
       mockRoomMember({
         state_key: 'user-2',
         content: { membership: 'invite' },
-      })
+      }),
     );
 
     render(<PollCard poll={poll.content} pollId={poll.state_key} showVotes />, {
@@ -221,10 +221,10 @@ describe('<PollCard/>', () => {
     });
 
     await expect(
-      screen.findByRole('listitem', { name: /2 voters/i })
+      screen.findByRole('listitem', { name: /2 voters/i }),
     ).resolves.toBeInTheDocument();
     expect(
-      screen.getByRole('listitem', { name: /0 voting persons/i })
+      screen.getByRole('listitem', { name: /0 voting persons/i }),
     ).toBeInTheDocument();
   });
 });

@@ -73,58 +73,58 @@ describe('<PollResultGroupedTable/>', () => {
 
     // Actually a rowheader, but the testing library is broken here
     expect(
-      within(rows[1]).getByRole('columnheader', { name: 'Yes' })
+      within(rows[1]).getByRole('columnheader', { name: 'Yes' }),
     ).toBeInTheDocument();
     expect(
-      within(rows[1]).getByRole('rowheader', { name: 'Total' })
+      within(rows[1]).getByRole('rowheader', { name: 'Total' }),
     ).toBeInTheDocument();
     expect(within(rows[1]).getByRole('cell')).toHaveTextContent('2');
 
     expect(
-      within(rows[2]).getByRole('rowheader', { name: 'Red Party' })
+      within(rows[2]).getByRole('rowheader', { name: 'Red Party' }),
     ).toBeInTheDocument();
     expect(within(rows[2]).getByRole('cell')).toHaveTextContent('1');
 
     expect(
-      within(rows[3]).getByRole('rowheader', { name: 'Blue Party' })
+      within(rows[3]).getByRole('rowheader', { name: 'Blue Party' }),
     ).toBeInTheDocument();
     expect(within(rows[3]).getByRole('cell')).toHaveTextContent('1');
 
     // Actually a rowheader, but the testing library is broken here
     expect(
-      within(rows[4]).getByRole('columnheader', { name: 'No' })
+      within(rows[4]).getByRole('columnheader', { name: 'No' }),
     ).toBeInTheDocument();
     expect(
-      within(rows[4]).getByRole('rowheader', { name: 'Total' })
+      within(rows[4]).getByRole('rowheader', { name: 'Total' }),
     ).toBeInTheDocument();
     expect(within(rows[4]).getByRole('cell')).toHaveTextContent('1');
 
     expect(
-      within(rows[5]).getByRole('rowheader', { name: 'Red Party' })
+      within(rows[5]).getByRole('rowheader', { name: 'Red Party' }),
     ).toBeInTheDocument();
     expect(within(rows[5]).getByRole('cell')).toHaveTextContent('0');
 
     expect(
-      within(rows[6]).getByRole('rowheader', { name: 'Blue Party' })
+      within(rows[6]).getByRole('rowheader', { name: 'Blue Party' }),
     ).toBeInTheDocument();
     expect(within(rows[6]).getByRole('cell')).toHaveTextContent('1');
 
     // Actually a rowheader, but the testing library is broken here
     expect(
-      within(rows[7]).getByRole('columnheader', { name: 'Invalid' })
+      within(rows[7]).getByRole('columnheader', { name: 'Invalid' }),
     ).toBeInTheDocument();
     expect(
-      within(rows[7]).getByRole('rowheader', { name: 'Total' })
+      within(rows[7]).getByRole('rowheader', { name: 'Total' }),
     ).toBeInTheDocument();
     expect(within(rows[7]).getByRole('cell')).toHaveTextContent('1');
 
     expect(
-      within(rows[8]).getByRole('rowheader', { name: 'Red Party' })
+      within(rows[8]).getByRole('rowheader', { name: 'Red Party' }),
     ).toBeInTheDocument();
     expect(within(rows[8]).getByRole('cell')).toHaveTextContent('1');
 
     expect(
-      within(rows[9]).getByRole('rowheader', { name: 'Blue Party' })
+      within(rows[9]).getByRole('rowheader', { name: 'Blue Party' }),
     ).toBeInTheDocument();
     expect(within(rows[9]).getByRole('cell')).toHaveTextContent('0');
   });
@@ -139,39 +139,39 @@ describe('<PollResultGroupedTable/>', () => {
 
     // Actually a rowheader, but the testing library is broken here
     expect(
-      within(rows[1]).getByRole('columnheader', { name: 'Yes' })
+      within(rows[1]).getByRole('columnheader', { name: 'Yes' }),
     ).toBeInTheDocument();
     expect(
-      within(rows[1]).getByRole('rowheader', { name: 'Total' })
+      within(rows[1]).getByRole('rowheader', { name: 'Total' }),
     ).toBeInTheDocument();
     expect(within(rows[1]).getByRole('cell')).toHaveTextContent('2');
 
     expect(
-      within(rows[2]).getByRole('rowheader', { name: 'Red Party' })
+      within(rows[2]).getByRole('rowheader', { name: 'Red Party' }),
     ).toBeInTheDocument();
     expect(within(rows[2]).getByRole('cell')).toHaveTextContent('1');
 
     expect(
-      within(rows[3]).getByRole('rowheader', { name: 'Blue Party' })
+      within(rows[3]).getByRole('rowheader', { name: 'Blue Party' }),
     ).toBeInTheDocument();
     expect(within(rows[3]).getByRole('cell')).toHaveTextContent('1');
 
     // Actually a rowheader, but the testing library is broken here
     expect(
-      within(rows[4]).getByRole('columnheader', { name: 'No' })
+      within(rows[4]).getByRole('columnheader', { name: 'No' }),
     ).toBeInTheDocument();
     expect(
-      within(rows[4]).getByRole('rowheader', { name: 'Total' })
+      within(rows[4]).getByRole('rowheader', { name: 'Total' }),
     ).toBeInTheDocument();
     expect(within(rows[4]).getByRole('cell')).toHaveTextContent('1');
 
     expect(
-      within(rows[5]).getByRole('rowheader', { name: 'Red Party' })
+      within(rows[5]).getByRole('rowheader', { name: 'Red Party' }),
     ).toBeInTheDocument();
     expect(within(rows[5]).getByRole('cell')).toHaveTextContent('0');
 
     expect(
-      within(rows[6]).getByRole('rowheader', { name: 'Blue Party' })
+      within(rows[6]).getByRole('rowheader', { name: 'Blue Party' }),
     ).toBeInTheDocument();
     expect(within(rows[6]).getByRole('cell')).toHaveTextContent('1');
   });

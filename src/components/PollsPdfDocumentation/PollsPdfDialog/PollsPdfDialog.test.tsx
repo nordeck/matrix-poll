@@ -58,7 +58,7 @@ describe('<PollsPdfDialog>', () => {
     const dialog = screen.getByRole('dialog', { name: 'Download PDF' });
 
     await expect(
-      within(dialog).findByRole('link', { name: 'Download' })
+      within(dialog).findByRole('link', { name: 'Download' }),
     ).resolves.toBeInTheDocument();
 
     expect(await axe(container)).toHaveNoViolations();
@@ -76,7 +76,7 @@ describe('<PollsPdfDialog>', () => {
     });
 
     await expect(
-      within(dialog).findByRole('link', { name: 'Download' })
+      within(dialog).findByRole('link', { name: 'Download' }),
     ).resolves.toBeInTheDocument();
   });
 
@@ -88,7 +88,7 @@ describe('<PollsPdfDialog>', () => {
     const dialog = screen.getByRole('dialog', { name: 'Download PDF' });
 
     await userEvent.click(
-      within(dialog).getByRole('button', { name: 'Close' })
+      within(dialog).getByRole('button', { name: 'Close' }),
     );
 
     expect(onClose).toBeCalled();

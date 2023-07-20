@@ -36,7 +36,7 @@ const voteSchema = Joi.object<IVote, true>({
 }).unknown();
 
 export function isValidVoteEvent(
-  event: RoomEvent<unknown>
+  event: RoomEvent<unknown>,
 ): event is RoomEvent<IVote> {
   return isValidEvent(event, ROOM_EVENT_VOTE, voteSchema);
 }

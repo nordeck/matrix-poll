@@ -69,7 +69,7 @@ describe('<CreatePollForm>', () => {
             },
           },
         },
-      })
+      }),
     );
     widgetApi.mockSendStateEvent(
       mockGroup({
@@ -84,7 +84,7 @@ describe('<CreatePollForm>', () => {
             },
           },
         },
-      })
+      }),
     );
 
     widgetApi.mockSendStateEvent(mockRoomMember());
@@ -93,28 +93,28 @@ describe('<CreatePollForm>', () => {
         state_key: '@user-bob',
         event_id: '$event-id-1',
         content: { displayname: 'Bob', avatar_url: undefined },
-      })
+      }),
     );
     widgetApi.mockSendStateEvent(
       mockRoomMember({
         state_key: '@user-charlie',
         event_id: '$event-id-2',
         content: { displayname: 'Charlie', avatar_url: undefined },
-      })
+      }),
     );
     widgetApi.mockSendStateEvent(
       mockRoomMember({
         state_key: '@user-dameon',
         event_id: '$event-id-3',
         content: { displayname: 'Dameon', avatar_url: undefined },
-      })
+      }),
     );
     widgetApi.mockSendStateEvent(
       mockRoomMember({
         state_key: '@user-eric',
         event_id: '$event-id-4',
         content: { displayname: 'Eric', avatar_url: undefined },
-      })
+      }),
     );
 
     Wrapper = ({ children }: PropsWithChildren<{}>) => {
@@ -165,10 +165,10 @@ describe('<CreatePollForm>', () => {
     expect(
       within(answerTypeRadioGroup).getByRole('radio', {
         name: 'Yes | No | Abstain',
-      })
+      }),
     ).toBeChecked();
     await userEvent.click(
-      within(answerTypeRadioGroup).getByRole('radio', { name: 'Yes | No' })
+      within(answerTypeRadioGroup).getByRole('radio', { name: 'Yes | No' }),
     );
 
     const durationSpinbutton = screen.getByRole('spinbutton', {
@@ -182,11 +182,11 @@ describe('<CreatePollForm>', () => {
     });
 
     await userEvent.click(
-      screen.getByRole('button', { name: /poll type open/i })
+      screen.getByRole('button', { name: /poll type open/i }),
     );
     const pollTypeListbox = screen.getByRole('listbox', { name: /poll type/i });
     await userEvent.click(
-      within(pollTypeListbox).getByRole('option', { name: /by name/i })
+      within(pollTypeListbox).getByRole('option', { name: /by name/i }),
     );
 
     const liveResultsSwitch = screen.getByRole('checkbox', {
@@ -238,19 +238,19 @@ describe('<CreatePollForm>', () => {
           groups: undefined,
         }}
       />,
-      { wrapper: Wrapper }
+      { wrapper: Wrapper },
     );
 
     expect(
-      screen.getByRole('textbox', { name: 'Title (required)' })
+      screen.getByRole('textbox', { name: 'Title (required)' }),
     ).toHaveValue('Poll Title');
     expect(
       screen.getByRole('textbox', {
         name: 'Description',
-      })
+      }),
     ).toHaveValue('Poll Description');
     expect(
-      screen.getByRole('textbox', { name: 'Question (required)' })
+      screen.getByRole('textbox', { name: 'Question (required)' }),
     ).toHaveValue('Poll Question');
     const answerTypeRadioGroup = screen.getByRole('radiogroup', {
       name: /answer type/i,
@@ -258,20 +258,20 @@ describe('<CreatePollForm>', () => {
     expect(
       within(answerTypeRadioGroup).getByRole('radio', {
         name: 'Yes | No',
-      })
+      }),
     ).toBeChecked();
     expect(
       screen.getByRole('spinbutton', {
         name: 'Duration in minutes (required)',
-      })
+      }),
     ).toHaveValue(50000);
     expect(
-      screen.getByRole('button', { name: /poll type by name/i })
+      screen.getByRole('button', { name: /poll type by name/i }),
     ).toBeInTheDocument();
     expect(
       screen.getByRole('checkbox', {
         name: /display live results/i,
-      })
+      }),
     ).not.toBeChecked();
   });
 
@@ -285,7 +285,7 @@ describe('<CreatePollForm>', () => {
         onPollChange={onPollChange}
         poll={mockPoll({}).content}
       />,
-      { wrapper: Wrapper }
+      { wrapper: Wrapper },
     );
 
     const titleTextbox = screen.getByRole('textbox', {
@@ -296,7 +296,7 @@ describe('<CreatePollForm>', () => {
 
     await userEvent.type(titleTextbox, 'Poll Title');
     expect(onPollChange).toHaveBeenLastCalledWith(
-      expect.objectContaining({ title: 'Poll Title' })
+      expect.objectContaining({ title: 'Poll Title' }),
     );
 
     const questionTextbox = screen.getByRole('textbox', {
@@ -307,7 +307,7 @@ describe('<CreatePollForm>', () => {
 
     await userEvent.type(questionTextbox, 'Poll Question');
     expect(onPollChange).toHaveBeenLastCalledWith(
-      expect.objectContaining({ question: 'Poll Question' })
+      expect.objectContaining({ question: 'Poll Question' }),
     );
   });
 
@@ -321,7 +321,7 @@ describe('<CreatePollForm>', () => {
     });
 
     expect(
-      screen.queryByRole('heading', { name: /Voting persons/i })
+      screen.queryByRole('heading', { name: /Voting persons/i }),
     ).not.toBeInTheDocument();
   });
 
@@ -367,7 +367,7 @@ describe('<CreatePollForm>', () => {
     });
 
     await expect(
-      screen.findByRole('region', { name: /voting persons/i })
+      screen.findByRole('region', { name: /voting persons/i }),
     ).resolves.toBeInTheDocument();
 
     const redPartyList = screen.getByRole('list', {
@@ -381,7 +381,7 @@ describe('<CreatePollForm>', () => {
       within(itemAlice).getByRole('combobox', {
         name: /attendance/i,
         description: /alice/i,
-      })
+      }),
     ).toHaveValue('Present');
 
     const itemBob = within(redPartyList).getByRole('listitem', {
@@ -391,7 +391,7 @@ describe('<CreatePollForm>', () => {
       within(itemBob).getByRole('combobox', {
         name: /attendance/i,
         description: /bob/i,
-      })
+      }),
     ).toHaveValue('Absent');
 
     const itemCharlie = within(redPartyList).getByRole('listitem', {
@@ -401,7 +401,7 @@ describe('<CreatePollForm>', () => {
       within(itemCharlie).getByRole('combobox', {
         name: /attendance/i,
         description: /charlie/i,
-      })
+      }),
     ).toHaveValue('Present');
 
     const bluePartyList = screen.getByRole('list', { name: /blue party/i });
@@ -413,7 +413,7 @@ describe('<CreatePollForm>', () => {
       within(itemDameon).getByRole('combobox', {
         name: /attendance/i,
         description: /dameon/i,
-      })
+      }),
     ).toHaveValue('Present');
   });
 
@@ -432,21 +432,21 @@ describe('<CreatePollForm>', () => {
       name: /alice/i,
     });
     expect(
-      within(itemAlice).getByRole('combobox', { name: /attendance/i })
+      within(itemAlice).getByRole('combobox', { name: /attendance/i }),
     ).toHaveValue('Present');
 
     const itemBob = within(redPartyList).getByRole('listitem', {
       name: /bob/i,
     });
     expect(
-      within(itemBob).getByRole('combobox', { name: /attendance/i })
+      within(itemBob).getByRole('combobox', { name: /attendance/i }),
     ).toHaveValue('Present');
 
     const itemCharlie = within(redPartyList).getByRole('listitem', {
       name: /charlie/i,
     });
     expect(
-      within(itemCharlie).getByRole('combobox', { name: /attendance/i })
+      within(itemCharlie).getByRole('combobox', { name: /attendance/i }),
     ).toHaveValue('Present');
 
     const bluePartyList = screen.getByRole('list', { name: /blue party/i });
@@ -455,7 +455,7 @@ describe('<CreatePollForm>', () => {
       name: /dameon/i,
     });
     expect(
-      within(itemDameon).getByRole('combobox', { name: /attendance/i })
+      within(itemDameon).getByRole('combobox', { name: /attendance/i }),
     ).toHaveValue('Present');
   });
 
@@ -470,7 +470,7 @@ describe('<CreatePollForm>', () => {
           color: '#ff0000',
           members: {},
         },
-      })
+      }),
     );
 
     const onPollChange = jest.fn();
@@ -484,7 +484,7 @@ describe('<CreatePollForm>', () => {
     expect(
       within(redPartyList).getByRole('listitem', {
         name: 'No delegates have been assigned yet',
-      })
+      }),
     ).toBeInTheDocument();
   });
 
@@ -497,15 +497,15 @@ describe('<CreatePollForm>', () => {
 
     await userEvent.type(
       screen.getByRole('textbox', { name: 'Title (required)' }),
-      'My Title'
+      'My Title',
     );
     await userEvent.type(
       screen.getByRole('textbox', { name: 'Description' }),
-      'My Description'
+      'My Description',
     );
     await userEvent.type(
       screen.getByRole('textbox', { name: 'Question (required)' }),
-      'My Question'
+      'My Question',
     );
     await userEvent.click(screen.getByRole('radio', { name: 'Yes | No' }));
 
@@ -520,7 +520,7 @@ describe('<CreatePollForm>', () => {
       within(aliceItem).getByRole('combobox', {
         name: /attendance/i,
         expanded: false,
-      })
+      }),
     );
 
     const aliceListbox = within(aliceItem).getByRole('listbox');
@@ -529,30 +529,30 @@ describe('<CreatePollForm>', () => {
       within(aliceListbox).getByRole('option', {
         name: 'Present',
         selected: true,
-      })
+      }),
     ).toBeInTheDocument();
     await expect(
       within(aliceListbox).findByRole('option', {
         name: 'Represented by Eric',
         selected: false,
-      })
+      }),
     ).resolves.toBeInTheDocument();
     expect(
       within(aliceListbox).getByRole('option', {
         name: 'Absent',
         selected: false,
-      })
+      }),
     ).toBeInTheDocument();
 
     await userEvent.click(
       within(aliceListbox).getByRole('option', {
         name: 'Absent',
         selected: false,
-      })
+      }),
     );
 
     expect(
-      within(aliceItem).getByRole('combobox', { name: /attendance/i })
+      within(aliceItem).getByRole('combobox', { name: /attendance/i }),
     ).toHaveValue('Absent');
 
     expect(onPollChange).toBeCalledWith(
@@ -589,7 +589,7 @@ describe('<CreatePollForm>', () => {
             },
           ],
         },
-      }).content
+      }).content,
     );
   });
 
@@ -602,15 +602,15 @@ describe('<CreatePollForm>', () => {
 
     await userEvent.type(
       screen.getByRole('textbox', { name: 'Title (required)' }),
-      'My Title'
+      'My Title',
     );
     await userEvent.type(
       screen.getByRole('textbox', { name: 'Description' }),
-      'My Description'
+      'My Description',
     );
     await userEvent.type(
       screen.getByRole('textbox', { name: 'Question (required)' }),
-      'My Question'
+      'My Question',
     );
     await userEvent.click(screen.getByRole('radio', { name: 'Yes | No' }));
 
@@ -622,7 +622,7 @@ describe('<CreatePollForm>', () => {
     });
 
     await userEvent.click(
-      within(aliceItem).getByRole('combobox', { expanded: false })
+      within(aliceItem).getByRole('combobox', { expanded: false }),
     );
 
     const aliceListbox = within(aliceItem).getByRole('listbox');
@@ -631,11 +631,11 @@ describe('<CreatePollForm>', () => {
       await within(aliceListbox).findByRole('option', {
         name: 'Represented by Eric',
         selected: false,
-      })
+      }),
     );
 
     expect(within(aliceItem).getByRole('combobox')).toHaveValue(
-      'Represented by Eric'
+      'Represented by Eric',
     );
 
     expect(onPollChange).toBeCalledWith(
@@ -673,7 +673,7 @@ describe('<CreatePollForm>', () => {
             },
           ],
         },
-      }).content
+      }).content,
     );
   });
 
@@ -692,7 +692,7 @@ describe('<CreatePollForm>', () => {
     });
 
     await userEvent.click(
-      within(aliceItem).getByRole('combobox', { expanded: false })
+      within(aliceItem).getByRole('combobox', { expanded: false }),
     );
     const aliceListbox = within(aliceItem).getByRole('listbox');
 
@@ -700,21 +700,21 @@ describe('<CreatePollForm>', () => {
       await within(aliceListbox).findByRole('option', {
         name: 'Represented by Eric',
         selected: false,
-      })
+      }),
     );
 
     const bobItem = within(redPartyList).getByRole('listitem', {
       name: /bob/i,
     });
     await userEvent.click(
-      within(bobItem).getByRole('combobox', { expanded: false })
+      within(bobItem).getByRole('combobox', { expanded: false }),
     );
     const bobListbox = within(bobItem).getByRole('listbox');
 
     expect(
       within(bobListbox)
         .getAllByRole('option')
-        .map((n) => n.textContent)
+        .map((n) => n.textContent),
     ).toEqual(['Present', 'Absent']);
   });
 
@@ -727,15 +727,15 @@ describe('<CreatePollForm>', () => {
 
     await userEvent.type(
       screen.getByRole('textbox', { name: 'Title (required)' }),
-      'My Title'
+      'My Title',
     );
     await userEvent.type(
       screen.getByRole('textbox', { name: 'Description' }),
-      'My Description'
+      'My Description',
     );
     await userEvent.type(
       screen.getByRole('textbox', { name: 'Question (required)' }),
-      'My Question'
+      'My Question',
     );
     await userEvent.click(screen.getByRole('radio', { name: 'Yes | No' }));
 
@@ -746,23 +746,23 @@ describe('<CreatePollForm>', () => {
       name: /alice/i,
     });
     await userEvent.click(
-      within(aliceItem).getByRole('combobox', { expanded: false })
+      within(aliceItem).getByRole('combobox', { expanded: false }),
     );
     await userEvent.click(
       within(within(aliceItem).getByRole('listbox')).getByRole('option', {
         name: 'Absent',
         selected: false,
-      })
+      }),
     );
 
     await userEvent.click(
-      within(aliceItem).getByRole('combobox', { expanded: false })
+      within(aliceItem).getByRole('combobox', { expanded: false }),
     );
     await userEvent.click(
       within(within(aliceItem).getByRole('listbox')).getByRole('option', {
         name: 'Present',
         selected: false,
-      })
+      }),
     );
 
     expect(within(aliceItem).getByRole('combobox')).toHaveValue('Present');
@@ -781,7 +781,7 @@ describe('<CreatePollForm>', () => {
             '@user-alice': 20,
           },
         },
-      })
+      }),
     );
 
     render(<CreatePollForm onPollChange={onPollChange} />, {
@@ -798,8 +798,8 @@ describe('<CreatePollForm>', () => {
     await waitFor(() => {
       expect(
         withMarkup(within(aliceItem).getByText)(
-          /Alice has an insufficient power level and will not be able to vote./
-        )
+          /Alice has an insufficient power level and will not be able to vote./,
+        ),
       ).toBeInTheDocument();
     });
   });
@@ -814,7 +814,7 @@ describe('<CreatePollForm>', () => {
             '@user-eric': 20,
           },
         },
-      })
+      }),
     );
 
     render(<CreatePollForm onPollChange={onPollChange} />, {
@@ -829,7 +829,7 @@ describe('<CreatePollForm>', () => {
     });
 
     await userEvent.click(
-      within(aliceItem).getByRole('combobox', { expanded: false })
+      within(aliceItem).getByRole('combobox', { expanded: false }),
     );
 
     const aliceListbox = within(aliceItem).getByRole('listbox');
@@ -838,14 +838,14 @@ describe('<CreatePollForm>', () => {
       await within(aliceListbox).findByRole('option', {
         name: 'Represented by Eric',
         selected: false,
-      })
+      }),
     );
 
     await waitFor(() => {
       expect(
         withMarkup(within(aliceItem).getByText)(
-          /Eric cannot represent Alice because the user has an insufficient power level./
-        )
+          /Eric cannot represent Alice because the user has an insufficient power level./,
+        ),
       ).toBeInTheDocument();
     });
   });
@@ -900,7 +900,7 @@ describe('<CreatePollForm>', () => {
     });
 
     expect(
-      within(itemBob).getByRole('combobox', { expanded: false })
+      within(itemBob).getByRole('combobox', { expanded: false }),
     ).toHaveValue('Absent');
 
     expect(onPollChange).toHaveBeenLastCalledWith(
@@ -937,7 +937,7 @@ describe('<CreatePollForm>', () => {
             },
           ],
         },
-      }).content
+      }).content,
     );
   });
 

@@ -36,7 +36,7 @@ describe('<PollsListFinished/>', () => {
   beforeEach(() => {
     widgetApi.mockSendRoomEvent(mockPollStart());
     widgetApi.mockSendRoomEvent(
-      mockPollStart({ event_id: '$start-event-id2' })
+      mockPollStart({ event_id: '$start-event-id2' }),
     );
 
     widgetApi.mockSendStateEvent(
@@ -46,7 +46,7 @@ describe('<PollsListFinished/>', () => {
           endTime: '2020-01-01T00:01:00Z',
           startEventId: '$start-event-id',
         },
-      })
+      }),
     );
     widgetApi.mockSendStateEvent(
       mockPoll({
@@ -57,7 +57,7 @@ describe('<PollsListFinished/>', () => {
           endTime: '2020-01-01T00:01:00Z',
           startEventId: '$start-event-id2',
         },
-      })
+      }),
     );
 
     Wrapper = ({ children }: PropsWithChildren<{}>) => {
@@ -76,17 +76,17 @@ describe('<PollsListFinished/>', () => {
     render(<PollsListFinished />, { wrapper: Wrapper });
 
     expect(
-      screen.getByRole('heading', { level: 3, name: /finished polls/i })
+      screen.getByRole('heading', { level: 3, name: /finished polls/i }),
     ).toBeInTheDocument();
     await expect(screen.findByText('2')).resolves.toBeInTheDocument();
 
     const list = screen.getByRole('list', { name: /finished polls/i });
 
     expect(
-      within(list).getByRole('listitem', { name: /my title/i })
+      within(list).getByRole('listitem', { name: /my title/i }),
     ).toBeInTheDocument();
     expect(
-      within(list).getByRole('listitem', { name: /another title/i })
+      within(list).getByRole('listitem', { name: /another title/i }),
     ).toBeInTheDocument();
   });
 
@@ -104,13 +104,13 @@ describe('<PollsListFinished/>', () => {
     });
     const finishedPollListItem = await within(finishedPollList).findByRole(
       'listitem',
-      { name: 'Another Title' }
+      { name: 'Another Title' },
     );
 
     expect(
       within(finishedPollListItem).getByRole('button', {
         name: 'See result',
-      })
+      }),
     ).toHaveAccessibleDescription('Another Title');
   });
 
@@ -123,10 +123,10 @@ describe('<PollsListFinished/>', () => {
     });
     const finishedPollListItem = await within(finishedPollList).findByRole(
       'listitem',
-      { name: 'Another Title' }
+      { name: 'Another Title' },
     );
     expect(
-      within(finishedPollListItem).getByTestId('votesLoadingPollFinished')
+      within(finishedPollListItem).getByTestId('votesLoadingPollFinished'),
     ).toBeInTheDocument();
   });
 
@@ -139,16 +139,16 @@ describe('<PollsListFinished/>', () => {
     });
     const finishedPollListItem = await within(finishedPollList).findByRole(
       'listitem',
-      { name: 'Another Title' }
+      { name: 'Another Title' },
     );
 
     const alert = await within(finishedPollListItem).findByRole('status');
     expect(
-      within(alert).getByText('Data could not be loaded.')
+      within(alert).getByText('Data could not be loaded.'),
     ).toBeInTheDocument();
 
     expect(
-      within(finishedPollListItem).queryByText(/See result/)
+      within(finishedPollListItem).queryByText(/See result/),
     ).not.toBeInTheDocument();
   });
 });

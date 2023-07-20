@@ -40,20 +40,20 @@ describe('<ShowResultsByNameList/>', () => {
           startTime: new Date().toISOString(),
           groups: undefined,
         },
-      })
+      }),
     );
 
     widgetApi.mockSendStateEvent(
       mockRoomMember({
         state_key: 'user-alice',
         content: { displayname: 'Alice' },
-      })
+      }),
     );
     widgetApi.mockSendStateEvent(
       mockRoomMember({
         state_key: 'user-bob',
         content: { displayname: 'Bob' },
-      })
+      }),
     );
 
     widgetApi.mockSendRoomEvent(
@@ -64,7 +64,7 @@ describe('<ShowResultsByNameList/>', () => {
           pollId: 'poll-0',
           answerId: '1',
         },
-      })
+      }),
     );
 
     Wrapper = ({ children }: PropsWithChildren<{}>) => {
@@ -76,7 +76,7 @@ describe('<ShowResultsByNameList/>', () => {
   it('should not explode if poll does not exist', () => {
     const { container } = render(
       <ShowResultsByNameList pollId="another-poll" />,
-      { wrapper: Wrapper }
+      { wrapper: Wrapper },
     );
 
     expect(container).toBeEmptyDOMElement();
@@ -88,7 +88,7 @@ describe('<ShowResultsByNameList/>', () => {
         <span id="label">Voting persons</span>
         <ShowResultsByNameList labelId="label" pollId="poll-0" />
       </>,
-      { wrapper: Wrapper }
+      { wrapper: Wrapper },
     );
 
     expect(await axe(container)).toHaveNoViolations();
@@ -100,7 +100,7 @@ describe('<ShowResultsByNameList/>', () => {
         <span id="label">Voting persons</span>
         <ShowResultsByNameList labelId="label" pollId="poll-0" />
       </>,
-      { wrapper: Wrapper }
+      { wrapper: Wrapper },
     );
 
     const list = await screen.findByRole('list', { name: /Voting persons/i });
@@ -119,7 +119,7 @@ describe('<ShowResultsByNameList/>', () => {
         <span id="label">Voting persons</span>
         <ShowResultsByNameList isFinished labelId="label" pollId="poll-0" />
       </>,
-      { wrapper: Wrapper }
+      { wrapper: Wrapper },
     );
 
     const list = await screen.findByRole('list', { name: /Voting persons/i });

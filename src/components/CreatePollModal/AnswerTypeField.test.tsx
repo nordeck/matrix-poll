@@ -26,16 +26,16 @@ describe('<AnswerTypeField>', () => {
     const radioGroup = screen.getByRole('radiogroup', { name: 'Answer type' });
 
     expect(
-      within(radioGroup).getByRole('radio', { name: 'Yes | No | Abstain' })
+      within(radioGroup).getByRole('radio', { name: 'Yes | No | Abstain' }),
     ).toBeChecked();
     expect(
-      within(radioGroup).getByRole('radio', { name: 'Yes | No' })
+      within(radioGroup).getByRole('radio', { name: 'Yes | No' }),
     ).not.toBeChecked();
   });
 
   it('should have not accessibility violations', async () => {
     const { container } = render(
-      <AnswerTypeField onChange={jest.fn()} value={[]} />
+      <AnswerTypeField onChange={jest.fn()} value={[]} />,
     );
 
     expect(await axe(container)).toHaveNoViolations();
@@ -55,15 +55,15 @@ describe('<AnswerTypeField>', () => {
             label: 'No',
           },
         ]}
-      />
+      />,
     );
 
     const radioGroup = screen.getByRole('radiogroup', { name: 'Answer type' });
     expect(
-      within(radioGroup).getByRole('radio', { name: 'Yes | No | Abstain' })
+      within(radioGroup).getByRole('radio', { name: 'Yes | No | Abstain' }),
     ).not.toBeChecked();
     expect(
-      within(radioGroup).getByRole('radio', { name: 'Yes | No' })
+      within(radioGroup).getByRole('radio', { name: 'Yes | No' }),
     ).toBeChecked();
   });
 
@@ -74,7 +74,7 @@ describe('<AnswerTypeField>', () => {
     const radioGroup = screen.getByRole('radiogroup', { name: 'Answer type' });
 
     await userEvent.click(
-      within(radioGroup).getByRole('radio', { name: 'Yes | No' })
+      within(radioGroup).getByRole('radio', { name: 'Yes | No' }),
     );
 
     expect(onChange).toBeCalledWith([

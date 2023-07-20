@@ -41,7 +41,7 @@ export function useUserDetails(): UseUserDetailsReturn {
         ? getRoomMemberDisplayName(memberEvent, allRoomMembers)
         : userId;
     },
-    [allRoomMembers, roomMembers]
+    [allRoomMembers, roomMembers],
   );
 
   return {

@@ -93,7 +93,7 @@ describe('createPollPdfContentTable', () => {
     const pollResult = mockGroupedResults(PollType.ByName);
 
     expect(
-      createPollPdfContentTable(pollResult, getUserDisplayName)
+      createPollPdfContentTable(pollResult, getUserDisplayName),
     ).toMatchSnapshot();
   });
 
@@ -101,7 +101,7 @@ describe('createPollPdfContentTable', () => {
     const pollResult = mockResults(PollType.ByName);
 
     expect(
-      createPollPdfContentTable(pollResult, getUserDisplayName)
+      createPollPdfContentTable(pollResult, getUserDisplayName),
     ).toMatchSnapshot();
   });
 
@@ -109,7 +109,7 @@ describe('createPollPdfContentTable', () => {
     const pollResult = mockGroupedResults(PollType.Open);
 
     expect(
-      createPollPdfContentTable(pollResult, getUserDisplayName)
+      createPollPdfContentTable(pollResult, getUserDisplayName),
     ).toMatchSnapshot();
   });
 
@@ -117,7 +117,7 @@ describe('createPollPdfContentTable', () => {
     const pollResult = mockResults(PollType.Open);
 
     expect(createPollPdfContentTable(pollResult, getUserDisplayName)).toEqual(
-      []
+      [],
     );
   });
 
@@ -125,7 +125,7 @@ describe('createPollPdfContentTable', () => {
     const pollResult = mockGroupedResults(PollType.Secret);
 
     expect(createPollPdfContentTable(pollResult, getUserDisplayName)).toEqual(
-      []
+      [],
     );
   });
 
@@ -133,7 +133,7 @@ describe('createPollPdfContentTable', () => {
     const pollResult = mockResults(PollType.Secret);
 
     expect(createPollPdfContentTable(pollResult, getUserDisplayName)).toEqual(
-      []
+      [],
     );
   });
 
@@ -143,20 +143,20 @@ describe('createPollPdfContentTable', () => {
     // no break line
     userName = 'user-1(@someid.that.break.one.time)';
     expect(addBreakLineToTheName(userName, 3)).toBe(
-      `user-1(@someid.that.break.one.time)`
+      `user-1(@someid.that.break.one.time)`,
     );
 
     // one break line
     userName = 'user-1(@someid.that.break.one.time.that.break.one.time)';
     expect(addBreakLineToTheName(userName, 3)).toBe(
-      'user-1(@someid.that.break.one.time.that.break\n.one.time)'
+      'user-1(@someid.that.break.one.time.that.break\n.one.time)',
     );
 
     // two break line
     userName =
       'user-1(@someid.that.break.one.time.that.break.one.time.that.break.one.time.that.break.one.time)';
     expect(addBreakLineToTheName(userName, 3)).toBe(
-      'user-1(@someid.that.break.one.time.that.break\n.one.time.that.break.one.time.that.break.one.\ntime)'
+      'user-1(@someid.that.break.one.time.that.break\n.one.time.that.break.one.time.that.break.one.\ntime)',
     );
   });
 
@@ -166,20 +166,20 @@ describe('createPollPdfContentTable', () => {
     // no break line
     userName = 'user-1(@someid.that.break.one.time)';
     expect(addBreakLineToTheName(userName, 4)).toBe(
-      `user-1(@someid.that.break.one.time)`
+      `user-1(@someid.that.break.one.time)`,
     );
 
     // one break line
     userName = 'user-1(@someid.that.break.one.time.that.break.one.time)';
     expect(addBreakLineToTheName(userName, 4)).toBe(
-      'user-1(@someid.that.break.one.time.that.\nbreak.one.time)'
+      'user-1(@someid.that.break.one.time.that.\nbreak.one.time)',
     );
 
     // two break line
     userName =
       'user-1(@someid.that.break.one.time.that.break.one.time.that.break.one.time.that.break.one.time)';
     expect(addBreakLineToTheName(userName, 4)).toBe(
-      'user-1(@someid.that.break.one.time.that.\nbreak.one.time.that.break.one.time.that.\nbreak.one.time)'
+      'user-1(@someid.that.break.one.time.that.\nbreak.one.time.that.break.one.time.that.\nbreak.one.time)',
     );
   });
 });
