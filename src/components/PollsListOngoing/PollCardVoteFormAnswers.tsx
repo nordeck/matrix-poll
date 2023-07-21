@@ -45,7 +45,7 @@ export function PollCardVoteFormAnswers({
         onSelectedAnswerIdChange(event.target.value);
       }
     },
-    [onSelectedAnswerIdChange]
+    [onSelectedAnswerIdChange],
   );
 
   const answerId = useId();

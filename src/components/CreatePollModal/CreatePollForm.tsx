@@ -63,13 +63,13 @@ export const CreatePollForm = ({
   const [question, setQuestion] = useState(poll?.question ?? '');
   const [description, setDescription] = useState(poll?.description ?? '');
   const [pollType, setPollType] = useState<PollType>(
-    poll?.pollType ?? PollType.Open
+    poll?.pollType ?? PollType.Open,
   );
   const [answers, setAnswers] = useState<Array<IPollAnswer>>(
-    () => poll?.answers ?? createAnswer()
+    () => poll?.answers ?? createAnswer(),
   );
   const [liveResults, setLiveResults] = useState(
-    poll ? poll.resultType === ResultType.Visible : true
+    poll ? poll.resultType === ResultType.Visible : true,
   );
   const [duration, setDuration] = useState(poll?.duration?.toString() ?? '1');
   const [isDirty, setIsDirty] = useState(false);
@@ -129,7 +129,7 @@ export const CreatePollForm = ({
       const groupEvents = selectPollGroups(groupEventsData);
       const updatedGroups = syncPollGroupsWithRoomGroups(
         poll?.groups ?? [],
-        groupEvents
+        groupEvents,
       );
 
       setGroups(updatedGroups);
@@ -154,7 +154,7 @@ export const CreatePollForm = ({
       setIsDirty(true);
       setQuestion(e.target.value);
     },
-    []
+    [],
   );
 
   const handleChangeDescription = useCallback(
@@ -162,7 +162,7 @@ export const CreatePollForm = ({
       setIsDirty(true);
       setDescription(e.target.value);
     },
-    []
+    [],
   );
 
   const handlePollTypeChange = useCallback((e: SelectChangeEvent<PollType>) => {
@@ -180,7 +180,7 @@ export const CreatePollForm = ({
       setIsDirty(true);
       setLiveResults(e.target.checked);
     },
-    []
+    [],
   );
 
   const handleChangeDuration = useCallback(
@@ -188,7 +188,7 @@ export const CreatePollForm = ({
       setIsDirty(true);
       setDuration(e.target.value.replace(/[^0-9]*/g, ''));
     },
-    []
+    [],
   );
 
   const handleGroupsChange = useCallback((groups: PollGroup[]) => {

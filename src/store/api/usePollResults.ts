@@ -40,7 +40,7 @@ import { useGetVotes } from './useGetVotes';
 
 /** A constant that shows that a user didn't submit an answer. */
 export const PollInvalidAnswer: unique symbol = Symbol(
-  'net.nordeck.poll.vote.invalid'
+  'net.nordeck.poll.vote.invalid',
 );
 
 type InvalidVote = Exclude<VotingRight, { state: 'active' }>;
@@ -99,7 +99,7 @@ type MakeSelectPollResultsOpts = {
  */
 export function usePollResults(
   pollId: string,
-  opts: MakeSelectPollResultsOpts = {}
+  opts: MakeSelectPollResultsOpts = {},
 ): AsyncState<SelectPollResults | undefined> {
   const {
     data: pollEvents,
@@ -165,7 +165,7 @@ export function usePollResults(
           // provide individual values because opts can't be memoed directly
           includeInvalidVotes: opts.includeInvalidVotes,
           skipLoadingVotes: opts.skipLoadingVotes,
-        }
+        },
       ),
     };
   }, [
@@ -194,14 +194,14 @@ export function selectPollResults(
     | EntityState<StateEvent<RoomMemberStateEventContent>>
     | undefined,
   powerLevels: StateEvent<PowerLevelsStateEvent> | undefined,
-  opts: MakeSelectPollResultsOpts = {}
+  opts: MakeSelectPollResultsOpts = {},
 ): SelectPollResults | undefined {
   const { includeInvalidVotes = false } = opts;
 
   const ignoredUsers = getIgnoredUsers();
   const roomMembers = roomMembersState
     ? selectRoomMembers(roomMembersState).filter(
-        (m) => !ignoredUsers.includes(m.state_key)
+        (m) => !ignoredUsers.includes(m.state_key),
       )
     : [];
 
@@ -217,15 +217,15 @@ export function selectPollResults(
                 hasRoomEventPower(
                   powerLevels?.content,
                   m.state_key,
-                  ROOM_EVENT_VOTE
-                )
+                  ROOM_EVENT_VOTE,
+                ),
             )
-            .map((m) => [m.state_key, PollInvalidAnswer])
+            .map((m) => [m.state_key, PollInvalidAnswer]),
         )
       : {};
 
     const allValidVotes: Votes = Object.fromEntries(
-      voteEvents.map((v) => [v.sender, v.content.answerId])
+      voteEvents.map((v) => [v.sender, v.content.answerId]),
     );
 
     const votes = {
@@ -250,7 +250,7 @@ export function selectPollResults(
       // get an object of all invalid voters
       const invalidVoters = pickBy(
         g.votingRights,
-        (v): v is InvalidVote => v !== undefined && v.state !== 'active'
+        (v): v is InvalidVote => v !== undefined && v.state !== 'active',
       );
 
       const allInvalidVotes: Votes = includeInvalidVotes
@@ -263,7 +263,7 @@ export function selectPollResults(
 
                 return [userId, PollInvalidAnswer];
               })
-              .filter(([userId]) => !(userId in invalidVoters))
+              .filter(([userId]) => !(userId in invalidVoters)),
           )
         : {};
 
@@ -279,10 +279,10 @@ export function selectPollResults(
             return Object.values(invalidVoters).some(
               (invalid) =>
                 invalid.state === 'represented' &&
-                invalid.representedBy === v.sender
+                invalid.representedBy === v.sender,
             );
           })
-          .map((v) => [v.sender, v.content.answerId])
+          .map((v) => [v.sender, v.content.answerId]),
       );
 
       const votes = {
@@ -296,7 +296,7 @@ export function selectPollResults(
         votes,
         invalidVoters,
       };
-    }
+    },
   );
 
   // flatten the grouped votes for the results type
@@ -368,7 +368,7 @@ function cleanupGroups(groups: PollGroup[]): PollGroup[] {
         }
 
         return [key, value];
-      })
+      }),
     ),
   }));
 }
@@ -380,7 +380,7 @@ function cleanupGroups(groups: PollGroup[]): PollGroup[] {
  * @returns a map with `answerId -> vote count`
  */
 export function getVoteAnswerCount(
-  votes: Votes
+  votes: Votes,
 ): Partial<Record<string | typeof PollInvalidAnswer, number>> {
   const result: Partial<Record<string | typeof PollInvalidAnswer, number>> = {};
 

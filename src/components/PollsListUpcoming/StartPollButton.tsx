@@ -82,7 +82,7 @@ export const StartPollButton = ({
 
     const expectedGroups = syncPollGroupsWithRoomGroups(
       poll.groups ?? [],
-      selectPollGroups(groupEvents)
+      selectPollGroups(groupEvents),
     );
 
     return !isEqual(expectedGroups, poll.groups ?? []);
@@ -125,7 +125,7 @@ export const StartPollButton = ({
           <DialogContentText id={dialogDescriptionId}>
             {t(
               'startPollButton.message',
-              'Are you sure you want to start the poll?'
+              'Are you sure you want to start the poll?',
             )}
           </DialogContentText>
 
@@ -134,13 +134,13 @@ export const StartPollButton = ({
               <AlertTitle>
                 {t(
                   'startPollButton.conflictMessage.title',
-                  'Changes in the groups detected.'
+                  'Changes in the groups detected.',
                 )}
               </AlertTitle>
 
               {t(
                 'startPollButton.conflictMessage.description',
-                'Please edit the poll to resolve conflict.'
+                'Please edit the poll to resolve conflict.',
               )}
             </Alert>
           )}
@@ -151,13 +151,13 @@ export const StartPollButton = ({
                 <AlertTitle>
                   {t(
                     'startPollButton.changePermissionMessage.title',
-                    'This poll contains users with an insufficient power level.'
+                    'This poll contains users with an insufficient power level.',
                   )}
                 </AlertTitle>
 
                 {t(
                   'startPollButton.changePermissionMessage.description',
-                  'Adjust the power level or remove the users from the poll.'
+                  'Adjust the power level or remove the users from the poll.',
                 )}
               </Alert>
             )}
@@ -167,13 +167,13 @@ export const StartPollButton = ({
               <AlertTitle>
                 {t(
                   'startPollButton.addVoters.title',
-                  'This poll has no voters.'
+                  'This poll has no voters.',
                 )}
               </AlertTitle>
 
               {t(
                 'startPollButton.addVoters.description',
-                'Please add voters to the poll.'
+                'Please add voters to the poll.',
               )}
             </Alert>
           )}

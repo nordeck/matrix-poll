@@ -35,38 +35,38 @@ export const widgetCapabilities = [
   WidgetEventCapability.forStateEvent(EventDirection.Receive, STATE_EVENT_POLL),
   WidgetEventCapability.forStateEvent(
     EventDirection.Send,
-    STATE_EVENT_POLL_SETTINGS
+    STATE_EVENT_POLL_SETTINGS,
   ),
   WidgetEventCapability.forStateEvent(
     EventDirection.Receive,
-    STATE_EVENT_POLL_SETTINGS
+    STATE_EVENT_POLL_SETTINGS,
   ),
   WidgetEventCapability.forStateEvent(
     EventDirection.Receive,
-    STATE_EVENT_POWER_LEVELS
+    STATE_EVENT_POWER_LEVELS,
   ),
   WidgetEventCapability.forStateEvent(
     EventDirection.Receive,
-    STATE_EVENT_ROOM_NAME
+    STATE_EVENT_ROOM_NAME,
   ),
   WidgetEventCapability.forStateEvent(
     EventDirection.Receive,
-    STATE_EVENT_ROOM_MEMBER
+    STATE_EVENT_ROOM_MEMBER,
   ),
   WidgetEventCapability.forStateEvent(
     EventDirection.Send,
-    STATE_EVENT_POLL_GROUP
+    STATE_EVENT_POLL_GROUP,
   ),
   WidgetEventCapability.forStateEvent(
     EventDirection.Receive,
-    STATE_EVENT_POLL_GROUP
+    STATE_EVENT_POLL_GROUP,
   ),
   WidgetEventCapability.forRoomEvent(
     EventDirection.Send,
-    ROOM_EVENT_POLL_START
+    ROOM_EVENT_POLL_START,
   ),
   WidgetEventCapability.forRoomEvent(
     EventDirection.Receive,
-    ROOM_EVENT_POLL_START
+    ROOM_EVENT_POLL_START,
   ),
 ];

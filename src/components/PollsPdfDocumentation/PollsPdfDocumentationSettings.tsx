@@ -47,7 +47,7 @@ export const PollsPdfDocumentationSettings = () => {
 
   const handleChangeDuration = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => setDuration(parseInt(e.target.value)),
-    [setDuration]
+    [setDuration],
   );
 
   const onOpenCallback = useCallback(() => setOpen(true), [setOpen]);
@@ -80,7 +80,7 @@ export const PollsPdfDocumentationSettings = () => {
         }).unwrap();
       }
     },
-    [duration, durationError, patchPollSettings]
+    [duration, durationError, patchPollSettings],
   );
 
   const titleId = useId();
@@ -108,7 +108,7 @@ export const PollsPdfDocumentationSettings = () => {
             <AlertTitle>
               {t(
                 'pollsPdfDocumentation.pdfDeactivatedTitle',
-                'PDF will be deactivated'
+                'PDF will be deactivated',
               )}
             </AlertTitle>
 
@@ -117,7 +117,7 @@ export const PollsPdfDocumentationSettings = () => {
               'The download of the PDF document will be deactivated on {{date, datetime}}.',
               {
                 date: new Date(
-                  pollSettings.event.content.pdfButtonDisabledAfter
+                  pollSettings.event.content.pdfButtonDisabledAfter,
                 ),
                 formatParams: {
                   date: {
@@ -128,7 +128,7 @@ export const PollsPdfDocumentationSettings = () => {
                     day: 'numeric',
                   },
                 },
-              }
+              },
             )}
           </Alert>
         )}
@@ -144,7 +144,7 @@ export const PollsPdfDocumentationSettings = () => {
               durationError &&
               t(
                 'pollsPdfDocumentation.durationHelperText',
-                'A duration is required'
+                'A duration is required',
               )
             }
             id={durationId}
@@ -155,7 +155,7 @@ export const PollsPdfDocumentationSettings = () => {
             }}
             label={t(
               'pollsPdfDocumentation.duration',
-              'Deactivate after weeks (required)'
+              'Deactivate after weeks (required)',
             )}
             margin="dense"
             onChange={handleChangeDuration}
@@ -165,7 +165,7 @@ export const PollsPdfDocumentationSettings = () => {
           <Tooltip
             title={t(
               'pollsPdfDocumentation.deactivate',
-              'Set deactivation time'
+              'Set deactivation time',
             )}
           >
             <Button
@@ -192,18 +192,18 @@ export const PollsPdfDocumentationSettings = () => {
         <ConfirmDeleteDialog
           confirmTitle={t(
             'pollsPdfDocumentation.closingConfirmButton',
-            'Deactivate'
+            'Deactivate',
           )}
           description={t(
             'pollsPdfDocumentation.closingMessage',
-            'You are about to deactivate the PDF download. Are you sure?'
+            'You are about to deactivate the PDF download. Are you sure?',
           )}
           onCancel={onCloseCallback}
           onConfirm={handleDisablePdfButton}
           open={open}
           title={t(
             'pollsPdfDocumentation.closingDialogHeader',
-            'Deactivate PDF'
+            'Deactivate PDF',
           )}
         />
       </CardContent>

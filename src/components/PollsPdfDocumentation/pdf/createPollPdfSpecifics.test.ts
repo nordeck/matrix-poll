@@ -63,7 +63,7 @@ describe('createPollPdfSpecifics', () => {
     };
 
     expect(
-      createPollPdfSpecifics(pollResult, getUserDisplayName)
+      createPollPdfSpecifics(pollResult, getUserDisplayName),
     ).toMatchSnapshot();
   });
 
@@ -112,7 +112,7 @@ describe('createPollPdfSpecifics', () => {
     };
 
     expect(
-      createPollPdfSpecifics(pollResult, getUserDisplayName)
+      createPollPdfSpecifics(pollResult, getUserDisplayName),
     ).toMatchSnapshot();
   });
 
@@ -131,7 +131,7 @@ describe('createPollPdfSpecifics', () => {
     };
 
     expect(
-      createPollPdfSpecifics(pollResult, getUserDisplayName)
+      createPollPdfSpecifics(pollResult, getUserDisplayName),
     ).toMatchSnapshot();
   });
 
@@ -176,7 +176,7 @@ describe('createPollPdfSpecifics', () => {
     };
 
     expect(
-      createPollPdfSpecifics(pollResult, getUserDisplayName)
+      createPollPdfSpecifics(pollResult, getUserDisplayName),
     ).toMatchSnapshot();
   });
 });

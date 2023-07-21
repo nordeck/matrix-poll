@@ -41,7 +41,7 @@ describe('useGetVotes', () => {
   it('should handle missing poll', async () => {
     const { result, waitForValueToChange } = renderHook(
       () => useGetVotes('another-poll-id'),
-      { wrapper }
+      { wrapper },
     );
 
     await waitForValueToChange(() => result.current.isLoading);
@@ -54,7 +54,7 @@ describe('useGetVotes', () => {
 
     const { result, waitForValueToChange } = renderHook(
       () => useGetVotes('another-poll-id'),
-      { wrapper }
+      { wrapper },
     );
 
     await waitForValueToChange(() => result.current.isLoading);
@@ -71,7 +71,7 @@ describe('useGetVotes', () => {
           startTime: '2020-01-01T00:00:00Z',
           startEventId: '$start-event-id',
         },
-      })
+      }),
     );
     const votes = [
       widgetApi.mockSendRoomEvent(
@@ -79,34 +79,34 @@ describe('useGetVotes', () => {
           sender: 'user-alice',
           content: { pollId: 'poll-0', answerId: '1' },
           origin_server_ts: new Date('2020-01-01T00:00:00Z').getTime(),
-        })
+        }),
       ),
       widgetApi.mockSendRoomEvent(
         mockVote({
           sender: 'user-bob',
           content: { pollId: 'poll-0', answerId: '2' },
           origin_server_ts: new Date('2020-01-01T00:00:00Z').getTime(),
-        })
+        }),
       ),
       widgetApi.mockSendRoomEvent(
         mockVote({
           sender: 'user-charlie',
           content: { pollId: 'poll-0', answerId: '1' },
           origin_server_ts: new Date('2020-01-01T00:00:00Z').getTime(),
-        })
+        }),
       ),
       widgetApi.mockSendRoomEvent(
         mockVote({
           sender: 'user-eric',
           content: { pollId: 'poll-other', answerId: '1' },
           origin_server_ts: new Date('2020-01-01T00:00:00Z').getTime(),
-        })
+        }),
       ),
     ];
 
     const { result, waitForValueToChange } = renderHook(
       () => useGetVotes('poll-0'),
-      { wrapper }
+      { wrapper },
     );
 
     await waitForValueToChange(() => result.current.isLoading);
@@ -127,7 +127,7 @@ describe('useGetVotes', () => {
           startEventId: '$start-event-id',
           duration: 1,
         },
-      })
+      }),
     );
     const votes = [
       widgetApi.mockSendRoomEvent(
@@ -135,27 +135,27 @@ describe('useGetVotes', () => {
           sender: 'user-alice',
           content: { pollId: 'poll-0', answerId: '1' },
           origin_server_ts: new Date('2020-01-01T00:00:01Z').getTime(),
-        })
+        }),
       ),
       widgetApi.mockSendRoomEvent(
         mockVote({
           sender: 'user-bob',
           content: { pollId: 'poll-0', answerId: '1' },
           origin_server_ts: new Date('2020-01-01T00:00:30Z').getTime(),
-        })
+        }),
       ),
       widgetApi.mockSendRoomEvent(
         mockVote({
           sender: 'user-charlie',
           content: { pollId: 'poll-0', answerId: '1' },
           origin_server_ts: new Date('2020-01-01T00:00:00Z').getTime(),
-        })
+        }),
       ),
     ];
 
     const { result, waitForValueToChange } = renderHook(
       () => useGetVotes('poll-0'),
-      { wrapper }
+      { wrapper },
     );
 
     await waitForValueToChange(() => result.current.isLoading);
@@ -175,7 +175,7 @@ describe('useGetVotes', () => {
           startTime: '2020-01-01T00:00:00Z',
           startEventId: '$start-event-id',
         },
-      })
+      }),
     );
     const votes = [
       widgetApi.mockSendRoomEvent(
@@ -184,7 +184,7 @@ describe('useGetVotes', () => {
           content: { pollId: 'poll-0', answerId: '2' },
           origin_server_ts: new Date('2020-01-01T00:00:01Z').getTime(),
           event_id: '$1',
-        })
+        }),
       ),
       // make sure the votes are sorted by origin_server_ts
       widgetApi.mockSendRoomEvent(
@@ -193,13 +193,13 @@ describe('useGetVotes', () => {
           content: { pollId: 'poll-0', answerId: '1' },
           origin_server_ts: new Date('2020-01-01T00:00:00Z').getTime(),
           event_id: '$0',
-        })
+        }),
       ),
     ];
 
     const { result, waitForValueToChange } = renderHook(
       () => useGetVotes('poll-0'),
-      { wrapper }
+      { wrapper },
     );
 
     await waitForValueToChange(() => result.current.isLoading);
@@ -220,7 +220,7 @@ describe('useGetVotes', () => {
           startTime: '2020-01-01T00:00:00Z',
           startEventId: '$start-event-id',
         },
-      })
+      }),
     );
     const votes = [
       widgetApi.mockSendRoomEvent(
@@ -228,20 +228,20 @@ describe('useGetVotes', () => {
           sender: 'user-alice',
           content: { pollId: 'poll-0', answerId: '1' },
           origin_server_ts: new Date('2020-01-01T00:00:00Z').getTime(),
-        })
+        }),
       ),
       widgetApi.mockSendRoomEvent(
         mockVote({
           sender: 'user-bob',
           content: { pollId: 'poll-0', answerId: '22' },
           origin_server_ts: new Date('2020-01-01T00:00:00Z').getTime(),
-        })
+        }),
       ),
     ];
 
     const { result, waitForValueToChange } = renderHook(
       () => useGetVotes('poll-0'),
-      { wrapper }
+      { wrapper },
     );
 
     await waitForValueToChange(() => result.current.isLoading);
@@ -263,7 +263,7 @@ describe('useGetVotes', () => {
           startEventId: '$start-event-id',
           duration: 1,
         },
-      })
+      }),
     );
     const votes = [
       // too early
@@ -272,7 +272,7 @@ describe('useGetVotes', () => {
           sender: '@user-1',
           content: { pollId: 'poll-0', answerId: '1' },
           origin_server_ts: new Date('2020-01-01T00:59:59Z').getTime(),
-        })
+        }),
       ),
 
       // correct
@@ -281,7 +281,7 @@ describe('useGetVotes', () => {
           sender: '@user-2',
           content: { pollId: 'poll-0', answerId: '1' },
           origin_server_ts: new Date('2020-01-01T01:00:00Z').getTime(),
-        })
+        }),
       ),
 
       // too late
@@ -290,13 +290,13 @@ describe('useGetVotes', () => {
           sender: '@user-3',
           content: { pollId: 'poll-0', answerId: '1' },
           origin_server_ts: new Date('2020-01-01T01:01:00Z').getTime(),
-        })
+        }),
       ),
     ];
 
     const { result, waitForValueToChange } = renderHook(
       () => useGetVotes('poll-0'),
-      { wrapper }
+      { wrapper },
     );
 
     await waitForValueToChange(() => result.current.isLoading);

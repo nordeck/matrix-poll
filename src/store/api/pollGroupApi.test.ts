@@ -31,13 +31,13 @@ describe('getPollGroups', () => {
   it('should return poll groups', async () => {
     const event0 = widgetApi.mockSendStateEvent(mockGroup());
     const event1 = widgetApi.mockSendStateEvent(
-      mockGroup({ state_key: 'group-1', content: { abbreviation: 'Group 1' } })
+      mockGroup({ state_key: 'group-1', content: { abbreviation: 'Group 1' } }),
     );
 
     const store = createStore({ widgetApi });
 
     await expect(
-      store.dispatch(pollGroupApi.endpoints.getPollGroups.initiate()).unwrap()
+      store.dispatch(pollGroupApi.endpoints.getPollGroups.initiate()).unwrap(),
     ).resolves.toEqual({
       ids: [event0.state_key, event1.state_key],
       entities: {
@@ -58,13 +58,13 @@ describe('getPollGroups', () => {
             '@user-alice': {} as MemberContent,
           },
         },
-      })
+      }),
     );
 
     const store = createStore({ widgetApi });
 
     await expect(
-      store.dispatch(pollGroupApi.endpoints.getPollGroups.initiate()).unwrap()
+      store.dispatch(pollGroupApi.endpoints.getPollGroups.initiate()).unwrap(),
     ).resolves.toEqual({
       ids: [event0.state_key, event1.state_key],
       entities: {
@@ -88,7 +88,7 @@ describe('getPollGroups', () => {
     const store = createStore({ widgetApi });
 
     await expect(
-      store.dispatch(pollGroupApi.endpoints.getPollGroups.initiate()).unwrap()
+      store.dispatch(pollGroupApi.endpoints.getPollGroups.initiate()).unwrap(),
     ).rejects.toEqual({
       message: 'Could not load poll groups: Some Error',
       name: 'LoadFailed',
@@ -102,19 +102,19 @@ describe('getPollGroups', () => {
 
     await waitFor(() =>
       expect(
-        pollGroupApi.endpoints.getPollGroups.select()(store.getState()).data
-      ).toEqual({ ids: [], entities: {} })
+        pollGroupApi.endpoints.getPollGroups.select()(store.getState()).data,
+      ).toEqual({ ids: [], entities: {} }),
     );
 
     const event = widgetApi.mockSendStateEvent(mockGroup());
 
     await waitFor(() =>
       expect(
-        pollGroupApi.endpoints.getPollGroups.select()(store.getState()).data
+        pollGroupApi.endpoints.getPollGroups.select()(store.getState()).data,
       ).toEqual({
         ids: [event.state_key],
         entities: { [event.state_key]: event },
-      })
+      }),
     );
   });
 
@@ -126,11 +126,11 @@ describe('getPollGroups', () => {
 
     await waitFor(() =>
       expect(
-        pollGroupApi.endpoints.getPollGroups.select()(store.getState()).data
+        pollGroupApi.endpoints.getPollGroups.select()(store.getState()).data,
       ).toEqual({
         ids: [event.state_key],
         entities: { [event.state_key]: event },
-      })
+      }),
     );
 
     // Delete poll group
@@ -146,8 +146,8 @@ describe('getPollGroups', () => {
 
     await waitFor(() =>
       expect(
-        pollGroupApi.endpoints.getPollGroups.select()(store.getState()).data
-      ).toEqual({ ids: [], entities: {} })
+        pollGroupApi.endpoints.getPollGroups.select()(store.getState()).data,
+      ).toEqual({ ids: [], entities: {} }),
     );
   });
 });
@@ -163,9 +163,9 @@ describe('updatePollGroup', () => {
           pollGroupApi.endpoints.updatePollGroup.initiate({
             groupId: 'group-0',
             content: group,
-          })
+          }),
         )
-        .unwrap()
+        .unwrap(),
     ).resolves.toEqual({
       event: expect.objectContaining({
         content: group,
@@ -176,7 +176,7 @@ describe('updatePollGroup', () => {
     expect(widgetApi.sendStateEvent).toBeCalledWith(
       'net.nordeck.poll.group',
       group,
-      { stateKey: 'group-0' }
+      { stateKey: 'group-0' },
     );
   });
 
@@ -197,9 +197,9 @@ describe('updatePollGroup', () => {
           pollGroupApi.endpoints.updatePollGroup.initiate({
             groupId: 'group-0',
             content: group,
-          })
+          }),
         )
-        .unwrap()
+        .unwrap(),
     ).resolves.toEqual({
       event: expect.objectContaining({
         content: group,
@@ -210,7 +210,7 @@ describe('updatePollGroup', () => {
     expect(widgetApi.sendStateEvent).toBeCalledWith(
       'net.nordeck.poll.group',
       group,
-      { stateKey: 'group-0' }
+      { stateKey: 'group-0' },
     );
   });
 
@@ -225,9 +225,9 @@ describe('updatePollGroup', () => {
           pollGroupApi.endpoints.updatePollGroup.initiate({
             groupId: 'group-0',
             content: mockGroup().content,
-          })
+          }),
         )
-        .unwrap()
+        .unwrap(),
     ).rejects.toEqual({
       name: 'UpdateFailed',
       message: 'Could not update poll group: Some Error',
@@ -245,7 +245,7 @@ describe('updatePollGroup', () => {
         pollGroupApi.endpoints.updatePollGroup.initiate({
           groupId: 'group-0',
           content: group,
-        })
+        }),
       )
       .unwrap();
     await store
@@ -253,7 +253,7 @@ describe('updatePollGroup', () => {
         pollGroupApi.endpoints.updatePollGroup.initiate({
           groupId: 'group-0',
           content: group,
-        })
+        }),
       )
       .unwrap();
   });
@@ -270,15 +270,15 @@ describe('deletePollGroup', () => {
         .dispatch(
           pollGroupApi.endpoints.deletePollGroup.initiate({
             groupId: 'group-0',
-          })
+          }),
         )
-        .unwrap()
+        .unwrap(),
     ).resolves.toEqual({});
 
     expect(widgetApi.sendStateEvent).toBeCalledWith(
       'net.nordeck.poll.group',
       {},
-      { stateKey: 'group-0' }
+      { stateKey: 'group-0' },
     );
   });
 
@@ -292,9 +292,9 @@ describe('deletePollGroup', () => {
         .dispatch(
           pollGroupApi.endpoints.deletePollGroup.initiate({
             groupId: 'group-0',
-          })
+          }),
         )
-        .unwrap()
+        .unwrap(),
     ).rejects.toEqual({
       name: 'UpdateFailed',
       message: 'Could not delete poll group: Some Error',
@@ -312,14 +312,14 @@ describe('deletePollGroup', () => {
       .dispatch(
         pollGroupApi.endpoints.deletePollGroup.initiate({
           groupId: 'group-0',
-        })
+        }),
       )
       .unwrap();
     await store
       .dispatch(
         pollGroupApi.endpoints.deletePollGroup.initiate({
           groupId: 'group-0',
-        })
+        }),
       )
       .unwrap();
   });

@@ -52,17 +52,17 @@ describe('<PollResultTable/>', () => {
     expect(within(rows[0]).getAllByRole('columnheader')).toHaveLength(2);
 
     expect(
-      within(rows[1]).getByRole('rowheader', { name: 'Yes' })
+      within(rows[1]).getByRole('rowheader', { name: 'Yes' }),
     ).toBeInTheDocument();
     expect(within(rows[1]).getByRole('cell')).toHaveTextContent('2');
 
     expect(
-      within(rows[2]).getByRole('rowheader', { name: 'No' })
+      within(rows[2]).getByRole('rowheader', { name: 'No' }),
     ).toBeInTheDocument();
     expect(within(rows[2]).getByRole('cell')).toHaveTextContent('1');
 
     expect(
-      within(rows[3]).getByRole('rowheader', { name: 'Invalid' })
+      within(rows[3]).getByRole('rowheader', { name: 'Invalid' }),
     ).toBeInTheDocument();
     expect(within(rows[3]).getByRole('cell')).toHaveTextContent('1');
   });
@@ -76,12 +76,12 @@ describe('<PollResultTable/>', () => {
     expect(within(rows[0]).getAllByRole('columnheader')).toHaveLength(2);
 
     expect(
-      within(rows[1]).getByRole('rowheader', { name: 'Yes' })
+      within(rows[1]).getByRole('rowheader', { name: 'Yes' }),
     ).toBeInTheDocument();
     expect(within(rows[1]).getByRole('cell')).toHaveTextContent('2');
 
     expect(
-      within(rows[2]).getByRole('rowheader', { name: 'No' })
+      within(rows[2]).getByRole('rowheader', { name: 'No' }),
     ).toBeInTheDocument();
     expect(within(rows[2]).getByRole('cell')).toHaveTextContent('1');
   });

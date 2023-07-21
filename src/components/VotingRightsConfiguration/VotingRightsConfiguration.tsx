@@ -38,7 +38,7 @@ export const VotingRightsConfiguration = ({
         onGroupsChange(groups.map((g) => (g.id === group.id ? group : g)));
       }
     },
-    [groups, onGroupsChange]
+    [groups, onGroupsChange],
   );
   const headingId = useId();
 

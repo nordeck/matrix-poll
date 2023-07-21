@@ -54,7 +54,7 @@ export function GroupForm({
   const [abbreviation, setAbbreviation] = useState('');
   const [color, setColor] = useState('#999999');
   const [delegateParticipants, setDelegateParticipants] = useState<string[]>(
-    []
+    [],
   );
   const [representativeParticipants, setRepresentativeParticipants] = useState<
     string[]
@@ -71,14 +71,14 @@ export function GroupForm({
       hasRoomEventPower(
         powerLevels?.event?.content,
         m.state_key,
-        ROOM_EVENT_VOTE
-      )
+        ROOM_EVENT_VOTE,
+      ),
     );
     const allGroupsExceptCurrentGroup = pollGroups
       ? selectPollGroups(pollGroups).filter((g) => g.state_key !== groupId)
       : [];
     const assignedRoomMemberIdsExceptCurrentGroup = Object.values(
-      allGroupsExceptCurrentGroup
+      allGroupsExceptCurrentGroup,
     ).flatMap((g) => Object.keys(g.content.members));
     const assignedRoomMemberIdsOfCurrentGroup = [
       ...delegateParticipants,
@@ -90,7 +90,7 @@ export function GroupForm({
     ]);
 
     return roomMembersWithVotingPower.filter(
-      (r) => !assignedRoomMemberIds.has(r.state_key)
+      (r) => !assignedRoomMemberIds.has(r.state_key),
     );
   }, [
     delegateParticipants,
@@ -108,12 +108,12 @@ export function GroupForm({
       setDelegateParticipants(
         Object.entries(group.members)
           .filter(([_, value]) => value.memberRole === 'delegate')
-          .map(([userId]) => userId)
+          .map(([userId]) => userId),
       );
       setRepresentativeParticipants(
         Object.entries(group.members)
           .filter(([_, value]) => value.memberRole === 'representative')
-          .map(([userId]) => userId)
+          .map(([userId]) => userId),
       );
     }
   }, [group, setDelegateParticipants, setRepresentativeParticipants]);
@@ -149,12 +149,12 @@ export function GroupForm({
         setRepresentativeParticipants((v) => [...v, participant]);
       } else {
         setRepresentativeParticipants((v) =>
-          v.filter((m) => m !== participant)
+          v.filter((m) => m !== participant),
         );
         setDelegateParticipants((v) => [...v, participant]);
       }
     },
-    []
+    [],
   );
 
   const handleChangeTitle = useCallback(
@@ -162,7 +162,7 @@ export function GroupForm({
       setDirty(true);
       setAbbreviation(event.target.value);
     },
-    []
+    [],
   );
 
   const handleChangeColor = useCallback(
@@ -170,7 +170,7 @@ export function GroupForm({
       setDirty(true);
       setColor(event.target.value);
     },
-    []
+    [],
   );
 
   useEffect(() => {
@@ -267,7 +267,7 @@ export function GroupForm({
             availableRoomMembers={availableRoomMembers}
             label={t(
               'assignParticipantsView.addDelegateUser',
-              'Assign delegate'
+              'Assign delegate',
             )}
             onAdd={handleAddDelegate}
           />
@@ -283,7 +283,7 @@ export function GroupForm({
             availableRoomMembers={availableRoomMembers}
             label={t(
               'assignParticipantsView.addRepresentativeUser',
-              'Assign representative'
+              'Assign representative',
             )}
             onAdd={handleAddRepresentative}
           />

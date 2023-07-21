@@ -41,7 +41,7 @@ describe('selectPollsOngoing', () => {
           startTime: '2022-08-11T17:33:00Z',
           endTime: '2022-08-11T17:34:00Z',
         },
-      })
+      }),
     );
     const poll2 = widgetApi.mockSendStateEvent(
       mockPoll({
@@ -50,7 +50,7 @@ describe('selectPollsOngoing', () => {
           startTime: '2022-08-11T17:33:00.001Z',
           endTime: '2022-08-11T17:34:00.001Z',
         },
-      })
+      }),
     );
     const poll3 = widgetApi.mockSendStateEvent(
       mockPoll({
@@ -59,7 +59,7 @@ describe('selectPollsOngoing', () => {
           startTime: '2022-08-11T17:34:00Z',
           endTime: '2022-08-11T17:35:00Z',
         },
-      })
+      }),
     );
     const poll4 = widgetApi.mockSendStateEvent(
       mockPoll({
@@ -68,7 +68,7 @@ describe('selectPollsOngoing', () => {
           startTime: '2022-08-11T17:34:01Z',
           endTime: '2022-08-11T17:35:01Z',
         },
-      })
+      }),
     );
 
     const store = createStore({ widgetApi });

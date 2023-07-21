@@ -43,7 +43,7 @@ export function useGetVotes(pollId: string): AsyncState<RoomEvent<IVote>[]> {
     },
     // wait until the polls have been loaded to make sure the
     // content of `startEventId` is valid.
-    { skip: isPollEventsLoading }
+    { skip: isPollEventsLoading },
   );
 
   return useMemo(() => {
@@ -77,7 +77,7 @@ export function useGetVotes(pollId: string): AsyncState<RoomEvent<IVote>[]> {
 
 export function selectGetVotes(
   pollEvent: StateEvent<IPoll> | undefined,
-  votes: RoomEvent<IVote>[]
+  votes: RoomEvent<IVote>[],
 ): RoomEvent<IVote>[] {
   if (!pollEvent || !pollEvent.content.startTime) {
     return [];
@@ -95,7 +95,7 @@ export function selectGetVotes(
 
       // only votes for existing answers
       .filter((v) =>
-        pollEvent.content.answers.some((a) => a.id === v.content.answerId)
+        pollEvent.content.answers.some((a) => a.id === v.content.answerId),
       )
 
       // only if they were cast during the vote duration

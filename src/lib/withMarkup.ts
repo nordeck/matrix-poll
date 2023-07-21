@@ -34,7 +34,7 @@ export const withMarkup =
       }
 
       const childrenDontHaveText = Array.from(node.children).every(
-        (child) => !hasText(child as HTMLElement)
+        (child) => !hasText(child as HTMLElement),
       );
       return childrenDontHaveText;
     });

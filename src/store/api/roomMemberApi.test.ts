@@ -46,13 +46,15 @@ describe('getRoomMembers', () => {
           displayname: 'Bob',
           avatar_url: undefined,
         },
-      })
+      }),
     );
 
     const store = createStore({ widgetApi });
 
     await expect(
-      store.dispatch(roomMemberApi.endpoints.getRoomMembers.initiate()).unwrap()
+      store
+        .dispatch(roomMemberApi.endpoints.getRoomMembers.initiate())
+        .unwrap(),
     ).resolves.toEqual({
       ids: ['@user-alice', '@user-bob'],
       entities: {
@@ -82,7 +84,9 @@ describe('getRoomMembers', () => {
     const store = createStore({ widgetApi });
 
     await expect(
-      store.dispatch(roomMemberApi.endpoints.getRoomMembers.initiate()).unwrap()
+      store
+        .dispatch(roomMemberApi.endpoints.getRoomMembers.initiate())
+        .unwrap(),
     ).rejects.toEqual({
       message: 'Could not load room members: Some Error',
       name: 'LoadFailed',
@@ -98,8 +102,8 @@ describe('getRoomMembers', () => {
 
     await waitFor(() =>
       expect(
-        roomMemberApi.endpoints.getRoomMembers.select()(store.getState()).data
-      ).toEqual(expect.objectContaining({ ids: ['@user-alice'] }))
+        roomMemberApi.endpoints.getRoomMembers.select()(store.getState()).data,
+      ).toEqual(expect.objectContaining({ ids: ['@user-alice'] })),
     );
 
     widgetApi.mockSendStateEvent(
@@ -108,13 +112,13 @@ describe('getRoomMembers', () => {
         content: {
           displayname: 'Bob',
         },
-      })
+      }),
     );
 
     await waitFor(() =>
       expect(
-        roomMemberApi.endpoints.getRoomMembers.select()(store.getState()).data
-      ).toEqual(expect.objectContaining({ ids: ['@user-alice', '@user-bob'] }))
+        roomMemberApi.endpoints.getRoomMembers.select()(store.getState()).data,
+      ).toEqual(expect.objectContaining({ ids: ['@user-alice', '@user-bob'] })),
     );
   });
 });
@@ -168,7 +172,7 @@ describe('selectActiveRoomMembers', () => {
           knockUser.state_key,
           banUser.state_key,
         ],
-      })
+      }),
     ).toEqual([joinUser, inviteUser]);
   });
 
@@ -195,12 +199,12 @@ describe('selectActiveRoomMembers', () => {
           [inviteUser.state_key]: inviteUser,
         },
         ids: [joinUser.state_key, inviteUser.state_key],
-      })
+      }),
     ).toEqual([joinUser]);
 
     expect(getEnvironment).toHaveBeenCalledWith(
       'REACT_APP_IGNORE_USER_IDS',
-      ''
+      '',
     );
   });
 });
