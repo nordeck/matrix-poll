@@ -15,7 +15,7 @@ jobs:
     outputs:
       docker-tag: ${{ steps.meta.outputs.version }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           # required for changesets
           fetch-depth: '0'
