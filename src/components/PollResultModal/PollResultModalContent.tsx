@@ -78,7 +78,7 @@ export const PollResultModalContent = ({
   const handleResultModeChange = useCallback(
     (e: SelectChangeEvent<ChartType>) =>
       setResultMode(e.target.value as ChartType),
-    []
+    [],
   );
 
   if (!pollResults) {
@@ -93,7 +93,7 @@ export const PollResultModalContent = ({
             inputProps={{
               'aria-label': t(
                 'pollResultModalContent.resultDisplayMode',
-                'Result Display Mode'
+                'Result Display Mode',
               ),
             }}
             onChange={handleResultModeChange}

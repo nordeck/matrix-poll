@@ -124,7 +124,7 @@ const pollSchema = Joi.object<IPoll, true>({
 }).unknown();
 
 export function isValidPollEvent(
-  event: StateEvent<unknown>
+  event: StateEvent<unknown>,
 ): event is StateEvent<IPoll> {
   return isValidEvent(event, STATE_EVENT_POLL, pollSchema);
 }
@@ -135,7 +135,7 @@ export function isValidPollEvent(
  * Should be done on every read from the room.
  */
 export function migratePollSchema(
-  pollEvent: StateEvent<IPoll>
+  pollEvent: StateEvent<IPoll>,
 ): StateEvent<IPoll> {
   if (
     pollEvent.content.startTime !== undefined &&

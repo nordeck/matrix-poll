@@ -42,7 +42,7 @@ type NotificationType = 'info';
 
 export type ShowNotificationFn = (
   type: NotificationType,
-  message: string
+  message: string,
 ) => void;
 
 type NotificationsState = {
@@ -58,7 +58,7 @@ export function useNotifications(): NotificationsState {
 
   if (context === undefined) {
     throw new Error(
-      'useNotifications must be used within a PollStatusNotificationsProvider'
+      'useNotifications must be used within a PollStatusNotificationsProvider',
     );
   }
 
@@ -108,7 +108,7 @@ export function PollStatusNotificationsProvider({
       if (
         ref.current &&
         !Array.from(ref.current.childNodes).some(
-          (c) => c.textContent === message
+          (c) => c.textContent === message,
         )
       ) {
         el = document.createElement('p');
@@ -127,7 +127,7 @@ export function PollStatusNotificationsProvider({
 
   const context = useMemo<NotificationsState>(
     () => ({ showNotification }),
-    [showNotification]
+    [showNotification],
   );
 
   return (

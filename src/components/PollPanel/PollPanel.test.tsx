@@ -75,7 +75,7 @@ describe('<PollPanel>', () => {
             },
           },
         },
-      })
+      }),
     );
     widgetApi.mockSendStateEvent(
       mockGroup({
@@ -90,7 +90,7 @@ describe('<PollPanel>', () => {
             },
           },
         },
-      })
+      }),
     );
 
     widgetApi.mockSendStateEvent(mockPoll());
@@ -101,7 +101,7 @@ describe('<PollPanel>', () => {
           startTime: '3999-12-31T00:00:00Z',
           endTime: '3999-12-31T00:01:00Z',
         },
-      })
+      }),
     );
     widgetApi.mockSendStateEvent(
       mockPoll({
@@ -110,7 +110,7 @@ describe('<PollPanel>', () => {
           startTime: '2020-01-01T00:00:00Z',
           endTime: '2020-01-01T00:01:00Z',
         },
-      })
+      }),
     );
 
     Wrapper = ({ children }: PropsWithChildren<{}>) => {
@@ -129,19 +129,19 @@ describe('<PollPanel>', () => {
     render(<PollPanel />, { wrapper: Wrapper });
 
     await expect(
-      screen.findByRole('list', { name: /not started polls/i })
+      screen.findByRole('list', { name: /not started polls/i }),
     ).resolves.toBeInTheDocument();
     expect(
-      screen.getByRole('list', { name: /active polls/i })
+      screen.getByRole('list', { name: /active polls/i }),
     ).toBeInTheDocument();
     expect(
-      screen.getByRole('list', { name: /finished polls/i })
+      screen.getByRole('list', { name: /finished polls/i }),
     ).toBeInTheDocument();
 
     const nav = await screen.findByRole('navigation');
 
     await expect(
-      within(nav).findByRole('button', { name: /create new poll/i })
+      within(nav).findByRole('button', { name: /create new poll/i }),
     ).resolves.toBeInTheDocument();
   });
 
@@ -157,10 +157,10 @@ describe('<PollPanel>', () => {
     widgetApi.clearStateEvents();
     widgetApi.mockSendStateEvent(mockPoll());
     widgetApi.mockSendStateEvent(
-      mockPoll({ state_key: 'poll-1', content: { title: 'Another Title' } })
+      mockPoll({ state_key: 'poll-1', content: { title: 'Another Title' } }),
     );
     widgetApi.mockSendStateEvent(
-      mockPollSettings({ content: { pollsOrder: ['poll-1', 'poll-0'] } })
+      mockPollSettings({ content: { pollsOrder: ['poll-1', 'poll-0'] } }),
     );
 
     const { baseElement } = render(<PollPanel />, {
@@ -175,7 +175,7 @@ describe('<PollPanel>', () => {
       expect(
         within(list)
           .getAllByRole('listitem', { name: /title$/i })
-          .map((c) => c.textContent)
+          .map((c) => c.textContent),
       ).toEqual([
         expect.stringMatching(/another title/i),
         expect.stringMatching(/my title/i),
@@ -199,28 +199,28 @@ describe('<PollPanel>', () => {
 
     await waitForAnnouncement(
       baseElement,
-      /You have lifted a poll\. It is in position 2 of 2 in the list\./
+      /You have lifted a poll\. It is in position 2 of 2 in the list\./,
     );
 
     fireEvent.keyDown(reorderButton, { keyCode: 38 /*{ArrowUp}*/ });
 
     await waitForAnnouncement(
       baseElement,
-      /You have moved the poll to position 1 of 2\./
+      /You have moved the poll to position 1 of 2\./,
     );
 
     fireEvent.keyDown(reorderButton, { keyCode: 32 /*{Space}*/ });
 
     await waitForAnnouncement(
       baseElement,
-      /You have dropped the poll\. It has moved from position 2 to 1\./
+      /You have dropped the poll\. It has moved from position 2 to 1\./,
     );
 
     await waitFor(() => {
       expect(
         within(list)
           .getAllByRole('listitem', { name: /title$/i })
-          .map((c) => c.textContent)
+          .map((c) => c.textContent),
       ).toEqual([
         expect.stringMatching(/my title/i),
         expect.stringMatching(/another title/i),
@@ -239,7 +239,7 @@ describe('<PollPanel>', () => {
           startTime: '2020-01-01T09:59:00Z',
           endTime: '2020-01-01T10:00:00Z',
         },
-      })
+      }),
     );
 
     render(<PollPanel />, { wrapper: Wrapper });
@@ -251,10 +251,10 @@ describe('<PollPanel>', () => {
       name: 'My Title',
     });
     expect(
-      screen.queryByRole('list', { name: /finished polls/i })
+      screen.queryByRole('list', { name: /finished polls/i }),
     ).not.toBeInTheDocument();
     expect(
-      screen.queryByRole('region', { name: 'Documentation' })
+      screen.queryByRole('region', { name: 'Documentation' }),
     ).not.toBeInTheDocument();
 
     act(() => {
@@ -269,10 +269,10 @@ describe('<PollPanel>', () => {
     expect(
       within(finishedList).getByRole('listitem', {
         name: 'My Title',
-      })
+      }),
     ).toBeInTheDocument();
     await expect(
-      screen.findByRole('region', { name: 'Documentation' })
+      screen.findByRole('region', { name: 'Documentation' }),
     ).resolves.toBeInTheDocument();
   });
 
@@ -289,7 +289,7 @@ describe('<PollPanel>', () => {
           startTime: '2020-01-01T00:00:00Z',
           endTime: '2020-01-01T00:01:00Z',
         },
-      })
+      }),
     );
 
     widgetApi.mockSendStateEvent(
@@ -298,7 +298,7 @@ describe('<PollPanel>', () => {
           startTime: '2020-01-01T09:59:00Z',
           endTime: '2020-01-01T10:00:00Z',
         },
-      })
+      }),
     );
 
     render(<PollPanel />, { wrapper: Wrapper });
@@ -310,7 +310,7 @@ describe('<PollPanel>', () => {
       name: /finished polls/i,
     });
     expect(
-      within(finishedList).getByRole('listitem', { name: 'A finished poll' })
+      within(finishedList).getByRole('listitem', { name: 'A finished poll' }),
     ).toBeInTheDocument();
 
     const activePoll = within(activeList).getByRole('listitem', {
@@ -326,7 +326,7 @@ describe('<PollPanel>', () => {
     expect(
       within(finishedList).getByRole('listitem', {
         name: 'My Title',
-      })
+      }),
     ).toBeInTheDocument();
   });
 
@@ -336,7 +336,7 @@ describe('<PollPanel>', () => {
     const nav = await screen.findByRole('navigation');
 
     await userEvent.click(
-      within(nav).getByRole('button', { name: /create new poll/i })
+      within(nav).getByRole('button', { name: /create new poll/i }),
     );
 
     expect(widgetApi.openModal).toBeCalledWith(
@@ -356,7 +356,7 @@ describe('<PollPanel>', () => {
             label: 'Cancel',
           },
         ],
-      }
+      },
     );
 
     expect(widgetApi.sendStateEvent).not.toBeCalled();
@@ -372,7 +372,7 @@ describe('<PollPanel>', () => {
     const nav = await screen.findByRole('navigation');
 
     await userEvent.click(
-      within(nav).getByRole('button', { name: /create new poll/i })
+      within(nav).getByRole('button', { name: /create new poll/i }),
     );
 
     expect(widgetApi.openModal).toBeCalledWith(
@@ -392,14 +392,14 @@ describe('<PollPanel>', () => {
             label: 'Cancel',
           },
         ],
-      }
+      },
     );
 
     await waitFor(() => {
       expect(widgetApi.sendStateEvent).toBeCalledWith(
         'net.nordeck.poll',
         mockPoll().content,
-        { stateKey: expect.any(String) }
+        { stateKey: expect.any(String) },
       );
     });
   });
@@ -408,7 +408,7 @@ describe('<PollPanel>', () => {
     widgetApi.mockSendStateEvent(
       mockPowerLevelsEvent({
         content: { users_default: 0 },
-      })
+      }),
     );
 
     render(<PollPanel />, { wrapper: Wrapper });
@@ -419,13 +419,13 @@ describe('<PollPanel>', () => {
 
 async function waitForAnnouncement(
   element: HTMLElement,
-  message: string | RegExp
+  message: string | RegExp,
 ) {
   await waitFor(() =>
     expect(
       // We are not able to access an aria-live region via the testing library
       // eslint-disable-next-line testing-library/no-node-access
-      element.querySelector('[aria-live=assertive]')
-    ).toHaveTextContent(message)
+      element.querySelector('[aria-live=assertive]'),
+    ).toHaveTextContent(message),
   );
 }

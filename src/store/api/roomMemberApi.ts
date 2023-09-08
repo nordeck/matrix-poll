@@ -56,13 +56,13 @@ export const roomMemberApi = baseApi.injectEndpoints({
           const initialState = roomMemberEventEntityAdapter.getInitialState();
 
           const events = await widgetApi.receiveStateEvents(
-            STATE_EVENT_ROOM_MEMBER
+            STATE_EVENT_ROOM_MEMBER,
           );
 
           return {
             data: roomMemberEventEntityAdapter.addMany(
               initialState,
-              events.filter(isValidRoomMemberStateEvent)
+              events.filter(isValidRoomMemberStateEvent),
             ),
           };
         } catch (e) {
@@ -79,7 +79,7 @@ export const roomMemberApi = baseApi.injectEndpoints({
 
       async onCacheEntryAdded(
         _,
-        { cacheDataLoaded, cacheEntryRemoved, extra, updateCachedData }
+        { cacheDataLoaded, cacheEntryRemoved, extra, updateCachedData },
       ) {
         const { widgetApi } = extra as ThunkExtraArgument;
 
@@ -91,11 +91,11 @@ export const roomMemberApi = baseApi.injectEndpoints({
           .pipe(
             filter(isValidRoomMemberStateEvent),
             bufferTime(0),
-            filter((list) => list.length > 0)
+            filter((list) => list.length > 0),
           )
           .subscribe(async (events) => {
             updateCachedData((state) =>
-              roomMemberEventEntityAdapter.upsertMany(state, events)
+              roomMemberEventEntityAdapter.upsertMany(state, events),
             );
           });
 
@@ -112,13 +112,13 @@ export const { selectAll: selectRoomMembers, selectById: selectRoomMember } =
   roomMemberEventEntityAdapter.getSelectors();
 
 export function selectActiveRoomMembers(
-  state: EntityState<StateEvent<RoomMemberStateEventContent>>
+  state: EntityState<StateEvent<RoomMemberStateEventContent>>,
 ) {
   const ignoredUsers = getIgnoredUsers();
   return selectRoomMembers(state)
     .filter(
       (m) =>
-        m.content.membership === 'join' || m.content.membership === 'invite'
+        m.content.membership === 'join' || m.content.membership === 'invite',
     )
     .filter((m) => !ignoredUsers.includes(m.state_key));
 }

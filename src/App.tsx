@@ -28,7 +28,7 @@ import { StoreProvider } from './store';
 function App() {
   const { showNotification } = useNotifications();
   const [pollNotificationsMiddleware] = useState(() =>
-    createPollStatusNotificationsMiddleware({ showNotification })
+    createPollStatusNotificationsMiddleware({ showNotification }),
   );
 
   return (

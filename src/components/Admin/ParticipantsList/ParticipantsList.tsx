@@ -27,7 +27,7 @@ type ParticipantsListProps = {
   onRemoveMember?: (participant: string) => void;
   onChangeDelegation?: (
     participant: string,
-    type: 'representative' | 'delegate'
+    type: 'representative' | 'delegate',
   ) => void;
 };
 
@@ -48,7 +48,7 @@ export function ParticipantsList({
         }),
         emptyState: t(
           'participantsList.noDelegate',
-          'No delegates have been assigned yet.'
+          'No delegates have been assigned yet.',
         ),
       };
     }
@@ -57,11 +57,11 @@ export function ParticipantsList({
       title: t(
         'participantsList.representative',
         'Representatives: {{count}}',
-        { count: members.length }
+        { count: members.length },
       ),
       emptyState: t(
         'participantsList.noRepresentative',
-        'No representatives have been assigned yet.'
+        'No representatives have been assigned yet.',
       ),
     };
   }, [members.length, t, type]);

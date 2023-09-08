@@ -59,15 +59,15 @@ describe('<PollInfosIcons/>', () => {
     expect(
       within(list).getByRole('listitem', {
         name: /open poll \(grouped\)/i,
-      })
+      }),
     ).toBeInTheDocument();
 
     expect(
-      within(list).getByRole('listitem', { name: /4 voters/i })
+      within(list).getByRole('listitem', { name: /4 voters/i }),
     ).toBeInTheDocument();
 
     expect(
-      within(list).getByRole('listitem', { name: /0 voting persons/i })
+      within(list).getByRole('listitem', { name: /0 voting persons/i }),
     ).toBeInTheDocument();
   });
 
@@ -81,7 +81,7 @@ describe('<PollInfosIcons/>', () => {
 
   it('should render open polls', async () => {
     widgetApi.mockSendStateEvent(
-      mockPoll({ content: { pollType: PollType.Open, groups: undefined } })
+      mockPoll({ content: { pollType: PollType.Open, groups: undefined } }),
     );
 
     render(<PollInfoIcons pollId="poll-0" showVotes />, {
@@ -98,7 +98,7 @@ describe('<PollInfosIcons/>', () => {
 
   it('should render secret polls', async () => {
     widgetApi.mockSendStateEvent(
-      mockPoll({ content: { pollType: PollType.Secret, groups: undefined } })
+      mockPoll({ content: { pollType: PollType.Secret, groups: undefined } }),
     );
 
     render(<PollInfoIcons pollId="poll-0" showVotes />, {
@@ -115,7 +115,7 @@ describe('<PollInfosIcons/>', () => {
 
   it('should render named polls', async () => {
     widgetApi.mockSendStateEvent(
-      mockPoll({ content: { pollType: PollType.ByName, groups: undefined } })
+      mockPoll({ content: { pollType: PollType.ByName, groups: undefined } }),
     );
 
     render(<PollInfoIcons pollId="poll-0" showVotes />, {
@@ -134,7 +134,7 @@ describe('<PollInfosIcons/>', () => {
     widgetApi.receiveRoomEvents.mockReturnValue(new Promise(() => {}));
 
     widgetApi.mockSendStateEvent(
-      mockPoll({ content: { pollType: PollType.Open, groups: undefined } })
+      mockPoll({ content: { pollType: PollType.Open, groups: undefined } }),
     );
 
     render(<PollInfoIcons pollId="poll-0" showVotes />, {
@@ -144,7 +144,7 @@ describe('<PollInfosIcons/>', () => {
     const list = await screen.findByRole('list', { name: /poll details/i });
 
     expect(
-      within(list).getByRole('listitem', { name: /Votes loading/i })
+      within(list).getByRole('listitem', { name: /Votes loading/i }),
     ).toBeInTheDocument();
   });
 
@@ -152,7 +152,7 @@ describe('<PollInfosIcons/>', () => {
     widgetApi.receiveRoomEvents.mockRejectedValue(new Error('Some Error'));
 
     widgetApi.mockSendStateEvent(
-      mockPoll({ content: { pollType: PollType.Open, groups: undefined } })
+      mockPoll({ content: { pollType: PollType.Open, groups: undefined } }),
     );
 
     render(<PollInfoIcons pollId="poll-0" showVotes />, {
@@ -164,19 +164,19 @@ describe('<PollInfosIcons/>', () => {
     expect(
       within(list).getByRole('listitem', {
         name: /open poll/i,
-      })
+      }),
     ).toBeInTheDocument();
 
     expect(
-      within(list).getByRole('listitem', { name: /0 voters/i })
+      within(list).getByRole('listitem', { name: /0 voters/i }),
     ).toBeInTheDocument();
 
     expect(
-      within(list).queryByRole('listitem', { name: /Votes loading/i })
+      within(list).queryByRole('listitem', { name: /Votes loading/i }),
     ).not.toBeInTheDocument();
 
     expect(
-      within(list).queryByRole('listitem', { name: /0 voting persons/i })
+      within(list).queryByRole('listitem', { name: /0 voting persons/i }),
     ).not.toBeInTheDocument();
   });
 });

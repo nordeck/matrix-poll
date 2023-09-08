@@ -24,11 +24,11 @@ import { PollGroup, VotingRights } from '../../model/IPoll';
 
 export function syncPollGroupsWithRoomGroups(
   pollGroups: PollGroup[],
-  groupEvents: StateEvent<GroupContent>[]
+  groupEvents: StateEvent<GroupContent>[],
 ): PollGroup[] {
   return groupEvents.map((groupEvent) => {
     const existingPollGroup = pollGroups.find(
-      (g) => g.id === groupEvent.state_key
+      (g) => g.id === groupEvent.state_key,
     );
 
     if (
@@ -65,7 +65,7 @@ export function syncPollGroupsWithRoomGroups(
         }
 
         return [m, { state: 'active' }];
-      })
+      }),
     );
 
     return {
@@ -80,7 +80,7 @@ export function syncPollGroupsWithRoomGroups(
 
 export const userPermissionHasChange = (
   groups: PollGroup[] | undefined,
-  powerLevel: PowerLevelsStateEvent | undefined
+  powerLevel: PowerLevelsStateEvent | undefined,
 ) => {
   return groups?.some((group) => {
     return Object.entries(group.votingRights).some((delegateId) => {

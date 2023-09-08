@@ -59,7 +59,7 @@ export const VotingRightView = ({
 export function getVotingRightLabel(
   votingRight: VotingRight,
   t: TFunction,
-  getUserDisplayName: (userId: string) => string
+  getUserDisplayName: (userId: string) => string,
 ) {
   if (votingRight.state === 'invalid') {
     return t('pollForm.absent', 'Absent');

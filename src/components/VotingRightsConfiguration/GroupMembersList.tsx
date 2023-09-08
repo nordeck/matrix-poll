@@ -51,7 +51,7 @@ export const GroupMembersList = ({
         });
       }
     },
-    [group, onGroupChange]
+    [group, onGroupChange],
   );
 
   return (
@@ -73,7 +73,7 @@ export const GroupMembersList = ({
           <ListEmptyState
             message={t(
               'pollForm.noDelegate',
-              'No delegates have been assigned yet'
+              'No delegates have been assigned yet',
             )}
           />
         )}
@@ -131,7 +131,7 @@ export const GroupMemberItem = ({
             <AlertTitle>
               {t(
                 'userHasNoPermissionMessage.title',
-                'Insufficient power level'
+                'Insufficient power level',
               )}
             </AlertTitle>
 
@@ -150,7 +150,7 @@ export const GroupMemberItem = ({
             <AlertTitle>
               {t(
                 'userHasNoPermissionMessage.title',
-                'Insufficient power level'
+                'Insufficient power level',
               )}
             </AlertTitle>
 

@@ -23,7 +23,7 @@ describe('<SectionHeadingDivider/>', () => {
     render(<SectionHeadingDivider count={2} title="Polls" />);
 
     expect(
-      screen.getByRole('heading', { level: 3, name: /polls/i })
+      screen.getByRole('heading', { level: 3, name: /polls/i }),
     ).toBeInTheDocument();
     expect(screen.getByText('2')).toBeInTheDocument();
   });
@@ -32,14 +32,14 @@ describe('<SectionHeadingDivider/>', () => {
     render(<SectionHeadingDivider title="Polls" />);
 
     expect(
-      screen.getByRole('heading', { level: 3, name: /polls/i })
+      screen.getByRole('heading', { level: 3, name: /polls/i }),
     ).toBeInTheDocument();
     expect(screen.queryByText('2')).not.toBeInTheDocument();
   });
 
   it('should have no accessibility violations', async () => {
     const { container } = render(
-      <SectionHeadingDivider count={2} title="Polls" />
+      <SectionHeadingDivider count={2} title="Polls" />,
     );
 
     expect(await axe(container)).toHaveNoViolations();

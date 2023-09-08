@@ -68,7 +68,7 @@ export const PollsListFinishedItem = ({ poll }: PollsListFinishedItemProps) => {
         header={<CheckIcon color="primary" />}
         headerMeta={formatPollDate(
           poll.content.startTime,
-          poll.content.endTime
+          poll.content.endTime,
         )}
         poll={poll.content}
         pollId={poll.state_key}

@@ -31,10 +31,10 @@ beforeEach(() => (widgetApi = mockWidgetApi()));
 describe('getVotes', () => {
   it('should return votes for a poll', async () => {
     const vote0 = widgetApi.mockSendRoomEvent(
-      mockVote({ origin_server_ts: 900 })
+      mockVote({ origin_server_ts: 900 }),
     );
     const vote1 = widgetApi.mockSendRoomEvent(
-      mockVote({ sender: '@user-alice', origin_server_ts: 500 })
+      mockVote({ sender: '@user-alice', origin_server_ts: 500 }),
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
@@ -42,7 +42,7 @@ describe('getVotes', () => {
         content: {
           pollId: 'poll-1',
         },
-      })
+      }),
     );
     const vote3 = widgetApi.mockSendRoomEvent(
       mockVote({
@@ -51,7 +51,7 @@ describe('getVotes', () => {
         content: {
           'm.relates_to': undefined,
         },
-      })
+      }),
     );
     const vote4 = widgetApi.mockSendRoomEvent(
       mockVote({
@@ -63,7 +63,7 @@ describe('getVotes', () => {
             event_id: '$another-start-event',
           },
         },
-      })
+      }),
     );
 
     const store = createStore({ widgetApi });
@@ -74,19 +74,19 @@ describe('getVotes', () => {
           voteApi.endpoints.getVotes.initiate({
             pollId: 'poll-0',
             pollStartEventId: undefined,
-          })
+          }),
         )
-        .unwrap()
+        .unwrap(),
     ).resolves.toEqual([vote1, vote0, vote3, vote4]);
   });
 
   it('should only return votes for a poll if they relate to the poll event', async () => {
     widgetApi.mockSendRoomEvent(mockPollStart());
     const vote0 = widgetApi.mockSendRoomEvent(
-      mockVote({ origin_server_ts: 900 })
+      mockVote({ origin_server_ts: 900 }),
     );
     const vote1 = widgetApi.mockSendRoomEvent(
-      mockVote({ sender: '@user-alice', origin_server_ts: 500 })
+      mockVote({ sender: '@user-alice', origin_server_ts: 500 }),
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
@@ -94,7 +94,7 @@ describe('getVotes', () => {
         content: {
           pollId: 'poll-1',
         },
-      })
+      }),
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
@@ -103,7 +103,7 @@ describe('getVotes', () => {
         content: {
           'm.relates_to': undefined,
         },
-      })
+      }),
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
@@ -115,7 +115,7 @@ describe('getVotes', () => {
             event_id: '$another-start-event',
           },
         },
-      })
+      }),
     );
 
     const store = createStore({ widgetApi });
@@ -126,15 +126,15 @@ describe('getVotes', () => {
           voteApi.endpoints.getVotes.initiate({
             pollId: 'poll-0',
             pollStartEventId: '$start-event-id',
-          })
+          }),
         )
-        .unwrap()
+        .unwrap(),
     ).resolves.toEqual([vote1, vote0]);
   });
 
   it('should read all votes for a poll when it exceeds the page size', async () => {
     widgetApi.mockSendRoomEvent(
-      mockPollStart({ event_id: '$another-start-event' })
+      mockPollStart({ event_id: '$another-start-event' }),
     );
 
     const votes = range(0, 51).map((idx) =>
@@ -147,8 +147,8 @@ describe('getVotes', () => {
               event_id: '$another-start-event',
             },
           },
-        })
-      )
+        }),
+      ),
     );
 
     const store = createStore({ widgetApi });
@@ -159,9 +159,9 @@ describe('getVotes', () => {
           voteApi.endpoints.getVotes.initiate({
             pollId: 'poll-0',
             pollStartEventId: '$another-start-event',
-          })
+          }),
         )
-        .unwrap()
+        .unwrap(),
     ).resolves.toEqual(votes);
   });
 
@@ -174,9 +174,9 @@ describe('getVotes', () => {
           voteApi.endpoints.getVotes.initiate({
             pollId: 'poll-0',
             pollStartEventId: undefined,
-          })
+          }),
         )
-        .unwrap()
+        .unwrap(),
     ).resolves.toEqual([]);
   });
 
@@ -191,9 +191,9 @@ describe('getVotes', () => {
           voteApi.endpoints.getVotes.initiate({
             pollId: 'poll-0',
             pollStartEventId: undefined,
-          })
+          }),
         )
-        .unwrap()
+        .unwrap(),
     ).rejects.toEqual({
       message: 'Could not load votes: Some Error',
       name: 'LoadFailed',
@@ -207,7 +207,7 @@ describe('getVotes', () => {
       voteApi.endpoints.getVotes.initiate({
         pollId: 'poll-0',
         pollStartEventId: undefined,
-      })
+      }),
     );
 
     await waitFor(() =>
@@ -215,8 +215,8 @@ describe('getVotes', () => {
         voteApi.endpoints.getVotes.select({
           pollId: 'poll-0',
           pollStartEventId: undefined,
-        })(store.getState()).data
-      ).toEqual([])
+        })(store.getState()).data,
+      ).toEqual([]),
     );
 
     const vote = widgetApi.mockSendRoomEvent(mockVote());
@@ -226,7 +226,7 @@ describe('getVotes', () => {
         content: {
           pollId: 'poll-1',
         },
-      })
+      }),
     );
     const vote2 = widgetApi.mockSendRoomEvent(
       mockVote({
@@ -235,7 +235,7 @@ describe('getVotes', () => {
         content: {
           'm.relates_to': undefined,
         },
-      })
+      }),
     );
     const vote3 = widgetApi.mockSendRoomEvent(
       mockVote({
@@ -247,7 +247,7 @@ describe('getVotes', () => {
             event_id: '$another-start-event',
           },
         },
-      })
+      }),
     );
 
     await waitFor(() =>
@@ -255,8 +255,8 @@ describe('getVotes', () => {
         voteApi.endpoints.getVotes.select({
           pollId: 'poll-0',
           pollStartEventId: undefined,
-        })(store.getState()).data
-      ).toEqual([vote, vote3, vote2])
+        })(store.getState()).data,
+      ).toEqual([vote, vote3, vote2]),
     );
   });
 
@@ -269,7 +269,7 @@ describe('getVotes', () => {
       voteApi.endpoints.getVotes.initiate({
         pollId: 'poll-0',
         pollStartEventId: '$start-event-id',
-      })
+      }),
     );
 
     await waitFor(() =>
@@ -277,8 +277,8 @@ describe('getVotes', () => {
         voteApi.endpoints.getVotes.select({
           pollId: 'poll-0',
           pollStartEventId: '$start-event-id',
-        })(store.getState()).data
-      ).toEqual([])
+        })(store.getState()).data,
+      ).toEqual([]),
     );
 
     const vote = widgetApi.mockSendRoomEvent(mockVote());
@@ -288,7 +288,7 @@ describe('getVotes', () => {
         content: {
           pollId: 'poll-1',
         },
-      })
+      }),
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
@@ -296,7 +296,7 @@ describe('getVotes', () => {
         content: {
           'm.relates_to': undefined,
         },
-      })
+      }),
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
@@ -307,7 +307,7 @@ describe('getVotes', () => {
             event_id: '$another-start-event',
           },
         },
-      })
+      }),
     );
 
     await waitFor(() =>
@@ -315,8 +315,8 @@ describe('getVotes', () => {
         voteApi.endpoints.getVotes.select({
           pollId: 'poll-0',
           pollStartEventId: '$start-event-id',
-        })(store.getState()).data
-      ).toEqual([vote])
+        })(store.getState()).data,
+      ).toEqual([vote]),
     );
   });
 });
@@ -336,9 +336,9 @@ describe('vote', () => {
             pollId: 'poll-0',
             answerId: '1',
             pollStartEventId: undefined,
-          })
+          }),
         )
-        .unwrap()
+        .unwrap(),
     ).resolves.toEqual({
       event: expect.objectContaining({
         content: expectedVoteContent,
@@ -347,7 +347,7 @@ describe('vote', () => {
 
     expect(widgetApi.sendRoomEvent).toBeCalledWith(
       'net.nordeck.poll.vote',
-      expectedVoteContent
+      expectedVoteContent,
     );
   });
 
@@ -369,9 +369,9 @@ describe('vote', () => {
             pollId: 'poll-0',
             answerId: '1',
             pollStartEventId: '$start-event-id',
-          })
+          }),
         )
-        .unwrap()
+        .unwrap(),
     ).resolves.toEqual({
       event: expect.objectContaining({
         content: expectedVoteContent,
@@ -380,7 +380,7 @@ describe('vote', () => {
 
     expect(widgetApi.sendRoomEvent).toBeCalledWith(
       'net.nordeck.poll.vote',
-      expectedVoteContent
+      expectedVoteContent,
     );
   });
 
@@ -396,9 +396,9 @@ describe('vote', () => {
             pollId: 'poll-0',
             answerId: '1',
             pollStartEventId: undefined,
-          })
+          }),
         )
-        .unwrap()
+        .unwrap(),
     ).rejects.toEqual({
       name: 'UpdateFailed',
       message: 'Could not vote: Some Error',

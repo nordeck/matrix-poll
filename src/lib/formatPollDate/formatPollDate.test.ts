@@ -19,13 +19,13 @@ import { formatPollDate } from './formatPollDate';
 describe('formatPollDate', () => {
   it('should format short poll duration if start and end is on the same day', () => {
     expect(
-      formatPollDate('2022-07-18T17:31:00Z', '2022-07-18T17:41:00Z')
+      formatPollDate('2022-07-18T17:31:00Z', '2022-07-18T17:41:00Z'),
     ).toEqual('Jul 18, 5:31 PM - 5:41 PM');
   });
 
   it('should format long poll duration if start and end is on the same day', () => {
     expect(
-      formatPollDate('2022-07-18T17:31:00Z', '2022-07-19T03:31:00.000Z')
+      formatPollDate('2022-07-18T17:31:00Z', '2022-07-19T03:31:00.000Z'),
     ).toEqual('Jul 18, 5:31 PM - Jul 19, 3:31 AM');
   });
 });

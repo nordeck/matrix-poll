@@ -52,13 +52,13 @@ export const pollGroupApi = baseApi.injectEndpoints({
           const initialState = pollGroupEventEntityAdapter.getInitialState();
 
           const events = await widgetApi.receiveStateEvents(
-            STATE_EVENT_POLL_GROUP
+            STATE_EVENT_POLL_GROUP,
           );
 
           return {
             data: pollGroupEventEntityAdapter.addMany(
               initialState,
-              events.filter(isValidGroupEvent).map(migratePollGroupSchema)
+              events.filter(isValidGroupEvent).map(migratePollGroupSchema),
             ),
           };
         } catch (e) {
@@ -75,7 +75,7 @@ export const pollGroupApi = baseApi.injectEndpoints({
 
       async onCacheEntryAdded(
         _,
-        { cacheDataLoaded, cacheEntryRemoved, extra, updateCachedData }
+        { cacheDataLoaded, cacheEntryRemoved, extra, updateCachedData },
       ) {
         const { widgetApi } = extra as ThunkExtraArgument;
 
@@ -86,7 +86,7 @@ export const pollGroupApi = baseApi.injectEndpoints({
           .observeStateEvents(STATE_EVENT_POLL_GROUP)
           .pipe(
             bufferTime(0),
-            filter((list) => list.length > 0)
+            filter((list) => list.length > 0),
           )
           .subscribe(async (events) => {
             const eventsToUpdate = events
@@ -95,7 +95,7 @@ export const pollGroupApi = baseApi.injectEndpoints({
             const eventIdsToDelete = events
               .filter(
                 (e) =>
-                  e.type === STATE_EVENT_POLL_GROUP && isEqual(e.content, {})
+                  e.type === STATE_EVENT_POLL_GROUP && isEqual(e.content, {}),
               )
               .map((e) => e.state_key);
 
@@ -125,12 +125,12 @@ export const pollGroupApi = baseApi.injectEndpoints({
         try {
           const pollGroupEvents = await widgetApi.receiveStateEvents(
             STATE_EVENT_POLL_GROUP,
-            { stateKey: groupId }
+            { stateKey: groupId },
           );
           const pollGroupEvent = last(
             pollGroupEvents
               .filter(isValidGroupEvent)
-              .map(migratePollGroupSchema)
+              .map(migratePollGroupSchema),
           );
 
           // No recursive merge!
@@ -144,7 +144,7 @@ export const pollGroupApi = baseApi.injectEndpoints({
           const event = await widgetApi.sendStateEvent(
             STATE_EVENT_POLL_GROUP,
             pollGroup,
-            { stateKey: groupId }
+            { stateKey: groupId },
           );
 
           return { data: { event } };
@@ -171,12 +171,12 @@ export const pollGroupApi = baseApi.injectEndpoints({
         try {
           const pollGroupEvents = await widgetApi.receiveStateEvents(
             STATE_EVENT_POLL_GROUP,
-            { stateKey: groupId }
+            { stateKey: groupId },
           );
           const pollGroupEvent = last(
             pollGroupEvents
               .filter(isValidGroupEvent)
-              .map(migratePollGroupSchema)
+              .map(migratePollGroupSchema),
           );
 
           if (!pollGroupEvent) {
@@ -187,7 +187,7 @@ export const pollGroupApi = baseApi.injectEndpoints({
           await widgetApi.sendStateEvent(
             STATE_EVENT_POLL_GROUP,
             {},
-            { stateKey: groupId }
+            { stateKey: groupId },
           );
 
           return { data: {} };

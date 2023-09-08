@@ -37,11 +37,11 @@ export function PollCardCanNotVoteContent({
         {poll.resultType === ResultType.Visible
           ? t(
               'voteView.resultVisibleAfterFirstVote',
-              'You will see the result as soon as a first vote has been cast.'
+              'You will see the result as soon as a first vote has been cast.',
             )
           : t(
               'voteView.resultIsInvisible',
-              'You will see the result when the voting ends.'
+              'You will see the result when the voting ends.',
             )}
       </Typography>
     </Stack>

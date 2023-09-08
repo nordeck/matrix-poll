@@ -56,13 +56,13 @@ export const voteApi = baseApi.injectEndpoints({
                 from,
                 relationType: 'm.reference',
                 eventType: ROOM_EVENT_VOTE,
-              }
+              },
             );
 
             votes.push(
               ...result.chunk
                 .filter(isValidVoteEvent)
-                .filter((v) => v.content.pollId === pollId)
+                .filter((v) => v.content.pollId === pollId),
             );
 
             // typescript doesn't like circular types
@@ -84,7 +84,7 @@ export const voteApi = baseApi.injectEndpoints({
 
       async onCacheEntryAdded(
         { pollId, pollStartEventId },
-        { cacheDataLoaded, cacheEntryRemoved, extra, updateCachedData }
+        { cacheDataLoaded, cacheEntryRemoved, extra, updateCachedData },
       ) {
         const { widgetApi } = extra as ThunkExtraArgument;
 
@@ -97,7 +97,7 @@ export const voteApi = baseApi.injectEndpoints({
             filter(isValidVoteEvent),
             filter((v) => v.content.pollId === pollId),
             bufferTime(0),
-            filter((list) => list.length > 0)
+            filter((list) => list.length > 0),
           )
           .subscribe((rawEvents) => {
             let events = rawEvents;
@@ -107,7 +107,7 @@ export const voteApi = baseApi.injectEndpoints({
               events = rawEvents.filter(
                 (r) =>
                   r.content['m.relates_to']?.rel_type === 'm.reference' &&
-                  r.content['m.relates_to'].event_id === pollStartEventId
+                  r.content['m.relates_to'].event_id === pollStartEventId,
               );
             }
 

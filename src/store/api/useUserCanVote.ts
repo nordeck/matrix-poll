@@ -25,7 +25,7 @@ import { useGetPowerLevelsQuery } from './powerLevelsApi';
  */
 export function useUserCanVote(
   pollId: string,
-  userId: string | undefined
+  userId: string | undefined,
 ): AsyncState<boolean> {
   const {
     data: pollsState,
@@ -59,7 +59,7 @@ export function useUserCanVote(
   const hasPower = hasRoomEventPower(
     powerLevels?.event?.content,
     userId,
-    ROOM_EVENT_VOTE
+    ROOM_EVENT_VOTE,
   );
 
   // no groups -> default to the power level
@@ -77,8 +77,8 @@ export function useUserCanVote(
   // is a representative that represents a delegate
   const isRepresentative = pollEvent.content.groups.some((g) =>
     Object.values(g.votingRights).some(
-      (m) => m?.state === 'represented' && m.representedBy === userId
-    )
+      (m) => m?.state === 'represented' && m.representedBy === userId,
+    ),
   );
   if (isRepresentative) {
     return { isLoading: false, data: hasPower };

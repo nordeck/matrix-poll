@@ -31,7 +31,7 @@ const settingsSchema = Joi.object<IPollSettings, true>({
 }).unknown();
 
 export function isValidPollSettingsEvent(
-  event: StateEvent<unknown>
+  event: StateEvent<unknown>,
 ): event is StateEvent<IPollSettings> {
   return isValidEvent(event, STATE_EVENT_POLL_SETTINGS, settingsSchema);
 }

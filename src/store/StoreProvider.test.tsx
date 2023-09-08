@@ -55,7 +55,7 @@ describe('StoreProvider', () => {
     render(
       <StoreProvider>
         <ExampleWidget />
-      </StoreProvider>
+      </StoreProvider>,
     );
 
     expect(screen.getByText(/example/i)).toBeInTheDocument();

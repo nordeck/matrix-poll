@@ -29,10 +29,10 @@ export function createPollPdfPageHeader({
   roomMemberEvents: StateEvent<RoomMemberStateEventContent>[];
 }): Content {
   const invitedUsersCount = roomMemberEvents.filter(
-    (e) => e.content.membership === 'invite'
+    (e) => e.content.membership === 'invite',
   ).length;
   const joinedUsersCount = roomMemberEvents.filter(
-    (e) => e.content.membership === 'join'
+    (e) => e.content.membership === 'join',
   ).length;
 
   return [
@@ -53,7 +53,7 @@ export function createPollPdfPageHeader({
               text: t(
                 'createPollPdfContentHeader.joinedMembers',
                 'Joined persons: {{count}}',
-                { count: joinedUsersCount }
+                { count: joinedUsersCount },
               ),
             } as Column,
             {
@@ -61,7 +61,7 @@ export function createPollPdfPageHeader({
               text: t(
                 'createPollPdfContentHeader.invitedMembers',
                 'Invited persons: {{count}}',
-                { count: invitedUsersCount }
+                { count: invitedUsersCount },
               ),
             } as Column,
           ],

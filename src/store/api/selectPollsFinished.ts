@@ -21,7 +21,7 @@ import { IPoll } from '../../model';
 import { selectAllPolls } from './pollApi';
 
 export function selectPollsFinished(
-  state: EntityState<StateEvent<IPoll>>
+  state: EntityState<StateEvent<IPoll>>,
 ): StateEvent<IPoll>[] {
   return selectAllPolls(state).filter((p) => {
     if (p.content.startTime === undefined || p.content.endTime === undefined) {
