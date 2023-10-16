@@ -70,7 +70,7 @@
     "i18next-parser": "^7.7.0",
     "jest": "^27.4.3",
     "jest-axe": "^7.0.0",
-    "lint-staged": "^13.1.2",
+    "lint-staged": "^15.0.1",
     "prettier": "^3.0.0",
     "prettier-plugin-organize-imports": "^3.2.3",
     "react-scripts": "5.0.1",
