@@ -22,7 +22,7 @@
     "i18next": "^22.0.4",
     "i18next-chained-backend": "^4.2.0",
     "i18next-http-backend": "^2.2.2",
-    "joi": "^17.10.1",
+    "joi": "^17.11.0",
     "lodash": "^4.17.20",
     "luxon": "^3.3.0",
     "matrix-widget-api": "^1.6.0",
