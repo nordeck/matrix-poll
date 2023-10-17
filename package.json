@@ -59,7 +59,7 @@
     "@types/react-dom": "^17.0.18",
     "@types/uuid": "^9.0.0",
     "cross-env": "^7.0.3",
-    "depcheck": "^1.4.3",
+    "depcheck": "^1.4.7",
     "dotenv-cli": "^7.3.0",
     "eslint": "^8.50.0",
     "eslint-config-prettier": "^8.7.0",
