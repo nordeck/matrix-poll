@@ -1,5 +1,17 @@
 # @nordeck/matrix-poll-widget
 
+## 1.3.0
+
+### Minor Changes
+
+- 61dbf02: Add the option to manually end a poll immediately to shorten it if everyone already voted.
+
+### Patch Changes
+
+- 56f2879: Only allow integers for poll durations.
+- 8019507: Unify the diagrams colors of the answer options for the poll result chart in light and dark theme.
+- f98d77a: Improve performance by only generating the PDF if the user requests it.
+
 ## 1.2.0
 
 ### Minor Changes
