@@ -1,5 +1,11 @@
 # @nordeck/matrix-poll-widget
 
+## 1.3.1
+
+### Patch Changes
+
+- c5bebd0: Updating dependencies
+
 ## 1.3.0
 
 ### Minor Changes
