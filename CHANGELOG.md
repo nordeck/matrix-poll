@@ -1,5 +1,11 @@
 # @nordeck/matrix-poll-widget
 
+## 1.4.0
+
+### Minor Changes
+
+- cf73c8e: Sign the release containers with cosign.
+
 ## 1.3.1
 
 ### Patch Changes
