@@ -113,6 +113,18 @@ docker run --rm -e REACT_APP_HOME_SERVER_URL=https://matrix-client.matrix.org -p
 
 We also provide a [HELM chart](./charts/).
 
+## Verify the Container Images
+
+The container images releases are signed by [cosign](https://github.com/sigstore/cosign) using identity-based ("keyless") signing and transparency.
+Execute the following command to verify the signature of a container image:
+
+```sh
+cosign verify \
+--certificate-identity-regexp https://github.com/nordeck/matrix-poll-widget/.github/workflows/publish-release.yml@refs/tags/v \
+--certificate-oidc-issuer https://token.actions.githubusercontent.com \
+ghcr.io/nordeck/matrix-poll-widget:<version> | jq
+```
+
 ## License
 
 This project is licensed under [APACHE 2.0](./LICENSE).
