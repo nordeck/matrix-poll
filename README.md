@@ -120,7 +120,7 @@ Execute the following command to verify the signature of a container image:
 
 ```sh
 cosign verify \
---certificate-identity-regexp https://github.com/nordeck/matrix-poll-widget/.github/workflows/publish-release.yml@refs/tags/v \
+--certificate-identity-regexp https://github.com/nordeck/matrix-poll/.github/workflows/publish-release.yml@refs/tags/v \
 --certificate-oidc-issuer https://token.actions.githubusercontent.com \
 ghcr.io/nordeck/matrix-poll-widget:<version> | jq
 ```
