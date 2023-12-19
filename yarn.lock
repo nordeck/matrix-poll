@@ -1305,10 +1305,10 @@
   resolved "https://registry.yarnpkg.com/@carbon/motion/-/motion-11.16.0.tgz#fdb2c83fbbd0b4bebe748f89ef8f828fe3e942ad"
   integrity sha512-gr2oijosvrbV8I8dT+s+KTAzHswQ7GE1ffgKxMWWkdg4b91hlJ0qJe1BlG7ZnaHCRpeHKS12QQgnS/dy4yx92Q==
 
-"@carbon/styles@^1.4.0", "@carbon/styles@^1.45.0":
-  version "1.45.0"
-  resolved "https://registry.yarnpkg.com/@carbon/styles/-/styles-1.45.0.tgz#9c0d49c0ead86c5475605a6eabc4d9b2b6521d32"
-  integrity sha512-ihBjGeURX9BOyyesCQH7gAMS/BboPGXIp12gUIy0G9dBvDOjVJ3rJszF/iu/qatGMHLk0Gt53UQe2WL0i0Utvw==
+"@carbon/styles@^1.4.0", "@carbon/styles@^1.46.0":
+  version "1.46.0"
+  resolved "https://registry.yarnpkg.com/@carbon/styles/-/styles-1.46.0.tgz#2d1badfa391b50c0807251cdc13ea754c5d3611b"
+  integrity sha512-Jip+a8kGSrgPS2kheR7e/H8BQSVxboLYeV1hx5XVN8d5fo3uyWcIwROpSgvfaFiQ2lR3FEvrticy0Rlk1k6T/w==
   dependencies:
     "@carbon/colors" "^11.20.0"
     "@carbon/feature-flags" "^0.16.0"
