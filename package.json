@@ -11,7 +11,7 @@
     "@carbon/import-once": "^10.7.0",
     "@carbon/styles": "^1.46.0",
     "@matrix-widget-toolkit/api": "^3.3.0",
-    "@matrix-widget-toolkit/mui": "^1.1.5",
+    "@matrix-widget-toolkit/mui": "^1.2.0",
     "@matrix-widget-toolkit/react": "^1.0.6",
     "@mui/icons-material": "^5.15.6",
     "@mui/lab": "^5.0.0-alpha.154",
