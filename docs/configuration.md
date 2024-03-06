@@ -23,3 +23,7 @@ REACT_APP_POLL_SHOW_DEACTIVATE_PDF=true
 # A comma-separated list of users that should be ignored from the widget, useful for bots that are in the room
 REACT_APP_IGNORE_USER_IDS=@bot-1:matrix.org,@bot-2:matrix.org
 ```
+
+### Customization
+
+More environment variables for UI customization [@matrix-widget-toolkit/mui](https://www.npmjs.com/package/@matrix-widget-toolkit/mui#customization).
