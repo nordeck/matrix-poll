@@ -1,5 +1,11 @@
 # @nordeck/matrix-poll-widget
 
+## 1.4.1
+
+### Patch Changes
+
+- 93a29f3: Critical security update of the `ws` package (CVE-2024-37890)
+
 ## 1.4.0
 
 ### Minor Changes
