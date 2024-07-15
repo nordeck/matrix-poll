@@ -43,7 +43,7 @@
     "@changesets/cli": "^2.27.1",
     "@craco/craco": "^7.1.0",
     "@matrix-widget-toolkit/testing": "^2.3.2",
-    "@testing-library/dom": "^8.20.0",
+    "@testing-library/dom": "^10.3.2",
     "@testing-library/jest-dom": "^6.2.0",
     "@testing-library/react": "^12.1.5",
     "@testing-library/react-hooks": "^8.0.1",
