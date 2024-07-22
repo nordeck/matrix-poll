@@ -7,7 +7,7 @@
   "private": true,
   "dependencies": {
     "@carbon/charts": "^1.6.14",
-    "@carbon/charts-react": "^1.6.14",
+    "@carbon/charts-react": "^1.19.2",
     "@carbon/import-once": "^10.7.0",
     "@carbon/styles": "^1.46.0",
     "@matrix-widget-toolkit/api": "^3.3.0",
