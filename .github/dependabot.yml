@@ -17,6 +17,11 @@ updates:
     rebase-strategy: 'auto'
     schedule:
       interval: 'weekly'
+    groups:
+      production-dependencies:
+        dependency-type: 'production'
+      development-dependencies:
+        dependency-type: 'development'
   - package-ecosystem: 'docker'
     directory: '/'
     open-pull-requests-limit: 15
