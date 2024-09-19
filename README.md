@@ -1,6 +1,7 @@
 # Matrix Poll
 
 ![CI](https://github.com/nordeck/matrix-poll/workflows/CI/badge.svg)
+[![Matrix](https://img.shields.io/matrix/nordeck%3Amatrix.org)](https://matrix.to/#/#nordeck:matrix.org)
 
 This widget allows to conduct polls in Matrix rooms.
 But unlike [MSC3381](https://github.com/matrix-org/matrix-spec-proposals/blob/travis/msc/polls/proposals/3381-polls.md), it is designed for more complex scenarios, like polls with multiple parties in a council.
