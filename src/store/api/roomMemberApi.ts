@@ -17,8 +17,8 @@
 import {
   isValidRoomMemberStateEvent,
   RoomMemberStateEventContent,
-  StateEvent,
   STATE_EVENT_ROOM_MEMBER,
+  StateEvent,
 } from '@matrix-widget-toolkit/api';
 import { createEntityAdapter, EntityState } from '@reduxjs/toolkit';
 import { isError } from 'lodash';

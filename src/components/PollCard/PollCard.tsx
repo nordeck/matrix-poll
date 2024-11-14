@@ -21,7 +21,7 @@ import {
   Divider,
   Typography,
 } from '@mui/material';
-import React, { ReactElement, ReactNode } from 'react';
+import { ReactElement, ReactNode } from 'react';
 import { ellipsis } from '../../lib/ellipsis';
 import { IPoll } from '../../model';
 import { ExpandableText } from './ExpandableText';

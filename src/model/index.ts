@@ -15,27 +15,27 @@
  */
 
 export {
+  STATE_EVENT_POLL_GROUP,
   isValidGroupEvent,
   migratePollGroupSchema,
-  STATE_EVENT_POLL_GROUP,
 } from './IGroup';
 export type { GroupContent, IGroup, MemberContent, MemberRole } from './IGroup';
 export {
-  isValidPollEvent,
-  migratePollSchema,
   PollType,
   ResultType,
   STATE_EVENT_POLL,
+  isValidPollEvent,
+  migratePollSchema,
 } from './IPoll';
 export type { IPoll, IPollAnswer, PollGroup, VotingRight } from './IPoll';
 export {
-  isValidPollSettingsEvent,
   STATE_EVENT_POLL_SETTINGS,
+  isValidPollSettingsEvent,
 } from './IPollSettings';
 export type { IPollSettings } from './IPollSettings';
-export { isValidVoteEvent, ROOM_EVENT_VOTE } from './IVote';
+export { ROOM_EVENT_VOTE, isValidVoteEvent } from './IVote';
 export type { IVote } from './IVote';
 export { ROOM_EVENT_POLL_START } from './pollStartEvent';
 export type { PollStartEvent } from './pollStartEvent';
-export { isValidRoomNameEvent, STATE_EVENT_ROOM_NAME } from './roomNameEvent';
+export { STATE_EVENT_ROOM_NAME, isValidRoomNameEvent } from './roomNameEvent';
 export type { RoomNameEvent } from './roomNameEvent';

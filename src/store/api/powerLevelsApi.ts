@@ -17,8 +17,8 @@
 import {
   isValidPowerLevelStateEvent,
   PowerLevelsStateEvent,
-  StateEvent,
   STATE_EVENT_POWER_LEVELS,
+  StateEvent,
 } from '@matrix-widget-toolkit/api';
 import { isError, last } from 'lodash';
 import { bufferTime, filter } from 'rxjs';
