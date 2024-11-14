@@ -24,6 +24,7 @@ import React, {
   useCallback,
   useState,
 } from 'react';
+import { MenuButtonItem } from './MenuButtonItem';
 
 /** Props for {@link MenuButton} */
 type MenuButtonProps = PropsWithChildren<{
@@ -92,14 +93,18 @@ export function MenuButton({
       >
         {React.Children.map(children, (element) => {
           if (React.isValidElement(element)) {
-            return React.cloneElement(element, {
-              // override the onClick property to close the menu
-              // when the entry is clicked.
-              onClick: () => {
-                handleClose();
-                element.props.onClick?.();
-              },
-            });
+            const props =
+              element.type === MenuButtonItem
+                ? {
+                    // override the onClick property to close the menu
+                    // when the entry is clicked.
+                    onClick: () => {
+                      handleClose();
+                      element.props.onClick?.();
+                    },
+                  }
+                : {};
+            return React.cloneElement(element, props);
           }
 
           return element;
