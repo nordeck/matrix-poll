@@ -17,7 +17,6 @@
 import { interfaces as charts } from '@carbon/charts';
 import { SimpleBarChart } from '@carbon/charts-react';
 import { useThemeSelection } from '@matrix-widget-toolkit/react';
-import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { getAnswerLabel } from '../../../lib/getAnswerLabel';
 import {

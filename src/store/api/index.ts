@@ -50,8 +50,8 @@ export { selectPollsOngoing } from './selectPollsOngoing';
 export { selectPollsUpcoming } from './selectPollsUpcoming';
 export { selectGetVotes, useGetVotes } from './useGetVotes';
 export {
-  getVoteAnswerCount,
   PollInvalidAnswer,
+  getVoteAnswerCount,
   selectPollResults,
   usePollResults,
 } from './usePollResults';

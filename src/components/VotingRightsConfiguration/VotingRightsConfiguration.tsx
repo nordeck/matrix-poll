@@ -16,7 +16,7 @@
 
 import { Box, Typography } from '@mui/material';
 import { unstable_useId as useId } from '@mui/utils';
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ellipsis } from '../../lib/ellipsis';
 import { PollGroup } from '../../model/IPoll';

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-import React, { AriaAttributes } from 'react';
+import { AriaAttributes } from 'react';
 import { useTranslation } from 'react-i18next';
 import { IPoll } from '../../model';
 import { PollResultModal } from '../PollResultModal';

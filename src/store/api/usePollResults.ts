@@ -158,7 +158,7 @@ export function usePollResults(
       isLoading: false,
       data: selectPollResults(
         pollEvent,
-        opts?.skipLoadingVotes ? [] : voteEvents ?? [],
+        opts?.skipLoadingVotes ? [] : (voteEvents ?? []),
         roomMembersState,
         powerLevels?.event,
         {
