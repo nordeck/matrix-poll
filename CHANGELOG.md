@@ -1,5 +1,12 @@
 # @nordeck/matrix-poll-widget
 
+## 1.5.0
+
+### Minor Changes
+
+- dc1481a: Add Helm values for configuration of ipv4only mode
+- 86c53a4: New widget-server base image that supports IPv4-only deployments
+
 ## 1.4.1
 
 ### Patch Changes
