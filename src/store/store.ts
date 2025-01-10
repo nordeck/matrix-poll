@@ -19,7 +19,7 @@ import { Action, configureStore, Middleware } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { baseApi } from './api';
 
-const loggerMiddleware = () => (next: Function) => (action: Action) => {
+const loggerMiddleware: Middleware = () => (next) => (action: Action) => {
   if (process.env.NODE_ENV === 'development') {
     console.log('LOGGER', action.type);
   }

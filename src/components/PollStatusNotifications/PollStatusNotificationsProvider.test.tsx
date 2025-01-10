@@ -36,16 +36,10 @@ describe('<PollStatusNotificationsProvider/>', () => {
 
       return (
         <>
-          <button
-            // eslint-disable-next-line react/jsx-no-bind
-            onClick={() => showNotification('info', 'First Message')}
-          >
+          <button onClick={() => showNotification('info', 'First Message')}>
             First
           </button>
-          <button
-            // eslint-disable-next-line react/jsx-no-bind
-            onClick={() => showNotification('info', 'Second Message')}
-          >
+          <button onClick={() => showNotification('info', 'Second Message')}>
             Second
           </button>
         </>

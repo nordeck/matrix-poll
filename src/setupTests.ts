@@ -27,7 +27,9 @@ import { setLocale } from './lib/locale';
 
 // Use a different configuration for i18next during tests
 jest.mock('./i18n', () => {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   const i18n = require('i18next');
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   const { initReactI18next } = require('react-i18next');
 
   i18n.use(initReactI18next).init({

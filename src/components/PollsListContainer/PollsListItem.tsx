@@ -39,3 +39,4 @@ export const PollsListItem = React.forwardRef<
     </Box>
   );
 });
+PollsListItem.displayName = 'PollsListItem';
