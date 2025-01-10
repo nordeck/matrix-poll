@@ -13,8 +13,7 @@ $fontFamily: "Inter,Twemoji,'Apple Color Emoji','Segoe UI Emoji',Arial,Helvetica
 
 @use '@carbon/styles/scss/type' as * with (
   // disable all custom fonts
-  $font-families:
-    (
+  $font-families: (
       'mono': string.unquote($fontFamily),
       'sans': string.unquote($fontFamily),
       'sans-condensed': string.unquote($fontFamily),
