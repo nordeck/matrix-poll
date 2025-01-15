@@ -4,9 +4,9 @@ Nordeck establishes a clear process for reporting and addressing security vulner
 
 ## Supported Versions
 
-| Package     | Version | Supported          |
-| ----------- | ------- | ------------------ |
-| matrix-poll | >= 1.x  | :white_check_mark: |
+| Package                     | Version | Supported          |
+| --------------------------- | ------- | ------------------ |
+| @nordeck/matrix-poll-widget | >= 1.x  | :white_check_mark: |
 
 ## Reporting a Vulnerability
 
