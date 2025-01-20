@@ -1,5 +1,11 @@
 # @nordeck/matrix-poll-widget
 
+## 1.5.1
+
+### Patch Changes
+
+- 48d5e30: Adds SBOM report to widget, build and release assets
+
 ## 1.5.0
 
 ### Minor Changes
