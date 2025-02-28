@@ -1,5 +1,12 @@
 # @nordeck/matrix-poll-widget
 
+## 1.5.1
+
+### Patch Changes
+
+- 84a88c0: Update toolkit base image `widget-server` to version `1.1.1`.
+- 48d5e30: Adds SBOM report to widget, build and release assets
+
 ## 1.5.0
 
 ### Minor Changes
