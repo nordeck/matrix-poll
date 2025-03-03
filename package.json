@@ -50,7 +50,8 @@
     "**/resolve-url-loader": "^5.0.0",
     "**/semver": "^7.6.3",
     "**/@svgr/webpack": "^8.1.0",
-    "**/webpack": "^5.97.1"
+    "**/webpack": "^5.97.1",
+    "terser-webpack-plugin/serialize-javascript": "^6.0.2"
   },
   "devDependencies": {
     "@changesets/cli": "^2.28.0",
