@@ -1,5 +1,11 @@
 # @nordeck/matrix-poll-widget
 
+## 1.5.2
+
+### Patch Changes
+
+- 71df568: Bump helm/kind-action from 1.10.0 to 1.12.0
+
 ## 1.5.1
 
 ### Patch Changes
