@@ -15,6 +15,7 @@
  */
 
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { mockPoll } from '../../lib/testUtils';
 import { createStore } from '../store';
 import { pollApi } from './pollApi';
@@ -26,12 +27,12 @@ afterEach(() => widgetApi.stop());
 
 beforeEach(() => (widgetApi = mockWidgetApi()));
 
-afterEach(() => jest.useRealTimers());
+afterEach(() => vi.useRealTimers());
 
 describe('selectPollsOngoing', () => {
   it('should only show ongoing polls', async () => {
-    jest.useFakeTimers();
-    jest.setSystemTime(new Date('2022-08-11T17:34:00Z'));
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date('2022-08-11T17:34:00Z'));
 
     widgetApi.mockSendStateEvent(mockPoll());
     widgetApi.mockSendStateEvent(

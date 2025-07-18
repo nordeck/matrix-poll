@@ -64,16 +64,18 @@ For a list of available options, see [Configuration](./docs/configuration.md).
 Follow the [instructions to run the widget locally](https://github.com/nordeck/matrix-widget-toolkit/tree/main/example-widget-mui#running-the-widget-locally).
 The widget comes with two routes, visit them and follow the further instructions:
 
-- The poll widget itself, providing the voting view: `http(s)://localhost:3000/`
-- The admin widget, providing the group configuration: `http(s)://localhost:3000/admin/`
+- The poll widget itself, providing the voting view: `http://localhost:5273/` or `https://localhost:5274/`
+- The admin widget, providing the group configuration: `http://localhost:5273/admin/` or `https://localhost:5274/admin/`
 
 ### Available Scripts
 
 In the project directory, you can run:
 
 - `yarn dev`: Start the widget for development.
-- `yarn start`: Start the widget for development with a self-signed HTTPS certificate.
+- `yarn dev:https`: Start the widget for development with a self-signed HTTPS certificate.
 - `yarn build`: Build the production version of the widget.
+- `yarn preview`: Preview a production build of the widget.
+- `yarn preview:https`: Preview a production build of the widget with a self-signed HTTPS certificate.
 - `yarn test`: Watch all files for changes and run tests.
 - `yarn tsc`: Check TypeScript types for errors in the widget.
 - `yarn lint`: Run eslint on the widget.

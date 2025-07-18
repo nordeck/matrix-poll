@@ -14,19 +14,19 @@
  * limitations under the License.
  */
 
-import { render, screen } from '@testing-library/react';
-import { axe } from 'jest-axe';
-import { act } from 'react-dom/test-utils';
+import { act, render, screen } from '@testing-library/react';
+import axe from 'axe-core';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { TimeDistance } from './TimeDistance';
 
 afterEach(() => {
-  jest.useRealTimers();
+  vi.useRealTimers();
 });
 
 describe('<TimeDistance/>', () => {
   it('should render without exploding', () => {
-    jest.useFakeTimers();
-    jest.setSystemTime(new Date('2020-01-01T00:01:00Z'));
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date('2020-01-01T00:01:00Z'));
 
     render(
       <TimeDistance
@@ -39,8 +39,8 @@ describe('<TimeDistance/>', () => {
   });
 
   it('should use the current time if no start time is passed', () => {
-    jest.useFakeTimers();
-    jest.setSystemTime(new Date('2020-01-01T00:01:00Z'));
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date('2020-01-01T00:01:00Z'));
 
     render(<TimeDistance fallbackDuration={2} />);
 
@@ -48,8 +48,8 @@ describe('<TimeDistance/>', () => {
   });
 
   it('should use endTime if existing', () => {
-    jest.useFakeTimers();
-    jest.setSystemTime(new Date('2020-01-01T00:01:00Z'));
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date('2020-01-01T00:01:00Z'));
 
     render(
       <TimeDistance
@@ -71,12 +71,12 @@ describe('<TimeDistance/>', () => {
       />,
     );
 
-    expect(await axe(container)).toHaveNoViolations();
+    expect(await axe.run(container)).toHaveNoViolations();
   });
 
   it('should count down with duration', () => {
-    jest.useFakeTimers();
-    jest.setSystemTime(new Date('2020-01-01T00:00:00Z'));
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date('2020-01-01T00:00:00Z'));
 
     const { container } = render(
       <TimeDistance
@@ -88,34 +88,34 @@ describe('<TimeDistance/>', () => {
     expect(screen.getByText(/ends in 02:00/i)).toBeInTheDocument();
 
     act(() => {
-      jest.advanceTimersByTime(30000);
+      vi.advanceTimersByTime(30000);
     });
 
     expect(screen.getByText(/ends in 01:30/i)).toBeInTheDocument();
 
     act(() => {
-      jest.advanceTimersByTime(66000);
+      vi.advanceTimersByTime(66000);
     });
 
     expect(screen.getByText(/ends in 24/i)).toBeInTheDocument();
 
     act(() => {
-      jest.advanceTimersByTime(24000);
+      vi.advanceTimersByTime(24000);
     });
 
     expect(container).toBeEmptyDOMElement();
   });
 
   it('should show duration without counting down', () => {
-    jest.useFakeTimers();
-    jest.setSystemTime(new Date('2020-01-01T00:01:00Z'));
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date('2020-01-01T00:01:00Z'));
 
     render(<TimeDistance fallbackDuration={1} />);
 
     expect(screen.getByText(/ends in 01:00/i)).toBeInTheDocument();
 
     act(() => {
-      jest.advanceTimersByTime(4000);
+      vi.advanceTimersByTime(4000);
     });
 
     expect(screen.getByText(/ends in 01:00/i)).toBeInTheDocument();

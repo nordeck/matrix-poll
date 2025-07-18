@@ -17,7 +17,8 @@
 import { Typography } from '@mui/material';
 import { PropsWithChildren } from 'react';
 
-export function DisplayNameWordBreak({ children }: PropsWithChildren<{}>) {
+/* eslint-disable @typescript-eslint/no-explicit-any */
+export function DisplayNameWordBreak({ children }: PropsWithChildren<any>) {
   return (
     <Typography
       component="span"

@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import { describe, expect, it } from 'vitest';
 import { mockGroup } from '../lib/testUtils';
 import {
   isValidGroupEvent,
@@ -65,7 +66,7 @@ describe('isValidGroupEvent', () => {
     ).toBe(true);
   });
 
-  it.each<Object>([
+  it.each<object>([
     { abbreviation: undefined },
     { abbreviation: null },
     { abbreviation: 111 },
@@ -84,7 +85,7 @@ describe('isValidGroupEvent', () => {
     { members: { '@adenauer': { memberRole: null } } },
     { members: { '@adenauer': { memberRole: 111 } } },
     { members: { '@adenauer': { memberRole: 'unknown' } } },
-  ])('should reject event with patch %j', (patch: Object) => {
+  ])('should reject event with patch %j', (patch: object) => {
     expect(
       isValidGroupEvent({
         content: {

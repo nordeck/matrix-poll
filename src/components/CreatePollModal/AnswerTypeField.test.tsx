@@ -16,12 +16,13 @@
 
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { axe } from 'jest-axe';
+import axe from 'axe-core';
+import { describe, expect, it, vi } from 'vitest';
 import { AnswerTypeField } from './AnswerTypeField';
 
 describe('<AnswerTypeField>', () => {
   it('should render without exploding', () => {
-    render(<AnswerTypeField onChange={jest.fn()} value={[]} />);
+    render(<AnswerTypeField onChange={vi.fn()} value={[]} />);
 
     const radioGroup = screen.getByRole('radiogroup', { name: 'Answer type' });
 
@@ -35,16 +36,16 @@ describe('<AnswerTypeField>', () => {
 
   it('should have not accessibility violations', async () => {
     const { container } = render(
-      <AnswerTypeField onChange={jest.fn()} value={[]} />,
+      <AnswerTypeField onChange={vi.fn()} value={[]} />,
     );
 
-    expect(await axe(container)).toHaveNoViolations();
+    expect(await axe.run(container)).toHaveNoViolations();
   });
 
   it('should display existing answers', () => {
     render(
       <AnswerTypeField
-        onChange={jest.fn()}
+        onChange={vi.fn()}
         value={[
           {
             id: '1',
@@ -68,7 +69,7 @@ describe('<AnswerTypeField>', () => {
   });
 
   it('should select a answer', async () => {
-    const onChange = jest.fn();
+    const onChange = vi.fn();
     render(<AnswerTypeField onChange={onChange} value={[]} />);
 
     const radioGroup = screen.getByRole('radiogroup', { name: 'Answer type' });

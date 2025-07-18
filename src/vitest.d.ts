@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Nordeck IT + Consulting GmbH
+ * Copyright 2025 Nordeck IT + Consulting GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,15 +14,14 @@
  * limitations under the License.
  */
 
-import { render } from '@testing-library/react';
-import axe from 'axe-core';
-import { describe, expect, it } from 'vitest';
-import { GroupCardSkeleton } from './GroupCardSkeleton';
+import 'vitest';
 
-describe('<GroupCardSkeleton/>', () => {
-  it('should have no accessibility violations', async () => {
-    const { container } = render(<GroupCardSkeleton />);
+interface AxeMatchers<R = unknown> {
+  toHaveNoViolations: () => R;
+}
 
-    expect(await axe.run(container)).toHaveNoViolations();
-  });
-});
+declare module 'vitest' {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  interface Assertion<T = any> extends AxeMatchers<T> {}
+  interface AsymmetricMatchersContaining extends AxeMatchers {}
+}

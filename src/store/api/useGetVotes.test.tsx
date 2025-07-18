@@ -16,8 +16,9 @@
 
 import { WidgetApiMockProvider } from '@matrix-widget-toolkit/react';
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
-import { renderHook } from '@testing-library/react-hooks';
+import { renderHook, waitFor } from '@testing-library/react';
 import { ComponentType, PropsWithChildren } from 'react';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { mockPoll, mockPollStart, mockVote } from '../../lib/testUtils';
 import { StoreProvider } from '../StoreProvider';
 import { useGetVotes } from './useGetVotes';
@@ -39,27 +40,25 @@ beforeEach(() => {
 
 describe('useGetVotes', () => {
   it('should handle missing poll', async () => {
-    const { result, waitForValueToChange } = renderHook(
-      () => useGetVotes('another-poll-id'),
-      { wrapper },
+    const { result } = renderHook(() => useGetVotes('another-poll-id'), {
+      wrapper,
+    });
+
+    await waitFor(() =>
+      expect(result.current).toEqual({ isLoading: false, data: [] }),
     );
-
-    await waitForValueToChange(() => result.current.isLoading);
-
-    expect(result.current).toEqual({ isLoading: false, data: [] });
   });
 
   it('should report error', async () => {
     widgetApi.receiveStateEvents.mockRejectedValue(new Error('some error'));
 
-    const { result, waitForValueToChange } = renderHook(
-      () => useGetVotes('another-poll-id'),
-      { wrapper },
+    const { result } = renderHook(() => useGetVotes('another-poll-id'), {
+      wrapper,
+    });
+
+    await waitFor(() =>
+      expect(result.current).toEqual({ isLoading: false, isError: true }),
     );
-
-    await waitForValueToChange(() => result.current.isLoading);
-
-    expect(result.current).toEqual({ isLoading: false, isError: true });
   });
 
   it('should accept votes for the poll', async () => {
@@ -104,17 +103,14 @@ describe('useGetVotes', () => {
       ),
     ];
 
-    const { result, waitForValueToChange } = renderHook(
-      () => useGetVotes('poll-0'),
-      { wrapper },
+    const { result } = renderHook(() => useGetVotes('poll-0'), { wrapper });
+
+    await waitFor(() =>
+      expect(result.current).toEqual({
+        isLoading: false,
+        data: votes.slice(0, 3),
+      }),
     );
-
-    await waitForValueToChange(() => result.current.isLoading);
-
-    expect(result.current).toEqual({
-      isLoading: false,
-      data: votes.slice(0, 3),
-    });
   });
 
   it('should sort the votes by voting time', async () => {
@@ -153,17 +149,14 @@ describe('useGetVotes', () => {
       ),
     ];
 
-    const { result, waitForValueToChange } = renderHook(
-      () => useGetVotes('poll-0'),
-      { wrapper },
+    const { result } = renderHook(() => useGetVotes('poll-0'), { wrapper });
+
+    await waitFor(() =>
+      expect(result.current).toEqual({
+        isLoading: false,
+        data: [votes[2], votes[0], votes[1]],
+      }),
     );
-
-    await waitForValueToChange(() => result.current.isLoading);
-
-    expect(result.current).toEqual({
-      isLoading: false,
-      data: [votes[2], votes[0], votes[1]],
-    });
   });
 
   it('should use the first vote of a user', async () => {
@@ -197,17 +190,14 @@ describe('useGetVotes', () => {
       ),
     ];
 
-    const { result, waitForValueToChange } = renderHook(
-      () => useGetVotes('poll-0'),
-      { wrapper },
+    const { result } = renderHook(() => useGetVotes('poll-0'), { wrapper });
+
+    await waitFor(() =>
+      expect(result.current).toEqual({
+        isLoading: false,
+        data: votes.slice(1),
+      }),
     );
-
-    await waitForValueToChange(() => result.current.isLoading);
-
-    expect(result.current).toEqual({
-      isLoading: false,
-      data: votes.slice(1),
-    });
   });
 
   it('should skip votes for an unknown answer', async () => {
@@ -239,17 +229,14 @@ describe('useGetVotes', () => {
       ),
     ];
 
-    const { result, waitForValueToChange } = renderHook(
-      () => useGetVotes('poll-0'),
-      { wrapper },
+    const { result } = renderHook(() => useGetVotes('poll-0'), { wrapper });
+
+    await waitFor(() =>
+      expect(result.current).toEqual({
+        isLoading: false,
+        data: votes.slice(0, 1),
+      }),
     );
-
-    await waitForValueToChange(() => result.current.isLoading);
-
-    expect(result.current).toEqual({
-      isLoading: false,
-      data: votes.slice(0, 1),
-    });
   });
 
   it('should skip votes outside of the poll duration', async () => {
@@ -294,16 +281,13 @@ describe('useGetVotes', () => {
       ),
     ];
 
-    const { result, waitForValueToChange } = renderHook(
-      () => useGetVotes('poll-0'),
-      { wrapper },
+    const { result } = renderHook(() => useGetVotes('poll-0'), { wrapper });
+
+    await waitFor(() =>
+      expect(result.current).toEqual({
+        isLoading: false,
+        data: votes.slice(1, 2),
+      }),
     );
-
-    await waitForValueToChange(() => result.current.isLoading);
-
-    expect(result.current).toEqual({
-      isLoading: false,
-      data: votes.slice(1, 2),
-    });
   });
 });

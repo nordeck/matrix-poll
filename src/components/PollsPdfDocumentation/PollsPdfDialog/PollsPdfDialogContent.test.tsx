@@ -16,11 +16,12 @@
 
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { axe } from 'jest-axe';
+import axe from 'axe-core';
+import { describe, expect, it, vi } from 'vitest';
 import { PollsPdfDialogContent } from './PollsPdfDialogContent';
 
 describe('<PollsPdfDialogContent>', () => {
-  const onClose = jest.fn();
+  const onClose = vi.fn();
 
   it('should provide download button', async () => {
     render(
@@ -81,7 +82,7 @@ describe('<PollsPdfDialogContent>', () => {
       />,
     );
 
-    expect(await axe(container)).toHaveNoViolations();
+    expect(await axe.run(container)).toHaveNoViolations();
   });
 
   it('should have no accessibility violations while loading', async () => {
@@ -89,7 +90,7 @@ describe('<PollsPdfDialogContent>', () => {
       <PollsPdfDialogContent loading onClose={onClose} />,
     );
 
-    expect(await axe(container)).toHaveNoViolations();
+    expect(await axe.run(container)).toHaveNoViolations();
   });
 
   it('should have no accessibility violations on error', async () => {
@@ -97,6 +98,6 @@ describe('<PollsPdfDialogContent>', () => {
       <PollsPdfDialogContent error onClose={onClose} />,
     );
 
-    expect(await axe(container)).toHaveNoViolations();
+    expect(await axe.run(container)).toHaveNoViolations();
   });
 });

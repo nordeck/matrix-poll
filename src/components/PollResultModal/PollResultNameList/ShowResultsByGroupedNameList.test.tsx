@@ -17,9 +17,10 @@
 import { ThemeSelectionProvider } from '@matrix-widget-toolkit/react';
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
 import { render, screen, within } from '@testing-library/react';
-import { axe } from 'jest-axe';
+import axe from 'axe-core';
 import { ComponentType, PropsWithChildren, useMemo } from 'react';
 import { Provider } from 'react-redux';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { mockPoll, mockRoomMember, mockVote } from '../../../lib/testUtils';
 import { createStore } from '../../../store';
 import { ShowResultsByGroupedNameList } from './ShowResultsByGroupedNameList';
@@ -131,7 +132,7 @@ describe('<ShowResultsByGroupedNameList/>', () => {
       { wrapper: Wrapper },
     );
 
-    expect(await axe(container)).toHaveNoViolations();
+    expect(await axe.run(container)).toHaveNoViolations();
   });
 
   it('should render the poll results', async () => {

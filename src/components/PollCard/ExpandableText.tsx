@@ -16,7 +16,7 @@
 
 import { Link } from '@mui/material';
 import { unstable_useId as useId } from '@mui/utils';
-import { ReactElement, useCallback, useRef, useState } from 'react';
+import { MouseEvent, ReactElement, useCallback, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import LinesEllipsis from 'react-lines-ellipsis';
 
@@ -44,7 +44,7 @@ export function ExpandableText({
   const [showExpanded, setShowExpanded] = useState(false);
   const ref = useRef<HTMLButtonElement | null>(null);
 
-  const handleCollapse = useCallback((e) => {
+  const handleCollapse = useCallback((e: MouseEvent) => {
     e.preventDefault();
     setShowExpanded(false);
 
@@ -54,7 +54,7 @@ export function ExpandableText({
     }, 0);
   }, []);
 
-  const handleExpand = useCallback((e) => {
+  const handleExpand = useCallback((e: MouseEvent) => {
     e.preventDefault();
     setShowExpanded(true);
 

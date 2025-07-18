@@ -1,41 +1,41 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`createPollPdfSpecifics should generate a poll specifics content if there is a group and someone is represented 1`] = `
-Array [
-  Object {
+exports[`createPollPdfSpecifics > should generate a poll specifics content if there is a group and someone is represented 1`] = `
+[
+  {
     "color": "#444",
     "style": "tableExample",
-    "table": Object {
-      "body": Array [
-        Array [
-          Array [
-            Object {
+    "table": {
+      "body": [
+        [
+          [
+            {
               "decoration": "underline",
-              "margin": Array [
+              "margin": [
                 0,
                 2,
               ],
               "text": "Specifics",
             },
-            Object {
+            {
               "style": "list",
-              "ul": Array [
-                Object {
+              "ul": [
+                {
                   "alignment": "left",
-                  "text": Array [
+                  "text": [
                     "Absent: Name of user-bob (Red Party)",
-                    Object {
+                    {
                       "font": "ZapfDingbats",
                       "text": " ➔ ",
                     },
                     "Represented by: Name of user-backup-1 (Red Party)",
                   ],
                 },
-                Object {
+                {
                   "alignment": "left",
-                  "text": Array [
+                  "text": [
                     "Absent: Name of user-dameon (Blue Party)",
-                    Object {
+                    {
                       "font": "ZapfDingbats",
                       "text": " ➔ ",
                     },
@@ -47,7 +47,7 @@ Array [
           ],
         ],
       ],
-      "widths": Array [
+      "widths": [
         "100%",
       ],
     },
@@ -55,29 +55,29 @@ Array [
 ]
 `;
 
-exports[`createPollPdfSpecifics should generate a poll specifics content if there is a group with absent delegate without representing 1`] = `
-Array [
-  Object {
+exports[`createPollPdfSpecifics > should generate a poll specifics content if there is a group with absent delegate without representing 1`] = `
+[
+  {
     "color": "#444",
     "style": "tableExample",
-    "table": Object {
-      "body": Array [
-        Array [
-          Array [
-            Object {
+    "table": {
+      "body": [
+        [
+          [
+            {
               "decoration": "underline",
-              "margin": Array [
+              "margin": [
                 0,
                 2,
               ],
               "text": "Specifics",
             },
-            Object {
+            {
               "style": "list",
-              "ul": Array [
-                Object {
+              "ul": [
+                {
                   "alignment": "left",
-                  "text": Array [
+                  "text": [
                     "Absent: Name of user-bob (Red Party)",
                   ],
                 },
@@ -86,7 +86,7 @@ Array [
           ],
         ],
       ],
-      "widths": Array [
+      "widths": [
         "100%",
       ],
     },
@@ -94,48 +94,48 @@ Array [
 ]
 `;
 
-exports[`createPollPdfSpecifics should generate a poll specifics content if there is a group, someone is representing someone else and someone is not represented 1`] = `
-Array [
-  Object {
+exports[`createPollPdfSpecifics > should generate a poll specifics content if there is a group, someone is representing someone else and someone is not represented 1`] = `
+[
+  {
     "color": "#444",
     "style": "tableExample",
-    "table": Object {
-      "body": Array [
-        Array [
-          Array [
-            Object {
+    "table": {
+      "body": [
+        [
+          [
+            {
               "decoration": "underline",
-              "margin": Array [
+              "margin": [
                 0,
                 2,
               ],
               "text": "Specifics",
             },
-            Object {
+            {
               "style": "list",
-              "ul": Array [
-                Object {
+              "ul": [
+                {
                   "alignment": "left",
-                  "text": Array [
+                  "text": [
                     "Absent: Name of user-bob (Red Party)",
-                    Object {
+                    {
                       "font": "ZapfDingbats",
                       "text": " ➔ ",
                     },
                     "Represented by: Name of user-backup-1 (Red Party)",
                   ],
                 },
-                Object {
+                {
                   "alignment": "left",
-                  "text": Array [
+                  "text": [
                     "Absent: Name of user-charlie (Red Party)",
                   ],
                 },
-                Object {
+                {
                   "alignment": "left",
-                  "text": Array [
+                  "text": [
                     "Absent: Name of user-dameon (Blue Party)",
-                    Object {
+                    {
                       "font": "ZapfDingbats",
                       "text": " ➔ ",
                     },
@@ -147,7 +147,7 @@ Array [
           ],
         ],
       ],
-      "widths": Array [
+      "widths": [
         "100%",
       ],
     },
@@ -155,4 +155,4 @@ Array [
 ]
 `;
 
-exports[`createPollPdfSpecifics should not generate a poll specifics content if there is no group 1`] = `Array []`;
+exports[`createPollPdfSpecifics > should not generate a poll specifics content if there is no group 1`] = `[]`;

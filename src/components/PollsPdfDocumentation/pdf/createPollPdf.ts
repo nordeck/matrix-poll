@@ -20,6 +20,7 @@ import {
 } from '@matrix-widget-toolkit/api';
 import * as pdfMake from 'pdfmake/build/pdfmake';
 import { SelectPollResults } from '../../../store';
+import { createFontConfig } from './createFontConfig';
 import { createPollPdfDefinition } from './createPollPdfDefinition';
 
 export async function createPollPdf(params: {
@@ -29,7 +30,14 @@ export async function createPollPdf(params: {
   roomMemberEvents: StateEvent<RoomMemberStateEventContent>[];
   getUserDisplayName: (userId: string) => string;
 }): Promise<Blob> {
-  const pdf = pdfMake.createPdf(createPollPdfDefinition(params));
+  const cfg = createFontConfig();
+  const documentDefinitions = createPollPdfDefinition(params);
+  const pdf = pdfMake.createPdf(
+    documentDefinitions,
+    undefined,
+    cfg.fonts,
+    cfg.vfs,
+  );
 
   return new Promise((resolve) => pdf.getBlob(resolve));
 }

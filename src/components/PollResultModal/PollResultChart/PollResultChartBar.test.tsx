@@ -20,14 +20,15 @@ import {
 } from '@matrix-widget-toolkit/react';
 import { render, screen } from '@testing-library/react';
 import { ComponentType, PropsWithChildren } from 'react';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { mockPoll } from '../../../lib/testUtils';
 import { PollType } from '../../../model';
 import { PollInvalidAnswer, SelectPollResults } from '../../../store';
 import PollResultChartBar from './PollResultChartBar';
 
-const mockSimpleBarChart = jest.fn();
+const mockSimpleBarChart = vi.fn();
 
-jest.mock('@carbon/charts-react', () => ({
+vi.mock('@carbon/charts-react', () => ({
   SimpleBarChart: (props: unknown) => {
     // capture the render props
     mockSimpleBarChart(props);
@@ -36,18 +37,20 @@ jest.mock('@carbon/charts-react', () => ({
   },
 }));
 
-jest.mock('@matrix-widget-toolkit/react', () => ({
-  ...jest.requireActual('@matrix-widget-toolkit/react'),
-  useThemeSelection: jest.fn(),
+vi.mock('@matrix-widget-toolkit/react', async (importOriginal) => ({
+  ...(await importOriginal()),
+  useThemeSelection: vi.fn(),
 }));
 
 describe('<PollResultChartBar/>', () => {
   let Wrapper: ComponentType<PropsWithChildren<{}>>;
 
   beforeEach(() => {
-    jest
-      .mocked(useThemeSelection)
-      .mockReturnValue({ theme: 'light', setTheme: jest.fn(), isModal: false });
+    vi.mocked(useThemeSelection).mockReturnValue({
+      theme: 'light',
+      setTheme: vi.fn(),
+      isModal: false,
+    });
 
     Wrapper = ({ children }: PropsWithChildren<{}>) => {
       return <ThemeSelectionProvider>{children}</ThemeSelectionProvider>;
@@ -179,9 +182,11 @@ describe('<PollResultChartBar/>', () => {
   });
 
   it('should change the diagrams colors in dark mode', () => {
-    jest
-      .mocked(useThemeSelection)
-      .mockReturnValue({ theme: 'dark', setTheme: jest.fn(), isModal: false });
+    vi.mocked(useThemeSelection).mockReturnValue({
+      theme: 'dark',
+      setTheme: vi.fn(),
+      isModal: false,
+    });
     const pollResult: SelectPollResults = {
       poll: mockPoll({
         content: {

@@ -17,9 +17,10 @@
 import { WidgetApiMockProvider } from '@matrix-widget-toolkit/react';
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
 import { render, screen, within } from '@testing-library/react';
-import { axe } from 'jest-axe';
+import axe from 'axe-core';
 import { ComponentType, PropsWithChildren, useMemo } from 'react';
 import { Provider } from 'react-redux';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { mockPoll, mockPollStart } from '../../lib/testUtils';
 import { createStore } from '../../store';
 import { PollsListFinished } from './PollsListFinished';
@@ -93,7 +94,7 @@ describe('<PollsListFinished/>', () => {
   it('should have no accessibility violations', async () => {
     const { container } = render(<PollsListFinished />, { wrapper: Wrapper });
 
-    expect(await axe(container)).toHaveNoViolations();
+    expect(await axe.run(container)).toHaveNoViolations();
   });
 
   it('should have an accessible description that refers to the poll title', async () => {

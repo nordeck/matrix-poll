@@ -16,6 +16,7 @@
 
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
 import { waitFor } from '@testing-library/react';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { mockGroup } from '../../lib/testUtils';
 import { MemberContent } from '../../model';
 import { createStore } from '../store';
@@ -166,12 +167,7 @@ describe('updatePollGroup', () => {
           }),
         )
         .unwrap(),
-    ).resolves.toEqual({
-      event: expect.objectContaining({
-        content: group,
-        state_key: 'group-0',
-      }),
-    });
+    ).resolves.toEqual({});
 
     expect(widgetApi.sendStateEvent).toBeCalledWith(
       'net.nordeck.poll.group',
@@ -200,12 +196,7 @@ describe('updatePollGroup', () => {
           }),
         )
         .unwrap(),
-    ).resolves.toEqual({
-      event: expect.objectContaining({
-        content: group,
-        state_key: 'group-0',
-      }),
-    });
+    ).resolves.toEqual({});
 
     expect(widgetApi.sendStateEvent).toBeCalledWith(
       'net.nordeck.poll.group',

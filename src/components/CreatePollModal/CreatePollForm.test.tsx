@@ -18,9 +18,10 @@ import { WidgetApiMockProvider } from '@matrix-widget-toolkit/react';
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
 import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { axe } from 'jest-axe';
+import axe from 'axe-core';
 import { ComponentType, PropsWithChildren, useMemo } from 'react';
 import { Provider } from 'react-redux';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   mockGroup,
   mockPoll,
@@ -41,7 +42,7 @@ beforeEach(() => {
 });
 
 // These tests are quite slow, increasing the timeout to make it work in CI.
-jest.setTimeout(20000);
+vi.setConfig({ testTimeout: 20000 });
 
 describe('<CreatePollForm>', () => {
   let Wrapper: ComponentType<PropsWithChildren<{}>>;
@@ -128,7 +129,7 @@ describe('<CreatePollForm>', () => {
   });
 
   it('should create a new poll', async () => {
-    const onPollChange = jest.fn();
+    const onPollChange = vi.fn();
 
     widgetApi.clearStateEvents();
 
@@ -211,11 +212,11 @@ describe('<CreatePollForm>', () => {
   });
 
   it('should have not accessibility violations', async () => {
-    const { container } = render(<CreatePollForm onPollChange={jest.fn()} />, {
+    const { container } = render(<CreatePollForm onPollChange={vi.fn()} />, {
       wrapper: Wrapper,
     });
 
-    expect(await axe(container)).toHaveNoViolations();
+    expect(await axe.run(container)).toHaveNoViolations();
   });
 
   it('should edit an existing poll', () => {
@@ -223,7 +224,7 @@ describe('<CreatePollForm>', () => {
 
     render(
       <CreatePollForm
-        onPollChange={jest.fn()}
+        onPollChange={vi.fn()}
         poll={{
           title: 'Poll Title',
           question: 'Poll Question',
@@ -276,7 +277,7 @@ describe('<CreatePollForm>', () => {
   });
 
   it('should handle required fields', async () => {
-    const onPollChange = jest.fn();
+    const onPollChange = vi.fn();
 
     widgetApi.clearStateEvents();
 
@@ -312,7 +313,7 @@ describe('<CreatePollForm>', () => {
   });
 
   it('should not provide the voting rights configuration, if no groups are present', () => {
-    const onPollChange = jest.fn();
+    const onPollChange = vi.fn();
 
     widgetApi.clearStateEvents();
 
@@ -326,7 +327,7 @@ describe('<CreatePollForm>', () => {
   });
 
   it('should list all groups and their delegates', async () => {
-    const onPollChange = jest.fn();
+    const onPollChange = vi.fn();
     const poll: IPoll = mockPoll({
       content: {
         groups: [
@@ -418,7 +419,7 @@ describe('<CreatePollForm>', () => {
   });
 
   it('should set all voting persons to active', async () => {
-    const onPollChange = jest.fn();
+    const onPollChange = vi.fn();
 
     render(<CreatePollForm onPollChange={onPollChange} />, {
       wrapper: Wrapper,
@@ -473,7 +474,7 @@ describe('<CreatePollForm>', () => {
       }),
     );
 
-    const onPollChange = jest.fn();
+    const onPollChange = vi.fn();
     render(<CreatePollForm onPollChange={onPollChange} />, {
       wrapper: Wrapper,
     });
@@ -489,7 +490,7 @@ describe('<CreatePollForm>', () => {
   });
 
   it('should allow to set a user to absent without a representative', async () => {
-    const onPollChange = jest.fn();
+    const onPollChange = vi.fn();
 
     render(<CreatePollForm onPollChange={onPollChange} />, {
       wrapper: Wrapper,
@@ -594,7 +595,7 @@ describe('<CreatePollForm>', () => {
   });
 
   it('should allow to set a user to absent with a representative', async () => {
-    const onPollChange = jest.fn();
+    const onPollChange = vi.fn();
 
     render(<CreatePollForm onPollChange={onPollChange} />, {
       wrapper: Wrapper,
@@ -678,7 +679,7 @@ describe('<CreatePollForm>', () => {
   });
 
   it('should only allow to use a representative once', async () => {
-    const onPollChange = jest.fn();
+    const onPollChange = vi.fn();
 
     render(<CreatePollForm onPollChange={onPollChange} />, {
       wrapper: Wrapper,
@@ -719,7 +720,7 @@ describe('<CreatePollForm>', () => {
   });
 
   it('should allow to set a user back to present', async () => {
-    const onPollChange = jest.fn();
+    const onPollChange = vi.fn();
 
     render(<CreatePollForm onPollChange={onPollChange} />, {
       wrapper: Wrapper,
@@ -771,7 +772,7 @@ describe('<CreatePollForm>', () => {
   });
 
   it('should show warning message if a delegate has no more permission to vote', async () => {
-    const onPollChange = jest.fn();
+    const onPollChange = vi.fn();
 
     widgetApi.mockSendStateEvent(
       mockPowerLevelsEvent({
@@ -805,7 +806,7 @@ describe('<CreatePollForm>', () => {
   });
 
   it('should show warning message if a representative has no more permission to vote', async () => {
-    const onPollChange = jest.fn();
+    const onPollChange = vi.fn();
     widgetApi.mockSendStateEvent(
       mockPowerLevelsEvent({
         content: {
@@ -851,7 +852,7 @@ describe('<CreatePollForm>', () => {
   });
 
   it('should update the groups of the poll on load if they are different from the group events', async () => {
-    const onPollChange = jest.fn();
+    const onPollChange = vi.fn();
     const poll: IPoll = mockPoll({
       content: {
         groups: [
@@ -942,7 +943,7 @@ describe('<CreatePollForm>', () => {
   });
 
   it('should convert decimal numbers duration to Whole numbers', async () => {
-    const onPollChange = jest.fn();
+    const onPollChange = vi.fn();
 
     widgetApi.clearStateEvents();
 

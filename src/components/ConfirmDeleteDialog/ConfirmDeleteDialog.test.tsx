@@ -16,11 +16,16 @@
 
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { ConfirmDeleteDialog } from './ConfirmDeleteDialog';
 
 describe('<ConfirmDeleteDialog/>', () => {
-  const onCancel = jest.fn();
-  const onConfirm = jest.fn();
+  const onCancel = vi.fn();
+  const onConfirm = vi.fn();
+
+  afterEach(() => {
+    vi.resetAllMocks();
+  });
 
   it('should render without exploding', () => {
     render(

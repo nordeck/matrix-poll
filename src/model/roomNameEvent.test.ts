@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import { describe, expect, it } from 'vitest';
 import { isValidRoomNameEvent } from './roomNameEvent';
 
 describe('isValidRoomNameEvent', () => {
@@ -50,9 +51,9 @@ describe('isValidRoomNameEvent', () => {
     ).toBe(true);
   });
 
-  it.each<Object>([{ name: undefined }, { name: null }, { name: 111 }])(
+  it.each<object>([{ name: undefined }, { name: null }, { name: 111 }])(
     'should reject event with patch %j',
-    (patch: Object) => {
+    (patch: object) => {
       expect(
         isValidRoomNameEvent({
           content: {

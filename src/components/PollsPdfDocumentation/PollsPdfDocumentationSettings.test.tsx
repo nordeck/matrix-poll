@@ -17,9 +17,10 @@
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
 import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { axe } from 'jest-axe';
+import axe from 'axe-core';
 import { ComponentType, PropsWithChildren, useMemo } from 'react';
 import { Provider } from 'react-redux';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { mockPoll, mockPollSettings } from '../../lib/testUtils';
 import { PollType } from '../../model';
 import { createStore } from '../../store';
@@ -32,7 +33,7 @@ afterEach(() => widgetApi.stop());
 beforeEach(() => (widgetApi = mockWidgetApi()));
 
 afterEach(() => {
-  jest.useRealTimers();
+  vi.useRealTimers();
 });
 
 describe('<PollsPdfDocumentationSettings>', () => {
@@ -89,7 +90,7 @@ describe('<PollsPdfDocumentationSettings>', () => {
       wrapper: Wrapper,
     });
 
-    expect(await axe(container)).toHaveNoViolations();
+    expect(await axe.run(container)).toHaveNoViolations();
   });
 
   it('should render alert', async () => {
@@ -120,10 +121,10 @@ describe('<PollsPdfDocumentationSettings>', () => {
 
   it('should disable PDF download', async () => {
     const userEventAT = userEvent.setup({
-      advanceTimers: jest.advanceTimersByTime,
+      advanceTimers: vi.advanceTimersByTime,
     });
-    jest.useFakeTimers();
-    jest.setSystemTime(new Date('2020-01-01T10:00:00Z'));
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date('2020-01-01T10:00:00Z'));
 
     render(<PollsPdfDocumentationSettings />, {
       wrapper: Wrapper,
@@ -165,10 +166,10 @@ describe('<PollsPdfDocumentationSettings>', () => {
 
   it('should set PDF expiration date', async () => {
     const userEventAT = userEvent.setup({
-      advanceTimers: jest.advanceTimersByTime,
+      advanceTimers: vi.advanceTimersByTime,
     });
-    jest.useFakeTimers();
-    jest.setSystemTime(new Date('2020-01-01T10:00:00Z'));
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date('2020-01-01T10:00:00Z'));
 
     render(<PollsPdfDocumentationSettings />, {
       wrapper: Wrapper,

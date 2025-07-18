@@ -14,6 +14,4 @@
  * limitations under the License.
  */
 
-// Always make sure to initialize fonts if PDFs are generated.
-import './initializeFonts';
 export { createPollPdf } from './createPollPdf';

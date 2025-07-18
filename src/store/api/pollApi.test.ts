@@ -16,6 +16,7 @@
 
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
 import { waitFor } from '@testing-library/react';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { mockPoll } from '../../lib/testUtils';
 import { createStore } from '../store';
 import { pollApi } from './pollApi';
@@ -26,7 +27,7 @@ afterEach(() => widgetApi.stop());
 
 beforeEach(() => (widgetApi = mockWidgetApi()));
 
-afterEach(() => jest.useRealTimers());
+afterEach(() => vi.useRealTimers());
 
 describe('getPolls', () => {
   it('should return polls', async () => {
@@ -268,12 +269,7 @@ describe('updatePoll', () => {
           }),
         )
         .unwrap(),
-    ).resolves.toEqual({
-      event: expect.objectContaining({
-        content: poll,
-        state_key: 'poll-0',
-      }),
-    });
+    ).resolves.toEqual({});
 
     expect(widgetApi.sendStateEvent).toBeCalledWith('net.nordeck.poll', poll, {
       stateKey: 'poll-0',
@@ -300,12 +296,7 @@ describe('updatePoll', () => {
           }),
         )
         .unwrap(),
-    ).resolves.toEqual({
-      event: expect.objectContaining({
-        content: poll,
-        state_key: 'poll-0',
-      }),
-    });
+    ).resolves.toEqual({});
 
     expect(widgetApi.sendStateEvent).toBeCalledWith('net.nordeck.poll', poll, {
       stateKey: 'poll-0',
@@ -359,8 +350,8 @@ describe('updatePoll', () => {
 
 describe('startPoll', () => {
   it('should start poll', async () => {
-    jest.useFakeTimers();
-    jest.setSystemTime(new Date('2022-10-05T10:14:23Z'));
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date('2022-10-05T10:14:23Z'));
 
     const store = createStore({ widgetApi });
 
@@ -446,8 +437,8 @@ describe('startPoll', () => {
 
 describe('stopPoll', () => {
   it('should stop poll', async () => {
-    jest.useFakeTimers();
-    jest.setSystemTime(new Date('2022-10-05T10:14:23Z'));
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date('2022-10-05T10:14:23Z'));
 
     const store = createStore({ widgetApi });
 
@@ -469,17 +460,7 @@ describe('stopPoll', () => {
           }),
         )
         .unwrap(),
-    ).resolves.toEqual({
-      event: expect.objectContaining({
-        content: mockPoll({
-          content: {
-            startTime: '2022-10-05T10:14:23.000Z',
-            endTime: '2022-10-05T10:14:23.000Z',
-            startEventId: '$start-event-id',
-          },
-        }).content,
-      }),
-    });
+    ).resolves.toEqual({});
 
     expect(widgetApi.sendStateEvent).toBeCalledWith(
       'net.nordeck.poll',

@@ -32,8 +32,8 @@ import { baseApi } from './baseApi';
 
 // Use an entity adapter to efficiently interact with a collection of events.
 // The adapter provides selectors and reducers to read and manipulate a state.
-const pollsEntityAdapter = createEntityAdapter<StateEvent<IPoll>>({
-  selectId: (event) => event.state_key,
+const pollsEntityAdapter = createEntityAdapter({
+  selectId: (event: StateEvent<IPoll>) => event.state_key,
   sortComparer: (a, b) => {
     if (a.content.startTime && b.content.startTime) {
       const delta =
@@ -62,7 +62,7 @@ export const pollApi = baseApi.injectEndpoints({
     /**
      * Return the poll events of a room.
      */
-    getPolls: builder.query<EntityState<StateEvent<IPoll>>, void>({
+    getPolls: builder.query<EntityState<StateEvent<IPoll>, string>, void>({
       queryFn: async (_, { extra }) => {
         const { widgetApi } = extra as ThunkExtraArgument;
 
@@ -129,10 +129,7 @@ export const pollApi = baseApi.injectEndpoints({
     /**
      * Update the poll event in the current room.
      */
-    updatePoll: builder.mutation<
-      { event: StateEvent<IPoll> },
-      { pollId: string; content: IPoll }
-    >({
+    updatePoll: builder.mutation<{}, { pollId: string; content: IPoll }>({
       async queryFn({ pollId, content }, { extra }) {
         const { widgetApi } = extra as ThunkExtraArgument;
 
@@ -151,11 +148,11 @@ export const pollApi = baseApi.injectEndpoints({
             return { data: { event: pollEvent } };
           }
 
-          const event = await widgetApi.sendStateEvent(STATE_EVENT_POLL, poll, {
+          await widgetApi.sendStateEvent(STATE_EVENT_POLL, poll, {
             stateKey: pollId,
           });
 
-          return { data: { event } };
+          return { data: {} };
         } catch (e) {
           return {
             error: {
@@ -225,10 +222,7 @@ export const pollApi = baseApi.injectEndpoints({
     /**
      * Stop the poll event in the current room.
      */
-    stopPoll: builder.mutation<
-      { event?: StateEvent<IPoll> },
-      { pollId: string }
-    >({
+    stopPoll: builder.mutation<{}, { pollId: string }>({
       async queryFn({ pollId }, { extra }) {
         const { widgetApi } = extra as ThunkExtraArgument;
 
@@ -259,11 +253,11 @@ export const pollApi = baseApi.injectEndpoints({
             return { data: { event: pollEvent } };
           }
 
-          const event = await widgetApi.sendStateEvent(STATE_EVENT_POLL, poll, {
+          await widgetApi.sendStateEvent(STATE_EVENT_POLL, poll, {
             stateKey: pollId,
           });
 
-          return { data: { event } };
+          return { data: {} };
         } catch (e) {
           return {
             error: {

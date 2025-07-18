@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import { describe, expect, it } from 'vitest';
 import { isValidPollSettingsEvent } from './IPollSettings';
 
 describe('isValidPollSettingsEvent', () => {
@@ -66,7 +67,7 @@ describe('isValidPollSettingsEvent', () => {
     ).toBe(true);
   });
 
-  it.each<Object>([
+  it.each<object>([
     { pdfButtonDisabledAfter: null },
     { pdfButtonDisabledAfter: 111 },
     { pdfButtonDisabledAfter: '' },
@@ -76,7 +77,7 @@ describe('isValidPollSettingsEvent', () => {
     { pollsOrder: [undefined] },
     { pollsOrder: [null] },
     { pollsOrder: [111] },
-  ])('should reject event with patch %j', (patch: Object) => {
+  ])('should reject event with patch %j', (patch: object) => {
     expect(
       isValidPollSettingsEvent({
         content: {

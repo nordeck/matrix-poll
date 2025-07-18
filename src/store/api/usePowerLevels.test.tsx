@@ -16,8 +16,9 @@
 
 import { WidgetApiMockProvider } from '@matrix-widget-toolkit/react';
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
-import { renderHook } from '@testing-library/react-hooks';
+import { renderHook, waitFor } from '@testing-library/react';
 import { ComponentType, PropsWithChildren } from 'react';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { mockPowerLevelsEvent } from '../../lib/testUtils';
 import { StoreProvider } from '../StoreProvider';
 import { usePowerLevels } from './usePowerLevels';
@@ -65,7 +66,7 @@ describe('usePowerLevels', () => {
       }),
     );
 
-    const { result, waitFor } = renderHook(() => usePowerLevels(), {
+    const { result } = renderHook(() => usePowerLevels(), {
       wrapper,
     });
 
@@ -93,7 +94,7 @@ describe('usePowerLevels', () => {
       }),
     );
 
-    const { result, waitFor } = renderHook(() => usePowerLevels(), {
+    const { result } = renderHook(() => usePowerLevels(), {
       wrapper,
     });
 
@@ -121,7 +122,7 @@ describe('usePowerLevels', () => {
       }),
     );
 
-    const { result, waitFor } = renderHook(() => usePowerLevels(), {
+    const { result } = renderHook(() => usePowerLevels(), {
       wrapper,
     });
 
@@ -149,7 +150,7 @@ describe('usePowerLevels', () => {
       }),
     );
 
-    const { result, waitFor } = renderHook(() => usePowerLevels(), {
+    const { result } = renderHook(() => usePowerLevels(), {
       wrapper,
     });
 

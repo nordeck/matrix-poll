@@ -91,7 +91,7 @@ export const pollSettingsApi = baseApi.injectEndpoints({
      * Patch the poll settings event of a room.
      */
     patchPollSettings: builder.mutation<
-      { event: StateEvent<IPollSettings> },
+      {},
       { changes: Partial<IPollSettings> }
     >({
       async queryFn({ changes }, { extra }) {
@@ -117,16 +117,16 @@ export const pollSettingsApi = baseApi.injectEndpoints({
             isEqual(pollSettingsEvent.content, pollSettings)
           ) {
             // No change necessary
-            return { data: { event: pollSettingsEvent } };
+            return { data: {} };
           }
 
-          const event = await widgetApi.sendStateEvent(
+          await widgetApi.sendStateEvent(
             STATE_EVENT_POLL_SETTINGS,
             pollSettings,
             { stateKey: widgetApi.widgetParameters.roomId },
           );
 
-          return { data: { event } };
+          return { data: {} };
         } catch (e) {
           return {
             error: {

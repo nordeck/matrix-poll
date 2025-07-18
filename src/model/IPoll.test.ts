@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import { describe, expect, it } from 'vitest';
 import { mockPoll } from '../lib/testUtils';
 import { isValidPollEvent, migratePollSchema } from './IPoll';
 
@@ -164,7 +165,7 @@ describe('isValidPollEvent', () => {
     ).toBe(true);
   });
 
-  it.each<Object>([
+  it.each<object>([
     { title: undefined },
     { title: null },
     { title: 111 },
@@ -212,7 +213,7 @@ describe('isValidPollEvent', () => {
     { endTime: 'my-date' },
     { groups: null },
     { groups: 111 },
-  ])('should reject event with patch %j', (patch: Object) => {
+  ])('should reject event with patch %j', (patch: object) => {
     expect(
       isValidPollEvent({
         content: {
@@ -258,7 +259,7 @@ describe('isValidPollEvent', () => {
     ).toBe(false);
   });
 
-  it.each<Object>([
+  it.each<object>([
     { id: undefined },
     { id: null },
     { id: 111 },
@@ -301,7 +302,7 @@ describe('isValidPollEvent', () => {
         '@adenauer': { state: 'represented', representedBy: '' },
       },
     },
-  ])('should reject event with group patch %j', (patch: Object) => {
+  ])('should reject event with group patch %j', (patch: object) => {
     expect(
       isValidPollEvent({
         content: {
