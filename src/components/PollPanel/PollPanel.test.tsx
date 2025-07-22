@@ -231,7 +231,7 @@ describe('<PollPanel>', () => {
 
   it('should rerender when the first running poll finishes', async () => {
     widgetApi.clearStateEvents();
-    vi.useFakeTimers({ shouldAdvanceTime: true });
+    vi.useFakeTimers();
     vi.setSystemTime(new Date('2020-01-01T09:59:30Z'));
 
     widgetApi.mockSendStateEvent(
@@ -279,7 +279,7 @@ describe('<PollPanel>', () => {
 
   it('should rerender when a running poll finishes', async () => {
     widgetApi.clearStateEvents();
-    vi.useFakeTimers({ shouldAdvanceTime: true });
+    vi.useFakeTimers();
     vi.setSystemTime(new Date('2020-01-01T09:59:30Z'));
 
     widgetApi.mockSendStateEvent(
