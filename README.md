@@ -64,8 +64,8 @@ For a list of available options, see [Configuration](./docs/configuration.md).
 Follow the [instructions to run the widget locally](https://github.com/nordeck/matrix-widget-toolkit/tree/main/example-widget-mui#running-the-widget-locally).
 The widget comes with two routes, visit them and follow the further instructions:
 
-- The poll widget itself, providing the voting view: `http://localhost:5273/` or `https://localhost:5274/`
-- The admin widget, providing the group configuration: `http://localhost:5273/admin/` or `https://localhost:5274/admin/`
+- The poll widget itself, providing the voting view: `http(s)://localhost:5273/`
+- The admin widget, providing the group configuration: `http(s)://localhost:5273/admin/`
 
 ### Available Scripts
 
