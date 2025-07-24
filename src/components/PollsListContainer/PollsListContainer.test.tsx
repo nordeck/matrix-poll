@@ -15,7 +15,8 @@
  */
 
 import { render, screen, within } from '@testing-library/react';
-import { axe } from 'jest-axe';
+import axe from 'axe-core';
+import { describe, expect, it } from 'vitest';
 import { PollsListContainer } from './PollsListContainer';
 import { PollsListItem } from './PollsListItem';
 
@@ -57,6 +58,6 @@ describe('<PollsListContainer/>', () => {
       </PollsListContainer>,
     );
 
-    expect(await axe(container)).toHaveNoViolations();
+    expect(await axe.run(container)).toHaveNoViolations();
   });
 });

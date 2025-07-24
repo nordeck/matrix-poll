@@ -16,9 +16,10 @@
 
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
 import { render, screen } from '@testing-library/react';
-import { axe } from 'jest-axe';
+import axe from 'axe-core';
 import { ComponentType, PropsWithChildren, useMemo } from 'react';
 import { Provider } from 'react-redux';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { mockRoomMember } from '../../lib/testUtils';
 import { createStore } from '../../store';
 import { MemberAvatar } from './MemberAvatar';
@@ -45,7 +46,7 @@ describe('<MemberAvatar/>', () => {
     render(<MemberAvatar userId="@user-alice" />, { wrapper: Wrapper });
 
     await expect(
-      screen.findByRole('img', { hidden: true }),
+      screen.findByRole('presentation', { hidden: true }),
     ).resolves.toBeInTheDocument();
   });
 
@@ -55,17 +56,17 @@ describe('<MemberAvatar/>', () => {
     });
 
     await expect(
-      screen.findByRole('img', { hidden: true }),
+      screen.findByRole('presentation', { hidden: true }),
     ).resolves.toBeInTheDocument();
 
-    expect(await axe(container)).toHaveNoViolations();
+    expect(await axe.run(container)).toHaveNoViolations();
   });
 
   it('should render avatar url', async () => {
     render(<MemberAvatar userId="@user-alice" />, { wrapper: Wrapper });
 
     await expect(
-      screen.findByRole('img', { hidden: true }),
+      screen.findByRole('presentation', { hidden: true }),
     ).resolves.toHaveAttribute(
       'src',
       expect.stringMatching(/\/_matrix\/media\/r0\/thumbnail\/alice/i),

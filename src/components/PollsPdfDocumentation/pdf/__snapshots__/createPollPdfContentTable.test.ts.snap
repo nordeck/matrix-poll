@@ -1,17 +1,17 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`createPollPdfContentTable should generate table for "byName" with groups 1`] = `
-Array [
-  Array [
-    Object {
-      "table": Object {
-        "body": Array [
-          Array [
-            Object {
-              "columns": Array [
-                Object {
-                  "canvas": Array [
-                    Object {
+exports[`createPollPdfContentTable > should generate table for "byName" with groups 1`] = `
+[
+  [
+    {
+      "table": {
+        "body": [
+          [
+            {
+              "columns": [
+                {
+                  "canvas": [
+                    {
                       "color": "#ff0000",
                       "r1": 15,
                       "r2": 15,
@@ -22,11 +22,11 @@ Array [
                   ],
                   "width": 33,
                 },
-                Object {
-                  "relativePosition": Object {
+                {
+                  "relativePosition": {
                     "y": 7.777777777777778,
                   },
-                  "style": Object {
+                  "style": {
                     "alignment": "left",
                     "bold": true,
                     "fontSize": 13,
@@ -35,61 +35,61 @@ Array [
                 },
               ],
             },
-            Object {
+            {
               "style": "tableHeader",
               "text": "Yes
 1",
               "type": "none",
             },
-            Object {
+            {
               "style": "tableHeader",
               "text": "No
 0",
               "type": "none",
             },
-            Object {
+            {
               "style": "tableHeader",
               "text": "Invalid
 1",
               "type": "none",
             },
           ],
-          Array [
-            Object {
-              "style": Object {
+          [
+            {
+              "style": {
                 "alignment": "left",
               },
               "text": "Name of @user-1",
             },
-            Object {
+            {
               "style": "tableBody",
               "text": "X",
             },
-            Object {
+            {
               "style": "tableBody",
               "text": "",
             },
-            Object {
+            {
               "style": "tableBody",
               "text": "",
             },
           ],
-          Array [
-            Object {
-              "style": Object {
+          [
+            {
+              "style": {
                 "alignment": "left",
               },
               "text": "Name of @user-2",
             },
-            Object {
+            {
               "style": "tableBody",
               "text": "",
             },
-            Object {
+            {
               "style": "tableBody",
               "text": "",
             },
-            Object {
+            {
               "style": "tableBody",
               "text": "X",
             },
@@ -97,7 +97,7 @@ Array [
         ],
         "headerRows": 1,
         "heights": 18,
-        "widths": Array [
+        "widths": [
           "66%",
           "10%",
           "10%",
@@ -105,15 +105,15 @@ Array [
         ],
       },
     },
-    Object {
-      "table": Object {
-        "body": Array [
-          Array [
-            Object {
-              "columns": Array [
-                Object {
-                  "canvas": Array [
-                    Object {
+    {
+      "table": {
+        "body": [
+          [
+            {
+              "columns": [
+                {
+                  "canvas": [
+                    {
                       "color": "#0000ff",
                       "r1": 15,
                       "r2": 15,
@@ -124,11 +124,11 @@ Array [
                   ],
                   "width": 33,
                 },
-                Object {
-                  "relativePosition": Object {
+                {
+                  "relativePosition": {
                     "y": 7.777777777777778,
                   },
-                  "style": Object {
+                  "style": {
                     "alignment": "left",
                     "bold": true,
                     "fontSize": 13,
@@ -137,41 +137,41 @@ Array [
                 },
               ],
             },
-            Object {
+            {
               "style": "tableHeader",
               "text": "Yes
 0",
               "type": "none",
             },
-            Object {
+            {
               "style": "tableHeader",
               "text": "No
 1",
               "type": "none",
             },
-            Object {
+            {
               "style": "tableHeader",
               "text": "Invalid
 0",
               "type": "none",
             },
           ],
-          Array [
-            Object {
-              "style": Object {
+          [
+            {
+              "style": {
                 "alignment": "left",
               },
               "text": "Name of @user-3",
             },
-            Object {
+            {
               "style": "tableBody",
               "text": "",
             },
-            Object {
+            {
               "style": "tableBody",
               "text": "X",
             },
-            Object {
+            {
               "style": "tableBody",
               "text": "",
             },
@@ -179,7 +179,7 @@ Array [
         ],
         "headerRows": 1,
         "heights": 18,
-        "widths": Array [
+        "widths": [
           "66%",
           "10%",
           "10%",
@@ -187,15 +187,15 @@ Array [
         ],
       },
     },
-    Object {
-      "table": Object {
-        "body": Array [
-          Array [
-            Object {
-              "columns": Array [
-                Object {
-                  "canvas": Array [
-                    Object {
+    {
+      "table": {
+        "body": [
+          [
+            {
+              "columns": [
+                {
+                  "canvas": [
+                    {
                       "color": "#ffaaff",
                       "r1": 15,
                       "r2": 15,
@@ -206,11 +206,11 @@ Array [
                   ],
                   "width": 33,
                 },
-                Object {
-                  "relativePosition": Object {
+                {
+                  "relativePosition": {
                     "y": 7.777777777777778,
                   },
-                  "style": Object {
+                  "style": {
                     "alignment": "left",
                     "bold": true,
                     "fontSize": 13,
@@ -219,29 +219,29 @@ Array [
                 },
               ],
             },
-            Object {
+            {
               "style": "tableHeader",
               "text": "Yes
 0",
               "type": "none",
             },
-            Object {
+            {
               "style": "tableHeader",
               "text": "No
 0",
               "type": "none",
             },
-            Object {
+            {
               "style": "tableHeader",
               "text": "Invalid
 0",
               "type": "none",
             },
           ],
-          Array [
-            Object {
+          [
+            {
               "colSpan": 4,
-              "style": Object {
+              "style": {
                 "alignment": "center",
               },
               "text": "No votes were cast.",
@@ -250,7 +250,7 @@ Array [
         ],
         "headerRows": 1,
         "heights": 18,
-        "widths": Array [
+        "widths": [
           "66%",
           "10%",
           "10%",
@@ -262,20 +262,20 @@ Array [
 ]
 `;
 
-exports[`createPollPdfContentTable should generate table for "byName" without groups 1`] = `
-Array [
-  Object {
-    "table": Object {
-      "body": Array [
-        Array [
-          Object {
+exports[`createPollPdfContentTable > should generate table for "byName" without groups 1`] = `
+[
+  {
+    "table": {
+      "body": [
+        [
+          {
             "color": "black",
             "fillColor": "white",
-            "style": Object {
+            "style": {
               "alignment": "left",
               "bold": true,
               "fontSize": 13,
-              "margin": Array [
+              "margin": [
                 0,
                 5,
                 0,
@@ -284,7 +284,7 @@ Array [
             },
             "text": "",
           },
-          Object {
+          {
             "color": "black",
             "fillColor": "white",
             "style": "tableHeader",
@@ -292,7 +292,7 @@ Array [
 1",
             "type": "none",
           },
-          Object {
+          {
             "color": "black",
             "fillColor": "white",
             "style": "tableHeader",
@@ -300,7 +300,7 @@ Array [
 1",
             "type": "none",
           },
-          Object {
+          {
             "color": "black",
             "fillColor": "white",
             "style": "tableHeader",
@@ -309,62 +309,62 @@ Array [
             "type": "none",
           },
         ],
-        Array [
-          Object {
-            "style": Object {
+        [
+          {
+            "style": {
               "alignment": "left",
             },
             "text": "Name of @user-1",
           },
-          Object {
+          {
             "style": "tableBody",
             "text": "X",
           },
-          Object {
+          {
             "style": "tableBody",
             "text": "",
           },
-          Object {
+          {
             "style": "tableBody",
             "text": "",
           },
         ],
-        Array [
-          Object {
-            "style": Object {
+        [
+          {
+            "style": {
               "alignment": "left",
             },
             "text": "Name of @user-2",
           },
-          Object {
+          {
             "style": "tableBody",
             "text": "",
           },
-          Object {
+          {
             "style": "tableBody",
             "text": "",
           },
-          Object {
+          {
             "style": "tableBody",
             "text": "X",
           },
         ],
-        Array [
-          Object {
-            "style": Object {
+        [
+          {
+            "style": {
               "alignment": "left",
             },
             "text": "Name of @user-3",
           },
-          Object {
+          {
             "style": "tableBody",
             "text": "",
           },
-          Object {
+          {
             "style": "tableBody",
             "text": "X",
           },
-          Object {
+          {
             "style": "tableBody",
             "text": "",
           },
@@ -372,7 +372,7 @@ Array [
       ],
       "headerRows": 1,
       "heights": 18,
-      "widths": Array [
+      "widths": [
         "66%",
         "10%",
         "10%",
@@ -383,19 +383,19 @@ Array [
 ]
 `;
 
-exports[`createPollPdfContentTable should generate table for "open" with groups 1`] = `
-Array [
-  Array [
-    Array [
-      Object {
-        "table": Object {
-          "body": Array [
-            Array [
-              Object {
-                "columns": Array [
-                  Object {
-                    "canvas": Array [
-                      Object {
+exports[`createPollPdfContentTable > should generate table for "open" with groups 1`] = `
+[
+  [
+    [
+      {
+        "table": {
+          "body": [
+            [
+              {
+                "columns": [
+                  {
+                    "canvas": [
+                      {
                         "color": "#ff0000",
                         "r1": 15,
                         "r2": 15,
@@ -406,11 +406,11 @@ Array [
                     ],
                     "width": 33,
                   },
-                  Object {
-                    "relativePosition": Object {
+                  {
+                    "relativePosition": {
                       "y": 7.777777777777778,
                     },
-                    "style": Object {
+                    "style": {
                       "alignment": "left",
                       "bold": true,
                       "fontSize": 13,
@@ -419,19 +419,19 @@ Array [
                   },
                 ],
               },
-              Object {
+              {
                 "style": "tableHeader",
                 "text": "Yes
 1",
                 "type": "none",
               },
-              Object {
+              {
                 "style": "tableHeader",
                 "text": "No
 0",
                 "type": "none",
               },
-              Object {
+              {
                 "style": "tableHeader",
                 "text": "Invalid
 1",
@@ -441,7 +441,7 @@ Array [
           ],
           "headerRows": 1,
           "heights": 18,
-          "widths": Array [
+          "widths": [
             "66%",
             "10%",
             "10%",
@@ -449,15 +449,15 @@ Array [
           ],
         },
       },
-      Object {
-        "table": Object {
-          "body": Array [
-            Array [
-              Object {
-                "columns": Array [
-                  Object {
-                    "canvas": Array [
-                      Object {
+      {
+        "table": {
+          "body": [
+            [
+              {
+                "columns": [
+                  {
+                    "canvas": [
+                      {
                         "color": "#0000ff",
                         "r1": 15,
                         "r2": 15,
@@ -468,11 +468,11 @@ Array [
                     ],
                     "width": 33,
                   },
-                  Object {
-                    "relativePosition": Object {
+                  {
+                    "relativePosition": {
                       "y": 7.777777777777778,
                     },
-                    "style": Object {
+                    "style": {
                       "alignment": "left",
                       "bold": true,
                       "fontSize": 13,
@@ -481,19 +481,19 @@ Array [
                   },
                 ],
               },
-              Object {
+              {
                 "style": "tableHeader",
                 "text": "Yes
 0",
                 "type": "none",
               },
-              Object {
+              {
                 "style": "tableHeader",
                 "text": "No
 1",
                 "type": "none",
               },
-              Object {
+              {
                 "style": "tableHeader",
                 "text": "Invalid
 0",
@@ -503,7 +503,7 @@ Array [
           ],
           "headerRows": 1,
           "heights": 18,
-          "widths": Array [
+          "widths": [
             "66%",
             "10%",
             "10%",
@@ -511,15 +511,15 @@ Array [
           ],
         },
       },
-      Object {
-        "table": Object {
-          "body": Array [
-            Array [
-              Object {
-                "columns": Array [
-                  Object {
-                    "canvas": Array [
-                      Object {
+      {
+        "table": {
+          "body": [
+            [
+              {
+                "columns": [
+                  {
+                    "canvas": [
+                      {
                         "color": "#ffaaff",
                         "r1": 15,
                         "r2": 15,
@@ -530,11 +530,11 @@ Array [
                     ],
                     "width": 33,
                   },
-                  Object {
-                    "relativePosition": Object {
+                  {
+                    "relativePosition": {
                       "y": 7.777777777777778,
                     },
-                    "style": Object {
+                    "style": {
                       "alignment": "left",
                       "bold": true,
                       "fontSize": 13,
@@ -543,19 +543,19 @@ Array [
                   },
                 ],
               },
-              Object {
+              {
                 "style": "tableHeader",
                 "text": "Yes
 0",
                 "type": "none",
               },
-              Object {
+              {
                 "style": "tableHeader",
                 "text": "No
 0",
                 "type": "none",
               },
-              Object {
+              {
                 "style": "tableHeader",
                 "text": "Invalid
 0",
@@ -565,7 +565,7 @@ Array [
           ],
           "headerRows": 1,
           "heights": 18,
-          "widths": Array [
+          "widths": [
             "66%",
             "10%",
             "10%",

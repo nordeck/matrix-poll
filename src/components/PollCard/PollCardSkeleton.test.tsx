@@ -15,13 +15,14 @@
  */
 
 import { render } from '@testing-library/react';
-import { axe } from 'jest-axe';
+import axe from 'axe-core';
+import { describe, expect, it } from 'vitest';
 import { PollCardSkeleton } from './PollCardSkeleton';
 
 describe('<PollCardSkeleton/>', () => {
   it('should have no accessibility violations', async () => {
     const { container } = render(<PollCardSkeleton />);
 
-    expect(await axe(container)).toHaveNoViolations();
+    expect(await axe.run(container)).toHaveNoViolations();
   });
 });

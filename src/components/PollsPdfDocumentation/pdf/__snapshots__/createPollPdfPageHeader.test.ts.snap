@@ -1,14 +1,14 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`createPollPdfPageHeader should generate a pdf header and table 1`] = `
-Array [
-  Object {
-    "stack": Array [
-      Object {
+exports[`createPollPdfPageHeader > should generate a pdf header and table 1`] = `
+[
+  {
+    "stack": [
+      {
         "alignment": "center",
         "bold": true,
         "fontSize": 20,
-        "margin": Array [
+        "margin": [
           0,
           30,
           0,
@@ -16,15 +16,15 @@ Array [
         ],
         "text": "PDF Test",
       },
-      Object {
+      {
         "columnGap": 30,
-        "columns": Array [
-          Object {
+        "columns": [
+          {
             "alignment": "right",
             "text": "Joined persons: 3",
             "width": "*",
           },
-          Object {
+          {
             "text": "Invited persons: 2",
             "width": "*",
           },

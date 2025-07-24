@@ -17,6 +17,7 @@
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
 import { waitFor } from '@testing-library/react';
 import { Duration } from 'luxon';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { mockPoll } from '../../lib/testUtils';
 import { createStore, pollApi } from '../../store';
 import {
@@ -30,14 +31,18 @@ afterEach(() => widgetApi.stop());
 
 beforeEach(() => (widgetApi = mockWidgetApi()));
 
-afterEach(() => jest.useRealTimers());
+afterEach(() => vi.useRealTimers());
 
 describe('pollStatusNotificationsMiddleware', () => {
-  const showNotification = jest.fn();
+  const showNotification = vi.fn();
+
+  afterEach(() => {
+    vi.clearAllMocks();
+  });
 
   it('should notify if a poll was started', async () => {
-    jest.useFakeTimers();
-    jest.setSystemTime(new Date('2022-08-11T09:53:15Z'));
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date('2022-08-11T09:53:15Z'));
 
     widgetApi.mockSendStateEvent(mockPoll());
 
@@ -76,8 +81,8 @@ describe('pollStatusNotificationsMiddleware', () => {
   });
 
   it('should not notify if a poll was already started', async () => {
-    jest.useFakeTimers();
-    jest.setSystemTime(new Date('2022-08-11T09:53:15Z'));
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date('2022-08-11T09:53:15Z'));
 
     widgetApi.mockSendStateEvent(
       mockPoll({ content: { startTime: '2022-08-11T09:53:00Z' } }),
@@ -102,8 +107,8 @@ describe('pollStatusNotificationsMiddleware', () => {
   });
 
   it('should notify if a poll reached half its time', async () => {
-    jest.useFakeTimers();
-    jest.setSystemTime(new Date('2022-08-11T09:53:15Z'));
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date('2022-08-11T09:53:15Z'));
 
     widgetApi.mockSendStateEvent(
       mockPoll({
@@ -129,7 +134,7 @@ describe('pollStatusNotificationsMiddleware', () => {
       ).toBe(true);
     });
 
-    jest.advanceTimersByTime(15_000);
+    vi.advanceTimersByTime(15_000);
 
     expect(showNotification).toBeCalledWith(
       'info',
@@ -139,8 +144,8 @@ describe('pollStatusNotificationsMiddleware', () => {
   });
 
   it('should notify if a poll reached half when it already runs', async () => {
-    jest.useFakeTimers();
-    jest.setSystemTime(new Date('2022-08-11T09:53:30Z'));
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date('2022-08-11T09:53:30Z'));
 
     widgetApi.mockSendStateEvent(
       mockPoll({
@@ -174,8 +179,8 @@ describe('pollStatusNotificationsMiddleware', () => {
   });
 
   it('should notify if a poll will end soon', async () => {
-    jest.useFakeTimers();
-    jest.setSystemTime(new Date('2022-08-11T09:53:15Z'));
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date('2022-08-11T09:53:15Z'));
 
     widgetApi.mockSendStateEvent(
       mockPoll({
@@ -201,7 +206,7 @@ describe('pollStatusNotificationsMiddleware', () => {
       ).toBe(true);
     });
 
-    jest.advanceTimersByTime(30_000);
+    vi.advanceTimersByTime(30_000);
 
     expect(showNotification).toBeCalledWith(
       'info',
@@ -211,8 +216,8 @@ describe('pollStatusNotificationsMiddleware', () => {
   });
 
   it('should notify if a poll will end soon when it already runs', async () => {
-    jest.useFakeTimers();
-    jest.setSystemTime(new Date('2022-08-11T09:53:45Z'));
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date('2022-08-11T09:53:45Z'));
 
     widgetApi.mockSendStateEvent(
       mockPoll({
@@ -246,8 +251,8 @@ describe('pollStatusNotificationsMiddleware', () => {
   });
 
   it('should notify if a poll ended', async () => {
-    jest.useFakeTimers();
-    jest.setSystemTime(new Date('2022-08-11T09:53:15Z'));
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date('2022-08-11T09:53:15Z'));
 
     widgetApi.mockSendStateEvent(
       mockPoll({
@@ -273,7 +278,7 @@ describe('pollStatusNotificationsMiddleware', () => {
       ).toBe(true);
     });
 
-    jest.advanceTimersByTime(45_000);
+    vi.advanceTimersByTime(45_000);
 
     expect(showNotification).toBeCalledWith(
       'info',

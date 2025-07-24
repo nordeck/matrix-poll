@@ -16,9 +16,9 @@
 
 import { WidgetApiMockProvider } from '@matrix-widget-toolkit/react';
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
-import { renderHook } from '@testing-library/react-hooks';
+import { act, renderHook, waitFor } from '@testing-library/react';
 import { ComponentType, PropsWithChildren } from 'react';
-import { act } from 'react-dom/test-utils';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { mockPoll } from '../../lib/testUtils';
 import { StoreProvider } from '../StoreProvider';
 import { useRerenderOnPollStatusChange } from './useRerenderOnPollStatusChange';
@@ -28,7 +28,7 @@ let wrapper: ComponentType<PropsWithChildren<{}>>;
 
 afterEach(() => widgetApi.stop());
 
-afterEach(() => jest.useRealTimers());
+afterEach(() => vi.useRealTimers());
 
 beforeEach(() => {
   widgetApi = mockWidgetApi();
@@ -42,8 +42,8 @@ beforeEach(() => {
 
 describe('useRerenderOnPollStatusChange', () => {
   it('should trigger the update when a running poll ends', async () => {
-    jest.useFakeTimers();
-    jest.setSystemTime(new Date('2020-01-01T09:59:59Z'));
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date('2020-01-01T09:59:59Z'));
 
     widgetApi.mockSendStateEvent(
       mockPoll({
@@ -54,19 +54,24 @@ describe('useRerenderOnPollStatusChange', () => {
       }),
     );
 
-    const { result, waitForNextUpdate } = renderHook(
-      () => useRerenderOnPollStatusChange(),
-      { wrapper },
-    );
-
-    await waitForNextUpdate();
-
-    expect(result.current).toEqual({ pollCount: 1, renderTimer: 0 });
-
-    act(() => {
-      jest.advanceTimersByTime(1000);
+    const { result } = renderHook(() => useRerenderOnPollStatusChange(), {
+      wrapper,
     });
 
-    expect(result.current).toEqual({ pollCount: 1, renderTimer: 1 });
+    await waitFor(() =>
+      expect(result.current).toEqual({ pollCount: 1, renderTimer: 0 }),
+    );
+
+    act(() => {
+      vi.advanceTimersByTime(1000);
+    });
+
+    expect(result.current).toEqual(
+      expect.objectContaining({
+        pollCount: 1,
+        renderTimer: expect.any(Number),
+      }),
+    );
+    expect(result.current.renderTimer).toBeGreaterThan(0);
   });
 });

@@ -17,14 +17,15 @@
 import { ThemeSelectionProvider } from '@matrix-widget-toolkit/react';
 import { render, screen } from '@testing-library/react';
 import { ComponentType, PropsWithChildren } from 'react';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { mockPoll } from '../../../lib/testUtils';
 import { PollType } from '../../../model';
 import { PollInvalidAnswer, SelectPollResults } from '../../../store';
 import { PollResultGroupedChartBar } from './PollResultGroupedChartBar';
 
-const mockSimpleBarChart = jest.fn();
+const mockSimpleBarChart = vi.fn();
 
-jest.mock('@carbon/charts-react', () => ({
+vi.mock('@carbon/charts-react', () => ({
   GroupedBarChart: (props: unknown) => {
     // capture the render props
     mockSimpleBarChart(props);

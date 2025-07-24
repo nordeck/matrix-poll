@@ -17,9 +17,10 @@
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
 import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { axe } from 'jest-axe';
+import axe from 'axe-core';
 import { ComponentType, PropsWithChildren, useMemo } from 'react';
 import { Provider } from 'react-redux';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   mockGroup,
   mockPowerLevelsEvent,
@@ -55,7 +56,7 @@ describe('<GroupForm/>', () => {
   });
 
   it('should render without exploding', () => {
-    render(<GroupForm onGroupChange={jest.fn()} />, { wrapper: Wrapper });
+    render(<GroupForm onGroupChange={vi.fn()} />, { wrapper: Wrapper });
 
     expect(
       screen.getByRole('textbox', {
@@ -101,7 +102,7 @@ describe('<GroupForm/>', () => {
   });
 
   it('should add delegate and representative', async () => {
-    render(<GroupForm onGroupChange={jest.fn()} />, { wrapper: Wrapper });
+    render(<GroupForm onGroupChange={vi.fn()} />, { wrapper: Wrapper });
 
     const listDelegates = screen.getByRole('list', { name: /Delegates: 0/i });
 
@@ -145,7 +146,7 @@ describe('<GroupForm/>', () => {
   });
 
   it('should ignore user already assigned to other groups', async () => {
-    render(<GroupForm onGroupChange={jest.fn()} />, { wrapper: Wrapper });
+    render(<GroupForm onGroupChange={vi.fn()} />, { wrapper: Wrapper });
 
     await userEvent.click(
       screen.getByRole('combobox', {
@@ -180,7 +181,7 @@ describe('<GroupForm/>', () => {
   });
 
   it('should ignore user already assigned to the current group', async () => {
-    render(<GroupForm onGroupChange={jest.fn()} />, { wrapper: Wrapper });
+    render(<GroupForm onGroupChange={vi.fn()} />, { wrapper: Wrapper });
 
     await userEvent.click(
       screen.getByRole('combobox', {
@@ -206,7 +207,7 @@ describe('<GroupForm/>', () => {
   });
 
   it('should ignore user that left the room', async () => {
-    render(<GroupForm onGroupChange={jest.fn()} />, { wrapper: Wrapper });
+    render(<GroupForm onGroupChange={vi.fn()} />, { wrapper: Wrapper });
 
     await userEvent.click(
       screen.getByRole('combobox', {
@@ -240,7 +241,7 @@ describe('<GroupForm/>', () => {
   });
 
   it('should ignore user with insufficient voting rights', async () => {
-    render(<GroupForm onGroupChange={jest.fn()} />, { wrapper: Wrapper });
+    render(<GroupForm onGroupChange={vi.fn()} />, { wrapper: Wrapper });
 
     await userEvent.click(
       screen.getByRole('combobox', {
@@ -275,7 +276,7 @@ describe('<GroupForm/>', () => {
   });
 
   it('should change delegation', async () => {
-    render(<GroupForm onGroupChange={jest.fn()} />, { wrapper: Wrapper });
+    render(<GroupForm onGroupChange={vi.fn()} />, { wrapper: Wrapper });
 
     const listDelegates = screen.getByRole('list', { name: /Delegates: 0/i });
 
@@ -326,7 +327,7 @@ describe('<GroupForm/>', () => {
   });
 
   it('should remove a user from the delegation or representative list', async () => {
-    render(<GroupForm onGroupChange={jest.fn()} />, { wrapper: Wrapper });
+    render(<GroupForm onGroupChange={vi.fn()} />, { wrapper: Wrapper });
 
     const listDelegates = screen.getByRole('list', { name: /Delegates: 0/i });
 
@@ -378,7 +379,7 @@ describe('<GroupForm/>', () => {
   });
 
   it('should create group', async () => {
-    const onGroupChange = jest.fn();
+    const onGroupChange = vi.fn();
 
     render(<GroupForm onGroupChange={onGroupChange} />, { wrapper: Wrapper });
 
@@ -410,15 +411,15 @@ describe('<GroupForm/>', () => {
   });
 
   it('should have not accessibility violations', async () => {
-    const { container } = render(<GroupForm onGroupChange={jest.fn()} />, {
+    const { container } = render(<GroupForm onGroupChange={vi.fn()} />, {
       wrapper: Wrapper,
     });
 
-    expect(await axe(container)).toHaveNoViolations();
+    expect(await axe.run(container)).toHaveNoViolations();
   });
 
   it('should edit an existing group', () => {
-    const onGroupChange = jest.fn();
+    const onGroupChange = vi.fn();
     const group = mockGroup({
       content: {
         members: {
@@ -461,7 +462,7 @@ describe('<GroupForm/>', () => {
   });
 
   it('should edit members of the group', async () => {
-    const onGroupChange = jest.fn();
+    const onGroupChange = vi.fn();
     const group = mockGroup({
       content: {
         members: {
@@ -504,7 +505,7 @@ describe('<GroupForm/>', () => {
   });
 
   it('should return undefined for an invalid group', async () => {
-    const onGroupChange = jest.fn();
+    const onGroupChange = vi.fn();
 
     render(<GroupForm onGroupChange={onGroupChange} />, { wrapper: Wrapper });
 

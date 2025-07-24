@@ -20,7 +20,7 @@ import { IPoll } from '../../model';
 import { selectAllPolls } from './pollApi';
 
 export function selectPollsUpcoming(
-  state: EntityState<StateEvent<IPoll>>,
+  state: EntityState<StateEvent<IPoll>, string>,
   pollsOrder: string[] = [],
 ): StateEvent<IPoll>[] {
   return selectAllPolls(state)

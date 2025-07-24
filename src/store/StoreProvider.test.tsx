@@ -19,11 +19,12 @@ import { useWidgetApi } from '@matrix-widget-toolkit/react';
 import { configureStore, createReducer } from '@reduxjs/toolkit';
 import { render, screen } from '@testing-library/react';
 import { TypedUseSelectorHook, useSelector } from 'react-redux';
+import { describe, expect, it, MockedFunction, vi } from 'vitest';
 import { createStore } from './store';
 import { StoreProvider } from './StoreProvider';
 
-jest.mock('./store');
-jest.mock('@matrix-widget-toolkit/react');
+vi.mock('./store');
+vi.mock('@matrix-widget-toolkit/react');
 
 describe('StoreProvider', () => {
   it('should work', () => {
@@ -41,7 +42,10 @@ describe('StoreProvider', () => {
       return <p>{value}</p>;
     };
 
-    (createStore as jest.Mock).mockReturnValue(store);
+    (createStore as MockedFunction<typeof createStore>).mockReturnValue(
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      store as any,
+    );
 
     const widgetApi = {
       widgetParameters: {
@@ -50,7 +54,7 @@ describe('StoreProvider', () => {
       },
     };
 
-    jest.mocked(useWidgetApi).mockReturnValue(widgetApi as WidgetApi);
+    vi.mocked(useWidgetApi).mockReturnValue(widgetApi as WidgetApi);
 
     render(
       <StoreProvider>

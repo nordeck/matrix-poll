@@ -17,13 +17,14 @@
 import { getEnvironment } from '@matrix-widget-toolkit/mui';
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
 import { waitFor } from '@testing-library/react';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { mockRoomMember } from '../../lib/testUtils';
 import { createStore } from '../store';
 import { roomMemberApi, selectActiveRoomMembers } from './roomMemberApi';
 
-jest.mock('@matrix-widget-toolkit/mui', () => ({
-  ...jest.requireActual('@matrix-widget-toolkit/mui'),
-  getEnvironment: jest.fn(),
+vi.mock('@matrix-widget-toolkit/mui', async (importOriginal) => ({
+  ...(await importOriginal()),
+  getEnvironment: vi.fn(),
 }));
 
 let widgetApi: MockedWidgetApi;
@@ -33,7 +34,7 @@ afterEach(() => widgetApi.stop());
 beforeEach(() => {
   widgetApi = mockWidgetApi();
 
-  jest.mocked(getEnvironment).mockReturnValue('');
+  vi.mocked(getEnvironment).mockReturnValue('');
 });
 
 describe('getRoomMembers', () => {
@@ -177,7 +178,7 @@ describe('selectActiveRoomMembers', () => {
   });
 
   it('should exclude users that are ignored', () => {
-    jest.mocked(getEnvironment).mockReturnValue('@other-user,@invite-user');
+    vi.mocked(getEnvironment).mockReturnValue('@other-user,@invite-user');
 
     const joinUser = mockRoomMember({
       state_key: '@join-user',

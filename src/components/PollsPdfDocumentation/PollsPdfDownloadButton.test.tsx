@@ -18,14 +18,15 @@ import { WidgetApiMockProvider } from '@matrix-widget-toolkit/react';
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
 import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { axe } from 'jest-axe';
+import axe from 'axe-core';
 import { ComponentType, PropsWithChildren, useMemo } from 'react';
 import { Provider } from 'react-redux';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { createStore } from '../../store';
 import { PollsPdfDownloadButton } from './PollsPdfDownloadButton';
 
 // The pdf library doesn't work in test, so we mock pdf generation completely
-jest.mock('./pdf', () => ({ createPollPdf: jest.fn() }));
+vi.mock('./pdf', () => ({ createPollPdf: vi.fn() }));
 
 let widgetApi: MockedWidgetApi;
 
@@ -46,7 +47,7 @@ describe('<PollsPdfDownloadButton/>', () => {
       );
     };
 
-    jest.mocked(URL.createObjectURL).mockReturnValue('blob:url');
+    vi.mocked(URL.createObjectURL).mockReturnValue('data:,pdf%20content');
   });
 
   it('should render without exploding', () => {
@@ -80,6 +81,6 @@ describe('<PollsPdfDownloadButton/>', () => {
       wrapper: Wrapper,
     });
 
-    expect(await axe(container)).toHaveNoViolations();
+    expect(await axe.run(container)).toHaveNoViolations();
   });
 });

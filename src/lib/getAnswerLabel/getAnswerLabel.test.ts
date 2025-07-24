@@ -15,6 +15,7 @@
  */
 
 import { t } from 'i18next';
+import { describe, expect, it } from 'vitest';
 import { PollInvalidAnswer } from '../../store';
 import { mockPoll } from '../testUtils';
 import { getAnswerLabel } from './getAnswerLabel';

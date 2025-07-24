@@ -16,10 +16,11 @@
 
 import { getEnvironment } from '@matrix-widget-toolkit/mui';
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
-import { renderHook } from '@testing-library/react-hooks';
+import { renderHook, waitFor } from '@testing-library/react';
 import { DateTime } from 'luxon';
 import { ComponentType, PropsWithChildren, useState } from 'react';
 import { Provider } from 'react-redux';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   mockPoll,
   mockPowerLevelsEvent,
@@ -29,9 +30,9 @@ import {
 import { createStore } from '../store';
 import { PollInvalidAnswer, usePollResults } from './usePollResults';
 
-jest.mock('@matrix-widget-toolkit/mui', () => ({
-  ...jest.requireActual('@matrix-widget-toolkit/mui'),
-  getEnvironment: jest.fn(),
+vi.mock('@matrix-widget-toolkit/mui', async (importOriginal) => ({
+  ...(await importOriginal()),
+  getEnvironment: vi.fn(),
 }));
 
 let widgetApi: MockedWidgetApi;
@@ -46,9 +47,9 @@ describe('selectPollResults', () => {
   beforeEach(() => {
     widgetApi.mockSendStateEvent(mockPowerLevelsEvent());
 
-    jest
-      .mocked(getEnvironment)
-      .mockImplementation((_, defaultValue) => defaultValue);
+    vi.mocked(getEnvironment).mockImplementation(
+      (_, defaultValue) => defaultValue,
+    );
 
     Wrapper = ({ children }) => {
       const [store] = useState(() => createStore({ widgetApi }));
@@ -59,20 +60,20 @@ describe('selectPollResults', () => {
   it('should return error', async () => {
     widgetApi.receiveStateEvents.mockRejectedValue(new Error('Some error'));
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
       { wrapper: Wrapper },
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
-
-    expect(result.current).toEqual({ isLoading: false, isError: true });
+    await waitFor(() =>
+      expect(result.current).toEqual({ isLoading: false, isError: true }),
+    );
   });
 
   it('should return error, when vote loading is skipped', async () => {
     widgetApi.receiveStateEvents.mockRejectedValue(new Error('Some error'));
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () =>
         usePollResults('my-poll', {
           includeInvalidVotes: true,
@@ -81,9 +82,9 @@ describe('selectPollResults', () => {
       { wrapper: Wrapper },
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
-
-    expect(result.current).toEqual({ isLoading: false, isError: true });
+    await waitFor(() =>
+      expect(result.current).toEqual({ isLoading: false, isError: true }),
+    );
   });
 
   it('should return error when vote loading fails', async () => {
@@ -101,14 +102,14 @@ describe('selectPollResults', () => {
       }),
     );
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
       { wrapper: Wrapper },
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
-
-    expect(result.current).toEqual({ isLoading: false, isError: true });
+    await waitFor(() =>
+      expect(result.current).toEqual({ isLoading: false, isError: true }),
+    );
   });
 
   it('should ignore error when vote loading fails but vote loading is skipped', async () => {
@@ -127,7 +128,7 @@ describe('selectPollResults', () => {
     );
     widgetApi.mockSendStateEvent(mockRoomMember({ state_key: '@user' }));
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () =>
         usePollResults('my-poll', {
           includeInvalidVotes: true,
@@ -136,31 +137,31 @@ describe('selectPollResults', () => {
       { wrapper: Wrapper },
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
-
-    expect(result.current).toEqual({
-      isLoading: false,
-      data: {
-        poll,
-        results: { votes: { '@user': PollInvalidAnswer } },
-        votingRights: ['@user'],
-      },
-    });
+    await waitFor(() =>
+      expect(result.current).toEqual({
+        isLoading: false,
+        data: {
+          poll,
+          results: { votes: { '@user': PollInvalidAnswer } },
+          votingRights: ['@user'],
+        },
+      }),
+    );
   });
 
   it('should return undefined when no poll was found', async () => {
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
       { wrapper: Wrapper },
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
-
-    expect(result.current).toEqual({ isLoading: false, value: undefined });
+    await waitFor(() =>
+      expect(result.current).toEqual({ isLoading: false, value: undefined }),
+    );
   });
 
   it('should return undefined when no poll was found, when vote loading is skipped', async () => {
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () =>
         usePollResults('my-poll', {
           includeInvalidVotes: true,
@@ -169,9 +170,9 @@ describe('selectPollResults', () => {
       { wrapper: Wrapper },
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
-
-    expect(result.current).toEqual({ isLoading: false, value: undefined });
+    await waitFor(() =>
+      expect(result.current).toEqual({ isLoading: false, value: undefined }),
+    );
   });
 
   it('should still return information when poll was not started', async () => {
@@ -185,21 +186,21 @@ describe('selectPollResults', () => {
     );
     widgetApi.mockSendStateEvent(mockRoomMember({ state_key: '@user' }));
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
       { wrapper: Wrapper },
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
-
-    expect(result.current).toEqual({
-      isLoading: false,
-      data: {
-        poll,
-        results: { votes: { '@user': PollInvalidAnswer } },
-        votingRights: ['@user'],
-      },
-    });
+    await waitFor(() =>
+      expect(result.current).toEqual({
+        isLoading: false,
+        data: {
+          poll,
+          results: { votes: { '@user': PollInvalidAnswer } },
+          votingRights: ['@user'],
+        },
+      }),
+    );
   });
 
   it('should return all votes without groups', async () => {
@@ -267,31 +268,31 @@ describe('selectPollResults', () => {
       }),
     );
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
       { wrapper: Wrapper },
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
-
-    expect(result.current).toEqual({
-      isLoading: false,
-      data: {
-        poll,
-        votingRights: [
-          '@user-with-power-1',
-          '@user-with-power-2',
-          '@user-without-power',
-        ],
-        results: {
-          votes: {
-            '@user-with-power-1': '1',
-            '@user-with-power-2': '1',
-            '@user-without-power': '2',
+    await waitFor(() =>
+      expect(result.current).toEqual({
+        isLoading: false,
+        data: {
+          poll,
+          votingRights: [
+            '@user-with-power-1',
+            '@user-with-power-2',
+            '@user-without-power',
+          ],
+          results: {
+            votes: {
+              '@user-with-power-1': '1',
+              '@user-with-power-2': '1',
+              '@user-without-power': '2',
+            },
           },
         },
-      },
-    });
+      }),
+    );
   });
 
   it('should not return any votes, when vote loading is skipped', async () => {
@@ -321,7 +322,7 @@ describe('selectPollResults', () => {
       }),
     );
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () =>
         usePollResults('my-poll', {
           includeInvalidVotes: true,
@@ -330,20 +331,20 @@ describe('selectPollResults', () => {
       { wrapper: Wrapper },
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
-
-    expect(result.current).toEqual({
-      isLoading: false,
-      data: {
-        poll,
-        votingRights: ['@user-with-power-1'],
-        results: {
-          votes: {
-            '@user-with-power-1': PollInvalidAnswer,
+    await waitFor(() =>
+      expect(result.current).toEqual({
+        isLoading: false,
+        data: {
+          poll,
+          votingRights: ['@user-with-power-1'],
+          results: {
+            votes: {
+              '@user-with-power-1': PollInvalidAnswer,
+            },
           },
         },
-      },
-    });
+      }),
+    );
   });
 
   it('should handle missing answer from users with power without groups', async () => {
@@ -383,25 +384,25 @@ describe('selectPollResults', () => {
       }),
     );
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
       { wrapper: Wrapper },
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
-
-    expect(result.current).toEqual({
-      isLoading: false,
-      data: {
-        poll,
-        votingRights: ['@user-with-power-1'],
-        results: {
-          votes: {
-            '@user-with-power-1': PollInvalidAnswer,
+    await waitFor(() =>
+      expect(result.current).toEqual({
+        isLoading: false,
+        data: {
+          poll,
+          votingRights: ['@user-with-power-1'],
+          results: {
+            votes: {
+              '@user-with-power-1': PollInvalidAnswer,
+            },
           },
         },
-      },
-    });
+      }),
+    );
   });
 
   it('should ignore missing users that left the room', async () => {
@@ -444,25 +445,25 @@ describe('selectPollResults', () => {
       }),
     );
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
       { wrapper: Wrapper },
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
-
-    expect(result.current).toEqual({
-      isLoading: false,
-      data: {
-        poll,
-        votingRights: ['@user-with-power-1'],
-        results: {
-          votes: {
-            '@user-with-power-1': PollInvalidAnswer,
+    await waitFor(() =>
+      expect(result.current).toEqual({
+        isLoading: false,
+        data: {
+          poll,
+          votingRights: ['@user-with-power-1'],
+          results: {
+            votes: {
+              '@user-with-power-1': PollInvalidAnswer,
+            },
           },
         },
-      },
-    });
+      }),
+    );
   });
 
   it('should ignore missing answers if not enabled without groups', async () => {
@@ -488,23 +489,23 @@ describe('selectPollResults', () => {
       }),
     );
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: false }),
       { wrapper: Wrapper },
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
-
-    expect(result.current).toEqual({
-      isLoading: false,
-      data: {
-        poll,
-        votingRights: [],
-        results: {
-          votes: {},
+    await waitFor(() =>
+      expect(result.current).toEqual({
+        isLoading: false,
+        data: {
+          poll,
+          votingRights: [],
+          results: {
+            votes: {},
+          },
         },
-      },
-    });
+      }),
+    );
   });
 
   it('should handle missing answer with groups', async () => {
@@ -542,44 +543,44 @@ describe('selectPollResults', () => {
       }),
     );
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
       { wrapper: Wrapper },
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
-
-    expect(result.current).toEqual({
-      isLoading: false,
-      data: {
-        poll,
-        votingRights: ['@user-delegate-1', '@user-delegate-2'],
-        results: {
-          votes: {
-            '@user-delegate-1': PollInvalidAnswer,
-            '@user-delegate-2': PollInvalidAnswer,
-          },
-        },
-        groupedResults: {
-          'group-1': {
-            abbreviation: 'Group 1',
-            color: '#ff0000',
+    await waitFor(() =>
+      expect(result.current).toEqual({
+        isLoading: false,
+        data: {
+          poll,
+          votingRights: ['@user-delegate-1', '@user-delegate-2'],
+          results: {
             votes: {
               '@user-delegate-1': PollInvalidAnswer,
-            },
-            invalidVoters: {},
-          },
-          'group-2': {
-            abbreviation: 'Group 2',
-            color: '#0000ff',
-            votes: {
               '@user-delegate-2': PollInvalidAnswer,
             },
-            invalidVoters: {},
+          },
+          groupedResults: {
+            'group-1': {
+              abbreviation: 'Group 1',
+              color: '#ff0000',
+              votes: {
+                '@user-delegate-1': PollInvalidAnswer,
+              },
+              invalidVoters: {},
+            },
+            'group-2': {
+              abbreviation: 'Group 2',
+              color: '#0000ff',
+              votes: {
+                '@user-delegate-2': PollInvalidAnswer,
+              },
+              invalidVoters: {},
+            },
           },
         },
-      },
-    });
+      }),
+    );
   });
 
   it('should ignore missing answers if not enabled with groups', async () => {
@@ -617,37 +618,37 @@ describe('selectPollResults', () => {
       }),
     );
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: false }),
       { wrapper: Wrapper },
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
-
-    expect(result.current).toEqual({
-      isLoading: false,
-      data: {
-        poll,
-        votingRights: [],
-        results: {
-          votes: {},
-        },
-        groupedResults: {
-          'group-1': {
-            abbreviation: 'Group 1',
-            color: '#ff0000',
+    await waitFor(() =>
+      expect(result.current).toEqual({
+        isLoading: false,
+        data: {
+          poll,
+          votingRights: [],
+          results: {
             votes: {},
-            invalidVoters: {},
           },
-          'group-2': {
-            abbreviation: 'Group 2',
-            color: '#0000ff',
-            votes: {},
-            invalidVoters: {},
+          groupedResults: {
+            'group-1': {
+              abbreviation: 'Group 1',
+              color: '#ff0000',
+              votes: {},
+              invalidVoters: {},
+            },
+            'group-2': {
+              abbreviation: 'Group 2',
+              color: '#0000ff',
+              votes: {},
+              invalidVoters: {},
+            },
           },
         },
-      },
-    });
+      }),
+    );
   });
 
   it('should handle active delegates of a group', async () => {
@@ -700,40 +701,40 @@ describe('selectPollResults', () => {
       }),
     );
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
       { wrapper: Wrapper },
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
-
-    expect(result.current).toEqual({
-      isLoading: false,
-      data: {
-        poll,
-        votingRights: ['@user-delegate-1', '@user-delegate-2'],
-        results: {
-          votes: {
-            '@user-delegate-1': '1',
-            '@user-delegate-2': '2',
+    await waitFor(() =>
+      expect(result.current).toEqual({
+        isLoading: false,
+        data: {
+          poll,
+          votingRights: ['@user-delegate-1', '@user-delegate-2'],
+          results: {
+            votes: {
+              '@user-delegate-1': '1',
+              '@user-delegate-2': '2',
+            },
+          },
+          groupedResults: {
+            'group-1': {
+              abbreviation: 'Group 1',
+              color: '#ff0000',
+              votes: { '@user-delegate-1': '1' },
+              invalidVoters: {},
+            },
+            'group-2': {
+              abbreviation: 'Group 2',
+              color: '#0000ff',
+              votes: { '@user-delegate-2': '2' },
+              invalidVoters: {},
+            },
           },
         },
-        groupedResults: {
-          'group-1': {
-            abbreviation: 'Group 1',
-            color: '#ff0000',
-            votes: { '@user-delegate-1': '1' },
-            invalidVoters: {},
-          },
-          'group-2': {
-            abbreviation: 'Group 2',
-            color: '#0000ff',
-            votes: { '@user-delegate-2': '2' },
-            invalidVoters: {},
-          },
-        },
-      },
-    });
+      }),
+    );
   });
 
   it('should handle invalid delegates of a group', async () => {
@@ -779,41 +780,41 @@ describe('selectPollResults', () => {
       }),
     );
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
       { wrapper: Wrapper },
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
-
-    expect(result.current).toEqual({
-      isLoading: false,
-      data: {
-        poll,
-        votingRights: ['@user-delegate-1'],
-        results: {
-          votes: { '@user-delegate-1': '1' },
-        },
-        groupedResults: {
-          'group-1': {
-            abbreviation: 'Group 1',
-            color: '#ff0000',
+    await waitFor(() =>
+      expect(result.current).toEqual({
+        isLoading: false,
+        data: {
+          poll,
+          votingRights: ['@user-delegate-1'],
+          results: {
             votes: { '@user-delegate-1': '1' },
-            invalidVoters: {
-              '@user-delegate-2': { state: 'invalid' },
-            },
           },
-          'group-2': {
-            abbreviation: 'Group 2',
-            color: '#0000ff',
-            votes: {},
-            invalidVoters: {
-              '@user-delegate-3': { state: 'invalid' },
+          groupedResults: {
+            'group-1': {
+              abbreviation: 'Group 1',
+              color: '#ff0000',
+              votes: { '@user-delegate-1': '1' },
+              invalidVoters: {
+                '@user-delegate-2': { state: 'invalid' },
+              },
+            },
+            'group-2': {
+              abbreviation: 'Group 2',
+              color: '#0000ff',
+              votes: {},
+              invalidVoters: {
+                '@user-delegate-3': { state: 'invalid' },
+              },
             },
           },
         },
-      },
-    });
+      }),
+    );
   });
 
   it('should handle represented delegates of a group', async () => {
@@ -852,36 +853,36 @@ describe('selectPollResults', () => {
       }),
     );
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
       { wrapper: Wrapper },
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
-
-    expect(result.current).toEqual({
-      isLoading: false,
-      data: {
-        poll,
-        votingRights: ['@user-backup'],
-        results: {
-          votes: { '@user-backup': '1' },
-        },
-        groupedResults: {
-          'group-1': {
-            abbreviation: 'Group 1',
-            color: '#ff0000',
+    await waitFor(() =>
+      expect(result.current).toEqual({
+        isLoading: false,
+        data: {
+          poll,
+          votingRights: ['@user-backup'],
+          results: {
             votes: { '@user-backup': '1' },
-            invalidVoters: {
-              '@user-delegate': {
-                state: 'represented',
-                representedBy: '@user-backup',
+          },
+          groupedResults: {
+            'group-1': {
+              abbreviation: 'Group 1',
+              color: '#ff0000',
+              votes: { '@user-backup': '1' },
+              invalidVoters: {
+                '@user-delegate': {
+                  state: 'represented',
+                  representedBy: '@user-backup',
+                },
               },
             },
           },
         },
-      },
-    });
+      }),
+    );
   });
 
   it('should handle represented delegates of a group if no vote was cast', async () => {
@@ -913,36 +914,36 @@ describe('selectPollResults', () => {
       }),
     );
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
       { wrapper: Wrapper },
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
-
-    expect(result.current).toEqual({
-      isLoading: false,
-      data: {
-        poll,
-        votingRights: ['@user-backup'],
-        results: {
-          votes: { '@user-backup': PollInvalidAnswer },
-        },
-        groupedResults: {
-          'group-1': {
-            abbreviation: 'Group 1',
-            color: '#ff0000',
+    await waitFor(() =>
+      expect(result.current).toEqual({
+        isLoading: false,
+        data: {
+          poll,
+          votingRights: ['@user-backup'],
+          results: {
             votes: { '@user-backup': PollInvalidAnswer },
-            invalidVoters: {
-              '@user-delegate': {
-                state: 'represented',
-                representedBy: '@user-backup',
+          },
+          groupedResults: {
+            'group-1': {
+              abbreviation: 'Group 1',
+              color: '#ff0000',
+              votes: { '@user-backup': PollInvalidAnswer },
+              invalidVoters: {
+                '@user-delegate': {
+                  state: 'represented',
+                  representedBy: '@user-backup',
+                },
               },
             },
           },
         },
-      },
-    });
+      }),
+    );
   });
 
   it('should ignore a delegate that is part of two groups', async () => {
@@ -998,45 +999,45 @@ describe('selectPollResults', () => {
       }),
     );
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
       { wrapper: Wrapper },
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
-
-    expect(result.current).toEqual({
-      isLoading: false,
-      data: {
-        poll,
-        votingRights: ['@user-delegate-1', '@user-delegate-2'],
-        results: {
-          votes: {
-            '@user-delegate-1': '1',
-            '@user-delegate-2': '2',
-          },
-        },
-        groupedResults: {
-          'group-1': {
-            abbreviation: 'Group 1',
-            color: '#ff0000',
+    await waitFor(() =>
+      expect(result.current).toEqual({
+        isLoading: false,
+        data: {
+          poll,
+          votingRights: ['@user-delegate-1', '@user-delegate-2'],
+          results: {
             votes: {
               '@user-delegate-1': '1',
               '@user-delegate-2': '2',
             },
-            invalidVoters: {
-              '@user-delegate-3': { state: 'invalid' },
+          },
+          groupedResults: {
+            'group-1': {
+              abbreviation: 'Group 1',
+              color: '#ff0000',
+              votes: {
+                '@user-delegate-1': '1',
+                '@user-delegate-2': '2',
+              },
+              invalidVoters: {
+                '@user-delegate-3': { state: 'invalid' },
+              },
+            },
+            'group-2': {
+              abbreviation: 'Group 2',
+              color: '#0000ff',
+              votes: {},
+              invalidVoters: {},
             },
           },
-          'group-2': {
-            abbreviation: 'Group 2',
-            color: '#0000ff',
-            votes: {},
-            invalidVoters: {},
-          },
         },
-      },
-    });
+      }),
+    );
   });
 
   it('should ignore a representative that is used twice in a group', async () => {
@@ -1087,44 +1088,44 @@ describe('selectPollResults', () => {
       }),
     );
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
       { wrapper: Wrapper },
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
-
-    expect(result.current).toEqual({
-      isLoading: false,
-      data: {
-        poll,
-        votingRights: ['@user-backup'],
-        results: {
-          votes: { '@user-backup': '1' },
-        },
-        groupedResults: {
-          'group-1': {
-            abbreviation: 'Group 1',
-            color: '#ff0000',
+    await waitFor(() =>
+      expect(result.current).toEqual({
+        isLoading: false,
+        data: {
+          poll,
+          votingRights: ['@user-backup'],
+          results: {
             votes: { '@user-backup': '1' },
-            invalidVoters: {
-              '@user-delegate-1': {
-                state: 'represented',
-                representedBy: '@user-backup',
+          },
+          groupedResults: {
+            'group-1': {
+              abbreviation: 'Group 1',
+              color: '#ff0000',
+              votes: { '@user-backup': '1' },
+              invalidVoters: {
+                '@user-delegate-1': {
+                  state: 'represented',
+                  representedBy: '@user-backup',
+                },
+              },
+            },
+            'group-2': {
+              abbreviation: 'Group 2',
+              color: '#0000ff',
+              votes: {},
+              invalidVoters: {
+                '@user-delegate-2': { state: 'invalid' },
               },
             },
           },
-          'group-2': {
-            abbreviation: 'Group 2',
-            color: '#0000ff',
-            votes: {},
-            invalidVoters: {
-              '@user-delegate-2': { state: 'invalid' },
-            },
-          },
         },
-      },
-    });
+      }),
+    );
   });
 
   it('should ignore a representative that is used twice in different groups', async () => {
@@ -1167,37 +1168,37 @@ describe('selectPollResults', () => {
       }),
     );
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
       { wrapper: Wrapper },
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
-
-    expect(result.current).toEqual({
-      isLoading: false,
-      data: {
-        poll,
-        votingRights: ['@user-backup'],
-        results: {
-          votes: { '@user-backup': '1' },
-        },
-        groupedResults: {
-          'group-1': {
-            abbreviation: 'Group 1',
-            color: '#ff0000',
+    await waitFor(() =>
+      expect(result.current).toEqual({
+        isLoading: false,
+        data: {
+          poll,
+          votingRights: ['@user-backup'],
+          results: {
             votes: { '@user-backup': '1' },
-            invalidVoters: {
-              '@user-delegate-1': {
-                state: 'represented',
-                representedBy: '@user-backup',
+          },
+          groupedResults: {
+            'group-1': {
+              abbreviation: 'Group 1',
+              color: '#ff0000',
+              votes: { '@user-backup': '1' },
+              invalidVoters: {
+                '@user-delegate-1': {
+                  state: 'represented',
+                  representedBy: '@user-backup',
+                },
+                '@user-delegate-2': { state: 'invalid' },
               },
-              '@user-delegate-2': { state: 'invalid' },
             },
           },
         },
-      },
-    });
+      }),
+    );
   });
 
   it('should ignore a representative that is already a delegate in a group', async () => {
@@ -1237,43 +1238,41 @@ describe('selectPollResults', () => {
       }),
     );
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
       { wrapper: Wrapper },
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
-
-    expect(result.current).toEqual({
-      isLoading: false,
-      data: {
-        poll,
-        votingRights: ['@user-delegate-2'],
-        results: {
-          votes: { '@user-delegate-2': '1' },
-        },
-        groupedResults: {
-          'group-1': {
-            abbreviation: 'Group 1',
-            color: '#ff0000',
+    await waitFor(() =>
+      expect(result.current).toEqual({
+        isLoading: false,
+        data: {
+          poll,
+          votingRights: ['@user-delegate-2'],
+          results: {
             votes: { '@user-delegate-2': '1' },
-            invalidVoters: {
-              '@user-delegate-1': { state: 'invalid' },
+          },
+          groupedResults: {
+            'group-1': {
+              abbreviation: 'Group 1',
+              color: '#ff0000',
+              votes: { '@user-delegate-2': '1' },
+              invalidVoters: {
+                '@user-delegate-1': { state: 'invalid' },
+              },
             },
           },
         },
-      },
-    });
+      }),
+    );
   });
 
   it('should ignore ignored users', async () => {
-    jest
-      .mocked(getEnvironment)
-      .mockImplementation((name, defaultValue) =>
-        name === 'REACT_APP_IGNORE_USER_IDS'
-          ? '@user-with-power-2'
-          : defaultValue,
-      );
+    vi.mocked(getEnvironment).mockImplementation((name, defaultValue) =>
+      name === 'REACT_APP_IGNORE_USER_IDS'
+        ? '@user-with-power-2'
+        : defaultValue,
+    );
 
     widgetApi.mockSendStateEvent(
       mockPowerLevelsEvent({
@@ -1311,25 +1310,25 @@ describe('selectPollResults', () => {
       }),
     );
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
       { wrapper: Wrapper },
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
-
-    expect(result.current).toEqual({
-      isLoading: false,
-      data: {
-        poll,
-        votingRights: ['@user-with-power-1'],
-        results: {
-          votes: {
-            '@user-with-power-1': PollInvalidAnswer,
+    await waitFor(() =>
+      expect(result.current).toEqual({
+        isLoading: false,
+        data: {
+          poll,
+          votingRights: ['@user-with-power-1'],
+          results: {
+            votes: {
+              '@user-with-power-1': PollInvalidAnswer,
+            },
           },
         },
-      },
-    });
+      }),
+    );
   });
 
   it('should ignore votes from non-group members', async () => {
@@ -1372,31 +1371,31 @@ describe('selectPollResults', () => {
       }),
     );
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
       { wrapper: Wrapper },
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
-
-    expect(result.current).toEqual({
-      isLoading: false,
-      data: {
-        poll,
-        votingRights: ['@user-delegate'],
-        results: {
-          votes: { '@user-delegate': '1' },
-        },
-        groupedResults: {
-          'group-1': {
-            abbreviation: 'Group 1',
-            color: '#ff0000',
+    await waitFor(() =>
+      expect(result.current).toEqual({
+        isLoading: false,
+        data: {
+          poll,
+          votingRights: ['@user-delegate'],
+          results: {
             votes: { '@user-delegate': '1' },
-            invalidVoters: {},
+          },
+          groupedResults: {
+            'group-1': {
+              abbreviation: 'Group 1',
+              color: '#ff0000',
+              votes: { '@user-delegate': '1' },
+              invalidVoters: {},
+            },
           },
         },
-      },
-    });
+      }),
+    );
   });
 
   it('should ignore votes from invalid members in a group', async () => {
@@ -1432,33 +1431,33 @@ describe('selectPollResults', () => {
       }),
     );
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
       { wrapper: Wrapper },
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
-
-    expect(result.current).toEqual({
-      isLoading: false,
-      data: {
-        poll,
-        votingRights: [],
-        results: {
-          votes: {},
-        },
-        groupedResults: {
-          'group-1': {
-            abbreviation: 'Group 1',
-            color: '#ff0000',
+    await waitFor(() =>
+      expect(result.current).toEqual({
+        isLoading: false,
+        data: {
+          poll,
+          votingRights: [],
+          results: {
             votes: {},
-            invalidVoters: {
-              '@user-delegate': { state: 'invalid' },
+          },
+          groupedResults: {
+            'group-1': {
+              abbreviation: 'Group 1',
+              color: '#ff0000',
+              votes: {},
+              invalidVoters: {
+                '@user-delegate': { state: 'invalid' },
+              },
             },
           },
         },
-      },
-    });
+      }),
+    );
   });
 
   it('should ignore votes from represented members in a group', async () => {
@@ -1504,36 +1503,36 @@ describe('selectPollResults', () => {
       }),
     );
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
       { wrapper: Wrapper },
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
-
-    expect(result.current).toEqual({
-      isLoading: false,
-      data: {
-        poll,
-        votingRights: ['@user-backup'],
-        results: {
-          votes: { '@user-backup': '1' },
-        },
-        groupedResults: {
-          'group-1': {
-            abbreviation: 'Group 1',
-            color: '#ff0000',
+    await waitFor(() =>
+      expect(result.current).toEqual({
+        isLoading: false,
+        data: {
+          poll,
+          votingRights: ['@user-backup'],
+          results: {
             votes: { '@user-backup': '1' },
-            invalidVoters: {
-              '@user-delegate': {
-                state: 'represented',
-                representedBy: '@user-backup',
+          },
+          groupedResults: {
+            'group-1': {
+              abbreviation: 'Group 1',
+              color: '#ff0000',
+              votes: { '@user-backup': '1' },
+              invalidVoters: {
+                '@user-delegate': {
+                  state: 'represented',
+                  representedBy: '@user-backup',
+                },
               },
             },
           },
         },
-      },
-    });
+      }),
+    );
   });
 
   it('should only consider the first vote of a user without groups', async () => {
@@ -1568,23 +1567,23 @@ describe('selectPollResults', () => {
       }),
     );
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
       { wrapper: Wrapper },
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
-
-    expect(result.current).toEqual({
-      isLoading: false,
-      data: {
-        poll,
-        votingRights: ['@user'],
-        results: {
-          votes: { '@user': '1' },
+    await waitFor(() =>
+      expect(result.current).toEqual({
+        isLoading: false,
+        data: {
+          poll,
+          votingRights: ['@user'],
+          results: {
+            votes: { '@user': '1' },
+          },
         },
-      },
-    });
+      }),
+    );
   });
 
   it('should only consider the first vote of a user with groups', async () => {
@@ -1631,31 +1630,31 @@ describe('selectPollResults', () => {
       }),
     );
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
       { wrapper: Wrapper },
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
-
-    expect(result.current).toEqual({
-      isLoading: false,
-      data: {
-        poll,
-        votingRights: ['@user'],
-        results: {
-          votes: { '@user': '1' },
-        },
-        groupedResults: {
-          'group-1': {
-            abbreviation: 'Group 1',
-            color: '#ff0000',
+    await waitFor(() =>
+      expect(result.current).toEqual({
+        isLoading: false,
+        data: {
+          poll,
+          votingRights: ['@user'],
+          results: {
             votes: { '@user': '1' },
-            invalidVoters: {},
+          },
+          groupedResults: {
+            'group-1': {
+              abbreviation: 'Group 1',
+              color: '#ff0000',
+              votes: { '@user': '1' },
+              invalidVoters: {},
+            },
           },
         },
-      },
-    });
+      }),
+    );
   });
 
   it('should only consider votes that were sent during the poll duration without groups', async () => {
@@ -1699,23 +1698,23 @@ describe('selectPollResults', () => {
       }),
     );
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
       { wrapper: Wrapper },
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
-
-    expect(result.current).toEqual({
-      isLoading: false,
-      data: {
-        poll,
-        votingRights: ['@user-2'],
-        results: {
-          votes: { '@user-2': '1' },
+    await waitFor(() =>
+      expect(result.current).toEqual({
+        isLoading: false,
+        data: {
+          poll,
+          votingRights: ['@user-2'],
+          results: {
+            votes: { '@user-2': '1' },
+          },
         },
-      },
-    });
+      }),
+    );
   });
 
   it('should only consider votes that were sent during the poll duration with groups', async () => {
@@ -1777,38 +1776,38 @@ describe('selectPollResults', () => {
       }),
     );
 
-    const { result, waitForValueToChange } = renderHook(
+    const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
       { wrapper: Wrapper },
     );
 
-    await waitForValueToChange(() => result.current.isLoading);
-
-    expect(result.current).toEqual({
-      isLoading: false,
-      data: {
-        poll,
-        votingRights: ['@user-1', '@user-2', '@user-3'],
-        results: {
-          votes: {
-            '@user-1': PollInvalidAnswer,
-            '@user-2': '1',
-            '@user-3': PollInvalidAnswer,
-          },
-        },
-        groupedResults: {
-          'group-1': {
-            abbreviation: 'Group 1',
-            color: '#ff0000',
+    await waitFor(() =>
+      expect(result.current).toEqual({
+        isLoading: false,
+        data: {
+          poll,
+          votingRights: ['@user-1', '@user-2', '@user-3'],
+          results: {
             votes: {
               '@user-1': PollInvalidAnswer,
               '@user-2': '1',
               '@user-3': PollInvalidAnswer,
             },
-            invalidVoters: {},
+          },
+          groupedResults: {
+            'group-1': {
+              abbreviation: 'Group 1',
+              color: '#ff0000',
+              votes: {
+                '@user-1': PollInvalidAnswer,
+                '@user-2': '1',
+                '@user-3': PollInvalidAnswer,
+              },
+              invalidVoters: {},
+            },
           },
         },
-      },
-    });
+      }),
+    );
   });
 });

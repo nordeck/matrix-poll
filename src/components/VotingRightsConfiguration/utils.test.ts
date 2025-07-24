@@ -15,6 +15,7 @@
  */
 
 import { StateEvent } from '@matrix-widget-toolkit/api';
+import { beforeEach, describe, expect, it } from 'vitest';
 import { mockGroup, mockPoll, mockPowerLevelsEvent } from '../../lib/testUtils';
 import { GroupContent } from '../../model';
 import { PollGroup } from '../../model/IPoll';

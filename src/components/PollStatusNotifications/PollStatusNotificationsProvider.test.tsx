@@ -14,17 +14,17 @@
  * limitations under the License.
  */
 
-import { render, screen, within } from '@testing-library/react';
-import { renderHook } from '@testing-library/react-hooks';
+import { render, renderHook, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { axe } from 'jest-axe';
+import axe from 'axe-core';
 import { ComponentType, PropsWithChildren } from 'react';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   PollStatusNotificationsProvider,
   useNotifications,
 } from './PollStatusNotificationsProvider';
 
-afterEach(() => jest.useRealTimers());
+afterEach(() => vi.useRealTimers());
 
 describe('<PollStatusNotificationsProvider/>', () => {
   let Wrapper: ComponentType<PropsWithChildren<{}>>;
@@ -36,16 +36,10 @@ describe('<PollStatusNotificationsProvider/>', () => {
 
       return (
         <>
-          <button
-            // eslint-disable-next-line react/jsx-no-bind
-            onClick={() => showNotification('info', 'First Message')}
-          >
+          <button onClick={() => showNotification('info', 'First Message')}>
             First
           </button>
-          <button
-            // eslint-disable-next-line react/jsx-no-bind
-            onClick={() => showNotification('info', 'Second Message')}
-          >
+          <button onClick={() => showNotification('info', 'Second Message')}>
             Second
           </button>
         </>
@@ -67,7 +61,7 @@ describe('<PollStatusNotificationsProvider/>', () => {
   it('should have no accessibility violations', async () => {
     const { container } = render(<Component />, { wrapper: Wrapper });
 
-    expect(await axe(container)).toHaveNoViolations();
+    expect(await axe.run(container)).toHaveNoViolations();
   });
 
   it('should have no accessibility violations, when displaying notifications', async () => {
@@ -76,19 +70,19 @@ describe('<PollStatusNotificationsProvider/>', () => {
     const log = screen.getByRole('log');
 
     // use fake timers to display the message
-    jest.useFakeTimers();
+    vi.useFakeTimers();
 
     await userEvent.click(screen.getByRole('button', { name: 'First' }), {
-      advanceTimers: jest.advanceTimersByTime,
+      advanceTimers: vi.advanceTimersByTime,
     });
-    jest.advanceTimersByTime(1000);
+    vi.advanceTimersByTime(1000);
 
     // use real timers to make axe work
-    jest.useRealTimers();
+    vi.useRealTimers();
 
     expect(within(log).getByText('First Message')).toBeInTheDocument();
 
-    expect(await axe(container)).toHaveNoViolations();
+    expect(await axe.run(container)).toHaveNoViolations();
   });
 
   it('should inject a new notification container', () => {
@@ -101,48 +95,48 @@ describe('<PollStatusNotificationsProvider/>', () => {
   });
 
   it('should add and remove a new notification with a delay', async () => {
-    jest.useFakeTimers();
+    vi.useFakeTimers();
 
     render(<Component />, { wrapper: Wrapper });
 
     const log = screen.getByRole('log');
 
     await userEvent.click(screen.getByRole('button', { name: 'First' }), {
-      advanceTimers: jest.advanceTimersByTime,
+      advanceTimers: vi.advanceTimersByTime,
     });
 
     expect(log).toBeEmptyDOMElement();
 
-    jest.advanceTimersByTime(1000);
+    vi.advanceTimersByTime(1000);
 
     const message = within(log).getByText('First Message');
 
-    jest.advanceTimersByTime(9000);
+    vi.advanceTimersByTime(9000);
 
     expect(message).not.toBeInTheDocument();
     expect(log).toBeEmptyDOMElement();
   });
 
   it('should show multiple notifications', async () => {
-    jest.useFakeTimers();
+    vi.useFakeTimers();
 
     render(<Component />, { wrapper: Wrapper });
 
     const log = screen.getByRole('log');
 
     await userEvent.click(screen.getByRole('button', { name: 'First' }), {
-      advanceTimers: jest.advanceTimersByTime,
+      advanceTimers: vi.advanceTimersByTime,
     });
     await userEvent.click(screen.getByRole('button', { name: 'Second' }), {
-      advanceTimers: jest.advanceTimersByTime,
+      advanceTimers: vi.advanceTimersByTime,
     });
 
-    jest.advanceTimersByTime(1000);
+    vi.advanceTimersByTime(1000);
 
     const message1 = within(log).getByText('First Message');
     const message2 = within(log).getByText('Second Message');
 
-    jest.advanceTimersByTime(9000);
+    vi.advanceTimersByTime(9000);
 
     expect(message1).not.toBeInTheDocument();
     expect(message2).not.toBeInTheDocument();
@@ -150,21 +144,21 @@ describe('<PollStatusNotificationsProvider/>', () => {
   });
 
   it('should not duplicate existing notifications', async () => {
-    jest.useFakeTimers();
+    vi.useFakeTimers();
 
     render(<Component />, { wrapper: Wrapper });
 
     const log = screen.getByRole('log');
 
     await userEvent.click(screen.getByRole('button', { name: 'First' }), {
-      advanceTimers: jest.advanceTimersByTime,
+      advanceTimers: vi.advanceTimersByTime,
     });
-    jest.advanceTimersByTime(500);
+    vi.advanceTimersByTime(500);
 
     await userEvent.click(screen.getByRole('button', { name: 'First' }), {
-      advanceTimers: jest.advanceTimersByTime,
+      advanceTimers: vi.advanceTimersByTime,
     });
-    jest.advanceTimersByTime(1000);
+    vi.advanceTimersByTime(1000);
 
     expect(log.textContent).toBe('First Message');
   });

@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import { describe, expect, it } from 'vitest';
 import { mockPoll } from '../../../lib/testUtils';
 import { PollInvalidAnswer, SelectPollResults } from '../../../store';
 import { createPollPdfContentHeader } from './createPollPdfContentHeader';

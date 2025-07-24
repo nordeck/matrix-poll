@@ -14,29 +14,40 @@
  * limitations under the License.
  */
 
-import * as pdfMake from 'pdfmake/build/pdfmake';
-import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+import { TFontDictionary } from 'pdfmake/interfaces';
 import { zapfdingbats } from './zapfdingbats';
 
-initializeFonts(pdfMake);
+type FontConfig = {
+  vfs: Vfs;
+  fonts: TFontDictionary;
+};
 
-function initializeFonts(pdf: typeof pdfMake) {
-  pdf.vfs = {
-    'ZapfDingbats.ttf': zapfdingbats,
+type Vfs = { [file: string]: string };
+
+export function createFontConfig(): FontConfig {
+  const config: FontConfig = {
+    vfs: {
+      'ZapfDingbats.ttf': zapfdingbats,
+    },
+    fonts: {},
   };
 
-  Object.entries(pdfFonts.pdfMake.vfs).forEach(([n, f]) => {
-    pdf.vfs[n] = f;
+  // Ignore types. Works for vite dev, build, preview.
+  const vfs = pdfFonts as unknown as Vfs;
+  Object.entries(vfs).forEach(([n, f]) => {
+    config.vfs[n] = f;
   });
 
-  pdf.fonts = {};
-  pdf.fonts['Roboto'] = {
+  config.fonts['Roboto'] = {
     normal: 'Roboto-Regular.ttf',
     bold: 'Roboto-Medium.ttf',
     italics: 'Roboto-Italic.ttf',
     bolditalics: 'Roboto-MediumItalic.ttf',
   };
-  pdf.fonts['ZapfDingbats'] = {
+  config.fonts['ZapfDingbats'] = {
     normal: 'ZapfDingbats.ttf',
   };
+
+  return config;
 }

@@ -18,14 +18,15 @@ import { WidgetApiMockProvider } from '@matrix-widget-toolkit/react';
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { axe } from 'jest-axe';
+import axe from 'axe-core';
 import { ComponentType, PropsWithChildren, useMemo } from 'react';
 import { Provider } from 'react-redux';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { createStore } from '../../../store';
 import { PollsPdfDialog } from './PollsPdfDialog';
 
 // The pdf library doesn't work in test, so we mock pdf generation completely
-jest.mock('../pdf', () => ({ createPollPdf: jest.fn() }));
+vi.mock('../pdf', () => ({ createPollPdf: vi.fn() }));
 
 let widgetApi: MockedWidgetApi;
 
@@ -34,7 +35,7 @@ afterEach(() => widgetApi.stop());
 beforeEach(() => (widgetApi = mockWidgetApi()));
 
 describe('<PollsPdfDialog>', () => {
-  const onClose = jest.fn();
+  const onClose = vi.fn();
   let Wrapper: ComponentType<PropsWithChildren<{}>>;
 
   beforeEach(() => {
@@ -47,7 +48,7 @@ describe('<PollsPdfDialog>', () => {
       );
     };
 
-    jest.mocked(URL.createObjectURL).mockReturnValue('blob:url');
+    vi.mocked(URL.createObjectURL).mockReturnValue('data:,pdf%20content');
   });
 
   it('should have no accessibility violations', async () => {
@@ -61,7 +62,7 @@ describe('<PollsPdfDialog>', () => {
       within(dialog).findByRole('link', { name: 'Download' }),
     ).resolves.toBeInTheDocument();
 
-    expect(await axe(container)).toHaveNoViolations();
+    expect(await axe.run(container)).toHaveNoViolations();
   });
 
   it('should render without exploding', async () => {

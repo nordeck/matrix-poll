@@ -17,20 +17,21 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import LinesEllipsis from 'react-lines-ellipsis';
+import { afterEach, describe, expect, it, Mock, vi } from 'vitest';
 import { ExpandableText } from './ExpandableText';
 
-jest.mock('react-lines-ellipsis', () => ({
-  __esModule: true,
-  default: jest.fn(),
+vi.mock('react-lines-ellipsis', async (importOriginal) => ({
+  ...(await importOriginal()),
+  default: vi.fn(),
 }));
 
 describe('ExpandableText', () => {
   afterEach(() => {
-    jest.resetAllMocks();
+    vi.resetAllMocks();
   });
 
   it('should render without exploding', () => {
-    (LinesEllipsis as jest.Mock).mockImplementation(({ text }) => text);
+    (LinesEllipsis as Mock).mockImplementation(({ text }) => text);
 
     render(<ExpandableText text="A short text" />);
 
@@ -38,7 +39,7 @@ describe('ExpandableText', () => {
   });
 
   it('should show ellipsis, collapse, and expand', async () => {
-    (LinesEllipsis as jest.Mock).mockImplementation(({ ellipsis }) => ellipsis);
+    (LinesEllipsis as Mock).mockImplementation(({ ellipsis }) => ellipsis);
 
     render(<ExpandableText text="A short text" />);
 

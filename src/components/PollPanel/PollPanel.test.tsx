@@ -20,6 +20,7 @@ import {
 } from '@matrix-widget-toolkit/react';
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
 import {
+  act,
   fireEvent,
   render,
   screen,
@@ -27,10 +28,10 @@ import {
   within,
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { axe } from 'jest-axe';
+import axe from 'axe-core';
 import { ComponentType, PropsWithChildren, useMemo } from 'react';
-import { act } from 'react-dom/test-utils';
 import { Provider } from 'react-redux';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   mockGroup,
   mockPoll,
@@ -47,7 +48,7 @@ afterEach(() => widgetApi.stop());
 
 beforeEach(() => (widgetApi = mockWidgetApi()));
 
-afterEach(() => jest.useRealTimers());
+afterEach(() => vi.useRealTimers());
 
 describe('<PollPanel>', () => {
   let Wrapper: ComponentType<PropsWithChildren<{}>>;
@@ -150,7 +151,7 @@ describe('<PollPanel>', () => {
       wrapper: Wrapper,
     });
 
-    expect(await axe(container)).toHaveNoViolations();
+    expect(await axe.run(container)).toHaveNoViolations();
   });
 
   it('should reorder upcoming polls', async () => {
@@ -230,8 +231,8 @@ describe('<PollPanel>', () => {
 
   it('should rerender when the first running poll finishes', async () => {
     widgetApi.clearStateEvents();
-    jest.useFakeTimers();
-    jest.setSystemTime(new Date('2020-01-01T09:59:30Z'));
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date('2020-01-01T09:59:30Z'));
 
     widgetApi.mockSendStateEvent(
       mockPoll({
@@ -258,7 +259,7 @@ describe('<PollPanel>', () => {
     ).not.toBeInTheDocument();
 
     act(() => {
-      jest.advanceTimersByTime(30000);
+      vi.advanceTimersByTime(30000);
     });
 
     expect(activePoll).not.toBeInTheDocument();
@@ -278,8 +279,8 @@ describe('<PollPanel>', () => {
 
   it('should rerender when a running poll finishes', async () => {
     widgetApi.clearStateEvents();
-    jest.useFakeTimers();
-    jest.setSystemTime(new Date('2020-01-01T09:59:30Z'));
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date('2020-01-01T09:59:30Z'));
 
     widgetApi.mockSendStateEvent(
       mockPoll({
@@ -318,7 +319,7 @@ describe('<PollPanel>', () => {
     });
 
     act(() => {
-      jest.advanceTimersByTime(30000);
+      vi.advanceTimersByTime(30000);
     });
 
     expect(activePoll).not.toBeInTheDocument();
@@ -424,7 +425,6 @@ async function waitForAnnouncement(
   await waitFor(() =>
     expect(
       // We are not able to access an aria-live region via the testing library
-      // eslint-disable-next-line testing-library/no-node-access
       element.querySelector('[aria-live=assertive]'),
     ).toHaveTextContent(message),
   );

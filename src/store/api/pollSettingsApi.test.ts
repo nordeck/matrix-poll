@@ -16,6 +16,7 @@
 
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
 import { waitFor } from '@testing-library/react';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { mockPollSettings } from '../../lib/testUtils';
 import { createStore } from '../store';
 import { pollSettingsApi } from './pollSettingsApi';
@@ -99,12 +100,7 @@ describe('patchPollSettings', () => {
           }),
         )
         .unwrap(),
-    ).resolves.toEqual({
-      event: expect.objectContaining({
-        content: { pollsOrder: ['poll-0'] },
-        state_key: '!room-id',
-      }),
-    });
+    ).resolves.toEqual({});
 
     expect(widgetApi.sendStateEvent).toBeCalledWith(
       'net.nordeck.poll.settings',
@@ -132,15 +128,7 @@ describe('patchPollSettings', () => {
           }),
         )
         .unwrap(),
-    ).resolves.toEqual({
-      event: expect.objectContaining({
-        content: {
-          pollsOrder: ['poll-0'],
-          pdfButtonDisabledAfter: '2022-09-28T00:00:00Z',
-        },
-        state_key: '!room-id',
-      }),
-    });
+    ).resolves.toEqual({});
 
     expect(widgetApi.sendStateEvent).toBeCalledWith(
       'net.nordeck.poll.settings',

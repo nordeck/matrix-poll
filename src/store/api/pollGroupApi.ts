@@ -27,10 +27,8 @@ import {
 import { ThunkExtraArgument } from '../store';
 import { baseApi } from './baseApi';
 
-const pollGroupEventEntityAdapter = createEntityAdapter<
-  StateEvent<GroupContent>
->({
-  selectId: (event) => event.state_key,
+const pollGroupEventEntityAdapter = createEntityAdapter({
+  selectId: (event: StateEvent<GroupContent>) => event.state_key,
 });
 
 /**
@@ -44,7 +42,10 @@ export const pollGroupApi = baseApi.injectEndpoints({
     /**
      * Return the poll group events from the current room.
      */
-    getPollGroups: builder.query<EntityState<StateEvent<GroupContent>>, void>({
+    getPollGroups: builder.query<
+      EntityState<StateEvent<GroupContent>, string>,
+      void
+    >({
       queryFn: async (_, { extra }) => {
         const { widgetApi } = extra as ThunkExtraArgument;
 
@@ -116,7 +117,7 @@ export const pollGroupApi = baseApi.injectEndpoints({
      * Update the poll group event in the current room.
      */
     updatePollGroup: builder.mutation<
-      { event: StateEvent<GroupContent> },
+      {},
       { groupId: string; content: GroupContent }
     >({
       async queryFn({ groupId, content }, { extra }) {
@@ -141,13 +142,11 @@ export const pollGroupApi = baseApi.injectEndpoints({
             return { data: { event: pollGroupEvent } };
           }
 
-          const event = await widgetApi.sendStateEvent(
-            STATE_EVENT_POLL_GROUP,
-            pollGroup,
-            { stateKey: groupId },
-          );
+          await widgetApi.sendStateEvent(STATE_EVENT_POLL_GROUP, pollGroup, {
+            stateKey: groupId,
+          });
 
-          return { data: { event } };
+          return { data: {} };
         } catch (e) {
           return {
             error: {

@@ -19,6 +19,7 @@ import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
 import { render, screen } from '@testing-library/react';
 import { ComponentType, PropsWithChildren, useMemo } from 'react';
 import { Provider } from 'react-redux';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   mockPoll,
   mockRoomMember,
@@ -31,7 +32,7 @@ import { createPollPdf } from '../pdf';
 import PollsPdfDialogWrapper from './PollsPdfDialogWrapper';
 
 // The pdf library doesn't work in test, so we mock pdf generation completely
-jest.mock('../pdf', () => ({ createPollPdf: jest.fn() }));
+vi.mock('../pdf', () => ({ createPollPdf: vi.fn() }));
 
 let widgetApi: MockedWidgetApi;
 
@@ -40,7 +41,7 @@ afterEach(() => widgetApi.stop());
 beforeEach(() => (widgetApi = mockWidgetApi()));
 
 describe('<PollsPdfDialogWrapper>', () => {
-  const onClose = jest.fn();
+  const onClose = vi.fn();
   let Wrapper: ComponentType<PropsWithChildren<{}>>;
 
   beforeEach(() => {
@@ -107,19 +108,19 @@ describe('<PollsPdfDialogWrapper>', () => {
       );
     };
 
-    jest.mocked(URL.createObjectURL).mockReturnValue('blob:url');
+    vi.mocked(URL.createObjectURL).mockReturnValue('blob:url');
   });
 
   it('should generate pdf', async () => {
-    jest.mocked(createPollPdf).mockResolvedValue(new Blob(['value']));
+    vi.mocked(createPollPdf).mockResolvedValue(new Blob(['value']));
 
     render(<PollsPdfDialogWrapper onClose={onClose} />, { wrapper: Wrapper });
 
     const link = await screen.findByRole('link', { name: 'Download' });
     expect(link).toHaveAttribute('href', 'blob:url');
 
-    expect(jest.mocked(createPollPdf)).toBeCalledTimes(1);
-    expect(jest.mocked(createPollPdf)).toBeCalledWith({
+    expect(vi.mocked(createPollPdf)).toBeCalledTimes(1);
+    expect(vi.mocked(createPollPdf)).toBeCalledWith({
       authorName: '@user-id',
       getUserDisplayName: expect.any(Function),
       pollResults: [
@@ -219,7 +220,7 @@ describe('<PollsPdfDialogWrapper>', () => {
   });
 
   it('should revoke URL on unload', async () => {
-    jest.mocked(createPollPdf).mockResolvedValue(new Blob(['value']));
+    vi.mocked(createPollPdf).mockResolvedValue(new Blob(['value']));
 
     const { unmount } = render(<PollsPdfDialogWrapper onClose={onClose} />, {
       wrapper: Wrapper,
@@ -230,11 +231,11 @@ describe('<PollsPdfDialogWrapper>', () => {
 
     unmount();
 
-    expect(jest.mocked(URL.revokeObjectURL)).toBeCalledWith('blob:url');
+    expect(vi.mocked(URL.revokeObjectURL)).toBeCalledWith('blob:url');
   });
 
   it('should handle error while generating PDF', async () => {
-    jest.mocked(createPollPdf).mockRejectedValue(new Error('Failed'));
+    vi.mocked(createPollPdf).mockRejectedValue(new Error('Failed'));
 
     render(<PollsPdfDialogWrapper onClose={onClose} />, { wrapper: Wrapper });
 
@@ -244,7 +245,7 @@ describe('<PollsPdfDialogWrapper>', () => {
   });
 
   it('should show loading state', () => {
-    jest.mocked(createPollPdf).mockImplementation(
+    vi.mocked(createPollPdf).mockImplementation(
       () =>
         new Promise(() => {
           /* Never resolves */

@@ -15,13 +15,13 @@
  */
 
 import { WidgetApi } from '@matrix-widget-toolkit/api';
-import { Action, configureStore, Middleware } from '@reduxjs/toolkit';
+import { configureStore, Middleware } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { baseApi } from './api';
 
-const loggerMiddleware = () => (next: Function) => (action: Action) => {
+const loggerMiddleware: Middleware = () => (next) => (action: unknown) => {
   if (process.env.NODE_ENV === 'development') {
-    console.log('LOGGER', action.type);
+    console.log('LOGGER', action);
   }
   return next(action);
 };
@@ -49,7 +49,6 @@ export function createStore({
         .concat(loggerMiddleware)
         .concat(baseApi.middleware),
   });
-
   return store;
 }
 

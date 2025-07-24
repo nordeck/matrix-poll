@@ -14,6 +14,7 @@
  * limitations under the License.
  */
 
+import { describe, expect, it } from 'vitest';
 import { isValidVoteEvent } from './IVote';
 
 describe('isValidVoteEvent', () => {
@@ -70,7 +71,7 @@ describe('isValidVoteEvent', () => {
     ).toBe(true);
   });
 
-  it.each<Object>([
+  it.each<object>([
     { pollId: undefined },
     { pollId: null },
     { pollId: 111 },
@@ -86,7 +87,7 @@ describe('isValidVoteEvent', () => {
     { 'm.relates_to': { rel_type: 'm.reference', event_id: undefined } },
     { 'm.relates_to': { rel_type: 'm.reference', event_id: null } },
     { 'm.relates_to': { rel_type: 'm.reference', event_id: '' } },
-  ])('should reject event with patch %j', (patch: Object) => {
+  ])('should reject event with patch %j', (patch: object) => {
     expect(
       isValidVoteEvent({
         content: {

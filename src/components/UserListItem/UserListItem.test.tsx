@@ -19,6 +19,7 @@ import { Button } from '@mui/material';
 import { render, screen } from '@testing-library/react';
 import { ComponentType, PropsWithChildren } from 'react';
 import { Provider } from 'react-redux';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { createStore } from '../../store';
 import { UserListItem } from './UserListItem';
 

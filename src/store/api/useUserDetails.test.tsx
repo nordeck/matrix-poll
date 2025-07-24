@@ -15,9 +15,10 @@
  */
 
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
-import { renderHook } from '@testing-library/react-hooks';
+import { renderHook, waitFor } from '@testing-library/react';
 import { ComponentType, PropsWithChildren } from 'react';
 import { Provider } from 'react-redux';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { mockRoomMember } from '../../lib/testUtils';
 import { createStore } from '../store';
 import { useUserDetails } from './useUserDetails';
@@ -42,7 +43,7 @@ describe('useUserDetails', () => {
   });
 
   it('should generate display name', async () => {
-    const { result, waitFor } = renderHook(useUserDetails, { wrapper });
+    const { result } = renderHook(useUserDetails, { wrapper });
 
     await waitFor(() => {
       expect(result.current.getUserDisplayName('@user-alice')).toBe('Alice');

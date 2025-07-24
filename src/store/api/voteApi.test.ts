@@ -17,6 +17,7 @@
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
 import { waitFor } from '@testing-library/react';
 import { range } from 'lodash';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { mockPollStart, mockVote } from '../../lib/testUtils';
 import { IVote } from '../../model';
 import { createStore } from '../store';

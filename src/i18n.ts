@@ -14,19 +14,33 @@
  * limitations under the License.
  */
 
-import {
-  WidgetApiLanguageDetector,
-  WidgetToolkitI18nBackend,
-} from '@matrix-widget-toolkit/mui';
+import { extractWidgetParameters } from '@matrix-widget-toolkit/api';
+import { WidgetToolkitI18nBackend } from '@matrix-widget-toolkit/mui';
 import i18n from 'i18next';
+import LanguageDetector, {
+  CustomDetector,
+} from 'i18next-browser-languagedetector';
 import ChainedBackend from 'i18next-chained-backend';
 import HttpBackend from 'i18next-http-backend';
 import { initReactI18next } from 'react-i18next';
 import { setLocale } from './lib/locale';
 
+const widgetApiLanguageDetector: CustomDetector = {
+  name: 'widgetApi',
+  lookup: () => {
+    const { clientLanguage } = extractWidgetParameters();
+    return clientLanguage;
+  },
+};
+
+const pollLanguageDetector = new LanguageDetector(undefined, {
+  order: ['widgetApi', 'navigator'],
+});
+pollLanguageDetector.addDetector(widgetApiLanguageDetector);
+
 i18n
   .use(ChainedBackend)
-  .use(WidgetApiLanguageDetector)
+  .use(pollLanguageDetector)
   .use(initReactI18next)
   .init({
     backend: {

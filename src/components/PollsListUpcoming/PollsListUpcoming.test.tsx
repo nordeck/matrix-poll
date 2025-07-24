@@ -18,9 +18,10 @@ import { WidgetApiMockProvider } from '@matrix-widget-toolkit/react';
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
 import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { axe } from 'jest-axe';
+import axe from 'axe-core';
 import { ComponentType, PropsWithChildren, useMemo } from 'react';
 import { Provider } from 'react-redux';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { mockGroup, mockPoll, mockPowerLevelsEvent } from '../../lib/testUtils';
 import { withMarkup } from '../../lib/withMarkup';
 import { createStore } from '../../store';
@@ -103,13 +104,13 @@ describe('<PollsListUpcoming>', () => {
   it('should have no accessibility violations', async () => {
     const { container } = render(<PollsListUpcoming />, { wrapper: Wrapper });
 
-    expect(await axe(container)).toHaveNoViolations();
+    expect(await axe.run(container)).toHaveNoViolations();
   });
 
   it('should have an accessible description that refers to the poll title', async () => {
     render(<PollsListUpcoming />, { wrapper: Wrapper });
 
-    const notStartedPollList = screen.getByRole('list', {
+    const notStartedPollList = await screen.findByRole('list', {
       name: /not started polls/i,
     });
     const notStartedPollListItem = await within(notStartedPollList).findByRole(
@@ -156,7 +157,9 @@ describe('<PollsListUpcoming>', () => {
 
     render(<PollsListUpcoming />, { wrapper: Wrapper });
 
-    const pollList = screen.getByRole('list', { name: /not started polls/i });
+    const pollList = await screen.findByRole('list', {
+      name: /not started polls/i,
+    });
     const pollListItem = await within(pollList).findByRole('listitem', {
       name: 'My Title',
     });
@@ -172,7 +175,9 @@ describe('<PollsListUpcoming>', () => {
   it('should show start poll dialog and confirm start', async () => {
     render(<PollsListUpcoming />, { wrapper: Wrapper });
 
-    const pollList = screen.getByRole('list', { name: /not started polls/i });
+    const pollList = await screen.findByRole('list', {
+      name: /not started polls/i,
+    });
     const pollListItem = await within(pollList).findByRole('listitem', {
       name: 'My Title',
     });
@@ -211,7 +216,9 @@ describe('<PollsListUpcoming>', () => {
   it('should show start poll dialog containing a summary of the poll', async () => {
     render(<PollsListUpcoming />, { wrapper: Wrapper });
 
-    const pollList = screen.getByRole('list', { name: /not started polls/i });
+    const pollList = await screen.findByRole('list', {
+      name: /not started polls/i,
+    });
     const pollListItem = await within(pollList).findByRole('listitem', {
       name: 'My Other Title',
     });
@@ -251,7 +258,9 @@ describe('<PollsListUpcoming>', () => {
   it('should show start poll dialog containing a summary of the poll with voting rights', async () => {
     render(<PollsListUpcoming />, { wrapper: Wrapper });
 
-    const pollList = screen.getByRole('list', { name: /not started polls/i });
+    const pollList = await screen.findByRole('list', {
+      name: /not started polls/i,
+    });
     const pollListItem = await within(pollList).findByRole('listitem', {
       name: 'My Title',
     });
@@ -301,7 +310,9 @@ describe('<PollsListUpcoming>', () => {
 
     render(<PollsListUpcoming />, { wrapper: Wrapper });
 
-    const pollList = screen.getByRole('list', { name: /not started polls/i });
+    const pollList = await screen.findByRole('list', {
+      name: /not started polls/i,
+    });
     const pollListItem = await within(pollList).findByRole('listitem', {
       name: 'My Title',
     });
@@ -335,7 +346,9 @@ describe('<PollsListUpcoming>', () => {
 
     render(<PollsListUpcoming />, { wrapper: Wrapper });
 
-    const pollList = screen.getByRole('list', { name: /not started polls/i });
+    const pollList = await screen.findByRole('list', {
+      name: /not started polls/i,
+    });
     const pollListItem = await within(pollList).findByRole('listitem', {
       name: 'My Title',
     });
@@ -390,7 +403,9 @@ describe('<PollsListUpcoming>', () => {
 
     render(<PollsListUpcoming />, { wrapper: Wrapper });
 
-    const pollList = screen.getByRole('list', { name: /not started polls/i });
+    const pollList = await screen.findByRole('list', {
+      name: /not started polls/i,
+    });
     const pollListItem = await within(pollList).findByRole('listitem', {
       name: 'My Title',
     });
@@ -449,7 +464,9 @@ describe('<PollsListUpcoming>', () => {
 
     render(<PollsListUpcoming />, { wrapper: Wrapper });
 
-    const pollList = screen.getByRole('list', { name: /not started polls/i });
+    const pollList = await screen.findByRole('list', {
+      name: /not started polls/i,
+    });
     const pollListItem = await within(pollList).findByRole('listitem', {
       name: 'My Title',
     });
@@ -472,7 +489,9 @@ describe('<PollsListUpcoming>', () => {
   it('should show start poll dialog and cancel start', async () => {
     render(<PollsListUpcoming />, { wrapper: Wrapper });
 
-    const pollList = screen.getByRole('list', { name: /not started polls/i });
+    const pollList = await screen.findByRole('list', {
+      name: /not started polls/i,
+    });
     const pollListItem = await within(pollList).findByRole('listitem', {
       name: 'My Title',
     });
@@ -504,7 +523,9 @@ describe('<PollsListUpcoming>', () => {
 
     render(<PollsListUpcoming />, { wrapper: Wrapper });
 
-    const pollList = screen.getByRole('list', { name: /not started polls/i });
+    const pollList = await screen.findByRole('list', {
+      name: /not started polls/i,
+    });
     const pollListItem = await within(pollList).findByRole('listitem', {
       name: 'My Title',
     });
@@ -542,7 +563,9 @@ describe('<PollsListUpcoming>', () => {
   it('should not update the poll if the user aborts the action', async () => {
     render(<PollsListUpcoming />, { wrapper: Wrapper });
 
-    const pollList = screen.getByRole('list', { name: /not started polls/i });
+    const pollList = await screen.findByRole('list', {
+      name: /not started polls/i,
+    });
     const pollListItem = await within(pollList).findByRole('listitem', {
       name: 'My Title',
     });
@@ -570,7 +593,9 @@ describe('<PollsListUpcoming>', () => {
   it('should show delete poll dialog and confirm deletion', async () => {
     render(<PollsListUpcoming />, { wrapper: Wrapper });
 
-    const pollList = screen.getByRole('list', { name: /not started polls/i });
+    const pollList = await screen.findByRole('list', {
+      name: /not started polls/i,
+    });
     const pollListItem = await within(pollList).findByRole('listitem', {
       name: 'My Title',
     });
@@ -616,7 +641,9 @@ describe('<PollsListUpcoming>', () => {
   it('should show delete poll dialog and cancel deletion', async () => {
     render(<PollsListUpcoming />, { wrapper: Wrapper });
 
-    const pollList = screen.getByRole('list', { name: /not started polls/i });
+    const pollList = await screen.findByRole('list', {
+      name: /not started polls/i,
+    });
     const pollListItem = await within(pollList).findByRole('listitem', {
       name: 'My Title',
     });

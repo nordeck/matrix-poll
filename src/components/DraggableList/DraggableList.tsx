@@ -27,11 +27,11 @@ import {
   DragDropContext,
   DragStart,
   DragUpdate,
-  Droppable,
   DropResult,
   ResponderProvided,
 } from 'react-beautiful-dnd';
 import { useTranslation } from 'react-i18next';
+import { StrictModeDroppable } from './StrictModeDroppable';
 
 export function sortItems<T>(
   items: T[],
@@ -171,7 +171,7 @@ export function DraggableList<T>({
       onDragStart={handleDragStart}
       onDragUpdate={handleDragUpdate}
     >
-      <Droppable droppableId="list" isDropDisabled={disabled}>
+      <StrictModeDroppable droppableId="list" isDropDisabled={disabled}>
         {(provided) => (
           <Box
             {...provided.droppableProps}
@@ -187,7 +187,7 @@ export function DraggableList<T>({
             {provided.placeholder}
           </Box>
         )}
-      </Droppable>
+      </StrictModeDroppable>
     </DragDropContext>
   );
 }

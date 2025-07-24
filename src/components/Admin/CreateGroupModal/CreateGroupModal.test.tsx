@@ -18,10 +18,11 @@ import { WidgetApiMockProvider } from '@matrix-widget-toolkit/react';
 import { MockedWidgetApi, mockWidgetApi } from '@matrix-widget-toolkit/testing';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { axe } from 'jest-axe';
+import axe from 'axe-core';
 import { ComponentType, PropsWithChildren, useMemo } from 'react';
 import { Provider } from 'react-redux';
 import { Subject } from 'rxjs';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { mockRoomMember } from '../../../lib/testUtils';
 import { createStore } from '../../../store';
 import { CreateGroupModal } from './CreateGroupModal';
@@ -58,7 +59,7 @@ describe('<CreateGroupModal>', () => {
   it('should have no accessibility violations', async () => {
     const { container } = render(<CreateGroupModal />, { wrapper: Wrapper });
 
-    expect(await axe(container)).toHaveNoViolations();
+    expect(await axe.run(container)).toHaveNoViolations();
   });
 
   it('should create a group', async () => {
