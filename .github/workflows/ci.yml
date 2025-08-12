@@ -15,7 +15,7 @@ jobs:
     outputs:
       docker-tag: ${{ steps.meta.outputs.version }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           # required for changesets
           fetch-depth: '0'
@@ -134,7 +134,7 @@ jobs:
     needs: build
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0 # need main branch to diff against
       - name: Set up Helm
