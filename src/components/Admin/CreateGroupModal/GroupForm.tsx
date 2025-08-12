@@ -35,6 +35,7 @@ import {
   useGetPowerLevelsQuery,
   useGetRoomMembersQuery,
 } from '../../../store';
+import { useGetCreateEventQuery } from '../../../store/api/powerLevelsApi';
 import { ParticipantsList } from '../ParticipantsList';
 import { AssignParticipantButton } from './AssignParticipantButton';
 
@@ -62,6 +63,7 @@ export function GroupForm({
   const { data: pollGroups } = useGetPollGroupsQuery();
   const { data: roomMembers } = useGetRoomMembersQuery();
   const { data: powerLevels } = useGetPowerLevelsQuery();
+  const { data: createEvent } = useGetCreateEventQuery();
 
   const availableRoomMembers = useMemo(() => {
     const allRoomMembers = roomMembers
@@ -70,6 +72,7 @@ export function GroupForm({
     const roomMembersWithVotingPower = allRoomMembers.filter((m) =>
       hasRoomEventPower(
         powerLevels?.event?.content,
+        createEvent?.event,
         m.state_key,
         ROOM_EVENT_VOTE,
       ),
@@ -99,6 +102,7 @@ export function GroupForm({
     powerLevels?.event?.content,
     representativeParticipants,
     roomMembers,
+    createEvent?.event,
   ]);
 
   useEffect(() => {

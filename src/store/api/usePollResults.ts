@@ -20,6 +20,7 @@ import {
   RoomEvent,
   RoomMemberStateEventContent,
   StateEvent,
+  StateEventCreateContent,
 } from '@matrix-widget-toolkit/api';
 import { EntityState } from '@reduxjs/toolkit';
 import { keyBy, mapValues, pickBy } from 'lodash';
@@ -34,7 +35,10 @@ import {
 } from '../../model';
 import { getIgnoredUsers } from './config';
 import { selectPollById, useGetPollsQuery } from './pollApi';
-import { useGetPowerLevelsQuery } from './powerLevelsApi';
+import {
+  useGetCreateEventQuery,
+  useGetPowerLevelsQuery,
+} from './powerLevelsApi';
 import { selectRoomMembers, useGetRoomMembersQuery } from './roomMemberApi';
 import { useGetVotes } from './useGetVotes';
 
@@ -121,13 +125,19 @@ export function usePollResults(
     isLoading: isPowerLevelsLoading,
     isError: isPowerLevelsError,
   } = useGetPowerLevelsQuery();
+  const {
+    data: createEvent,
+    isLoading: isCreateEventLoading,
+    isError: isCreateEventError,
+  } = useGetCreateEventQuery();
 
   return useMemo(() => {
     if (
       isPollEventsError ||
       (!opts?.skipLoadingVotes && isVoteEventsError) ||
       isRoomMembersStateError ||
-      isPowerLevelsError
+      isPowerLevelsError ||
+      isCreateEventError
     ) {
       return { isLoading: false, isError: true };
     }
@@ -136,7 +146,8 @@ export function usePollResults(
       isPollEventsLoading ||
       (!opts?.skipLoadingVotes && isVoteEventsLoading) ||
       isRoomMembersStateLoading ||
-      isPowerLevelsLoading
+      isPowerLevelsLoading ||
+      isCreateEventLoading
     ) {
       return {
         isLoading: true,
@@ -161,6 +172,7 @@ export function usePollResults(
         opts?.skipLoadingVotes ? [] : (voteEvents ?? []),
         roomMembersState,
         powerLevels?.event,
+        createEvent?.event,
         {
           // provide individual values because opts can't be memoed directly
           includeInvalidVotes: opts.includeInvalidVotes,
@@ -177,6 +189,8 @@ export function usePollResults(
     isRoomMembersStateLoading,
     isVoteEventsError,
     isVoteEventsLoading,
+    isCreateEventError,
+    isCreateEventLoading,
     opts.includeInvalidVotes,
     opts.skipLoadingVotes,
     pollEvents,
@@ -184,6 +198,7 @@ export function usePollResults(
     powerLevels?.event,
     roomMembersState,
     voteEvents,
+    createEvent?.event,
   ]);
 }
 
@@ -194,6 +209,7 @@ export function selectPollResults(
     | EntityState<StateEvent<RoomMemberStateEventContent>, string>
     | undefined,
   powerLevels: StateEvent<PowerLevelsStateEvent> | undefined,
+  createEvent: StateEvent<StateEventCreateContent> | undefined,
   opts: MakeSelectPollResultsOpts = {},
 ): SelectPollResults | undefined {
   const { includeInvalidVotes = false } = opts;
@@ -216,6 +232,7 @@ export function selectPollResults(
                   m.content.membership === 'invite') &&
                 hasRoomEventPower(
                   powerLevels?.content,
+                  createEvent,
                   m.state_key,
                   ROOM_EVENT_VOTE,
                 ),

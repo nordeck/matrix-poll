@@ -68,6 +68,9 @@ export function PollsPdfDialogWrapper({ onClose }: { onClose: () => void }) {
     const { event: powerLevelsEvent } = await dispatch(
       powerLevelsApi.endpoints.getPowerLevels.initiate(),
     ).unwrap();
+    const { event: createEvent } = await dispatch(
+      powerLevelsApi.endpoints.getCreateEvent.initiate(),
+    ).unwrap();
 
     const pollsResult = await dispatch(
       pollApi.endpoints.getPolls.initiate(),
@@ -89,6 +92,7 @@ export function PollsPdfDialogWrapper({ onClose }: { onClose: () => void }) {
         vote,
         roomMembersResult,
         powerLevelsEvent,
+        createEvent,
         { includeInvalidVotes: true },
       );
 

@@ -25,7 +25,10 @@ import {
   STATE_EVENT_POLL_GROUP,
   STATE_EVENT_POLL_SETTINGS,
 } from '../../model';
-import { useGetPowerLevelsQuery } from './powerLevelsApi';
+import {
+  useGetCreateEventQuery,
+  useGetPowerLevelsQuery,
+} from './powerLevelsApi';
 
 export type PowerLevels = {
   canCreatePoll: boolean | undefined;
@@ -37,7 +40,11 @@ export type PowerLevels = {
 export function usePowerLevels({
   userId,
 }: { userId?: string } = {}): PowerLevels {
-  const { data: powerLevels, isLoading } = useGetPowerLevelsQuery();
+  const { data: powerLevels, isLoading: isPowerLevelsLoading } =
+    useGetPowerLevelsQuery();
+  const { data: createEvent, isLoading: isCreateEventLoading } =
+    useGetCreateEventQuery();
+  const isLoading = isPowerLevelsLoading || isCreateEventLoading;
   const widgetApi = useWidgetApi();
   userId ??= widgetApi.widgetParameters.userId;
 
@@ -49,21 +56,25 @@ export function usePowerLevels({
   if (!isLoading && powerLevels) {
     canCreatePoll = hasStateEventPower(
       powerLevels?.event?.content,
+      createEvent?.event,
       userId,
       STATE_EVENT_POLL,
     );
     canCreatePollSettings = hasStateEventPower(
       powerLevels?.event?.content,
+      createEvent?.event,
       userId,
       STATE_EVENT_POLL_SETTINGS,
     );
     canCreateGroups = hasStateEventPower(
       powerLevels?.event?.content,
+      createEvent?.event,
       userId,
       STATE_EVENT_POLL_GROUP,
     );
     canCreateVote = hasRoomEventPower(
       powerLevels?.event?.content,
+      createEvent?.event,
       userId,
       ROOM_EVENT_VOTE,
     );

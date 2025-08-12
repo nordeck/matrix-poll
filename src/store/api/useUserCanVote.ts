@@ -18,7 +18,10 @@ import { hasRoomEventPower } from '@matrix-widget-toolkit/api';
 import { AsyncState } from '../../lib/utils';
 import { ROOM_EVENT_VOTE } from '../../model';
 import { selectPollById, useGetPollsQuery } from './pollApi';
-import { useGetPowerLevelsQuery } from './powerLevelsApi';
+import {
+  useGetCreateEventQuery,
+  useGetPowerLevelsQuery,
+} from './powerLevelsApi';
 
 /**
  * Returns if the user is permitted to vote the given poll.
@@ -37,17 +40,22 @@ export function useUserCanVote(
     isLoading: isPowerLevelsLoading,
     isError: isPowerLevelsError,
   } = useGetPowerLevelsQuery();
+  const {
+    data: createEvent,
+    isLoading: isCreateEventLoading,
+    isError: isCreateEventError,
+  } = useGetCreateEventQuery();
   const pollEvent = pollsState ? selectPollById(pollsState, pollId) : undefined;
 
   if (!userId) {
     return { isLoading: false, data: false };
   }
 
-  if (isPollsError || isPowerLevelsError) {
+  if (isPollsError || isPowerLevelsError || isCreateEventError) {
     return { isLoading: false, isError: true };
   }
 
-  if (isPollsLoading || isPowerLevelsLoading) {
+  if (isPollsLoading || isPowerLevelsLoading || isCreateEventLoading) {
     return { isLoading: true };
   }
 
@@ -58,6 +66,7 @@ export function useUserCanVote(
 
   const hasPower = hasRoomEventPower(
     powerLevels?.event?.content,
+    createEvent?.event,
     userId,
     ROOM_EVENT_VOTE,
   );
