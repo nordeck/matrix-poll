@@ -48,7 +48,7 @@ export function mockRoomMember({
 } = {}): StateEvent<RoomMemberStateEventContent> {
   return {
     type: 'm.room.member',
-    sender: state_key,
+    sender: '@user-id:example.com',
     content: {
       membership: 'join',
       displayname: 'Alice',

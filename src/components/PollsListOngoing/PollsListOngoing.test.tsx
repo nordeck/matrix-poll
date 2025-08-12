@@ -28,6 +28,7 @@ import {
   mockPollStart,
   mockPowerLevelsEvent,
   mockRoomMember,
+  mockRoomVersion11CreateEvent,
   mockVote,
 } from '../../lib/testUtils';
 import { PollType, ResultType } from '../../model';
@@ -38,12 +39,15 @@ let widgetApi: MockedWidgetApi;
 
 afterEach(() => widgetApi.stop());
 
-beforeEach(() => (widgetApi = mockWidgetApi({ userId: '@user-charlie' })));
+beforeEach(
+  () => (widgetApi = mockWidgetApi({ userId: '@user-charlie:example.com' })),
+);
 
 describe('<PollsListOngoing>', () => {
   let Wrapper: ComponentType<PropsWithChildren<{}>>;
 
   beforeEach(() => {
+    widgetApi.mockSendStateEvent(mockRoomVersion11CreateEvent());
     widgetApi.mockSendStateEvent(mockPowerLevelsEvent());
 
     widgetApi.mockSendStateEvent(mockRoomMember());
@@ -664,7 +668,7 @@ describe('<PollsListOngoing>', () => {
     widgetApi.mockSendRoomEvent(
       mockVote({
         origin_server_ts: new Date().getTime(),
-        sender: '@user-charlie',
+        sender: '@user-charlie:example.com',
         content: { answerId: '1', pollId: 'poll-open-invisible' },
       }),
     );

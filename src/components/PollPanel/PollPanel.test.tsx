@@ -37,6 +37,7 @@ import {
   mockPoll,
   mockPollSettings,
   mockPowerLevelsEvent,
+  mockRoomVersion11CreateEvent,
 } from '../../lib/testUtils';
 import { createStore } from '../../store';
 import { PollModalResult } from '../CreatePollModal';
@@ -54,6 +55,7 @@ describe('<PollPanel>', () => {
   let Wrapper: ComponentType<PropsWithChildren<{}>>;
 
   beforeEach(() => {
+    widgetApi.mockSendStateEvent(mockRoomVersion11CreateEvent());
     widgetApi.mockSendStateEvent(
       mockGroup({
         state_key: 'red-party',
@@ -156,6 +158,7 @@ describe('<PollPanel>', () => {
 
   it('should reorder upcoming polls', async () => {
     widgetApi.clearStateEvents();
+    widgetApi.mockSendStateEvent(mockRoomVersion11CreateEvent());
     widgetApi.mockSendStateEvent(mockPoll());
     widgetApi.mockSendStateEvent(
       mockPoll({ state_key: 'poll-1', content: { title: 'Another Title' } }),
@@ -231,6 +234,7 @@ describe('<PollPanel>', () => {
 
   it('should rerender when the first running poll finishes', async () => {
     widgetApi.clearStateEvents();
+    widgetApi.mockSendStateEvent(mockRoomVersion11CreateEvent());
     vi.useFakeTimers();
     vi.setSystemTime(new Date('2020-01-01T09:59:30Z'));
 

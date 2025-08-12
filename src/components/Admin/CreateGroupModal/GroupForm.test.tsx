@@ -167,7 +167,7 @@ describe('<GroupForm/>', () => {
         state_key: 'group-1',
         content: {
           members: {
-            '@user-bob': { memberRole: 'representative' },
+            '@user-bob:example.com': { memberRole: 'representative' },
           },
         },
       }),

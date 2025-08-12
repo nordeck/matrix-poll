@@ -160,7 +160,7 @@ describe('<PollsPdfDocumentationSettings>', () => {
     expect(widgetApi.sendStateEvent).toBeCalledWith(
       'net.nordeck.poll.settings',
       { pdfButtonDisabledAfter: '2020-01-01T10:00:00.000Z' },
-      { stateKey: '!room-id' },
+      { stateKey: '!room-id:example.com' },
     );
   });
 
@@ -197,7 +197,7 @@ describe('<PollsPdfDocumentationSettings>', () => {
     expect(widgetApi.sendStateEvent).toBeCalledWith(
       'net.nordeck.poll.settings',
       { pdfButtonDisabledAfter: '2020-01-22T10:00:00.000Z' },
-      { stateKey: '!room-id' },
+      { stateKey: '!room-id:example.com' },
     );
   });
 

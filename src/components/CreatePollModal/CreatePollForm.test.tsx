@@ -651,7 +651,7 @@ describe('<CreatePollForm>', () => {
               votingRights: {
                 '@user-alice:example.com': {
                   state: 'represented',
-                  representedBy: '@user-eric',
+                  representedBy: '@user-eric:example.com',
                 },
                 '@user-bob:example.com': {
                   state: 'active',
