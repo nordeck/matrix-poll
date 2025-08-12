@@ -75,28 +75,28 @@ describe('useGetVotes', () => {
     const votes = [
       widgetApi.mockSendRoomEvent(
         mockVote({
-          sender: 'user-alice',
+          sender: '@user-alice:example.com',
           content: { pollId: 'poll-0', answerId: '1' },
           origin_server_ts: new Date('2020-01-01T00:00:00Z').getTime(),
         }),
       ),
       widgetApi.mockSendRoomEvent(
         mockVote({
-          sender: 'user-bob',
+          sender: '@user-bob:example.com',
           content: { pollId: 'poll-0', answerId: '2' },
           origin_server_ts: new Date('2020-01-01T00:00:00Z').getTime(),
         }),
       ),
       widgetApi.mockSendRoomEvent(
         mockVote({
-          sender: 'user-charlie',
+          sender: '@user-charlie:example.com',
           content: { pollId: 'poll-0', answerId: '1' },
           origin_server_ts: new Date('2020-01-01T00:00:00Z').getTime(),
         }),
       ),
       widgetApi.mockSendRoomEvent(
         mockVote({
-          sender: 'user-eric',
+          sender: '@user-eric:example.com',
           content: { pollId: 'poll-other', answerId: '1' },
           origin_server_ts: new Date('2020-01-01T00:00:00Z').getTime(),
         }),
@@ -128,21 +128,21 @@ describe('useGetVotes', () => {
     const votes = [
       widgetApi.mockSendRoomEvent(
         mockVote({
-          sender: 'user-alice',
+          sender: '@user-alice:example.com',
           content: { pollId: 'poll-0', answerId: '1' },
           origin_server_ts: new Date('2020-01-01T00:00:01Z').getTime(),
         }),
       ),
       widgetApi.mockSendRoomEvent(
         mockVote({
-          sender: 'user-bob',
+          sender: '@user-bob:example.com',
           content: { pollId: 'poll-0', answerId: '1' },
           origin_server_ts: new Date('2020-01-01T00:00:30Z').getTime(),
         }),
       ),
       widgetApi.mockSendRoomEvent(
         mockVote({
-          sender: 'user-charlie',
+          sender: '@user-charlie:example.com',
           content: { pollId: 'poll-0', answerId: '1' },
           origin_server_ts: new Date('2020-01-01T00:00:00Z').getTime(),
         }),
@@ -173,7 +173,7 @@ describe('useGetVotes', () => {
     const votes = [
       widgetApi.mockSendRoomEvent(
         mockVote({
-          sender: 'user-alice',
+          sender: '@user-alice:example.com',
           content: { pollId: 'poll-0', answerId: '2' },
           origin_server_ts: new Date('2020-01-01T00:00:01Z').getTime(),
           event_id: '$1',
@@ -182,7 +182,7 @@ describe('useGetVotes', () => {
       // make sure the votes are sorted by origin_server_ts
       widgetApi.mockSendRoomEvent(
         mockVote({
-          sender: 'user-alice',
+          sender: '@user-alice:example.com',
           content: { pollId: 'poll-0', answerId: '1' },
           origin_server_ts: new Date('2020-01-01T00:00:00Z').getTime(),
           event_id: '$0',
@@ -215,14 +215,14 @@ describe('useGetVotes', () => {
     const votes = [
       widgetApi.mockSendRoomEvent(
         mockVote({
-          sender: 'user-alice',
+          sender: '@user-alice:example.com',
           content: { pollId: 'poll-0', answerId: '1' },
           origin_server_ts: new Date('2020-01-01T00:00:00Z').getTime(),
         }),
       ),
       widgetApi.mockSendRoomEvent(
         mockVote({
-          sender: 'user-bob',
+          sender: '@user-bob:example.com',
           content: { pollId: 'poll-0', answerId: '22' },
           origin_server_ts: new Date('2020-01-01T00:00:00Z').getTime(),
         }),
@@ -256,7 +256,7 @@ describe('useGetVotes', () => {
       // too early
       widgetApi.mockSendRoomEvent(
         mockVote({
-          sender: '@user-1',
+          sender: '@user-1:example.com',
           content: { pollId: 'poll-0', answerId: '1' },
           origin_server_ts: new Date('2020-01-01T00:59:59Z').getTime(),
         }),
@@ -265,7 +265,7 @@ describe('useGetVotes', () => {
       // correct
       widgetApi.mockSendRoomEvent(
         mockVote({
-          sender: '@user-2',
+          sender: '@user-2:example.com',
           content: { pollId: 'poll-0', answerId: '1' },
           origin_server_ts: new Date('2020-01-01T01:00:00Z').getTime(),
         }),
@@ -274,7 +274,7 @@ describe('useGetVotes', () => {
       // too late
       widgetApi.mockSendRoomEvent(
         mockVote({
-          sender: '@user-3',
+          sender: '@user-3:example.com',
           content: { pollId: 'poll-0', answerId: '1' },
           origin_server_ts: new Date('2020-01-01T01:01:00Z').getTime(),
         }),

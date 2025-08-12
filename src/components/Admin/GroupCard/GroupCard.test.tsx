@@ -43,7 +43,7 @@ describe('<GroupCard/>', () => {
 
     widgetApi.mockSendStateEvent(
       mockRoomMember({
-        state_key: 'user-bob',
+        state_key: '@user-bob:example.com',
         event_id: 'id-2',
         content: {
           displayname: 'Bob',
@@ -57,8 +57,8 @@ describe('<GroupCard/>', () => {
       mockGroup({
         content: {
           members: {
-            'user-alice': { memberRole: 'delegate' },
-            'user-bob': { memberRole: 'representative' },
+            '@user-alice:example.com': { memberRole: 'delegate' },
+            '@user-bob:example.com': { memberRole: 'representative' },
           },
         },
       }),

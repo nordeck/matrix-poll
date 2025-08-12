@@ -56,16 +56,16 @@ describe('<CreatePollForm>', () => {
           abbreviation: 'Red Party',
           color: '#ff0000',
           members: {
-            '@user-alice': {
+            '@user-alice:example.com': {
               memberRole: 'delegate',
             },
-            '@user-bob': {
+            '@user-bob:example.com': {
               memberRole: 'delegate',
             },
-            '@user-charlie': {
+            '@user-charlie:example.com': {
               memberRole: 'delegate',
             },
-            '@user-eric': {
+            '@user-eric:example.com': {
               memberRole: 'representative',
             },
           },
@@ -80,7 +80,7 @@ describe('<CreatePollForm>', () => {
           abbreviation: 'Blue Party',
           color: '#0000ff',
           members: {
-            '@user-dameon': {
+            '@user-dameon:example.com': {
               memberRole: 'delegate',
             },
           },
@@ -91,28 +91,28 @@ describe('<CreatePollForm>', () => {
     widgetApi.mockSendStateEvent(mockRoomMember());
     widgetApi.mockSendStateEvent(
       mockRoomMember({
-        state_key: '@user-bob',
+        state_key: '@user-bob:example.com',
         event_id: '$event-id-1',
         content: { displayname: 'Bob', avatar_url: undefined },
       }),
     );
     widgetApi.mockSendStateEvent(
       mockRoomMember({
-        state_key: '@user-charlie',
+        state_key: '@user-charlie:example.com',
         event_id: '$event-id-2',
         content: { displayname: 'Charlie', avatar_url: undefined },
       }),
     );
     widgetApi.mockSendStateEvent(
       mockRoomMember({
-        state_key: '@user-dameon',
+        state_key: '@user-dameon:example.com',
         event_id: '$event-id-3',
         content: { displayname: 'Dameon', avatar_url: undefined },
       }),
     );
     widgetApi.mockSendStateEvent(
       mockRoomMember({
-        state_key: '@user-eric',
+        state_key: '@user-eric:example.com',
         event_id: '$event-id-4',
         content: { displayname: 'Eric', avatar_url: undefined },
       }),
@@ -337,13 +337,13 @@ describe('<CreatePollForm>', () => {
             abbreviation: 'Red Party',
             color: '#ff0000',
             votingRights: {
-              '@user-alice': {
+              '@user-alice:example.com': {
                 state: 'active',
               },
-              '@user-bob': {
+              '@user-bob:example.com': {
                 state: 'invalid',
               },
-              '@user-charlie': {
+              '@user-charlie:example.com': {
                 state: 'active',
               },
             },
@@ -354,7 +354,7 @@ describe('<CreatePollForm>', () => {
             abbreviation: 'Blue Party',
             color: '#0000ff',
             votingRights: {
-              '@user-dameon': {
+              '@user-dameon:example.com': {
                 state: 'active',
               },
             },
@@ -566,13 +566,13 @@ describe('<CreatePollForm>', () => {
               abbreviation: 'Red Party',
               color: '#ff0000',
               votingRights: {
-                '@user-alice': {
+                '@user-alice:example.com': {
                   state: 'invalid',
                 },
-                '@user-bob': {
+                '@user-bob:example.com': {
                   state: 'active',
                 },
-                '@user-charlie': {
+                '@user-charlie:example.com': {
                   state: 'active',
                 },
               },
@@ -583,7 +583,7 @@ describe('<CreatePollForm>', () => {
               abbreviation: 'Blue Party',
               color: '#0000ff',
               votingRights: {
-                '@user-dameon': {
+                '@user-dameon:example.com': {
                   state: 'active',
                 },
               },
@@ -649,14 +649,14 @@ describe('<CreatePollForm>', () => {
               abbreviation: 'Red Party',
               color: '#ff0000',
               votingRights: {
-                '@user-alice': {
+                '@user-alice:example.com': {
                   state: 'represented',
                   representedBy: '@user-eric',
                 },
-                '@user-bob': {
+                '@user-bob:example.com': {
                   state: 'active',
                 },
-                '@user-charlie': {
+                '@user-charlie:example.com': {
                   state: 'active',
                 },
               },
@@ -667,7 +667,7 @@ describe('<CreatePollForm>', () => {
               abbreviation: 'Blue Party',
               color: '#0000ff',
               votingRights: {
-                '@user-dameon': {
+                '@user-dameon:example.com': {
                   state: 'active',
                 },
               },
@@ -779,7 +779,7 @@ describe('<CreatePollForm>', () => {
         content: {
           events_default: 50,
           users: {
-            '@user-alice': 20,
+            '@user-alice:example.com': 20,
           },
         },
       }),
@@ -812,7 +812,7 @@ describe('<CreatePollForm>', () => {
         content: {
           events_default: 50,
           users: {
-            '@user-eric': 20,
+            '@user-eric:example.com': 20,
           },
         },
       }),
@@ -862,14 +862,14 @@ describe('<CreatePollForm>', () => {
             abbreviation: 'Red Party',
             color: '#ff0000',
             votingRights: {
-              '@user-alice': {
+              '@user-alice:example.com': {
                 state: 'active',
               },
-              '@user-bob': {
+              '@user-bob:example.com': {
                 state: 'represented',
                 representedBy: 'user-hans',
               },
-              '@user-charlie': {
+              '@user-charlie:example.com': {
                 state: 'active',
               },
             },
@@ -880,7 +880,7 @@ describe('<CreatePollForm>', () => {
             abbreviation: 'Blue Party',
             color: '#0000ff',
             votingRights: {
-              '@user-dameon': {
+              '@user-dameon:example.com': {
                 state: 'active',
               },
             },
@@ -914,13 +914,13 @@ describe('<CreatePollForm>', () => {
               abbreviation: 'Red Party',
               color: '#ff0000',
               votingRights: {
-                '@user-alice': {
+                '@user-alice:example.com': {
                   state: 'active',
                 },
-                '@user-bob': {
+                '@user-bob:example.com': {
                   state: 'invalid',
                 },
-                '@user-charlie': {
+                '@user-charlie:example.com': {
                   state: 'active',
                 },
               },
@@ -931,7 +931,7 @@ describe('<CreatePollForm>', () => {
               abbreviation: 'Blue Party',
               color: '#0000ff',
               votingRights: {
-                '@user-dameon': {
+                '@user-dameon:example.com': {
                   state: 'active',
                 },
               },

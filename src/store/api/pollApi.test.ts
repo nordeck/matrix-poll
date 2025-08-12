@@ -239,12 +239,12 @@ describe('getPolls', () => {
     // Delete poll
     widgetApi.mockSendStateEvent({
       type: 'net.nordeck.poll',
-      sender: '@user-id',
+      sender: '@user-id:example.com',
       content: {},
       state_key: poll.state_key,
       origin_server_ts: 0,
       event_id: '$event-id-0',
-      room_id: '!room-id',
+      room_id: '!room-id:example.com',
     });
 
     await waitFor(() =>

@@ -41,9 +41,9 @@ describe('<UserListItem/>', () => {
   });
 
   it('should render without exploding', () => {
-    render(<UserListItem userId="myUser" />, { wrapper });
+    render(<UserListItem userId="@myuser:example.com" />, { wrapper });
 
-    expect(screen.getByText(/myuser/i)).toBeInTheDocument();
+    expect(screen.getByText(/@myuser:example.com/i)).toBeInTheDocument();
     expect(screen.getByText('M')).toHaveAttribute('aria-hidden', 'true');
   });
 

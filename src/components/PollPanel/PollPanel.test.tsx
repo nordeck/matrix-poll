@@ -62,16 +62,16 @@ describe('<PollPanel>', () => {
           abbreviation: 'Red Party',
           color: '#ff0000',
           members: {
-            'user-alice': {
+            '@user-alice:example.com': {
               memberRole: 'delegate',
             },
-            'user-bob': {
+            '@user-bob:example.com': {
               memberRole: 'delegate',
             },
-            'user-charlie': {
+            '@user-charlie:example.com': {
               memberRole: 'delegate',
             },
-            'user-eric': {
+            '@user-eric:example.com': {
               memberRole: 'representative',
             },
           },
@@ -86,7 +86,7 @@ describe('<PollPanel>', () => {
           abbreviation: 'Blue Party',
           color: '#0000ff',
           members: {
-            'user-dameon': {
+            '@user-dameon:example.com': {
               memberRole: 'delegate',
             },
           },

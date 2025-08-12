@@ -16,7 +16,12 @@
 
 import { StateEvent } from '@matrix-widget-toolkit/api';
 import { beforeEach, describe, expect, it } from 'vitest';
-import { mockGroup, mockPoll, mockPowerLevelsEvent } from '../../lib/testUtils';
+import {
+  mockGroup,
+  mockPoll,
+  mockPowerLevelsEvent,
+  mockRoomVersion11CreateEvent,
+} from '../../lib/testUtils';
 import { GroupContent } from '../../model';
 import { PollGroup } from '../../model/IPoll';
 import { syncPollGroupsWithRoomGroups, userPermissionHasChange } from './utils';
@@ -34,16 +39,16 @@ describe('syncPollGroupsWithRoomGroups', () => {
           abbreviation: 'Red Party',
           color: '#ff0000',
           members: {
-            'user-alice': {
+            '@user-alice:example.com': {
               memberRole: 'delegate',
             },
-            'user-bob': {
+            '@user-bob:example.com': {
               memberRole: 'delegate',
             },
-            'user-charlie': {
+            '@user-charlie:example.com': {
               memberRole: 'delegate',
             },
-            'user-eric': {
+            '@user-eric:example.com': {
               memberRole: 'representative',
             },
           },
@@ -56,7 +61,7 @@ describe('syncPollGroupsWithRoomGroups', () => {
           abbreviation: 'Blue Party',
           color: '#0000ff',
           members: {
-            'user-dameon': {
+            '@user-dameon:example.com': {
               memberRole: 'delegate',
             },
           },
@@ -72,13 +77,13 @@ describe('syncPollGroupsWithRoomGroups', () => {
       abbreviation: 'Red Party',
       color: '#ff0000',
       votingRights: {
-        'user-alice': {
+        '@user-alice:example.com': {
           state: 'active',
         },
-        'user-bob': {
+        '@user-bob:example.com': {
           state: 'active',
         },
-        'user-charlie': {
+        '@user-charlie:example.com': {
           state: 'active',
         },
       },
@@ -90,7 +95,7 @@ describe('syncPollGroupsWithRoomGroups', () => {
       abbreviation: 'Blue Party',
       color: '#0000ff',
       votingRights: {
-        'user-dameon': {
+        '@user-dameon:example.com': {
           state: 'active',
         },
       },
@@ -102,7 +107,7 @@ describe('syncPollGroupsWithRoomGroups', () => {
       abbreviation: 'Green Party',
       color: '#00ff00',
       votingRights: {
-        'user-hans': {
+        '@user-hans:example.com': {
           state: 'active',
         },
       },
@@ -123,14 +128,14 @@ describe('syncPollGroupsWithRoomGroups', () => {
       abbreviation: 'Red Party',
       color: '#ff0000',
       votingRights: {
-        'user-alice': {
+        '@user-alice:example.com': {
           // Make sure that changes to the red group are preserved
           state: 'invalid',
         },
-        'user-bob': {
+        '@user-bob:example.com': {
           state: 'active',
         },
-        'user-charlie': {
+        '@user-charlie:example.com': {
           state: 'active',
         },
       },
@@ -148,14 +153,14 @@ describe('syncPollGroupsWithRoomGroups', () => {
       abbreviation: 'Red Party',
       color: '#ff0000',
       votingRights: {
-        'user-alice': {
+        '@user-alice:example.com': {
           // Make sure that changes to the red group are preserved
           state: 'invalid',
         },
-        'user-bob': {
+        '@user-bob:example.com': {
           state: 'active',
         },
-        'user-charlie': {
+        '@user-charlie:example.com': {
           state: 'active',
         },
       },
@@ -180,10 +185,10 @@ describe('syncPollGroupsWithRoomGroups', () => {
           abbreviation: 'Blue Party',
           color: '#0000ff',
           votingRights: {
-            'user-dameon': {
+            '@user-dameon:example.com': {
               state: 'invalid',
             },
-            'user-gina': {
+            '@user-gina:example.com': {
               state: 'active',
             },
           },
@@ -200,7 +205,7 @@ describe('syncPollGroupsWithRoomGroups', () => {
           abbreviation: 'Blue Party',
           color: '#0000ff',
           votingRights: {
-            'user-dameon': {
+            '@user-dameon:example.com': {
               state: 'invalid',
             },
           },
@@ -216,10 +221,10 @@ describe('syncPollGroupsWithRoomGroups', () => {
           abbreviation: 'Red Party',
           color: '#ff0000',
           votingRights: {
-            'user-alice': {
+            '@user-alice:example.com': {
               state: 'active',
             },
-            'user-bob': {
+            '@user-bob:example.com': {
               state: 'represented',
               representedBy: 'user-charlie',
             },
@@ -237,13 +242,13 @@ describe('syncPollGroupsWithRoomGroups', () => {
           abbreviation: 'Red Party',
           color: '#ff0000',
           votingRights: {
-            'user-alice': {
+            '@user-alice:example.com': {
               state: 'active',
             },
-            'user-bob': {
+            '@user-bob:example.com': {
               state: 'invalid',
             },
-            'user-charlie': {
+            '@user-charlie:example.com': {
               state: 'active',
             },
           },
@@ -260,14 +265,14 @@ describe('syncPollGroupsWithRoomGroups', () => {
           abbreviation: 'Red Party',
           color: '#ff0000',
           votingRights: {
-            'user-alice': {
+            '@user-alice:example.com': {
               state: 'active',
             },
-            'user-bob': {
+            '@user-bob:example.com': {
               state: 'represented',
               representedBy: 'user-iris',
             },
-            'user-charlie': {
+            '@user-charlie:example.com': {
               state: 'active',
             },
           },
@@ -284,13 +289,13 @@ describe('syncPollGroupsWithRoomGroups', () => {
           abbreviation: 'Red Party',
           color: '#ff0000',
           votingRights: {
-            'user-alice': {
+            '@user-alice:example.com': {
               state: 'active',
             },
-            'user-bob': {
+            '@user-bob:example.com': {
               state: 'invalid',
             },
-            'user-charlie': {
+            '@user-charlie:example.com': {
               state: 'active',
             },
           },
@@ -305,13 +310,14 @@ describe('syncPollGroupsWithRoomGroups', () => {
       content: {
         events_default: 50,
         users: {
-          'user1@example': 20,
-          'user2@example': 70,
-          'user3@example': 100,
-          'user4@example': 0,
+          '@user1:example.com': 20,
+          '@user2:example.com': 70,
+          '@user3:example.com': 100,
+          '@user4:example.com': 0,
         },
       },
     });
+    const createEvent = mockRoomVersion11CreateEvent();
     const groups = [
       mockPoll({
         content: {
@@ -322,15 +328,15 @@ describe('syncPollGroupsWithRoomGroups', () => {
               abbreviation: 'group-1',
               color: '#fff',
               votingRights: {
-                'user1@example': {
+                '@user1:example.com': {
                   state: 'active',
                 },
-                'user2@example': {
+                '@user2:example.com': {
                   state: 'active',
                 },
-                'user3@example': {
+                '@user3:example.com': {
                   state: 'represented',
-                  representedBy: 'user4@example',
+                  representedBy: '@user4:example.com',
                 },
               },
             },
@@ -339,9 +345,9 @@ describe('syncPollGroupsWithRoomGroups', () => {
       }),
     ][0].content.groups;
 
-    expect(userPermissionHasChange(groups, powerLevelsEvent.content)).toBe(
-      true,
-    );
+    expect(
+      userPermissionHasChange(groups, powerLevelsEvent.content, createEvent),
+    ).toBe(true);
   });
 
   it('should return fasle if all users of a group has permission to vote', () => {
@@ -349,13 +355,14 @@ describe('syncPollGroupsWithRoomGroups', () => {
       content: {
         events_default: 50,
         users: {
-          'user1@example': 80,
-          'user2@example': 70,
-          'user3@example': 100,
-          'user4@example': 50,
+          '@user1:example.com': 80,
+          '@user2:example.com': 70,
+          '@user3:example.com': 100,
+          '@user4:example.com': 50,
         },
       },
     });
+    const createEvent = mockRoomVersion11CreateEvent();
     const groups = [
       mockPoll({
         content: {
@@ -366,15 +373,15 @@ describe('syncPollGroupsWithRoomGroups', () => {
               abbreviation: 'group-1',
               color: '#fff',
               votingRights: {
-                'user1@example': {
+                '@user1:example.com': {
                   state: 'active',
                 },
-                'user2@example': {
+                '@user2:example.com': {
                   state: 'active',
                 },
-                'user3@example': {
+                '@user3:example.com': {
                   state: 'represented',
-                  representedBy: 'user4@example',
+                  representedBy: '@user4:example.com',
                 },
               },
             },
@@ -383,8 +390,8 @@ describe('syncPollGroupsWithRoomGroups', () => {
       }),
     ][0].content.groups;
 
-    expect(userPermissionHasChange(groups, powerLevelsEvent.content)).toBe(
-      false,
-    );
+    expect(
+      userPermissionHasChange(groups, powerLevelsEvent.content, createEvent),
+    ).toBe(false);
   });
 });

@@ -35,11 +35,11 @@ describe('getVotes', () => {
       mockVote({ origin_server_ts: 900 }),
     );
     const vote1 = widgetApi.mockSendRoomEvent(
-      mockVote({ sender: '@user-alice', origin_server_ts: 500 }),
+      mockVote({ sender: '@user-alice:example.com', origin_server_ts: 500 }),
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
-        sender: '@user-charlie',
+        sender: '@user-charlie:example.com',
         content: {
           pollId: 'poll-1',
         },
@@ -47,7 +47,7 @@ describe('getVotes', () => {
     );
     const vote3 = widgetApi.mockSendRoomEvent(
       mockVote({
-        sender: '@user-dave',
+        sender: '@user-dave:example.com',
         origin_server_ts: 1000,
         content: {
           'm.relates_to': undefined,
@@ -56,7 +56,7 @@ describe('getVotes', () => {
     );
     const vote4 = widgetApi.mockSendRoomEvent(
       mockVote({
-        sender: '@user-eve',
+        sender: '@user-eve:example.com',
         origin_server_ts: 1500,
         content: {
           'm.relates_to': {
@@ -87,11 +87,11 @@ describe('getVotes', () => {
       mockVote({ origin_server_ts: 900 }),
     );
     const vote1 = widgetApi.mockSendRoomEvent(
-      mockVote({ sender: '@user-alice', origin_server_ts: 500 }),
+      mockVote({ sender: '@user-alice:example.com', origin_server_ts: 500 }),
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
-        sender: '@user-charlie',
+        sender: '@user-charlie:example.com',
         content: {
           pollId: 'poll-1',
         },
@@ -99,7 +99,7 @@ describe('getVotes', () => {
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
-        sender: '@user-dave',
+        sender: '@user-dave:example.com',
         origin_server_ts: 1000,
         content: {
           'm.relates_to': undefined,
@@ -108,7 +108,7 @@ describe('getVotes', () => {
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
-        sender: '@user-eve',
+        sender: '@user-eve:example.com',
         origin_server_ts: 1500,
         content: {
           'm.relates_to': {
@@ -141,7 +141,7 @@ describe('getVotes', () => {
     const votes = range(0, 51).map((idx) =>
       widgetApi.mockSendRoomEvent(
         mockVote({
-          sender: `@user-${idx}`,
+          sender: `@user-${idx}:example.com`,
           content: {
             'm.relates_to': {
               rel_type: 'm.reference',
@@ -240,7 +240,7 @@ describe('getVotes', () => {
     );
     const vote3 = widgetApi.mockSendRoomEvent(
       mockVote({
-        sender: '@user-eve',
+        sender: '@user-eve:example.com',
         origin_server_ts: 1000,
         content: {
           'm.relates_to': {
@@ -285,7 +285,7 @@ describe('getVotes', () => {
     const vote = widgetApi.mockSendRoomEvent(mockVote());
     widgetApi.mockSendRoomEvent(
       mockVote({
-        sender: '@user-charlie',
+        sender: '@user-charlie:example.com',
         content: {
           pollId: 'poll-1',
         },
@@ -293,7 +293,7 @@ describe('getVotes', () => {
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
-        sender: '@user-dave',
+        sender: '@user-dave:example.com',
         content: {
           'm.relates_to': undefined,
         },
@@ -301,7 +301,7 @@ describe('getVotes', () => {
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
-        sender: '@user-eve',
+        sender: '@user-eve:example.com',
         content: {
           'm.relates_to': {
             rel_type: 'm.reference',

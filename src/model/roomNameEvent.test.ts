@@ -26,9 +26,9 @@ describe('isValidRoomNameEvent', () => {
         },
         event_id: '$event-id',
         origin_server_ts: 0,
-        room_id: '!room-id',
+        room_id: '!room-id:example.com',
         state_key: '',
-        sender: '@user-id',
+        sender: '@user-id:example.com',
         type: 'm.room.name',
       }),
     ).toBe(true);

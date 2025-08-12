@@ -46,16 +46,16 @@ describe('<PollsListUpcoming>', () => {
           abbreviation: 'Red Party',
           color: '#ff0000',
           members: {
-            '@user-alice': {
+            '@user-alice:example.com': {
               memberRole: 'delegate',
             },
-            '@user-bob': {
+            '@user-bob:example.com': {
               memberRole: 'delegate',
             },
-            '@user-charlie': {
+            '@user-charlie:example.com': {
               memberRole: 'delegate',
             },
-            '@user-eric': {
+            '@user-eric:example.com': {
               memberRole: 'representative',
             },
           },
@@ -70,7 +70,7 @@ describe('<PollsListUpcoming>', () => {
           abbreviation: 'Blue Party',
           color: '#0000ff',
           members: {
-            '@user-dameon': {
+            '@user-dameon:example.com': {
               memberRole: 'delegate',
             },
           },
@@ -338,7 +338,7 @@ describe('<PollsListUpcoming>', () => {
         content: {
           events_default: 50,
           users: {
-            '@user-alice': 20,
+            '@user-alice:example.com': 20,
           },
         },
       }),
@@ -361,7 +361,7 @@ describe('<PollsListUpcoming>', () => {
 
     await waitFor(() => {
       const aliceItem = within(dialog).getByRole('listitem', {
-        name: '@user-alice',
+        name: '@user-alice:example.com',
       });
 
       expect(
@@ -448,11 +448,11 @@ describe('<PollsListUpcoming>', () => {
               abbreviation: 'Blue Party',
               color: '#0000ff',
               votingRights: {
-                '@user-charlie': {
+                '@user-charlie:example.com': {
                   state: 'represented',
                   representedBy: '@user-bob',
                 },
-                '@user-bob': {
+                '@user-bob:example.com': {
                   state: 'invalid',
                 },
               },

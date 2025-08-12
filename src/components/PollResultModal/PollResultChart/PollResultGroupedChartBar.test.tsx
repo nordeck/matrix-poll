@@ -53,10 +53,10 @@ describe('<PollResultGroupedChartBar/>', () => {
       }),
       results: {
         votes: {
-          '@user-1': '1',
-          '@user-2': PollInvalidAnswer,
-          '@user-3': '2',
-          '@user-4': '1',
+          '@user-1:example.com': '1',
+          '@user-2:example.com': PollInvalidAnswer,
+          '@user-3:example.com': '2',
+          '@user-4:example.com': '1',
         },
       },
       votingRights: ['@user-1', '@user-2', '@user-3', '@user-4'],
@@ -65,8 +65,8 @@ describe('<PollResultGroupedChartBar/>', () => {
           abbreviation: 'Group 1',
           color: '#ff0000',
           votes: {
-            '@user-1': '1',
-            '@user-2': PollInvalidAnswer,
+            '@user-1:example.com': '1',
+            '@user-2:example.com': PollInvalidAnswer,
           },
           invalidVoters: {},
         },
@@ -74,8 +74,8 @@ describe('<PollResultGroupedChartBar/>', () => {
           abbreviation: 'Group 2',
           color: '#0000ff',
           votes: {
-            '@user-3': '2',
-            '@user-4': '1',
+            '@user-3:example.com': '2',
+            '@user-4:example.com': '1',
           },
           invalidVoters: {},
         },
@@ -138,10 +138,10 @@ describe('<PollResultGroupedChartBar/>', () => {
       }),
       results: {
         votes: {
-          '@user-1': '1',
-          '@user-2': PollInvalidAnswer,
-          '@user-3': '2',
-          '@user-4': '1',
+          '@user-1:example.com': '1',
+          '@user-2:example.com': PollInvalidAnswer,
+          '@user-3:example.com': '2',
+          '@user-4:example.com': '1',
         },
       },
       votingRights: ['@user-1', '@user-2', '@user-3', '@user-4'],
@@ -150,8 +150,8 @@ describe('<PollResultGroupedChartBar/>', () => {
           abbreviation: 'Group 1',
           color: '#ff0000',
           votes: {
-            '@user-1': '1',
-            '@user-2': PollInvalidAnswer,
+            '@user-1:example.com': '1',
+            '@user-2:example.com': PollInvalidAnswer,
           },
           invalidVoters: {},
         },
@@ -159,8 +159,8 @@ describe('<PollResultGroupedChartBar/>', () => {
           abbreviation: 'Group 2',
           color: '#0000ff',
           votes: {
-            '@user-3': '2',
-            '@user-4': '1',
+            '@user-3:example.com': '2',
+            '@user-4:example.com': '1',
           },
           invalidVoters: {},
         },

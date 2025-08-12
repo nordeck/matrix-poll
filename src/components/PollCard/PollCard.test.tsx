@@ -107,52 +107,52 @@ describe('<PollCard/>', () => {
   it('should render cast votes and participants', async () => {
     widgetApi.mockSendStateEvent(
       mockRoomMember({
-        state_key: 'user-1',
+        state_key: '@user-1:example.com',
         content: { membership: 'join' },
       }),
     );
     widgetApi.mockSendStateEvent(
       mockRoomMember({
-        state_key: 'user-2',
+        state_key: '@user-2:example.com',
         content: { membership: 'invite' },
       }),
     );
     widgetApi.mockSendStateEvent(
       mockRoomMember({
-        state_key: 'user-3',
+        state_key: '@user-3:example.com',
         content: { membership: 'leave' },
       }),
     );
     widgetApi.mockSendStateEvent(
       mockRoomMember({
-        state_key: 'user-4',
+        state_key: '@user-4:example.com',
         content: { membership: 'ban' },
       }),
     );
     widgetApi.mockSendStateEvent(
       mockRoomMember({
-        state_key: 'user-5',
+        state_key: '@user-5:example.com',
         content: { membership: 'knock' },
       }),
     );
 
     widgetApi.mockSendRoomEvent(
       mockVote({
-        sender: 'user-1',
+        sender: '@user-1:example.com',
         origin_server_ts: Date.now(),
         content: { pollId: 'poll-0', answerId: '1' },
       }),
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
-        sender: 'user-2',
+        sender: '@user-2:example.com',
         origin_server_ts: Date.now(),
         content: { pollId: 'poll-0', answerId: '2' },
       }),
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
-        sender: 'user-3',
+        sender: '@user-3:example.com',
         origin_server_ts: Date.now(),
         content: { pollId: 'poll-0', answerId: '1' },
       }),
@@ -180,13 +180,13 @@ describe('<PollCard/>', () => {
 
     widgetApi.mockSendStateEvent(
       mockRoomMember({
-        state_key: 'user-1',
+        state_key: '@user-1:example.com',
         content: { membership: 'join' },
       }),
     );
     widgetApi.mockSendStateEvent(
       mockRoomMember({
-        state_key: 'user-2',
+        state_key: '@user-2:example.com',
         content: { membership: 'invite' },
       }),
     );
@@ -206,13 +206,13 @@ describe('<PollCard/>', () => {
   it('should render show correct information if no one voted yet', async () => {
     widgetApi.mockSendStateEvent(
       mockRoomMember({
-        state_key: 'user-1',
+        state_key: '@user-1:example.com',
         content: { membership: 'join' },
       }),
     );
     widgetApi.mockSendStateEvent(
       mockRoomMember({
-        state_key: 'user-2',
+        state_key: '@user-2:example.com',
         content: { membership: 'invite' },
       }),
     );

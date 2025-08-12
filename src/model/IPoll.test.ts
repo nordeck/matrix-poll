@@ -42,8 +42,8 @@ describe('isValidPollEvent', () => {
         state_key: 'poll-id',
         event_id: '$event-id',
         origin_server_ts: 0,
-        room_id: '!room-id',
-        sender: '@user-id',
+        room_id: '!room-id:example.com',
+        sender: '@user-id:example.com',
         type: 'net.nordeck.poll',
       }),
     ).toBe(true);
@@ -69,8 +69,8 @@ describe('isValidPollEvent', () => {
         state_key: 'poll-id',
         event_id: '$event-id',
         origin_server_ts: 0,
-        room_id: '!room-id',
-        sender: '@user-id',
+        room_id: '!room-id:example.com',
+        sender: '@user-id:example.com',
         type: 'net.nordeck.poll',
       }),
     ).toBe(true);
@@ -100,9 +100,12 @@ describe('isValidPollEvent', () => {
               abbreviation: 'CDU',
               color: 'black',
               votingRights: {
-                '@adenauer': { state: 'active' },
-                '@erhard': { state: 'invalid' },
-                '@kiesinger': { state: 'represented', representedBy: '@kohl' },
+                '@adenauer:example.com': { state: 'active' },
+                '@erhard:example.com': { state: 'invalid' },
+                '@kiesinger:example.com': {
+                  state: 'represented',
+                  representedBy: '@kohl:example.com',
+                },
               },
             },
           ],
@@ -110,8 +113,8 @@ describe('isValidPollEvent', () => {
         state_key: 'poll-id',
         event_id: '$event-id',
         origin_server_ts: 0,
-        room_id: '!room-id',
-        sender: '@user-id',
+        room_id: '!room-id:example.com',
+        sender: '@user-id:example.com',
         type: 'net.nordeck.poll',
       }),
     ).toBe(true);
@@ -142,11 +145,14 @@ describe('isValidPollEvent', () => {
               abbreviation: 'CDU',
               color: 'black',
               votingRights: {
-                '@adenauer': { state: 'active', additional: 'data' },
-                '@erhard': { state: 'invalid', additional: 'data' },
-                '@kiesinger': {
+                '@adenauer:example.com': {
+                  state: 'active',
+                  additional: 'data',
+                },
+                '@erhard:example.com': { state: 'invalid', additional: 'data' },
+                '@kiesinger:example.com': {
                   state: 'represented',
-                  representedBy: '@kohl',
+                  representedBy: '@kohl:example.com',
                   additional: 'data',
                 },
               },
@@ -158,8 +164,8 @@ describe('isValidPollEvent', () => {
         state_key: 'poll-id',
         event_id: '$event-id',
         origin_server_ts: 0,
-        room_id: '!room-id',
-        sender: '@user-id',
+        room_id: '!room-id:example.com',
+        sender: '@user-id:example.com',
         type: 'net.nordeck.poll',
       }),
     ).toBe(true);
@@ -238,11 +244,11 @@ describe('isValidPollEvent', () => {
               abbreviation: 'CDU',
               color: 'black',
               votingRights: {
-                '@adenauer': { state: 'active' },
-                '@erhard': { state: 'invalid' },
-                '@kiesinger': {
+                '@adenauer:example.com': { state: 'active' },
+                '@erhard:example.com': { state: 'invalid' },
+                '@kiesinger:example.com': {
                   state: 'represented',
-                  representedBy: '@kohl',
+                  representedBy: '@kohl:example.com',
                 },
               },
             },
@@ -252,8 +258,8 @@ describe('isValidPollEvent', () => {
         state_key: 'poll-id',
         event_id: '$event-id',
         origin_server_ts: 0,
-        room_id: '!room-id',
-        sender: '@user-id',
+        room_id: '!room-id:example.com',
+        sender: '@user-id:example.com',
         type: 'net.nordeck.poll',
       }),
     ).toBe(false);
@@ -277,29 +283,32 @@ describe('isValidPollEvent', () => {
     { votingRights: undefined },
     { votingRights: null },
     { votingRights: 111 },
-    { votingRights: { '@adenauer': {} } },
-    { votingRights: { '@adenauer': { state: null } } },
-    { votingRights: { '@adenauer': { state: 111 } } },
-    { votingRights: { '@adenauer': { state: '' } } },
-    { votingRights: { '@adenauer': { state: 'unknown' } } },
+    { votingRights: { '@adenauer:example.com': {} } },
+    { votingRights: { '@adenauer:example.com': { state: null } } },
+    { votingRights: { '@adenauer:example.com': { state: 111 } } },
+    { votingRights: { '@adenauer:example.com': { state: '' } } },
+    { votingRights: { '@adenauer:example.com': { state: 'unknown' } } },
     {
       votingRights: {
-        '@adenauer': { state: 'represented', representedBy: undefined },
+        '@adenauer:example.com': {
+          state: 'represented',
+          representedBy: undefined,
+        },
       },
     },
     {
       votingRights: {
-        '@adenauer': { state: 'represented', representedBy: null },
+        '@adenauer:example.com': { state: 'represented', representedBy: null },
       },
     },
     {
       votingRights: {
-        '@adenauer': { state: 'represented', representedBy: 111 },
+        '@adenauer:example.com': { state: 'represented', representedBy: 111 },
       },
     },
     {
       votingRights: {
-        '@adenauer': { state: 'represented', representedBy: '' },
+        '@adenauer:example.com': { state: 'represented', representedBy: '' },
       },
     },
   ])('should reject event with group patch %j', (patch: object) => {
@@ -326,11 +335,11 @@ describe('isValidPollEvent', () => {
               abbreviation: 'CDU',
               color: 'black',
               votingRights: {
-                '@adenauer': { state: 'active' },
-                '@erhard': { state: 'invalid' },
-                '@kiesinger': {
+                '@adenauer:example.com': { state: 'active' },
+                '@erhard:example.com': { state: 'invalid' },
+                '@kiesinger:example.com': {
                   state: 'represented',
-                  representedBy: '@kohl',
+                  representedBy: '@kohl:example.com',
                 },
               },
               ...patch,
@@ -340,8 +349,8 @@ describe('isValidPollEvent', () => {
         state_key: 'poll-id',
         event_id: '$event-id',
         origin_server_ts: 0,
-        room_id: '!room-id',
-        sender: '@user-id',
+        room_id: '!room-id:example.com',
+        sender: '@user-id:example.com',
         type: 'net.nordeck.poll',
       }),
     ).toBe(false);

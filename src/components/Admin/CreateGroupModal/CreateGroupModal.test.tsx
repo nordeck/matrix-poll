@@ -40,7 +40,7 @@ describe('<CreateGroupModal>', () => {
     widgetApi.mockSendStateEvent(mockRoomMember());
     widgetApi.mockSendStateEvent(
       mockRoomMember({
-        state_key: 'user-bob',
+        state_key: '@user-bob:example.com',
         event_id: 'event-id-1',
         content: { displayname: 'Bob', avatar_url: undefined },
       }),
@@ -94,7 +94,7 @@ describe('<CreateGroupModal>', () => {
           abbreviation: 'My Group',
           color: '#999999',
           members: {
-            'user-bob': {
+            '@user-bob:example.com': {
               memberRole: 'delegate',
             },
           },
