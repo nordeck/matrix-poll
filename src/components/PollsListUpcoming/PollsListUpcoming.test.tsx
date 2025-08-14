@@ -43,7 +43,6 @@ describe('<PollsListUpcoming>', () => {
   let Wrapper: ComponentType<PropsWithChildren<{}>>;
 
   beforeEach(() => {
-    // Room version 11 create event
     widgetApi.mockSendStateEvent(mockRoomVersion11CreateEvent());
 
     widgetApi.mockSendStateEvent(
