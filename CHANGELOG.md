@@ -1,5 +1,15 @@
 # @nordeck/matrix-poll-widget
 
+## 1.6.0
+
+### Minor Changes
+
+- 3bea188: Migrate to vite and vitest. Update to react 18, redux 5, react redux 9 and redux toolkit 2. Update to latest matrix widget toolkit. Update eslint to 9.
+
+### Patch Changes
+
+- 743e27a: Update to newer widget toolkit for room version 12 support
+
 ## 1.5.2
 
 ### Patch Changes
