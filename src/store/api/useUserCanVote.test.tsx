@@ -53,9 +53,12 @@ describe('useUserCanVote', () => {
   });
 
   it('should return false if still loading', async () => {
-    const { result } = renderHook(() => useUserCanVote('poll-1', 'user-1'), {
-      wrapper,
-    });
+    const { result } = renderHook(
+      () => useUserCanVote('poll-1', '@user-1:example.com'),
+      {
+        wrapper,
+      },
+    );
 
     expect(result.current).toEqual({ isLoading: true });
   });
@@ -71,9 +74,12 @@ describe('useUserCanVote', () => {
   it('should return error', async () => {
     widgetApi.receiveStateEvents.mockRejectedValue(new Error('Some error'));
 
-    const { result } = renderHook(() => useUserCanVote('poll-1', 'user-1'), {
-      wrapper,
-    });
+    const { result } = renderHook(
+      () => useUserCanVote('poll-1', '@user-1:example.com'),
+      {
+        wrapper,
+      },
+    );
 
     await waitFor(() =>
       expect(result.current).toEqual({ isLoading: false, isError: true }),
@@ -81,9 +87,12 @@ describe('useUserCanVote', () => {
   });
 
   it('should return reject if a poll does not exist', async () => {
-    const { result } = renderHook(() => useUserCanVote('poll-1', 'user-1'), {
-      wrapper,
-    });
+    const { result } = renderHook(
+      () => useUserCanVote('poll-1', '@user-1:example.com'),
+      {
+        wrapper,
+      },
+    );
 
     await waitFor(() =>
       expect(result.current).toEqual({ isLoading: false, data: false }),
@@ -98,9 +107,12 @@ describe('useUserCanVote', () => {
     });
 
     it('should accept vote of user with the correct power', async () => {
-      const { result } = renderHook(() => useUserCanVote('poll-1', 'user-1'), {
-        wrapper,
-      });
+      const { result } = renderHook(
+        () => useUserCanVote('poll-1', '@user-1:example.com'),
+        {
+          wrapper,
+        },
+      );
 
       await waitFor(() =>
         expect(result.current).toEqual({ isLoading: false, data: true }),
@@ -120,9 +132,12 @@ describe('useUserCanVote', () => {
         }),
       );
 
-      const { result } = renderHook(() => useUserCanVote('poll-1', 'user-1'), {
-        wrapper,
-      });
+      const { result } = renderHook(
+        () => useUserCanVote('poll-1', '@user-1:example.com'),
+        {
+          wrapper,
+        },
+      );
 
       await waitFor(() =>
         expect(result.current).toEqual({ isLoading: false, data: false }),
@@ -143,12 +158,12 @@ describe('useUserCanVote', () => {
                 abbreviation: 'CDU',
                 color: 'black',
                 votingRights: {
-                  '@delegate': {
+                  '@delegate:example.com': {
                     state: 'active',
                   },
-                  '@delegate-absent': {
+                  '@delegate-absent:example.com': {
                     state: 'represented',
-                    representedBy: '@representative-represents',
+                    representedBy: '@representative-represents:example.com',
                   },
                 },
               },
@@ -160,7 +175,7 @@ describe('useUserCanVote', () => {
 
     it('should accept vote from delegate with correct power', async () => {
       const { result } = renderHook(
-        () => useUserCanVote('poll-1', '@delegate'),
+        () => useUserCanVote('poll-1', '@delegate:example.com'),
         { wrapper },
       );
 
@@ -183,7 +198,7 @@ describe('useUserCanVote', () => {
       );
 
       const { result } = renderHook(
-        () => useUserCanVote('poll-1', '@delegate'),
+        () => useUserCanVote('poll-1', '@delegate:example.com'),
         { wrapper },
       );
 
@@ -194,7 +209,8 @@ describe('useUserCanVote', () => {
 
     it('should accept vote from representative that votes for a delegate with correct power', async () => {
       const { result } = renderHook(
-        () => useUserCanVote('poll-1', '@representative-represents'),
+        () =>
+          useUserCanVote('poll-1', '@representative-represents:example.com'),
         { wrapper },
       );
 
@@ -217,7 +233,8 @@ describe('useUserCanVote', () => {
       );
 
       const { result } = renderHook(
-        () => useUserCanVote('poll-1', '@representative-represents'),
+        () =>
+          useUserCanVote('poll-1', '@representative-represents:example.com'),
         { wrapper },
       );
 
@@ -228,7 +245,7 @@ describe('useUserCanVote', () => {
 
     it('should reject vote from absent delegate with correct power', async () => {
       const { result } = renderHook(
-        () => useUserCanVote('poll-1', '@delegate-absent'),
+        () => useUserCanVote('poll-1', '@delegate-absent:example.com'),
         { wrapper },
       );
 
@@ -238,9 +255,12 @@ describe('useUserCanVote', () => {
     });
 
     it('should reject vote from a guest with correct power', async () => {
-      const { result } = renderHook(() => useUserCanVote('poll-1', '@guest'), {
-        wrapper,
-      });
+      const { result } = renderHook(
+        () => useUserCanVote('poll-1', '@guest:example.com'),
+        {
+          wrapper,
+        },
+      );
 
       await waitFor(() =>
         expect(result.current).toEqual({ isLoading: false, data: false }),

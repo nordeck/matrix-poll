@@ -46,10 +46,12 @@ describe('useUserDetails', () => {
     const { result } = renderHook(useUserDetails, { wrapper });
 
     await waitFor(() => {
-      expect(result.current.getUserDisplayName('@user-alice')).toBe('Alice');
+      expect(result.current.getUserDisplayName('@user-alice:example.com')).toBe(
+        'Alice',
+      );
     });
-    expect(result.current.getUserDisplayName('@other-user-id')).toBe(
-      '@other-user-id',
-    );
+    expect(
+      result.current.getUserDisplayName('@other-user-id:example.com'),
+    ).toBe('@other-user-id:example.com');
   });
 });

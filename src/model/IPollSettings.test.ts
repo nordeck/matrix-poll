@@ -25,8 +25,8 @@ describe('isValidPollSettingsEvent', () => {
         state_key: '',
         event_id: '$event-id',
         origin_server_ts: 0,
-        room_id: '!room-id',
-        sender: '@user-id',
+        room_id: '!room-id:example.com',
+        sender: '@user-id:example.com',
         type: 'net.nordeck.poll.settings',
       }),
     ).toBe(true);
@@ -42,8 +42,8 @@ describe('isValidPollSettingsEvent', () => {
         state_key: '',
         event_id: '$event-id',
         origin_server_ts: 0,
-        room_id: '!room-id',
-        sender: '@user-id',
+        room_id: '!room-id:example.com',
+        sender: '@user-id:example.com',
         type: 'net.nordeck.poll.settings',
       }),
     ).toBe(true);
@@ -60,8 +60,8 @@ describe('isValidPollSettingsEvent', () => {
         state_key: '',
         event_id: '$event-id',
         origin_server_ts: 0,
-        room_id: '!room-id',
-        sender: '@user-id',
+        room_id: '!room-id:example.com',
+        sender: '@user-id:example.com',
         type: 'net.nordeck.poll.settings',
       }),
     ).toBe(true);
@@ -88,8 +88,8 @@ describe('isValidPollSettingsEvent', () => {
         state_key: '',
         event_id: '$event-id',
         origin_server_ts: 0,
-        room_id: '!room-id',
-        sender: '@user-id',
+        room_id: '!room-id:example.com',
+        sender: '@user-id:example.com',
         type: 'net.nordeck.poll.settings',
       }),
     ).toBe(false);

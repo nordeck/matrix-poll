@@ -47,7 +47,7 @@ describe('<ShowResultsByGroupedNameList/>', () => {
               abbreviation: 'Group 1',
               color: '#ff0000',
               votingRights: {
-                'user-alice': { state: 'active' },
+                '@user-alice:example.com': { state: 'active' },
               },
             },
             {
@@ -56,7 +56,7 @@ describe('<ShowResultsByGroupedNameList/>', () => {
               abbreviation: 'Group 2',
               color: '#0000ff',
               votingRights: {
-                'user-bob': { state: 'active' },
+                '@user-bob:example.com': { state: 'active' },
               },
             },
           ],
@@ -66,20 +66,20 @@ describe('<ShowResultsByGroupedNameList/>', () => {
 
     widgetApi.mockSendStateEvent(
       mockRoomMember({
-        state_key: 'user-alice',
+        state_key: '@user-alice:example.com',
         content: { displayname: 'Alice' },
       }),
     );
     widgetApi.mockSendStateEvent(
       mockRoomMember({
-        state_key: 'user-bob',
+        state_key: '@user-bob:example.com',
         content: { displayname: 'Bob' },
       }),
     );
 
     widgetApi.mockSendRoomEvent(
       mockVote({
-        sender: 'user-alice',
+        sender: '@user-alice:example.com',
         origin_server_ts: Date.now(),
         content: {
           pollId: 'poll-0',

@@ -56,7 +56,7 @@ describe('getPollGroups', () => {
         content: {
           abbreviation: 'Group 1',
           members: {
-            '@user-alice': {} as MemberContent,
+            '@user-alice:example.com': {} as MemberContent,
           },
         },
       }),
@@ -75,7 +75,7 @@ describe('getPollGroups', () => {
             abbreviation: 'Group 1',
             color: '#07f556',
             members: {
-              '@user-alice': { memberRole: 'delegate' },
+              '@user-alice:example.com': { memberRole: 'delegate' },
             },
           },
         }),
@@ -137,12 +137,12 @@ describe('getPollGroups', () => {
     // Delete poll group
     widgetApi.mockSendStateEvent({
       type: 'net.nordeck.poll.group',
-      sender: '@user-id',
+      sender: '@user-id:example.com',
       content: {},
       state_key: 'group-0',
       origin_server_ts: 0,
       event_id: '$event-id-0',
-      room_id: '!room-id',
+      room_id: '!room-id:example.com',
     });
 
     await waitFor(() =>

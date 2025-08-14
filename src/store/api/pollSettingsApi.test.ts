@@ -105,7 +105,7 @@ describe('patchPollSettings', () => {
     expect(widgetApi.sendStateEvent).toBeCalledWith(
       'net.nordeck.poll.settings',
       { pollsOrder: ['poll-0'] },
-      { stateKey: '!room-id' },
+      { stateKey: '!room-id:example.com' },
     );
   });
 
@@ -136,7 +136,7 @@ describe('patchPollSettings', () => {
         pollsOrder: ['poll-0'],
         pdfButtonDisabledAfter: '2022-09-28T00:00:00Z',
       },
-      { stateKey: '!room-id' },
+      { stateKey: '!room-id:example.com' },
     );
   });
 

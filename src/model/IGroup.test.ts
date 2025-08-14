@@ -30,15 +30,15 @@ describe('isValidGroupEvent', () => {
           abbreviation: 'CDU',
           color: 'black',
           members: {
-            '@adenauer': { memberRole: 'delegate' },
-            '@erhard': { memberRole: 'representative' },
+            '@adenauer:example.com': { memberRole: 'delegate' },
+            '@erhard:example.com': { memberRole: 'representative' },
           },
         },
         state_key: 'group-id',
         event_id: '$event-id',
         origin_server_ts: 0,
-        room_id: '!room-id',
-        sender: '@user-id',
+        room_id: '!room-id:example.com',
+        sender: '@user-id:example.com',
         type: 'net.nordeck.poll.group',
       }),
     ).toBe(true);
@@ -51,16 +51,22 @@ describe('isValidGroupEvent', () => {
           abbreviation: 'CDU',
           color: 'black',
           members: {
-            '@adenauer': { memberRole: 'delegate', additional: 'data' },
-            '@erhard': { memberRole: 'representative', additional: 'data' },
+            '@adenauer:example.com': {
+              memberRole: 'delegate',
+              additional: 'data',
+            },
+            '@erhard:example.com': {
+              memberRole: 'representative',
+              additional: 'data',
+            },
           },
           additional: 'data',
         },
         state_key: 'group-id',
         event_id: '$event-id',
         origin_server_ts: 0,
-        room_id: '!room-id',
-        sender: '@user-id',
+        room_id: '!room-id:example.com',
+        sender: '@user-id:example.com',
         type: 'net.nordeck.poll.group',
       }),
     ).toBe(true);
@@ -78,13 +84,13 @@ describe('isValidGroupEvent', () => {
     { members: undefined },
     { members: null },
     { members: 111 },
-    { members: { '@adenauer': null } },
-    { members: { '@adenauer': 111 } },
+    { members: { '@adenauer:example.com': null } },
+    { members: { '@adenauer:example.com': 111 } },
     // While the next rule is desired, we need to stay backward compatible
     //{ members: { '@adenauer': { memberRole: undefined } } },
-    { members: { '@adenauer': { memberRole: null } } },
-    { members: { '@adenauer': { memberRole: 111 } } },
-    { members: { '@adenauer': { memberRole: 'unknown' } } },
+    { members: { '@adenauer:example.com': { memberRole: null } } },
+    { members: { '@adenauer:example.com': { memberRole: 111 } } },
+    { members: { '@adenauer:example.com': { memberRole: 'unknown' } } },
   ])('should reject event with patch %j', (patch: object) => {
     expect(
       isValidGroupEvent({
@@ -92,16 +98,16 @@ describe('isValidGroupEvent', () => {
           abbreviation: 'CDU',
           color: 'black',
           members: {
-            '@adenauer': { memberRole: 'delegate' },
-            '@erhard': { memberRole: 'representative' },
+            '@adenauer:example.com': { memberRole: 'delegate' },
+            '@erhard:example.com': { memberRole: 'representative' },
           },
           ...patch,
         },
         state_key: 'group-id',
         event_id: '$event-id',
         origin_server_ts: 0,
-        room_id: '!room-id',
-        sender: '@user-id',
+        room_id: '!room-id:example.com',
+        sender: '@user-id:example.com',
         type: 'net.nordeck.poll.group',
       }),
     ).toBe(false);
@@ -115,10 +121,10 @@ describe('migratePollGroupSchema', () => {
         abbreviation: 'Gruppe 1',
         color: '#1d1adb',
         members: {
-          '@user-alice': {
+          '@user-alice:example.com': {
             memberRole: 'delegate',
           },
-          '@user-charlie': {
+          '@user-charlie:example.com': {
             joinDate: '2022-03-08T09:45:36.862Z',
             leaveDate: '2022-03-08T10:45:36.862Z',
             memberRole: 'representative',
@@ -133,7 +139,7 @@ describe('migratePollGroupSchema', () => {
           abbreviation: 'Gruppe 1',
           color: '#1d1adb',
           members: {
-            '@user-alice': {
+            '@user-alice:example.com': {
               memberRole: 'delegate',
             },
           },
@@ -148,11 +154,11 @@ describe('migratePollGroupSchema', () => {
         abbreviation: 'Gruppe 1',
         color: '#1d1adb',
         members: {
-          '@user-alice': {
+          '@user-alice:example.com': {
             joinDate: '2022-03-08T09:45:33.411Z',
             memberRole: 'delegate',
           } as MemberContent,
-          '@user-bob': {
+          '@user-bob:example.com': {
             joinDate: '2022-03-08T09:45:33.411Z',
             leaveDate: undefined,
             memberRole: 'delegate',
@@ -167,10 +173,10 @@ describe('migratePollGroupSchema', () => {
           abbreviation: 'Gruppe 1',
           color: '#1d1adb',
           members: {
-            '@user-alice': {
+            '@user-alice:example.com': {
               memberRole: 'delegate',
             },
-            '@user-bob': {
+            '@user-bob:example.com': {
               memberRole: 'delegate',
             },
           },
@@ -185,8 +191,8 @@ describe('migratePollGroupSchema', () => {
         abbreviation: 'Gruppe 1',
         color: '#1d1adb',
         members: {
-          '@user-alice': {} as MemberContent,
-          '@user-bob': {
+          '@user-alice:example.com': {} as MemberContent,
+          '@user-bob:example.com': {
             memberRole: 'delegate',
           },
         },
@@ -199,10 +205,10 @@ describe('migratePollGroupSchema', () => {
           abbreviation: 'Gruppe 1',
           color: '#1d1adb',
           members: {
-            '@user-alice': {
+            '@user-alice:example.com': {
               memberRole: 'delegate',
             },
-            '@user-bob': {
+            '@user-bob:example.com': {
               memberRole: 'delegate',
             },
           },

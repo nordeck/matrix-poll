@@ -42,7 +42,7 @@ describe('getRoomMembers', () => {
     widgetApi.mockSendStateEvent(mockRoomMember());
     widgetApi.mockSendStateEvent(
       mockRoomMember({
-        state_key: '@user-bob',
+        state_key: '@user-bob:example.com',
         content: {
           displayname: 'Bob',
           avatar_url: undefined,
@@ -57,18 +57,18 @@ describe('getRoomMembers', () => {
         .dispatch(roomMemberApi.endpoints.getRoomMembers.initiate())
         .unwrap(),
     ).resolves.toEqual({
-      ids: ['@user-alice', '@user-bob'],
+      ids: ['@user-alice:example.com', '@user-bob:example.com'],
       entities: {
-        '@user-alice': expect.objectContaining({
-          state_key: '@user-alice',
+        '@user-alice:example.com': expect.objectContaining({
+          state_key: '@user-alice:example.com',
           content: {
             avatar_url: 'mxc://alice.png',
             membership: 'join',
             displayname: 'Alice',
           },
         }),
-        '@user-bob': expect.objectContaining({
-          state_key: '@user-bob',
+        '@user-bob:example.com': expect.objectContaining({
+          state_key: '@user-bob:example.com',
           content: {
             membership: 'join',
             displayname: 'Bob',
@@ -104,12 +104,12 @@ describe('getRoomMembers', () => {
     await waitFor(() =>
       expect(
         roomMemberApi.endpoints.getRoomMembers.select()(store.getState()).data,
-      ).toEqual(expect.objectContaining({ ids: ['@user-alice'] })),
+      ).toEqual(expect.objectContaining({ ids: ['@user-alice:example.com'] })),
     );
 
     widgetApi.mockSendStateEvent(
       mockRoomMember({
-        state_key: '@user-bob',
+        state_key: '@user-bob:example.com',
         content: {
           displayname: 'Bob',
         },
@@ -119,7 +119,11 @@ describe('getRoomMembers', () => {
     await waitFor(() =>
       expect(
         roomMemberApi.endpoints.getRoomMembers.select()(store.getState()).data,
-      ).toEqual(expect.objectContaining({ ids: ['@user-alice', '@user-bob'] })),
+      ).toEqual(
+        expect.objectContaining({
+          ids: ['@user-alice:example.com', '@user-bob:example.com'],
+        }),
+      ),
     );
   });
 });
@@ -127,31 +131,31 @@ describe('getRoomMembers', () => {
 describe('selectActiveRoomMembers', () => {
   it('should include users that are join and invite', () => {
     const joinUser = mockRoomMember({
-      state_key: '@join-user',
+      state_key: '@join-user:example.com',
       content: {
         membership: 'join',
       },
     });
     const inviteUser = mockRoomMember({
-      state_key: '@invite-user',
+      state_key: '@invite-user:example.com',
       content: {
         membership: 'invite',
       },
     });
     const leaveUser = mockRoomMember({
-      state_key: '@leave-user',
+      state_key: '@leave-user:example.com',
       content: {
         membership: 'leave',
       },
     });
     const knockUser = mockRoomMember({
-      state_key: '@knock-user',
+      state_key: '@knock-user:example.com',
       content: {
         membership: 'knock',
       },
     });
     const banUser = mockRoomMember({
-      state_key: '@ban-user',
+      state_key: '@ban-user:example.com',
       content: {
         membership: 'ban',
       },
@@ -178,16 +182,18 @@ describe('selectActiveRoomMembers', () => {
   });
 
   it('should exclude users that are ignored', () => {
-    vi.mocked(getEnvironment).mockReturnValue('@other-user,@invite-user');
+    vi.mocked(getEnvironment).mockReturnValue(
+      '@other-user:example.com,@invite-user:example.com',
+    );
 
     const joinUser = mockRoomMember({
-      state_key: '@join-user',
+      state_key: '@join-use:example.comr',
       content: {
         membership: 'join',
       },
     });
     const inviteUser = mockRoomMember({
-      state_key: '@invite-user',
+      state_key: '@invite-user:example.com',
       content: {
         membership: 'invite',
       },

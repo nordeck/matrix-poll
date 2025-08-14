@@ -26,6 +26,7 @@ import {
   mockGroup,
   mockPowerLevelsEvent,
   mockRoomMember,
+  mockRoomVersion11CreateEvent,
 } from '../../../lib/testUtils';
 import { createStore } from '../../../store';
 import { GroupModalResult } from '../CreateGroupModal';
@@ -41,12 +42,13 @@ describe('<AdminPanel/>', () => {
   let Wrapper: ComponentType<PropsWithChildren<{}>>;
 
   beforeEach(() => {
+    widgetApi.mockSendStateEvent(mockRoomVersion11CreateEvent());
     widgetApi.mockSendStateEvent(mockRoomMember());
 
     widgetApi.mockSendStateEvent(
       mockRoomMember({
-        state_key: 'user-bob',
-        event_id: 'id-2',
+        state_key: '@user-bob:example.com',
+        event_id: '$id-2',
         content: {
           displayname: 'Bob',
           membership: 'join',
@@ -59,8 +61,8 @@ describe('<AdminPanel/>', () => {
       mockGroup({
         content: {
           members: {
-            'user-alice': { memberRole: 'delegate' },
-            'user-bob': { memberRole: 'representative' },
+            '@user-alice:example.com': { memberRole: 'delegate' },
+            '@user-bob:example.com': { memberRole: 'representative' },
           },
         },
       }),
@@ -116,6 +118,7 @@ describe('<AdminPanel/>', () => {
 
   it('should render empty group notice', async () => {
     widgetApi.clearStateEvents();
+    widgetApi.mockSendStateEvent(mockRoomVersion11CreateEvent());
 
     render(<AdminPanel />, { wrapper: Wrapper });
 

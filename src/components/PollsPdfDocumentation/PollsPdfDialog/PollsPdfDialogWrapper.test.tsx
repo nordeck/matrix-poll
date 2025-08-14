@@ -49,7 +49,7 @@ describe('<PollsPdfDialogWrapper>', () => {
 
     widgetApi.mockSendStateEvent(
       mockRoomMember({
-        state_key: '@user-id',
+        state_key: '@user-id:example.com',
         content: {
           displayname: 'My User',
         },
@@ -70,7 +70,10 @@ describe('<PollsPdfDialogWrapper>', () => {
     );
 
     widgetApi.mockSendRoomEvent(
-      mockVote({ sender: '@user-alice', origin_server_ts: 1577923215000 }),
+      mockVote({
+        sender: '@user-alice:example.com',
+        origin_server_ts: 1577923215000,
+      }),
     );
 
     widgetApi.mockSendStateEvent(
@@ -121,7 +124,7 @@ describe('<PollsPdfDialogWrapper>', () => {
 
     expect(vi.mocked(createPollPdf)).toBeCalledTimes(1);
     expect(vi.mocked(createPollPdf)).toBeCalledWith({
-      authorName: '@user-id',
+      authorName: '@user-id:example.com',
       getUserDisplayName: expect.any(Function),
       pollResults: [
         {
@@ -142,18 +145,18 @@ describe('<PollsPdfDialogWrapper>', () => {
             },
             event_id: '$event-id-0',
             origin_server_ts: 0,
-            room_id: '!room-id',
-            sender: '@user-id',
+            room_id: '!room-id:example.com',
+            sender: '@user-id:example.com',
             state_key: 'poll-1',
             type: 'net.nordeck.poll',
           },
           results: {
             votes: {
-              '@user-alice': PollInvalidAnswer,
-              '@user-id': PollInvalidAnswer,
+              '@user-alice:example.com': PollInvalidAnswer,
+              '@user-id:example.com': PollInvalidAnswer,
             },
           },
-          votingRights: ['@user-alice', '@user-id'],
+          votingRights: ['@user-alice:example.com', '@user-id:example.com'],
         },
         {
           poll: {
@@ -173,18 +176,18 @@ describe('<PollsPdfDialogWrapper>', () => {
             },
             event_id: '$event-id-0',
             origin_server_ts: 0,
-            room_id: '!room-id',
-            sender: '@user-id',
+            room_id: '!room-id:example.com',
+            sender: '@user-id:example.com',
             state_key: 'poll-0',
             type: 'net.nordeck.poll',
           },
           results: {
             votes: {
-              '@user-alice': '1',
-              '@user-id': PollInvalidAnswer,
+              '@user-alice:example.com': '1',
+              '@user-id:example.com': PollInvalidAnswer,
             },
           },
-          votingRights: ['@user-alice', '@user-id'],
+          votingRights: ['@user-alice:example.com', '@user-id:example.com'],
         },
       ],
       roomMemberEvents: [
@@ -196,9 +199,9 @@ describe('<PollsPdfDialogWrapper>', () => {
           },
           event_id: '$event-id-0',
           origin_server_ts: 0,
-          room_id: '!room-id',
-          sender: '@user-id',
-          state_key: '@user-alice',
+          room_id: '!room-id:example.com',
+          sender: '@user-id:example.com',
+          state_key: '@user-alice:example.com',
           type: 'm.room.member',
         },
         {
@@ -209,9 +212,9 @@ describe('<PollsPdfDialogWrapper>', () => {
           },
           event_id: '$event-id-0',
           origin_server_ts: 0,
-          room_id: '!room-id',
-          sender: '@user-id',
-          state_key: '@user-id',
+          room_id: '!room-id:example.com',
+          sender: '@user-id:example.com',
+          state_key: '@user-id:example.com',
           type: 'm.room.member',
         },
       ],

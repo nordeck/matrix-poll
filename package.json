@@ -11,9 +11,9 @@
     "@carbon/charts-react": "^1.6.14",
     "@carbon/import-once": "^10.7.0",
     "@carbon/styles": "^1.75.0",
-    "@matrix-widget-toolkit/api": "^4.2.0",
-    "@matrix-widget-toolkit/mui": "^2.1.1",
-    "@matrix-widget-toolkit/react": "^2.0.6",
+    "@matrix-widget-toolkit/api": "^5.0.1",
+    "@matrix-widget-toolkit/mui": "^2.2.0",
+    "@matrix-widget-toolkit/react": "^2.1.0",
     "@mui/icons-material": "^5.15.6",
     "@mui/lab": "^5.0.0-alpha.154",
     "@mui/material": "^5.14.10",
@@ -45,7 +45,7 @@
     "@changesets/cli": "^2.28.0",
     "@eslint/compat": "^1.2.9",
     "@eslint/js": "^9.28.0",
-    "@matrix-widget-toolkit/testing": "^3.1.0",
+    "@matrix-widget-toolkit/testing": "^4.0.0",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.0.1",
@@ -145,5 +145,6 @@
   },
   "bugs": {
     "url": "https://github.com/nordeck/matrix-poll/issues"
-  }
+  },
+  "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610"
 }

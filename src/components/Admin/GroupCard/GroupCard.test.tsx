@@ -23,7 +23,11 @@ import userEvent from '@testing-library/user-event';
 import { ComponentType, PropsWithChildren, useMemo } from 'react';
 import { Provider } from 'react-redux';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { mockGroup, mockRoomMember } from '../../../lib/testUtils';
+import {
+  mockGroup,
+  mockRoomMember,
+  mockRoomVersion11CreateEvent,
+} from '../../../lib/testUtils';
 import { GroupContent } from '../../../model';
 import { createStore } from '../../../store';
 import { GroupCard } from './GroupCard';
@@ -39,11 +43,12 @@ describe('<GroupCard/>', () => {
   let group: StateEvent<GroupContent>;
 
   beforeEach(async () => {
+    widgetApi.mockSendStateEvent(mockRoomVersion11CreateEvent());
     widgetApi.mockSendStateEvent(mockRoomMember());
 
     widgetApi.mockSendStateEvent(
       mockRoomMember({
-        state_key: 'user-bob',
+        state_key: '@user-bob:example.com',
         event_id: 'id-2',
         content: {
           displayname: 'Bob',
@@ -57,8 +62,8 @@ describe('<GroupCard/>', () => {
       mockGroup({
         content: {
           members: {
-            'user-alice': { memberRole: 'delegate' },
-            'user-bob': { memberRole: 'representative' },
+            '@user-alice:example.com': { memberRole: 'delegate' },
+            '@user-bob:example.com': { memberRole: 'representative' },
           },
         },
       }),

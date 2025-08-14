@@ -126,7 +126,9 @@ describe('selectPollResults', () => {
         },
       }),
     );
-    widgetApi.mockSendStateEvent(mockRoomMember({ state_key: '@user' }));
+    widgetApi.mockSendStateEvent(
+      mockRoomMember({ state_key: '@user:example.com' }),
+    );
 
     const { result } = renderHook(
       () =>
@@ -142,8 +144,8 @@ describe('selectPollResults', () => {
         isLoading: false,
         data: {
           poll,
-          results: { votes: { '@user': PollInvalidAnswer } },
-          votingRights: ['@user'],
+          results: { votes: { '@user:example.com': PollInvalidAnswer } },
+          votingRights: ['@user:example.com'],
         },
       }),
     );
@@ -184,7 +186,9 @@ describe('selectPollResults', () => {
         },
       }),
     );
-    widgetApi.mockSendStateEvent(mockRoomMember({ state_key: '@user' }));
+    widgetApi.mockSendStateEvent(
+      mockRoomMember({ state_key: '@user:example.com' }),
+    );
 
     const { result } = renderHook(
       () => usePollResults('my-poll', { includeInvalidVotes: true }),
@@ -196,8 +200,8 @@ describe('selectPollResults', () => {
         isLoading: false,
         data: {
           poll,
-          results: { votes: { '@user': PollInvalidAnswer } },
-          votingRights: ['@user'],
+          results: { votes: { '@user:example.com': PollInvalidAnswer } },
+          votingRights: ['@user:example.com'],
         },
       }),
     );
@@ -208,9 +212,9 @@ describe('selectPollResults', () => {
       mockPowerLevelsEvent({
         content: {
           users: {
-            '@user-with-power-1': 50,
-            '@user-with-power-2': 50,
-            '@user-without-power': 10,
+            '@user-with-power-1:example.com': 50,
+            '@user-with-power-2:example.com': 50,
+            '@user-without-power:example.com': 10,
           },
           events: {
             'net.nordeck.poll.vote': 50,
@@ -221,13 +225,13 @@ describe('selectPollResults', () => {
       }),
     );
     widgetApi.mockSendStateEvent(
-      mockRoomMember({ state_key: '@user-with-power-1' }),
+      mockRoomMember({ state_key: '@user-with-power-1:example.com' }),
     );
     widgetApi.mockSendStateEvent(
-      mockRoomMember({ state_key: '@user-with-power-2' }),
+      mockRoomMember({ state_key: '@user-with-power-2:example.com' }),
     );
     widgetApi.mockSendStateEvent(
-      mockRoomMember({ state_key: '@user-without-power' }),
+      mockRoomMember({ state_key: '@user-without-power:example.com' }),
     );
     const poll = widgetApi.mockSendStateEvent(
       mockPoll({
@@ -245,7 +249,7 @@ describe('selectPollResults', () => {
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
-        sender: '@user-with-power-1',
+        sender: '@user-with-power-1:example.com',
         event_id: '0',
         content: { pollId: 'my-poll', answerId: '1' },
         origin_server_ts: Date.now(),
@@ -253,7 +257,7 @@ describe('selectPollResults', () => {
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
-        sender: '@user-with-power-2',
+        sender: '@user-with-power-2:example.com',
         event_id: '1',
         content: { pollId: 'my-poll', answerId: '1' },
         origin_server_ts: Date.now(),
@@ -261,7 +265,7 @@ describe('selectPollResults', () => {
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
-        sender: '@user-without-power',
+        sender: '@user-without-power:example.com',
         event_id: '2',
         content: { pollId: 'my-poll', answerId: '2' },
         origin_server_ts: Date.now(),
@@ -279,15 +283,15 @@ describe('selectPollResults', () => {
         data: {
           poll,
           votingRights: [
-            '@user-with-power-1',
-            '@user-with-power-2',
-            '@user-without-power',
+            '@user-with-power-1:example.com',
+            '@user-with-power-2:example.com',
+            '@user-without-power:example.com',
           ],
           results: {
             votes: {
-              '@user-with-power-1': '1',
-              '@user-with-power-2': '1',
-              '@user-without-power': '2',
+              '@user-with-power-1:example.com': '1',
+              '@user-with-power-2:example.com': '1',
+              '@user-without-power:example.com': '2',
             },
           },
         },
@@ -297,7 +301,7 @@ describe('selectPollResults', () => {
 
   it('should not return any votes, when vote loading is skipped', async () => {
     widgetApi.mockSendStateEvent(
-      mockRoomMember({ state_key: '@user-with-power-1' }),
+      mockRoomMember({ state_key: '@user-with-power-1:example.com' }),
     );
     const poll = widgetApi.mockSendStateEvent(
       mockPoll({
@@ -315,7 +319,7 @@ describe('selectPollResults', () => {
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
-        sender: '@user-with-power-1',
+        sender: '@user-with-power-1:example.com',
         event_id: '0',
         content: { pollId: 'my-poll', answerId: '1' },
         origin_server_ts: Date.now(),
@@ -336,10 +340,10 @@ describe('selectPollResults', () => {
         isLoading: false,
         data: {
           poll,
-          votingRights: ['@user-with-power-1'],
+          votingRights: ['@user-with-power-1:example.com'],
           results: {
             votes: {
-              '@user-with-power-1': PollInvalidAnswer,
+              '@user-with-power-1:example.com': PollInvalidAnswer,
             },
           },
         },
@@ -352,8 +356,8 @@ describe('selectPollResults', () => {
       mockPowerLevelsEvent({
         content: {
           users: {
-            '@user-with-power-1': 50,
-            '@user-without-power': 10,
+            '@user-with-power-1:example.com': 50,
+            '@user-without-power:example.com': 10,
           },
           events: {
             'net.nordeck.poll.vote': 50,
@@ -364,10 +368,10 @@ describe('selectPollResults', () => {
       }),
     );
     widgetApi.mockSendStateEvent(
-      mockRoomMember({ state_key: '@user-with-power-1' }),
+      mockRoomMember({ state_key: '@user-with-power-1:example.com' }),
     );
     widgetApi.mockSendStateEvent(
-      mockRoomMember({ state_key: '@user-without-power' }),
+      mockRoomMember({ state_key: '@user-without-power:example.com' }),
     );
     const poll = widgetApi.mockSendStateEvent(
       mockPoll({
@@ -394,10 +398,10 @@ describe('selectPollResults', () => {
         isLoading: false,
         data: {
           poll,
-          votingRights: ['@user-with-power-1'],
+          votingRights: ['@user-with-power-1:example.com'],
           results: {
             votes: {
-              '@user-with-power-1': PollInvalidAnswer,
+              '@user-with-power-1:example.com': PollInvalidAnswer,
             },
           },
         },
@@ -410,8 +414,8 @@ describe('selectPollResults', () => {
       mockPowerLevelsEvent({
         content: {
           users: {
-            '@user-with-power-1': 50,
-            '@user-with-power-2': 50,
+            '@user-with-power-1:example.com': 50,
+            '@user-with-power-2:example.com': 50,
           },
           events: {
             'net.nordeck.poll.vote': 50,
@@ -422,11 +426,11 @@ describe('selectPollResults', () => {
       }),
     );
     widgetApi.mockSendStateEvent(
-      mockRoomMember({ state_key: '@user-with-power-1' }),
+      mockRoomMember({ state_key: '@user-with-power-1:example.com' }),
     );
     widgetApi.mockSendStateEvent(
       mockRoomMember({
-        state_key: '@user-with-power-2',
+        state_key: '@user-with-power-2:example.com',
         content: { membership: 'leave' },
       }),
     );
@@ -455,10 +459,10 @@ describe('selectPollResults', () => {
         isLoading: false,
         data: {
           poll,
-          votingRights: ['@user-with-power-1'],
+          votingRights: ['@user-with-power-1:example.com'],
           results: {
             votes: {
-              '@user-with-power-1': PollInvalidAnswer,
+              '@user-with-power-1:example.com': PollInvalidAnswer,
             },
           },
         },
@@ -469,10 +473,10 @@ describe('selectPollResults', () => {
   it('should ignore missing answers if not enabled without groups', async () => {
     widgetApi.mockSendStateEvent(mockPowerLevelsEvent());
     widgetApi.mockSendStateEvent(
-      mockRoomMember({ state_key: '@user-with-power-1' }),
+      mockRoomMember({ state_key: '@user-with-power-1:example.com' }),
     );
     widgetApi.mockSendStateEvent(
-      mockRoomMember({ state_key: '@user-with-power-2' }),
+      mockRoomMember({ state_key: '@user-with-power-2:example.com' }),
     );
     const poll = widgetApi.mockSendStateEvent(
       mockPoll({
@@ -526,7 +530,7 @@ describe('selectPollResults', () => {
               abbreviation: 'Group 1',
               color: '#ff0000',
               votingRights: {
-                '@user-delegate-1': { state: 'active' },
+                '@user-delegate-1:example.com': { state: 'active' },
               },
             },
             {
@@ -535,7 +539,7 @@ describe('selectPollResults', () => {
               abbreviation: 'Group 2',
               color: '#0000ff',
               votingRights: {
-                '@user-delegate-2': { state: 'active' },
+                '@user-delegate-2:example.com': { state: 'active' },
               },
             },
           ],
@@ -553,11 +557,14 @@ describe('selectPollResults', () => {
         isLoading: false,
         data: {
           poll,
-          votingRights: ['@user-delegate-1', '@user-delegate-2'],
+          votingRights: [
+            '@user-delegate-1:example.com',
+            '@user-delegate-2:example.com',
+          ],
           results: {
             votes: {
-              '@user-delegate-1': PollInvalidAnswer,
-              '@user-delegate-2': PollInvalidAnswer,
+              '@user-delegate-1:example.com': PollInvalidAnswer,
+              '@user-delegate-2:example.com': PollInvalidAnswer,
             },
           },
           groupedResults: {
@@ -565,7 +572,7 @@ describe('selectPollResults', () => {
               abbreviation: 'Group 1',
               color: '#ff0000',
               votes: {
-                '@user-delegate-1': PollInvalidAnswer,
+                '@user-delegate-1:example.com': PollInvalidAnswer,
               },
               invalidVoters: {},
             },
@@ -573,7 +580,7 @@ describe('selectPollResults', () => {
               abbreviation: 'Group 2',
               color: '#0000ff',
               votes: {
-                '@user-delegate-2': PollInvalidAnswer,
+                '@user-delegate-2:example.com': PollInvalidAnswer,
               },
               invalidVoters: {},
             },
@@ -601,7 +608,7 @@ describe('selectPollResults', () => {
               abbreviation: 'Group 1',
               color: '#ff0000',
               votingRights: {
-                '@user-delegate-1': { state: 'active' },
+                '@user-delegate-1:example.com': { state: 'active' },
               },
             },
             {
@@ -610,7 +617,7 @@ describe('selectPollResults', () => {
               abbreviation: 'Group 2',
               color: '#0000ff',
               votingRights: {
-                '@user-delegate-2': { state: 'active' },
+                '@user-delegate-2:example.com': { state: 'active' },
               },
             },
           ],
@@ -669,7 +676,7 @@ describe('selectPollResults', () => {
               abbreviation: 'Group 1',
               color: '#ff0000',
               votingRights: {
-                '@user-delegate-1': { state: 'active' },
+                '@user-delegate-1:example.com': { state: 'active' },
               },
             },
             {
@@ -678,7 +685,7 @@ describe('selectPollResults', () => {
               abbreviation: 'Group 2',
               color: '#0000ff',
               votingRights: {
-                '@user-delegate-2': { state: 'active' },
+                '@user-delegate-2:example.com': { state: 'active' },
               },
             },
           ],
@@ -688,14 +695,14 @@ describe('selectPollResults', () => {
 
     widgetApi.mockSendRoomEvent(
       mockVote({
-        sender: '@user-delegate-1',
+        sender: '@user-delegate-1:example.com',
         content: { pollId: 'my-poll', answerId: '1' },
         origin_server_ts: Date.now(),
       }),
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
-        sender: '@user-delegate-2',
+        sender: '@user-delegate-2:example.com',
         content: { pollId: 'my-poll', answerId: '2' },
         origin_server_ts: Date.now(),
       }),
@@ -711,24 +718,27 @@ describe('selectPollResults', () => {
         isLoading: false,
         data: {
           poll,
-          votingRights: ['@user-delegate-1', '@user-delegate-2'],
+          votingRights: [
+            '@user-delegate-1:example.com',
+            '@user-delegate-2:example.com',
+          ],
           results: {
             votes: {
-              '@user-delegate-1': '1',
-              '@user-delegate-2': '2',
+              '@user-delegate-1:example.com': '1',
+              '@user-delegate-2:example.com': '2',
             },
           },
           groupedResults: {
             'group-1': {
               abbreviation: 'Group 1',
               color: '#ff0000',
-              votes: { '@user-delegate-1': '1' },
+              votes: { '@user-delegate-1:example.com': '1' },
               invalidVoters: {},
             },
             'group-2': {
               abbreviation: 'Group 2',
               color: '#0000ff',
-              votes: { '@user-delegate-2': '2' },
+              votes: { '@user-delegate-2:example.com': '2' },
               invalidVoters: {},
             },
           },
@@ -755,8 +765,8 @@ describe('selectPollResults', () => {
               abbreviation: 'Group 1',
               color: '#ff0000',
               votingRights: {
-                '@user-delegate-1': { state: 'active' },
-                '@user-delegate-2': { state: 'invalid' },
+                '@user-delegate-1:example.com': { state: 'active' },
+                '@user-delegate-2:example.com': { state: 'invalid' },
               },
             },
             {
@@ -765,7 +775,7 @@ describe('selectPollResults', () => {
               abbreviation: 'Group 2',
               color: '#0000ff',
               votingRights: {
-                '@user-delegate-3': { state: 'invalid' },
+                '@user-delegate-3:example.com': { state: 'invalid' },
               },
             },
           ],
@@ -774,7 +784,7 @@ describe('selectPollResults', () => {
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
-        sender: '@user-delegate-1',
+        sender: '@user-delegate-1:example.com',
         content: { pollId: 'my-poll', answerId: '1' },
         origin_server_ts: Date.now(),
       }),
@@ -790,17 +800,17 @@ describe('selectPollResults', () => {
         isLoading: false,
         data: {
           poll,
-          votingRights: ['@user-delegate-1'],
+          votingRights: ['@user-delegate-1:example.com'],
           results: {
-            votes: { '@user-delegate-1': '1' },
+            votes: { '@user-delegate-1:example.com': '1' },
           },
           groupedResults: {
             'group-1': {
               abbreviation: 'Group 1',
               color: '#ff0000',
-              votes: { '@user-delegate-1': '1' },
+              votes: { '@user-delegate-1:example.com': '1' },
               invalidVoters: {
-                '@user-delegate-2': { state: 'invalid' },
+                '@user-delegate-2:example.com': { state: 'invalid' },
               },
             },
             'group-2': {
@@ -808,7 +818,7 @@ describe('selectPollResults', () => {
               color: '#0000ff',
               votes: {},
               invalidVoters: {
-                '@user-delegate-3': { state: 'invalid' },
+                '@user-delegate-3:example.com': { state: 'invalid' },
               },
             },
           },
@@ -835,9 +845,9 @@ describe('selectPollResults', () => {
               abbreviation: 'Group 1',
               color: '#ff0000',
               votingRights: {
-                '@user-delegate': {
+                '@user-delegate:example.com': {
                   state: 'represented',
-                  representedBy: '@user-backup',
+                  representedBy: '@user-backup:example.com',
                 },
               },
             },
@@ -847,7 +857,7 @@ describe('selectPollResults', () => {
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
-        sender: '@user-backup',
+        sender: '@user-backup:example.com',
         content: { pollId: 'my-poll', answerId: '1' },
         origin_server_ts: Date.now(),
       }),
@@ -863,19 +873,19 @@ describe('selectPollResults', () => {
         isLoading: false,
         data: {
           poll,
-          votingRights: ['@user-backup'],
+          votingRights: ['@user-backup:example.com'],
           results: {
-            votes: { '@user-backup': '1' },
+            votes: { '@user-backup:example.com': '1' },
           },
           groupedResults: {
             'group-1': {
               abbreviation: 'Group 1',
               color: '#ff0000',
-              votes: { '@user-backup': '1' },
+              votes: { '@user-backup:example.com': '1' },
               invalidVoters: {
-                '@user-delegate': {
+                '@user-delegate:example.com': {
                   state: 'represented',
-                  representedBy: '@user-backup',
+                  representedBy: '@user-backup:example.com',
                 },
               },
             },
@@ -903,9 +913,9 @@ describe('selectPollResults', () => {
               abbreviation: 'Group 1',
               color: '#ff0000',
               votingRights: {
-                '@user-delegate': {
+                '@user-delegate:example.com': {
                   state: 'represented',
-                  representedBy: '@user-backup',
+                  representedBy: '@user-backup:example.com',
                 },
               },
             },
@@ -924,19 +934,19 @@ describe('selectPollResults', () => {
         isLoading: false,
         data: {
           poll,
-          votingRights: ['@user-backup'],
+          votingRights: ['@user-backup:example.com'],
           results: {
-            votes: { '@user-backup': PollInvalidAnswer },
+            votes: { '@user-backup:example.com': PollInvalidAnswer },
           },
           groupedResults: {
             'group-1': {
               abbreviation: 'Group 1',
               color: '#ff0000',
-              votes: { '@user-backup': PollInvalidAnswer },
+              votes: { '@user-backup:example.com': PollInvalidAnswer },
               invalidVoters: {
-                '@user-delegate': {
+                '@user-delegate:example.com': {
                   state: 'represented',
-                  representedBy: '@user-backup',
+                  representedBy: '@user-backup:example.com',
                 },
               },
             },
@@ -964,9 +974,9 @@ describe('selectPollResults', () => {
               abbreviation: 'Group 1',
               color: '#ff0000',
               votingRights: {
-                '@user-delegate-1': { state: 'active' },
-                '@user-delegate-2': { state: 'active' },
-                '@user-delegate-3': { state: 'invalid' },
+                '@user-delegate-1:example.com': { state: 'active' },
+                '@user-delegate-2:example.com': { state: 'active' },
+                '@user-delegate-3:example.com': { state: 'invalid' },
               },
             },
             {
@@ -975,9 +985,9 @@ describe('selectPollResults', () => {
               abbreviation: 'Group 2',
               color: '#0000ff',
               votingRights: {
-                '@user-delegate-1': { state: 'active' },
-                '@user-delegate-2': { state: 'invalid' },
-                '@user-delegate-3': { state: 'active' },
+                '@user-delegate-1:example.com': { state: 'active' },
+                '@user-delegate-2:example.com': { state: 'invalid' },
+                '@user-delegate-3:example.com': { state: 'active' },
               },
             },
           ],
@@ -986,14 +996,14 @@ describe('selectPollResults', () => {
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
-        sender: '@user-delegate-1',
+        sender: '@user-delegate-1:example.com',
         content: { pollId: 'my-poll', answerId: '1' },
         origin_server_ts: Date.now(),
       }),
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
-        sender: '@user-delegate-2',
+        sender: '@user-delegate-2:example.com',
         content: { pollId: 'my-poll', answerId: '2' },
         origin_server_ts: Date.now(),
       }),
@@ -1009,11 +1019,14 @@ describe('selectPollResults', () => {
         isLoading: false,
         data: {
           poll,
-          votingRights: ['@user-delegate-1', '@user-delegate-2'],
+          votingRights: [
+            '@user-delegate-1:example.com',
+            '@user-delegate-2:example.com',
+          ],
           results: {
             votes: {
-              '@user-delegate-1': '1',
-              '@user-delegate-2': '2',
+              '@user-delegate-1:example.com': '1',
+              '@user-delegate-2:example.com': '2',
             },
           },
           groupedResults: {
@@ -1021,11 +1034,11 @@ describe('selectPollResults', () => {
               abbreviation: 'Group 1',
               color: '#ff0000',
               votes: {
-                '@user-delegate-1': '1',
-                '@user-delegate-2': '2',
+                '@user-delegate-1:example.com': '1',
+                '@user-delegate-2:example.com': '2',
               },
               invalidVoters: {
-                '@user-delegate-3': { state: 'invalid' },
+                '@user-delegate-3:example.com': { state: 'invalid' },
               },
             },
             'group-2': {
@@ -1058,9 +1071,9 @@ describe('selectPollResults', () => {
               abbreviation: 'Group 1',
               color: '#ff0000',
               votingRights: {
-                '@user-delegate-1': {
+                '@user-delegate-1:example.com': {
                   state: 'represented',
-                  representedBy: '@user-backup',
+                  representedBy: '@user-backup:example.com',
                 },
               },
             },
@@ -1070,9 +1083,9 @@ describe('selectPollResults', () => {
               abbreviation: 'Group 2',
               color: '#0000ff',
               votingRights: {
-                '@user-delegate-2': {
+                '@user-delegate-2:example.com': {
                   state: 'represented',
-                  representedBy: '@user-backup',
+                  representedBy: '@user-backup:example.com',
                 },
               },
             },
@@ -1082,7 +1095,7 @@ describe('selectPollResults', () => {
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
-        sender: '@user-backup',
+        sender: '@user-backup:example.com',
         content: { pollId: 'my-poll', answerId: '1' },
         origin_server_ts: Date.now(),
       }),
@@ -1098,19 +1111,19 @@ describe('selectPollResults', () => {
         isLoading: false,
         data: {
           poll,
-          votingRights: ['@user-backup'],
+          votingRights: ['@user-backup:example.com'],
           results: {
-            votes: { '@user-backup': '1' },
+            votes: { '@user-backup:example.com': '1' },
           },
           groupedResults: {
             'group-1': {
               abbreviation: 'Group 1',
               color: '#ff0000',
-              votes: { '@user-backup': '1' },
+              votes: { '@user-backup:example.com': '1' },
               invalidVoters: {
-                '@user-delegate-1': {
+                '@user-delegate-1:example.com': {
                   state: 'represented',
-                  representedBy: '@user-backup',
+                  representedBy: '@user-backup:example.com',
                 },
               },
             },
@@ -1119,7 +1132,7 @@ describe('selectPollResults', () => {
               color: '#0000ff',
               votes: {},
               invalidVoters: {
-                '@user-delegate-2': { state: 'invalid' },
+                '@user-delegate-2:example.com': { state: 'invalid' },
               },
             },
           },
@@ -1146,13 +1159,13 @@ describe('selectPollResults', () => {
               abbreviation: 'Group 1',
               color: '#ff0000',
               votingRights: {
-                '@user-delegate-1': {
+                '@user-delegate-1:example.com': {
                   state: 'represented',
-                  representedBy: '@user-backup',
+                  representedBy: '@user-backup:example.com',
                 },
-                '@user-delegate-2': {
+                '@user-delegate-2:example.com': {
                   state: 'represented',
-                  representedBy: '@user-backup',
+                  representedBy: '@user-backup:example.com',
                 },
               },
             },
@@ -1162,7 +1175,7 @@ describe('selectPollResults', () => {
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
-        sender: '@user-backup',
+        sender: '@user-backup:example.com',
         content: { pollId: 'my-poll', answerId: '1' },
         origin_server_ts: Date.now(),
       }),
@@ -1178,21 +1191,21 @@ describe('selectPollResults', () => {
         isLoading: false,
         data: {
           poll,
-          votingRights: ['@user-backup'],
+          votingRights: ['@user-backup:example.com'],
           results: {
-            votes: { '@user-backup': '1' },
+            votes: { '@user-backup:example.com': '1' },
           },
           groupedResults: {
             'group-1': {
               abbreviation: 'Group 1',
               color: '#ff0000',
-              votes: { '@user-backup': '1' },
+              votes: { '@user-backup:example.com': '1' },
               invalidVoters: {
-                '@user-delegate-1': {
+                '@user-delegate-1:example.com': {
                   state: 'represented',
-                  representedBy: '@user-backup',
+                  representedBy: '@user-backup:example.com',
                 },
-                '@user-delegate-2': { state: 'invalid' },
+                '@user-delegate-2:example.com': { state: 'invalid' },
               },
             },
           },
@@ -1219,11 +1232,11 @@ describe('selectPollResults', () => {
               abbreviation: 'Group 1',
               color: '#ff0000',
               votingRights: {
-                '@user-delegate-1': {
+                '@user-delegate-1:example.com': {
                   state: 'represented',
-                  representedBy: '@user-delegate-2',
+                  representedBy: '@user-delegate-2:example.com',
                 },
-                '@user-delegate-2': { state: 'active' },
+                '@user-delegate-2:example.com': { state: 'active' },
               },
             },
           ],
@@ -1232,7 +1245,7 @@ describe('selectPollResults', () => {
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
-        sender: '@user-delegate-2',
+        sender: '@user-delegate-2:example.com',
         content: { pollId: 'my-poll', answerId: '1' },
         origin_server_ts: Date.now(),
       }),
@@ -1248,17 +1261,17 @@ describe('selectPollResults', () => {
         isLoading: false,
         data: {
           poll,
-          votingRights: ['@user-delegate-2'],
+          votingRights: ['@user-delegate-2:example.com'],
           results: {
-            votes: { '@user-delegate-2': '1' },
+            votes: { '@user-delegate-2:example.com': '1' },
           },
           groupedResults: {
             'group-1': {
               abbreviation: 'Group 1',
               color: '#ff0000',
-              votes: { '@user-delegate-2': '1' },
+              votes: { '@user-delegate-2:example.com': '1' },
               invalidVoters: {
-                '@user-delegate-1': { state: 'invalid' },
+                '@user-delegate-1:example.com': { state: 'invalid' },
               },
             },
           },
@@ -1270,7 +1283,7 @@ describe('selectPollResults', () => {
   it('should ignore ignored users', async () => {
     vi.mocked(getEnvironment).mockImplementation((name, defaultValue) =>
       name === 'REACT_APP_IGNORE_USER_IDS'
-        ? '@user-with-power-2'
+        ? '@user-with-power-2:example.com'
         : defaultValue,
     );
 
@@ -1278,8 +1291,8 @@ describe('selectPollResults', () => {
       mockPowerLevelsEvent({
         content: {
           users: {
-            '@user-with-power-1': 50,
-            '@user-with-power-2': 50,
+            '@user-with-power-1:example.com': 50,
+            '@user-with-power-2:example.com': 50,
           },
           events: {
             'net.nordeck.poll.vote': 50,
@@ -1290,10 +1303,10 @@ describe('selectPollResults', () => {
       }),
     );
     widgetApi.mockSendStateEvent(
-      mockRoomMember({ state_key: '@user-with-power-1' }),
+      mockRoomMember({ state_key: '@user-with-power-1:example.com' }),
     );
     widgetApi.mockSendStateEvent(
-      mockRoomMember({ state_key: '@user-with-power-2' }),
+      mockRoomMember({ state_key: '@user-with-power-2:example.com' }),
     );
     const poll = widgetApi.mockSendStateEvent(
       mockPoll({
@@ -1320,10 +1333,10 @@ describe('selectPollResults', () => {
         isLoading: false,
         data: {
           poll,
-          votingRights: ['@user-with-power-1'],
+          votingRights: ['@user-with-power-1:example.com'],
           results: {
             votes: {
-              '@user-with-power-1': PollInvalidAnswer,
+              '@user-with-power-1:example.com': PollInvalidAnswer,
             },
           },
         },
@@ -1349,7 +1362,7 @@ describe('selectPollResults', () => {
               abbreviation: 'Group 1',
               color: '#ff0000',
               votingRights: {
-                '@user-delegate': { state: 'active' },
+                '@user-delegate:example.com': { state: 'active' },
               },
             },
           ],
@@ -1358,14 +1371,14 @@ describe('selectPollResults', () => {
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
-        sender: '@user-delegate',
+        sender: '@user-delegate:example.com',
         content: { pollId: 'my-poll', answerId: '1' },
         origin_server_ts: Date.now(),
       }),
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
-        sender: '@user-1',
+        sender: '@user-1:example.com',
         content: { pollId: 'my-poll', answerId: '2' },
         origin_server_ts: Date.now(),
       }),
@@ -1381,15 +1394,15 @@ describe('selectPollResults', () => {
         isLoading: false,
         data: {
           poll,
-          votingRights: ['@user-delegate'],
+          votingRights: ['@user-delegate:example.com'],
           results: {
-            votes: { '@user-delegate': '1' },
+            votes: { '@user-delegate:example.com': '1' },
           },
           groupedResults: {
             'group-1': {
               abbreviation: 'Group 1',
               color: '#ff0000',
-              votes: { '@user-delegate': '1' },
+              votes: { '@user-delegate:example.com': '1' },
               invalidVoters: {},
             },
           },
@@ -1416,7 +1429,7 @@ describe('selectPollResults', () => {
               abbreviation: 'Group 1',
               color: '#ff0000',
               votingRights: {
-                '@user-delegate': { state: 'invalid' },
+                '@user-delegate:example.com': { state: 'invalid' },
               },
             },
           ],
@@ -1425,7 +1438,7 @@ describe('selectPollResults', () => {
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
-        sender: '@user-delegate',
+        sender: '@user-delegate:example.com',
         content: { pollId: 'my-poll', answerId: '1' },
         origin_server_ts: Date.now(),
       }),
@@ -1451,7 +1464,7 @@ describe('selectPollResults', () => {
               color: '#ff0000',
               votes: {},
               invalidVoters: {
-                '@user-delegate': { state: 'invalid' },
+                '@user-delegate:example.com': { state: 'invalid' },
               },
             },
           },
@@ -1478,9 +1491,9 @@ describe('selectPollResults', () => {
               abbreviation: 'Group 1',
               color: '#ff0000',
               votingRights: {
-                '@user-delegate': {
+                '@user-delegate:example.com': {
                   state: 'represented',
-                  representedBy: '@user-backup',
+                  representedBy: '@user-backup:example.com',
                 },
               },
             },
@@ -1490,14 +1503,14 @@ describe('selectPollResults', () => {
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
-        sender: '@user-delegate',
+        sender: '@user-delegate:example.com',
         content: { pollId: 'my-poll', answerId: '1' },
         origin_server_ts: Date.now(),
       }),
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
-        sender: '@user-backup',
+        sender: '@user-backup:example.com',
         content: { pollId: 'my-poll', answerId: '1' },
         origin_server_ts: Date.now(),
       }),
@@ -1513,19 +1526,19 @@ describe('selectPollResults', () => {
         isLoading: false,
         data: {
           poll,
-          votingRights: ['@user-backup'],
+          votingRights: ['@user-backup:example.com'],
           results: {
-            votes: { '@user-backup': '1' },
+            votes: { '@user-backup:example.com': '1' },
           },
           groupedResults: {
             'group-1': {
               abbreviation: 'Group 1',
               color: '#ff0000',
-              votes: { '@user-backup': '1' },
+              votes: { '@user-backup:example.com': '1' },
               invalidVoters: {
-                '@user-delegate': {
+                '@user-delegate:example.com': {
                   state: 'represented',
-                  representedBy: '@user-backup',
+                  representedBy: '@user-backup:example.com',
                 },
               },
             },
@@ -1552,7 +1565,7 @@ describe('selectPollResults', () => {
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
-        sender: '@user',
+        sender: '@user:example.com',
         content: { pollId: 'my-poll', answerId: '1' },
         event_id: 'event-0',
         origin_server_ts: Date.now(),
@@ -1560,7 +1573,7 @@ describe('selectPollResults', () => {
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
-        sender: '@user',
+        sender: '@user:example.com',
         content: { pollId: 'my-poll', answerId: '2' },
         event_id: 'event-1',
         origin_server_ts: Date.now(),
@@ -1577,9 +1590,9 @@ describe('selectPollResults', () => {
         isLoading: false,
         data: {
           poll,
-          votingRights: ['@user'],
+          votingRights: ['@user:example.com'],
           results: {
-            votes: { '@user': '1' },
+            votes: { '@user:example.com': '1' },
           },
         },
       }),
@@ -1604,7 +1617,7 @@ describe('selectPollResults', () => {
               abbreviation: 'Group 1',
               color: '#ff0000',
               votingRights: {
-                '@user': {
+                '@user:example.com': {
                   state: 'active',
                 },
               },
@@ -1615,7 +1628,7 @@ describe('selectPollResults', () => {
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
-        sender: '@user',
+        sender: '@user:example.com',
         content: { pollId: 'my-poll', answerId: '1' },
         event_id: 'event-1',
         origin_server_ts: Date.now(),
@@ -1623,7 +1636,7 @@ describe('selectPollResults', () => {
     );
     widgetApi.mockSendRoomEvent(
       mockVote({
-        sender: '@user',
+        sender: '@user:example.com',
         content: { pollId: 'my-poll', answerId: '2' },
         event_id: 'event-2',
         origin_server_ts: Date.now(),
@@ -1640,15 +1653,15 @@ describe('selectPollResults', () => {
         isLoading: false,
         data: {
           poll,
-          votingRights: ['@user'],
+          votingRights: ['@user:example.com'],
           results: {
-            votes: { '@user': '1' },
+            votes: { '@user:example.com': '1' },
           },
           groupedResults: {
             'group-1': {
               abbreviation: 'Group 1',
               color: '#ff0000',
-              votes: { '@user': '1' },
+              votes: { '@user:example.com': '1' },
               invalidVoters: {},
             },
           },
@@ -1676,7 +1689,7 @@ describe('selectPollResults', () => {
     // too early
     widgetApi.mockSendRoomEvent(
       mockVote({
-        sender: '@user-1',
+        sender: '@user-1:example.com',
         content: { pollId: 'my-poll', answerId: '1' },
         origin_server_ts: new Date('2020-01-01T00:59:59Z').getTime(),
       }),
@@ -1684,7 +1697,7 @@ describe('selectPollResults', () => {
     // correct
     widgetApi.mockSendRoomEvent(
       mockVote({
-        sender: '@user-2',
+        sender: '@user-2:example.com',
         content: { pollId: 'my-poll', answerId: '1' },
         origin_server_ts: new Date('2020-01-01T01:00:00Z').getTime(),
       }),
@@ -1692,7 +1705,7 @@ describe('selectPollResults', () => {
     // too late
     widgetApi.mockSendRoomEvent(
       mockVote({
-        sender: '@user-3',
+        sender: '@user-3:example.com',
         content: { pollId: 'my-poll', answerId: '1' },
         origin_server_ts: new Date('2020-01-01T01:01:00Z').getTime(),
       }),
@@ -1708,9 +1721,9 @@ describe('selectPollResults', () => {
         isLoading: false,
         data: {
           poll,
-          votingRights: ['@user-2'],
+          votingRights: ['@user-2:example.com'],
           results: {
-            votes: { '@user-2': '1' },
+            votes: { '@user-2:example.com': '1' },
           },
         },
       }),
@@ -1736,13 +1749,13 @@ describe('selectPollResults', () => {
               abbreviation: 'Group 1',
               color: '#ff0000',
               votingRights: {
-                '@user-1': {
+                '@user-1:example.com': {
                   state: 'active',
                 },
-                '@user-2': {
+                '@user-2:example.com': {
                   state: 'active',
                 },
-                '@user-3': {
+                '@user-3:example.com': {
                   state: 'active',
                 },
               },
@@ -1754,7 +1767,7 @@ describe('selectPollResults', () => {
     // too early
     widgetApi.mockSendRoomEvent(
       mockVote({
-        sender: '@user-1',
+        sender: '@user-1:example.com',
         content: { pollId: 'my-poll', answerId: '1' },
         origin_server_ts: new Date('2020-01-01T00:59:59Z').getTime(),
       }),
@@ -1762,7 +1775,7 @@ describe('selectPollResults', () => {
     // correct
     widgetApi.mockSendRoomEvent(
       mockVote({
-        sender: '@user-2',
+        sender: '@user-2:example.com',
         content: { pollId: 'my-poll', answerId: '1' },
         origin_server_ts: new Date('2020-01-01T01:00:00Z').getTime(),
       }),
@@ -1770,7 +1783,7 @@ describe('selectPollResults', () => {
     // too late
     widgetApi.mockSendRoomEvent(
       mockVote({
-        sender: '@user-3',
+        sender: '@user-3:example.com',
         content: { pollId: 'my-poll', answerId: '1' },
         origin_server_ts: new Date('2020-01-01T01:01:00Z').getTime(),
       }),
@@ -1786,12 +1799,16 @@ describe('selectPollResults', () => {
         isLoading: false,
         data: {
           poll,
-          votingRights: ['@user-1', '@user-2', '@user-3'],
+          votingRights: [
+            '@user-1:example.com',
+            '@user-2:example.com',
+            '@user-3:example.com',
+          ],
           results: {
             votes: {
-              '@user-1': PollInvalidAnswer,
-              '@user-2': '1',
-              '@user-3': PollInvalidAnswer,
+              '@user-1:example.com': PollInvalidAnswer,
+              '@user-2:example.com': '1',
+              '@user-3:example.com': PollInvalidAnswer,
             },
           },
           groupedResults: {
@@ -1799,9 +1816,9 @@ describe('selectPollResults', () => {
               abbreviation: 'Group 1',
               color: '#ff0000',
               votes: {
-                '@user-1': PollInvalidAnswer,
-                '@user-2': '1',
-                '@user-3': PollInvalidAnswer,
+                '@user-1:example.com': PollInvalidAnswer,
+                '@user-2:example.com': '1',
+                '@user-3:example.com': PollInvalidAnswer,
               },
               invalidVoters: {},
             },

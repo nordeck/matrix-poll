@@ -22,7 +22,12 @@ import axe from 'axe-core';
 import { ComponentType, PropsWithChildren, useMemo } from 'react';
 import { Provider } from 'react-redux';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
-import { mockGroup, mockPoll, mockPowerLevelsEvent } from '../../lib/testUtils';
+import {
+  mockGroup,
+  mockPoll,
+  mockPowerLevelsEvent,
+  mockRoomVersion11CreateEvent,
+} from '../../lib/testUtils';
 import { withMarkup } from '../../lib/withMarkup';
 import { createStore } from '../../store';
 import { PollModalResult } from '../CreatePollModal';
@@ -38,6 +43,8 @@ describe('<PollsListUpcoming>', () => {
   let Wrapper: ComponentType<PropsWithChildren<{}>>;
 
   beforeEach(() => {
+    widgetApi.mockSendStateEvent(mockRoomVersion11CreateEvent());
+
     widgetApi.mockSendStateEvent(
       mockGroup({
         state_key: 'red-party',
@@ -46,16 +53,16 @@ describe('<PollsListUpcoming>', () => {
           abbreviation: 'Red Party',
           color: '#ff0000',
           members: {
-            '@user-alice': {
+            '@user-alice:example.com': {
               memberRole: 'delegate',
             },
-            '@user-bob': {
+            '@user-bob:example.com': {
               memberRole: 'delegate',
             },
-            '@user-charlie': {
+            '@user-charlie:example.com': {
               memberRole: 'delegate',
             },
-            '@user-eric': {
+            '@user-eric:example.com': {
               memberRole: 'representative',
             },
           },
@@ -70,7 +77,7 @@ describe('<PollsListUpcoming>', () => {
           abbreviation: 'Blue Party',
           color: '#0000ff',
           members: {
-            '@user-dameon': {
+            '@user-dameon:example.com': {
               memberRole: 'delegate',
             },
           },
@@ -280,13 +287,19 @@ describe('<PollsListUpcoming>', () => {
     });
 
     expect(
-      within(redPartyList).getByRole('listitem', { name: '@user-alice' }),
+      within(redPartyList).getByRole('listitem', {
+        name: '@user-alice:example.com',
+      }),
     ).toHaveTextContent(/Present/);
     expect(
-      within(redPartyList).getByRole('listitem', { name: '@user-bob' }),
+      within(redPartyList).getByRole('listitem', {
+        name: '@user-bob:example.com',
+      }),
     ).toHaveTextContent(/Present/);
     expect(
-      within(redPartyList).getByRole('listitem', { name: '@user-charlie' }),
+      within(redPartyList).getByRole('listitem', {
+        name: '@user-charlie:example.com',
+      }),
     ).toHaveTextContent(/Present/);
 
     const bluePartyList = within(dialog).getByRole('list', {
@@ -294,7 +307,9 @@ describe('<PollsListUpcoming>', () => {
     });
 
     expect(
-      within(bluePartyList).getByRole('listitem', { name: '@user-dameon' }),
+      within(bluePartyList).getByRole('listitem', {
+        name: '@user-dameon:example.com',
+      }),
     ).toHaveTextContent(/Present/);
 
     await waitFor(() => {
@@ -338,7 +353,7 @@ describe('<PollsListUpcoming>', () => {
         content: {
           events_default: 50,
           users: {
-            '@user-alice': 20,
+            '@user-alice:example.com': 20,
           },
         },
       }),
@@ -361,12 +376,12 @@ describe('<PollsListUpcoming>', () => {
 
     await waitFor(() => {
       const aliceItem = within(dialog).getByRole('listitem', {
-        name: '@user-alice',
+        name: '@user-alice:example.com',
       });
 
       expect(
         withMarkup(within(aliceItem).getByText)(
-          /user-alice has an insufficient power level and will not be able to vote./,
+          /@user-alice:example.com has an insufficient power level and will not be able to vote./,
         ),
       ).toBeInTheDocument();
     });
@@ -448,11 +463,11 @@ describe('<PollsListUpcoming>', () => {
               abbreviation: 'Blue Party',
               color: '#0000ff',
               votingRights: {
-                '@user-charlie': {
+                '@user-charlie:example.com': {
                   state: 'represented',
-                  representedBy: '@user-bob',
+                  representedBy: '@user-bob:example.com',
                 },
-                '@user-bob': {
+                '@user-bob:example.com': {
                   state: 'invalid',
                 },
               },

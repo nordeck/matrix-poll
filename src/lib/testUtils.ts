@@ -19,6 +19,7 @@ import {
   RoomEvent,
   RoomMemberStateEventContent,
   StateEvent,
+  StateEventCreateContent,
 } from '@matrix-widget-toolkit/api';
 import {
   GroupContent,
@@ -37,7 +38,7 @@ import {
  * @remarks Only use for tests
  */
 export function mockRoomMember({
-  state_key = '@user-alice',
+  state_key = '@user-alice:example.com',
   event_id = '$event-id-0',
   content = {},
 }: {
@@ -47,7 +48,7 @@ export function mockRoomMember({
 } = {}): StateEvent<RoomMemberStateEventContent> {
   return {
     type: 'm.room.member',
-    sender: '@user-id',
+    sender: '@user-id:example.com',
     content: {
       membership: 'join',
       displayname: 'Alice',
@@ -57,7 +58,7 @@ export function mockRoomMember({
     state_key,
     origin_server_ts: 0,
     event_id,
-    room_id: '!room-id',
+    room_id: '!room-id:example.com',
   };
 }
 
@@ -67,7 +68,7 @@ export function mockRoomMember({
  * @remarks Only use for tests
  */
 export function mockRoomName({
-  room_id = '!room-id',
+  room_id = '!room-id:example.com',
   content = {},
 }: {
   room_id?: string;
@@ -99,7 +100,7 @@ export function mockPowerLevelsEvent({
 } = {}): StateEvent<PowerLevelsStateEvent> {
   return {
     type: 'm.room.power_levels',
-    sender: '@user-id',
+    sender: '@user-id:example.com',
     content: {
       users_default: 100,
       ...content,
@@ -107,7 +108,7 @@ export function mockPowerLevelsEvent({
     state_key: '',
     origin_server_ts: 0,
     event_id: '$event-id-0',
-    room_id: '!room-id',
+    room_id: '!room-id:example.com',
   };
 }
 
@@ -129,7 +130,7 @@ export function mockPoll({
 } = {}): StateEvent<IPoll> {
   return {
     type: 'net.nordeck.poll',
-    sender: '@user-id',
+    sender: '@user-id:example.com',
     content: {
       title: 'My Title',
       question: 'My Question',
@@ -148,13 +149,13 @@ export function mockPoll({
           abbreviation: 'Red Party',
           color: '#ff0000',
           votingRights: {
-            '@user-alice': {
+            '@user-alice:example.com': {
               state: 'active',
             },
-            '@user-bob': {
+            '@user-bob:example.com': {
               state: 'active',
             },
-            '@user-charlie': {
+            '@user-charlie:example.com': {
               state: 'active',
             },
           },
@@ -165,7 +166,7 @@ export function mockPoll({
           abbreviation: 'Blue Party',
           color: '#0000ff',
           votingRights: {
-            '@user-dameon': {
+            '@user-dameon:example.com': {
               state: 'active',
             },
           },
@@ -176,7 +177,7 @@ export function mockPoll({
     state_key,
     origin_server_ts,
     event_id,
-    room_id: '!room-id',
+    room_id: '!room-id:example.com',
   };
 }
 
@@ -197,13 +198,13 @@ export function mockPollStart({
 } = {}): RoomEvent<PollStartEvent> {
   return {
     type: 'net.nordeck.poll.start',
-    sender: '@user-id',
+    sender: '@user-id:example.com',
     content: {
       ...content,
     },
     origin_server_ts,
     event_id,
-    room_id: '!room-id',
+    room_id: '!room-id:example.com',
   };
 }
 
@@ -223,7 +224,7 @@ export function mockGroup({
 } = {}): StateEvent<GroupContent> {
   return {
     type: 'net.nordeck.poll.group',
-    sender: '@user-id',
+    sender: '@user-id:example.com',
     content: {
       abbreviation: 'GROUP 0',
       color: '#07f556',
@@ -233,7 +234,7 @@ export function mockGroup({
     state_key,
     origin_server_ts: 0,
     event_id,
-    room_id: '!room-id',
+    room_id: '!room-id:example.com',
   };
 }
 
@@ -244,7 +245,7 @@ export function mockGroup({
  */
 export function mockVote({
   event_id,
-  sender = '@user-bob',
+  sender = '@user-bob:example.com',
   origin_server_ts = 0,
   content = {},
 }: {
@@ -267,7 +268,7 @@ export function mockVote({
     },
     origin_server_ts,
     event_id: event_id ?? sender,
-    room_id: '!room-id',
+    room_id: '!room-id:example.com',
   };
 }
 
@@ -285,13 +286,41 @@ export function mockPollSettings({
 } = {}): StateEvent<IPollSettings> {
   return {
     type: 'net.nordeck.poll.settings',
-    sender: '@user-id',
+    sender: '@user-id:example.com',
     content: {
       ...content,
     },
-    state_key: '!room-id',
+    state_key: '!room-id:example.com',
     origin_server_ts: 0,
     event_id,
-    room_id: '!room-id',
+    room_id: '!room-id:example.com',
+  };
+}
+
+/**
+ * Create a room version 11 create event with known test data.
+ *
+ * @remarks Only use for tests
+ */
+export function mockRoomVersion11CreateEvent({
+  event_id = '$event-id-0',
+  origin_server_ts = 0,
+  content = {},
+}: {
+  event_id?: string;
+  origin_server_ts?: number;
+  content?: Partial<{ room_version: '11' }>;
+} = {}): StateEvent<StateEventCreateContent> {
+  return {
+    type: 'm.room.create',
+    sender: '@user-id:example.com',
+    content: {
+      room_version: '11',
+      ...content,
+    },
+    origin_server_ts,
+    event_id,
+    room_id: '!room-id:example.com',
+    state_key: '',
   };
 }

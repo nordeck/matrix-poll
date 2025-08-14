@@ -46,20 +46,20 @@ describe('<ShowResultsByNameList/>', () => {
 
     widgetApi.mockSendStateEvent(
       mockRoomMember({
-        state_key: 'user-alice',
+        state_key: '@user-alice:example.com',
         content: { displayname: 'Alice' },
       }),
     );
     widgetApi.mockSendStateEvent(
       mockRoomMember({
-        state_key: 'user-bob',
+        state_key: '@user-bob:example.com',
         content: { displayname: 'Bob' },
       }),
     );
 
     widgetApi.mockSendRoomEvent(
       mockVote({
-        sender: 'user-alice',
+        sender: '@user-alice:example.com',
         origin_server_ts: Date.now(),
         content: {
           pollId: 'poll-0',

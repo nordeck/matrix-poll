@@ -49,8 +49,8 @@ describe('StoreProvider', () => {
 
     const widgetApi = {
       widgetParameters: {
-        roomId: 'room-1234',
-        userId: 'user-1234',
+        roomId: '!room-1234:example.com',
+        userId: '@user-1234:example.com',
       },
     };
 

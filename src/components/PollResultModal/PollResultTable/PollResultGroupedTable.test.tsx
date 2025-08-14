@@ -34,10 +34,10 @@ describe('<PollResultGroupedTable/>', () => {
       }),
       results: {
         votes: {
-          '@user-1': '1',
-          '@user-2': PollInvalidAnswer,
-          '@user-3': '2',
-          '@user-4': '1',
+          '@user-1:example.com': '1',
+          '@user-2:example.com': PollInvalidAnswer,
+          '@user-3:example.com': '2',
+          '@user-4:example.com': '1',
         },
       },
       groupedResults: {
@@ -46,8 +46,8 @@ describe('<PollResultGroupedTable/>', () => {
           color: '#ff0000',
           invalidVoters: {},
           votes: {
-            '@user-1': '1',
-            '@user-2': PollInvalidAnswer,
+            '@user-1:example.com': '1',
+            '@user-2:example.com': PollInvalidAnswer,
           },
         },
         'blue-party': {
@@ -55,12 +55,17 @@ describe('<PollResultGroupedTable/>', () => {
           color: '#0000ff',
           invalidVoters: {},
           votes: {
-            '@user-3': '2',
-            '@user-4': '1',
+            '@user-3:example.com': '2',
+            '@user-4:example.com': '1',
           },
         },
       },
-      votingRights: ['@user-1', '@user-2', '@user-3', '@user-4'],
+      votingRights: [
+        '@user-1:example.com',
+        '@user-2:example.com',
+        '@user-3:example.com',
+        '@user-4:example.com',
+      ],
     };
   });
 

@@ -43,7 +43,9 @@ describe('<MemberAvatar/>', () => {
   });
 
   it('should render without exploding', async () => {
-    render(<MemberAvatar userId="@user-alice" />, { wrapper: Wrapper });
+    render(<MemberAvatar userId="@user-alice:example.com" />, {
+      wrapper: Wrapper,
+    });
 
     await expect(
       screen.findByRole('presentation', { hidden: true }),
@@ -51,9 +53,12 @@ describe('<MemberAvatar/>', () => {
   });
 
   it('should have not accessibility violations', async () => {
-    const { container } = render(<MemberAvatar userId="@user-alice" />, {
-      wrapper: Wrapper,
-    });
+    const { container } = render(
+      <MemberAvatar userId="@user-alice:example.com" />,
+      {
+        wrapper: Wrapper,
+      },
+    );
 
     await expect(
       screen.findByRole('presentation', { hidden: true }),
@@ -63,7 +68,9 @@ describe('<MemberAvatar/>', () => {
   });
 
   it('should render avatar url', async () => {
-    render(<MemberAvatar userId="@user-alice" />, { wrapper: Wrapper });
+    render(<MemberAvatar userId="@user-alice:example.com" />, {
+      wrapper: Wrapper,
+    });
 
     await expect(
       screen.findByRole('presentation', { hidden: true }),
@@ -78,7 +85,9 @@ describe('<MemberAvatar/>', () => {
       mockRoomMember({ content: { avatar_url: undefined } }),
     );
 
-    render(<MemberAvatar userId="@user-alice" />, { wrapper: Wrapper });
+    render(<MemberAvatar userId="@user-alice:example.com" />, {
+      wrapper: Wrapper,
+    });
 
     await expect(screen.findByText('A')).resolves.toBeInTheDocument();
   });

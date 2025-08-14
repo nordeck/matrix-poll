@@ -42,7 +42,7 @@ describe('<GroupForm/>', () => {
     widgetApi.mockSendStateEvent(mockRoomMember());
     widgetApi.mockSendStateEvent(
       mockRoomMember({
-        state_key: '@user-bob',
+        state_key: '@user-bob:example.com',
         content: {
           displayname: 'Bob',
         },
@@ -167,7 +167,7 @@ describe('<GroupForm/>', () => {
         state_key: 'group-1',
         content: {
           members: {
-            '@user-bob': { memberRole: 'representative' },
+            '@user-bob:example.com': { memberRole: 'representative' },
           },
         },
       }),
@@ -225,7 +225,7 @@ describe('<GroupForm/>', () => {
 
     widgetApi.mockSendStateEvent(
       mockRoomMember({
-        state_key: '@user-bob',
+        state_key: '@user-bob:example.com',
         content: {
           membership: 'leave',
           displayname: 'Bob',
@@ -261,7 +261,7 @@ describe('<GroupForm/>', () => {
       mockPowerLevelsEvent({
         content: {
           users: {
-            '@user-bob': 0,
+            '@user-bob:example.com': 0,
           },
           events_default: 50,
         },
@@ -405,7 +405,7 @@ describe('<GroupForm/>', () => {
       abbreviation: 'Red Party',
       color: '#999999',
       members: {
-        '@user-alice': { memberRole: 'delegate' },
+        '@user-alice:example.com': { memberRole: 'delegate' },
       },
     });
   });
@@ -423,10 +423,10 @@ describe('<GroupForm/>', () => {
     const group = mockGroup({
       content: {
         members: {
-          '@user-bob': {
+          '@user-bob:example.com': {
             memberRole: 'delegate',
           },
-          '@user-alice': {
+          '@user-alice:example.com': {
             memberRole: 'representative',
           },
         },
@@ -466,10 +466,10 @@ describe('<GroupForm/>', () => {
     const group = mockGroup({
       content: {
         members: {
-          '@user-bob': {
+          '@user-bob:example.com': {
             memberRole: 'delegate',
           },
-          '@user-alice': {
+          '@user-alice:example.com': {
             memberRole: 'representative',
           },
         },

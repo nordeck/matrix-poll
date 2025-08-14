@@ -28,6 +28,7 @@ import {
   mockPollStart,
   mockPowerLevelsEvent,
   mockRoomMember,
+  mockRoomVersion11CreateEvent,
   mockVote,
 } from '../../lib/testUtils';
 import { PollType, ResultType } from '../../model';
@@ -38,25 +39,28 @@ let widgetApi: MockedWidgetApi;
 
 afterEach(() => widgetApi.stop());
 
-beforeEach(() => (widgetApi = mockWidgetApi({ userId: '@user-charlie' })));
+beforeEach(
+  () => (widgetApi = mockWidgetApi({ userId: '@user-charlie:example.com' })),
+);
 
 describe('<PollsListOngoing>', () => {
   let Wrapper: ComponentType<PropsWithChildren<{}>>;
 
   beforeEach(() => {
+    widgetApi.mockSendStateEvent(mockRoomVersion11CreateEvent());
     widgetApi.mockSendStateEvent(mockPowerLevelsEvent());
 
     widgetApi.mockSendStateEvent(mockRoomMember());
     widgetApi.mockSendStateEvent(
       mockRoomMember({
-        state_key: '@user-bob',
+        state_key: '@user-bob:example.com',
         event_id: '$event-id-1',
         content: { displayname: 'Bob', avatar_url: undefined },
       }),
     );
     widgetApi.mockSendStateEvent(
       mockRoomMember({
-        state_key: '@user-charlie',
+        state_key: '@user-charlie:example.com',
         event_id: '$event-id-2',
         content: { displayname: 'charlie', avatar_url: undefined },
       }),
@@ -422,7 +426,7 @@ describe('<PollsListOngoing>', () => {
     widgetApi.mockSendRoomEvent(
       mockVote({
         origin_server_ts: new Date().getTime(),
-        sender: '@user-charlie',
+        sender: '@user-charlie:example.com',
         content: { answerId: '2', pollId: 'poll-open-visible' },
       }),
     );
@@ -460,7 +464,7 @@ describe('<PollsListOngoing>', () => {
     widgetApi.mockSendRoomEvent(
       mockVote({
         origin_server_ts: new Date().getTime(),
-        sender: '@user-charlie',
+        sender: '@user-charlie:example.com',
         content: { answerId: '2', pollId: 'poll-secret-visible' },
       }),
     );
@@ -664,7 +668,7 @@ describe('<PollsListOngoing>', () => {
     widgetApi.mockSendRoomEvent(
       mockVote({
         origin_server_ts: new Date().getTime(),
-        sender: '@user-charlie',
+        sender: '@user-charlie:example.com',
         content: { answerId: '1', pollId: 'poll-open-invisible' },
       }),
     );
@@ -702,7 +706,7 @@ describe('<PollsListOngoing>', () => {
     widgetApi.mockSendRoomEvent(
       mockVote({
         origin_server_ts: new Date().getTime(),
-        sender: '@user-charlie',
+        sender: '@user-charlie:example.com',
         content: { answerId: '1', pollId: 'poll-open-invisible' },
       }),
     );

@@ -36,6 +36,7 @@ import {
   useGetPowerLevelsQuery,
   usePollResults,
 } from '../../store';
+import { useGetCreateEventQuery } from '../../store/api/powerLevelsApi';
 import { PollCard } from '../PollCard';
 import {
   getCanViewResults,
@@ -75,6 +76,7 @@ export const StartPollButton = ({
   const hasVoters = pollResults && pollResults.votingRights.length > 0;
 
   const { data: powerLevel } = useGetPowerLevelsQuery();
+  const { data: createEvent } = useGetCreateEventQuery();
   const groupsHaveConflicts = useMemo(() => {
     if (!groupEvents) {
       return false;
@@ -145,7 +147,11 @@ export const StartPollButton = ({
             </Alert>
           )}
 
-          {userPermissionHasChange(poll.groups, powerLevel?.event?.content) &&
+          {userPermissionHasChange(
+            poll.groups,
+            powerLevel?.event?.content,
+            createEvent?.event,
+          ) &&
             !groupsHaveConflicts && (
               <Alert role="status" severity="warning" sx={{ my: 2 }}>
                 <AlertTitle>

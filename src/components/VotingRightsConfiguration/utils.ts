@@ -18,6 +18,7 @@ import {
   hasRoomEventPower,
   PowerLevelsStateEvent,
   StateEvent,
+  StateEventCreateContent,
 } from '@matrix-widget-toolkit/api';
 import { GroupContent, ROOM_EVENT_VOTE } from '../../model';
 import { PollGroup, VotingRights } from '../../model/IPoll';
@@ -81,6 +82,7 @@ export function syncPollGroupsWithRoomGroups(
 export const userPermissionHasChange = (
   groups: PollGroup[] | undefined,
   powerLevel: PowerLevelsStateEvent | undefined,
+  createEvent: StateEvent<StateEventCreateContent> | undefined,
 ) => {
   return groups?.some((group) => {
     return Object.entries(group.votingRights).some((delegateId) => {
@@ -88,7 +90,12 @@ export const userPermissionHasChange = (
         delegateId[1]?.state === 'represented'
           ? delegateId[1].representedBy
           : delegateId[0];
-      return !hasRoomEventPower(powerLevel, userPermission, ROOM_EVENT_VOTE);
+      return !hasRoomEventPower(
+        powerLevel,
+        createEvent,
+        userPermission,
+        ROOM_EVENT_VOTE,
+      );
     });
   });
 };
