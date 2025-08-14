@@ -15,6 +15,7 @@
  */
 
 import {
+  STATE_EVENT_CREATE,
   STATE_EVENT_POWER_LEVELS,
   STATE_EVENT_ROOM_MEMBER,
 } from '@matrix-widget-toolkit/api';
@@ -44,6 +45,10 @@ export const widgetCapabilities = [
   WidgetEventCapability.forStateEvent(
     EventDirection.Receive,
     STATE_EVENT_POWER_LEVELS,
+  ),
+  WidgetEventCapability.forStateEvent(
+    EventDirection.Receive,
+    STATE_EVENT_CREATE,
   ),
   WidgetEventCapability.forStateEvent(
     EventDirection.Receive,
