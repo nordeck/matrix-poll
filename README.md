@@ -144,6 +144,12 @@ cosign verify \
 ghcr.io/nordeck/matrix-poll-widget:<version> | jq
 ```
 
+### Matrix Room Upgrades
+
+The widget room can be upgraded.
+Before the upgrade it is strongly recommended to download any necessary poll data by exporting it as PDF.
+After the upgrade, the poll widget needs to be configured in the new room.
+
 ## License
 
 This project is licensed under [APACHE 2.0](./LICENSE).
