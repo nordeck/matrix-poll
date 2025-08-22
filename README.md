@@ -1,4 +1,4 @@
-# Matrix Poll
+# NeoChoice
 
 ![CI](https://github.com/nordeck/matrix-poll/workflows/CI/badge.svg)
 [![Matrix](https://img.shields.io/matrix/nordeck%3Amatrix.org)](https://matrix.to/#/#nordeck:matrix.org)
