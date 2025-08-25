@@ -1,4 +1,4 @@
-# Matrix Poll
+# NeoChoice
 
 ![CI](https://github.com/nordeck/matrix-poll/workflows/CI/badge.svg)
 [![Matrix](https://img.shields.io/matrix/nordeck%3Amatrix.org)](https://matrix.to/#/#nordeck:matrix.org)
@@ -143,6 +143,18 @@ cosign verify \
 --certificate-oidc-issuer https://token.actions.githubusercontent.com \
 ghcr.io/nordeck/matrix-poll-widget:<version> | jq
 ```
+
+## Matrix Room Upgrades
+
+The widget room can be [upgraded](https://matrix.org/docs/communities/administration/#room-upgrades).
+Before the upgrade it is strongly recommended to download any necessary poll data by exporting it as PDF.
+After the upgrade, the poll widget needs to be configured in the new room.
+
+If you are using the widget as part of [NeoDateFix](https://github.com/nordeck/matrix-meetings), then
+please refer to its [documentation](https://github.com/nordeck/matrix-meetings/blob/main/README.md#matrix-room-upgrades)
+about room upgrades.
+
+Matrix room version 12 is supported from NeoChoice version [1.6.0](https://github.com/nordeck/matrix-poll/releases/tag/v1.6.0).
 
 ## License
 
