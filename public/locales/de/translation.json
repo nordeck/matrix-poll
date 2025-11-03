@@ -86,10 +86,10 @@
     "groupTitlePlaceholder": "Gruppenname"
   },
   "infosIcons": {
+    "castVotes_loading": "Abgegebene Stimmen werden geladen",
     "castVotes_zero": "Keine abgegebenen Stimmen",
     "castVotes_one": "Eine abgegebene Stimme",
     "castVotes_other": "{{count}} abgegebene Stimmen",
-    "castVotes_loading": "Abgegebene Stimmen werden geladen",
     "title": "Abstimmungsdetails",
     "users_zero": "Kein:e Stimmberechtigte:r",
     "users_one": "Ein:e Stimmberechtigte:r",

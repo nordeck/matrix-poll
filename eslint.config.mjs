@@ -35,7 +35,6 @@ export default ts.config(
     ignores: [
       '**/lib/**',
       '**/build/**',
-      '**/i18next-parser.config.js',
       '**/*test.ts.snap',
       'scripts/prepack.js',
       'scripts/postpack.js',

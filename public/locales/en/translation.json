@@ -86,10 +86,10 @@
     "groupTitlePlaceholder": "Group title"
   },
   "infosIcons": {
+    "castVotes_loading": "Votes loading",
     "castVotes_zero": "No cast votes",
     "castVotes_one": "One cast vote",
     "castVotes_other": "{{count}} cast votes",
-    "castVotes_loading": "Votes loading",
     "title": "Poll Details",
     "users_zero": "No voting persons",
     "users_one": "One voting person",
