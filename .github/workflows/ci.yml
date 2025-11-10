@@ -45,7 +45,7 @@ jobs:
         run: yarn tsc
 
       - name: check translations
-        run: yarn translate --fail-on-update
+        run: yarn translate --ci --dry-run
 
       - name: test
         run: yarn test:all

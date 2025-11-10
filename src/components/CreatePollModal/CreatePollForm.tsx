@@ -333,10 +333,6 @@ export const CreatePollForm = ({
               <MenuItem value={PollType.ByName}>
                 {t('pollForm.type', 'By Name', { context: 'byName' })}
               </MenuItem>
-              {/*TODO: we will create it in the future
-              <MenuItem value={PollType.Secret}>
-                {t('pollForm.type', 'Secret', { context: 'secret' })}
-              </MenuItem>*/}
               <MenuItem value={PollType.Open}>
                 {t('pollForm.type', 'Open', { context: 'open' })}
               </MenuItem>
