@@ -1,5 +1,11 @@
 # @nordeck/matrix-poll-widget
 
+## 1.6.1
+
+### Patch Changes
+
+- d101442: Use i18next-cli instead of i18next-parser
+
 ## 1.6.0
 
 ### Minor Changes
