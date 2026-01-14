@@ -11,7 +11,7 @@
     "@carbon/charts-react": "^1.6.14",
     "@carbon/import-once": "^10.7.0",
     "@carbon/styles": "^1.75.0",
-    "@matrix-widget-toolkit/api": "^5.0.1",
+    "@matrix-widget-toolkit/api": "^5.0.2",
     "@matrix-widget-toolkit/mui": "^2.2.0",
     "@matrix-widget-toolkit/react": "^2.1.0",
     "@mui/icons-material": "^5.15.6",
