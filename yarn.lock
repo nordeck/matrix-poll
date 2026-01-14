@@ -1133,7 +1133,7 @@
     globby "^11.0.0"
     read-yaml-file "^1.1.0"
 
-"@matrix-widget-toolkit/api@^5.0.0", "@matrix-widget-toolkit/api@^5.0.1":
+"@matrix-widget-toolkit/api@^5.0.0":
   version "5.0.2"
   resolved "https://registry.yarnpkg.com/@matrix-widget-toolkit/api/-/api-5.0.2.tgz#b4e6e0e79bef0ae7b951d21d108da3749445c61a"
   integrity sha512-MYKhWEWK6AofshYYe8tNxGwTB8xqrKrQA2Z0Qk9r2FQJIrKkqVJedVQqBbkXOHw6/wNRXkQfQ3soWzrd2hrzww==
@@ -1142,6 +1142,16 @@
     matrix-widget-api "1.13.1"
     qs "6.14.0"
     rxjs "7.8.2"
+
+"@matrix-widget-toolkit/api@^5.0.2":
+  version "5.0.3"
+  resolved "https://registry.yarnpkg.com/@matrix-widget-toolkit/api/-/api-5.0.3.tgz#e8757aa6c432a22c61c449f6ad963b65c7433d1b"
+  integrity sha512-9ceQPnqRuuZVYcWHXSquWIdIk5yAh2q1J5chyI2H9D3cFJZcZMa+g/XY9sBAGl/gxpgCr7qWJgrfUNPjHImEew==
+  dependencies:
+    joi "^17.13.3"
+    matrix-widget-api "^1.13.1"
+    qs "^6.14.1"
+    rxjs "^7.8.2"
 
 "@matrix-widget-toolkit/mui@^2.2.0":
   version "2.2.0"
@@ -4662,7 +4672,7 @@ jiti@2.6.1:
   resolved "https://registry.yarnpkg.com/jiti/-/jiti-2.6.1.tgz#178ef2fc9a1a594248c20627cd820187a4d78d92"
   integrity sha512-ekilCSN1jwRvIbgeg/57YFh8qQDNbwDb9xT/qu2DAHbFFZUicIl4ygVaAvzveMhMVr3LnpSKTNnwt8PoOfmKhQ==
 
-joi@17.13.3, joi@^17.11.0:
+joi@17.13.3, joi@^17.11.0, joi@^17.13.3:
   version "17.13.3"
   resolved "https://registry.yarnpkg.com/joi/-/joi-17.13.3.tgz#0f5cc1169c999b30d344366d384b12d92558bcec"
   integrity sha512-otDA4ldcIx+ZXsKHWmp0YizCweVRZG96J10b0FevjfuncLO1oX59THoAmHkNubYJ+9gWsYsp5k8v4ib6oDv1fA==
@@ -4933,6 +4943,14 @@ matrix-widget-api@1.13.1, matrix-widget-api@^1.6.0:
   version "1.13.1"
   resolved "https://registry.yarnpkg.com/matrix-widget-api/-/matrix-widget-api-1.13.1.tgz#5b1caeed2fc58148bcd2984e0546d2d06a1713ad"
   integrity sha512-mkOHUVzaN018TCbObfGOSaMW2GoUxOfcxNNlTVx5/HeMk3OSQPQM0C9oEME5Liiv/dBUoSrEB64V8wF7e/gb1w==
+  dependencies:
+    "@types/events" "^3.0.0"
+    events "^3.2.0"
+
+matrix-widget-api@^1.13.1:
+  version "1.15.0"
+  resolved "https://registry.yarnpkg.com/matrix-widget-api/-/matrix-widget-api-1.15.0.tgz#a508f72a5993a95382bdf890bd9e54525295b321"
+  integrity sha512-Yu9rX9wyF3A1sqviKgiYHz8aGgL3HhJe9OXKi/lccr1eZnNb6y+ELdbshTjs+VLKM4rkTWt6CE3THsw3f/CZhg==
   dependencies:
     "@types/events" "^3.0.0"
     events "^3.2.0"
@@ -5473,6 +5491,13 @@ qs@6.14.0:
   version "6.14.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.14.0.tgz#c63fa40680d2c5c941412a0e899c89af60c0a930"
   integrity sha512-YWWTjgABSKcvs/nWBi9PycY/JiPJqOD4JA6o9Sej2AtvSGarXxKC3OQSk4pAarbdQlKAh5D4FCQkJNkW+GAn3w==
+  dependencies:
+    side-channel "^1.1.0"
+
+qs@^6.14.1:
+  version "6.14.1"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.14.1.tgz#a41d85b9d3902f31d27861790506294881871159"
+  integrity sha512-4EK3+xJl8Ts67nLYNwqw/dsFVnCf+qR7RgXSK9jEEm9unao3njwMDdmsdvoKBKHzxd7tCYz5e5M+SnMjdtXGQQ==
   dependencies:
     side-channel "^1.1.0"
 
