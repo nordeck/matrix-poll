@@ -79,7 +79,6 @@
 - 97a4875: Change the create group dialog to create only a single group.
 - d4b6e8f: Rework the user interface to resolve accessibility issues and comply to BITV 2.0 and WCAG 2.1.
   Notable changes are:
-
   - Screen reader users can now interact with the widget.
   - The widget is now keyboard accessible.
   - Adds support for a high contrast theme for visually impaired users.
