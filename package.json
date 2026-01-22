@@ -60,7 +60,7 @@
     "@types/uuid": "^9.0.7",
     "@vitejs/plugin-basic-ssl": "^2.1.4",
     "@vitejs/plugin-react-swc": "^4.2.2",
-    "@vitest/coverage-v8": "^4.0.0",
+    "@vitest/coverage-v8": "^3.2.4",
     "@vitest/eslint-plugin": "^1.6.4",
     "axe-core": "^4.11.0",
     "depcheck": "^1.4.7",
@@ -82,7 +82,7 @@
     "typescript": "^5.7.2",
     "typescript-eslint": "^8.37.0",
     "vite": "^7.3.1",
-    "vitest": "^4.0.0",
+    "vitest": "^3.2.4",
     "yarn-deduplicate": "^6.0.2"
   },
   "engines": {
