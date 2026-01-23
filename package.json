@@ -18,7 +18,7 @@
     "@mui/lab": "^5.0.0-alpha.154",
     "@mui/material": "^5.14.10",
     "@mui/utils": "^5.15.6",
-    "@reduxjs/toolkit": "^2.6.1",
+    "@reduxjs/toolkit": "^2.11.2",
     "d3": "^7.8.5",
     "i18next": "^23.16.8",
     "i18next-browser-languagedetector": "^8.2.0",
