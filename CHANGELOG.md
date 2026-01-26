@@ -1,5 +1,15 @@
 # @nordeck/matrix-poll-widget
 
+## 1.6.1
+
+### Patch Changes
+
+- 57b62ed: Update `react-router-dom` to 6.30.3 to resolve `CVE-2025-68470`, `CVE-2026-22029`
+- 9cab281: Update lodash to resolve CVE: `CVE-2025-13465`
+- c269bcf: Update vite to 7, vitest to 3.2.4
+- d101442: Use i18next-cli instead of i18next-parser
+- 89822f7: Update minor dependencies. Update `widget-server` to 1.2.1 for CVEs: `CVE-2024-56171`, `CVE-2025-49794`, `CVE-2025-49796`.
+
 ## 1.6.0
 
 ### Minor Changes
