@@ -121,6 +121,12 @@ For example, this allows running the image in an IPv4-only environment, as demon
 
 We also provide a [HELM chart](./charts/).
 
+Install via OCI Registry:
+
+```sh
+helm install matrix-poll-widget oci://ghcr.io/nordeck/charts/matrix-poll-widget
+```
+
 ## Supply Chain Security
 
 To ensure transparency and security in our software supply chain, we provide comprehensive Software Bill of Materials (SBOM) reports for this project and signed container images.
@@ -142,6 +148,15 @@ cosign verify \
 --certificate-identity-regexp https://github.com/nordeck/matrix-poll/.github/workflows/publish-release.yml@refs/tags/v \
 --certificate-oidc-issuer https://token.actions.githubusercontent.com \
 ghcr.io/nordeck/matrix-poll-widget:<version> | jq
+```
+
+Execute the following command to verify the signature of a chart container image (example for version: `@nordeck/helm-matrix-poll-widget-0.2.0`):
+
+```sh
+cosign verify \
+--certificate-identity-regexp https://github.com/nordeck/matrix-poll-widget/.github/workflows/helm-release.yml@refs/tags/@nordeck/helm-matrix-poll-widget-0.2.0 \
+--certificate-oidc-issuer https://token.actions.githubusercontent.com \
+ghcr.io/nordeck/charts/matrix-poll-widget:0.2.0 | jq
 ```
 
 ## Matrix Room Upgrades
