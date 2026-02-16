@@ -5,7 +5,7 @@ name: Release Package
 on:
   push:
     tags:
-      - '*'
+      - 'v*' # https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax#filter-pattern-cheat-sheet
 
 jobs:
   build:
