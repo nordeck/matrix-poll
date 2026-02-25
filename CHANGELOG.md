@@ -1,5 +1,11 @@
 # @nordeck/matrix-poll-widget
 
+## 1.6.2
+
+### Patch Changes
+
+- c408b10: Upload helm chart to OCI Registry, release helm chart
+
 ## 1.6.1
 
 ### Patch Changes
