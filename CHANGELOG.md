@@ -1,5 +1,14 @@
 # @nordeck/matrix-poll-widget
 
+## 1.6.2
+
+### Patch Changes
+
+- 8838e9a: Pin trivy version to 0.69.3
+  Pin trivy-action to v0.35.0
+- c408b10: Upload helm chart to OCI Registry, release helm chart
+- 89dd79d: Update `widget-server` base image to v1.2.2
+
 ## 1.6.1
 
 ### Patch Changes
