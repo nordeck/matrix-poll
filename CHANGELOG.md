@@ -1,5 +1,17 @@
 # @nordeck/matrix-poll-widget
 
+## 1.6.2
+
+### Patch Changes
+
+- 7944c59: Update dependency uuid to v14
+- 8838e9a: Pin trivy version to 0.69.3
+  Pin trivy-action to v0.35.0
+- c408b10: Upload helm chart to OCI Registry, release helm chart
+- 51e7012: Bump @matrix-widget-toolkit (api 5.1.0, mui 2.2.2, react 2.1.2, testing 4.1.0) and the widget-server base image to 1.2.3
+- 89dd79d: Update `widget-server` base image to v1.2.2
+- bee1004: Bump flatted from 3.3.3 to 3.4.2
+
 ## 1.6.1
 
 ### Patch Changes
