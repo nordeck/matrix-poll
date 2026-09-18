@@ -77,7 +77,9 @@ ${violation.helpUrl}
 const DateTimeFormat = Intl.DateTimeFormat;
 function mockDateTimeFormatTimeZone(timeZone: string): void {
   vi.spyOn(Intl, 'DateTimeFormat').mockImplementation(
-    (locale, options) => new DateTimeFormat(locale, { ...options, timeZone }),
+    function (locale, options) {
+      return new DateTimeFormat(locale, { ...options, timeZone });
+    },
   );
 }
 
