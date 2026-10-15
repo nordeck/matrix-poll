@@ -8,7 +8,7 @@ image:
   repository: ghcr.io/nordeck/matrix-poll-widget
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: "@sha256:d782a27db53ee809d2c0e1fb81d37237e809ac93ffa7234da0ab5b7733c88070"
 
 imagePullSecrets: []
 nameOverride: ""
