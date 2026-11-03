@@ -1,5 +1,11 @@
 # @nordeck/matrix-poll-widget
 
+## 1.6.3
+
+### Patch Changes
+
+- 8412c60: Update `widget-server` base image to v1.2.4
+
 ## 1.6.2
 
 ### Patch Changes

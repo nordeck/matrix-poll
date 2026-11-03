@@ -3,7 +3,7 @@
   "description": "A poll widget for Matrix",
   "author": "Nordeck IT + Consulting GmbH",
   "license": "Apache-2.0",
-  "version": "1.6.2",
+  "version": "1.6.3",
   "private": true,
   "dependencies": {
     "@carbon/charts": "^1.6.14",
