@@ -210,7 +210,6 @@ We resolve certain conflicts automatically when the user opens the edit dialog:
        eventId: $BB
        # ...
 
-
    # resolution
    groups:
      - id: group-1
@@ -356,16 +355,16 @@ These will not be created by the widget itself, but might be created by a malici
        # ...
        votingRights:
          '@user-1:test.de':
-            state: 'represented'
-            # ⚠️ the user already is a representative; but in another group!
-            representedBy: '@user-3:test.de'
+           state: 'represented'
+           # ⚠️ the user already is a representative; but in another group!
+           representedBy: '@user-3:test.de'
      - id: group-2
        # ...
        votingRights:
          '@user-2:test.de':
-            state: 'represented'
-            # ⚠️ the user already is a representative; but in another group!
-            representedBy: '@user-3:test.de'
+           state: 'represented'
+           # ⚠️ the user already is a representative; but in another group!
+           representedBy: '@user-3:test.de'
 
    # resolution
    groups:
@@ -373,15 +372,15 @@ These will not be created by the widget itself, but might be created by a malici
        # ...
        votingRights:
          '@user-1:test.de':
-            state: 'represented'
-            # the first event in the object will be used
-            representedBy: '@user-3:test.de'
+           state: 'represented'
+           # the first event in the object will be used
+           representedBy: '@user-3:test.de'
      - id: group-2
        # ...
        votingRights:
          '@user-2:test.de':
-            # interpreted as 'invalid'
-            state: 'invalid'
+           # interpreted as 'invalid'
+           state: 'invalid'
    ```
 
 4. A user is part of multiple groups at once:
@@ -408,7 +407,7 @@ These will not be created by the widget itself, but might be created by a malici
        # ...
        votingRights:
          '@user-1:test.de':
-         # the first event in the object will be used
+           # the first event in the object will be used
            state: 'delegate'
      - id: group-2
        # ...

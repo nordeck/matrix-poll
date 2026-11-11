@@ -206,8 +206,7 @@ export function selectPollResults(
   pollEvent: StateEvent<IPoll>,
   voteEvents: RoomEvent<IVote>[],
   roomMembersState:
-    | EntityState<StateEvent<RoomMemberStateEventContent>, string>
-    | undefined,
+    EntityState<StateEvent<RoomMemberStateEventContent>, string> | undefined,
   powerLevels: StateEvent<PowerLevelsStateEvent> | undefined,
   createEvent: StateEvent<StateEventCreateContent> | undefined,
   opts: MakeSelectPollResultsOpts = {},
