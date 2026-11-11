@@ -31,11 +31,7 @@ import {
 import { ShowNotificationFn } from './PollStatusNotificationsProvider';
 
 type PollStatus =
-  | 'created'
-  | 'started'
-  | 'reached_half'
-  | 'reached_last_quarter'
-  | 'finished';
+  'created' | 'started' | 'reached_half' | 'reached_last_quarter' | 'finished';
 
 type CreatePollNotificationsMiddlewareProps = {
   showNotification: ShowNotificationFn;
