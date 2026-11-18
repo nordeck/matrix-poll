@@ -1,5 +1,11 @@
 # @nordeck/matrix-poll-widget
 
+## 1.6.4
+
+### Patch Changes
+
+- e71ece7: Bump widget server to 1.2.5
+
 ## 1.6.3
 
 ### Patch Changes
